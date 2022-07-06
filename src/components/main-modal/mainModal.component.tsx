@@ -33,7 +33,7 @@ export default function MainModal({
         <ModalBody>{children}</ModalBody>
 
         {buttonTitle && (
-          <ModalSubmitButton>
+          <ModalSubmitButton onClick={onClose}>
             <button>{buttonTitle}</button>
           </ModalSubmitButton>
         )}
