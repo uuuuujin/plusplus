@@ -2,6 +2,7 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Home from './routes/home/home.component';
 import Search from './routes/search/search.component';
+import './App.css';
 
 function App(): JSX.Element {
   return (
