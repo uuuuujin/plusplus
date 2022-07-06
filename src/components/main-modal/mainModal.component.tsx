@@ -17,7 +17,7 @@ export interface ModalProp {
   buttonTitle?: string;
 }
 
-export default function Modal({
+export default function MainModal({
   isOpen,
   onClose,
   title,
