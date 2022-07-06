@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Container from '../../components/container/container.component';
-import Modal from '../../components/main-modal/mainModal.component';
+import MainModal from '../../components/main-modal/mainModal.component';
 
 export default function Search(): JSX.Element {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -14,7 +14,7 @@ export default function Search(): JSX.Element {
         <div>검색화면 입니다요~</div>
         <button onClick={handleModal}>모달 테스트 버튼</button>
 
-        <Modal
+        <MainModal
           isOpen={isModalOpen}
           onClose={handleModal}
           title="어디로 떠날까요?"
@@ -22,7 +22,7 @@ export default function Search(): JSX.Element {
           buttonTitle="검색하기"
         >
           <span>하하하</span>
-        </Modal>
+        </MainModal>
       </div>
     </Container>
   );
