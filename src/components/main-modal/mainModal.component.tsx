@@ -11,7 +11,7 @@ import {
 export interface ModalProp {
   isOpen: boolean;
   onClose: () => void;
-  title?: string;
+  title: string;
   children: JSX.Element;
   contentWidth?: number;
   buttonTitle?: string;
