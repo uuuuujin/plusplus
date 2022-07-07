@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Footer from '../footer/footer.component'
 
 const ContainerStyle = styled.div`
   max-width: 768px;
@@ -11,5 +12,9 @@ interface ContainerProp {
 }
 
 export default function Container({ children }: ContainerProp): JSX.Element {
-  return <ContainerStyle>{children}</ContainerStyle>;
+  return (
+    <div> 
+    <ContainerStyle>{children}</ContainerStyle>
+    </div>
+  )
 }
