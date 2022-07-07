@@ -5,18 +5,20 @@ import {AiOutlineHome, AiOutlineHeart} from 'react-icons/ai';
 import {BsPerson} from 'react-icons/bs';
 
 const FooterStyle = styled.div`
+    width: 100%;
     max-width: 768px;
-    bottom: 0;
-    height: 60px;
-    margin: 0 auto;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: 0;
+    height: 60px;
     border-top: solid 1px;
 `
-// 페이지 하단 고정 배치 되는지 확인 필요
 
 const FooterBox = styled.div`
+    display: grid;
     justify-self: center;
     color: black;
     font-size: 2rem;

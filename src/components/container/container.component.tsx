@@ -15,7 +15,6 @@ export default function Container({ children }: ContainerProp): JSX.Element {
   return (
     <div> 
     <ContainerStyle>{children}</ContainerStyle>
-    <Footer></Footer>
     </div>
   )
 }
