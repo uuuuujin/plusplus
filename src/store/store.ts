@@ -1,12 +1,19 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import counterReducer from './modules/counter/counter.slice';
+import modalReducer from './modules/modal/modal.slice';
+import searchReducer from './modules/search/search.slice';
 
 export const store = configureStore({
   reducer: {
-    counter: counterReducer,
+    modal: modalReducer,
+    search: searchReducer,
   },
 });
 
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
-export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootState, unknown, Action<string>>;
+export type AppThunk<ReturnType = void> = ThunkAction<
+  ReturnType,
+  RootState,
+  unknown,
+  Action<string>
+>;
