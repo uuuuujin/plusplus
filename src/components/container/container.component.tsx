@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const ContainerStyle = styled.div`
   max-width: 768px;
   margin: 0 auto;
-  background-color: pink;
+  background-color: #e9e9e9;
 `;
 
 interface ContainerProp {
