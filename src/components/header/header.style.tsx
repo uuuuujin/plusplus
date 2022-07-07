@@ -1,19 +1,27 @@
 import styled from 'styled-components';
 import theme from '../../style/theme';
+export const NavWrapper = styled.div`
+  widht: 100vw;
+`;
 export const Nav = styled.div`
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  // max-width: 768px;
+  width: 768px;
   display: flex;
+  justify-content: space-between;
   align-items: center;
   padding: 5px 20px;
   height: 76px;
   border: 1px solid black;
 `;
-
 export const Logo = styled.img`
-  width: 25%;
-  height: 50px;
+  width: 100px;
+  height: 45px;
 `;
 export const Icons = styled.div`
-  width: 75%;
+  // background: green;
   display: flex;
   justify-content: flex-end;
 `;
