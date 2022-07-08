@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
 import { modalAction } from '../../store/modules/modal/modal.slice';
-import { selectIsDestinationModalOpen } from '../../store/modules/modal/modal.select';
 import { selectSearchRegionName } from '../../store/modules/search/search.select';
 import { IoIosArrowDown } from 'react-icons/io';
 import { GrPowerReset, GrFilter } from 'react-icons/gr';
 import Container from '../../components/container/container.component';
 import DestinationModal from '../../components/destination-modal/destinationModal.component';
 import Header from '../../components/header/header.component';
+import FilterModal from '../../components/filter-modal/filterModal.component';
 
 import {
   FilterTop,
@@ -27,6 +27,10 @@ export default function Search(): JSX.Element {
   };
   const searchRegionName = useAppSelector(selectSearchRegionName);
 
+  const handleFilterModal = () => {
+    dispatch(modalAction.radioFilterModal());
+  }
+
   return (
     <Container>
       <div>
@@ -45,7 +49,7 @@ export default function Search(): JSX.Element {
               <IconButton>
                 <GrPowerReset />
               </IconButton>
-              <IconButton>
+              <IconButton onClick={handleFilterModal}>
                 <GrFilter />
               </IconButton>
             </IconButtonContainer>
@@ -69,15 +73,16 @@ export default function Search(): JSX.Element {
 
           <IconButtonContainer className='desktop'>
             <IconButton >
-              <GrPowerReset />
+              <GrPowerReset/>
             </IconButton>
-            <IconButton >
-              <GrFilter />
+            <IconButton onClick={handleFilterModal}>
+              <GrFilter/>
             </IconButton>
           </IconButtonContainer>
         </FilterTop>
 
         <DestinationModal />
+        <FilterModal/>
       </div>
     </Container>
   );

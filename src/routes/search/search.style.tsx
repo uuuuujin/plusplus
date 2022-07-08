@@ -79,6 +79,7 @@ export const IconButton = styled.button`
   border-radius: 5px;
   padding-top: 5px;
   cursor: pointer;
+
 `;
 
 export const IconButtonContainer = styled.div`

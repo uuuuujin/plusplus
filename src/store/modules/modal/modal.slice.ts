@@ -2,10 +2,12 @@ import { createSlice } from '@reduxjs/toolkit';
 
 export interface ModalState {
   isDestinationModalOpen: boolean;
+  isFilterModalOpen: boolean;
 }
 
 const initialState: ModalState = {
   isDestinationModalOpen: false,
+  isFilterModalOpen: false,
 };
 
 export const modalSlice = createSlice({
@@ -15,6 +17,9 @@ export const modalSlice = createSlice({
     radioDestinationModal: (state) => {
       state.isDestinationModalOpen = !state.isDestinationModalOpen;
     },
+    radioFilterModal: (state) => {
+      state.isFilterModalOpen = !state.isFilterModalOpen;
+    }
   },
 });
 
