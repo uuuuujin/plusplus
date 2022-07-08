@@ -1,10 +1,13 @@
 import { NavWrapper, Nav, Icons, Icon, Logo } from './header.style';
 import { AiOutlineCalendar } from 'react-icons/ai';
 import { BsMap } from 'react-icons/bs';
+import { useAppDispatch } from '../../hooks/index.hook';
 import MainModal from '../main-modal/mainModal.component';
 import CompanyLogoImage from '../../assets/images/logologo.png';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import DestinationModal from '../destination-modal/destinationModal.component';
+import { modalAction } from '../../store/modules/modal/modal.slice';
 
 function CompanyLogo() {
   return (
@@ -19,11 +22,14 @@ export default function Header(): JSX.Element {
   const calendarModalHandler = () => {
     setCalendarModalOpen((e) => !e);
   };
-  const [isMapModalOpen, setMapModalOpen] = useState(false);
-  const mapModalHandler = () => {
-    setMapModalOpen((e) => !e);
-  };
-
+  // const [isMapModalOpen, setMapModalOpen] = useState(false);
+  // const mapModalHandler = () => {
+  //   setMapModalOpen((e) => !e);
+  // };
+  const dispatch = useAppDispatch();
+  const handleDestinationModal = () => {
+    dispatch(modalAction.radioDestinationModal());
+  }
   return (
     <NavWrapper>
       <Nav>
@@ -33,25 +39,13 @@ export default function Header(): JSX.Element {
             <AiOutlineCalendar />
             <span>날짜</span>
           </Icon>
-          <MainModal
-            isOpen={isCalendarModalOpen}
-            onClose={calendarModalHandler}
-            title="언제 떠날까요?"
-          >
-            <div>달력 달력</div>
-          </MainModal>
-          <Icon onClick={mapModalHandler}>
+          <DestinationModal/>
+          <Icon onClick={handleDestinationModal}>
             <BsMap />
             <span>지도</span>
           </Icon>
-          <MainModal
-            isOpen={isMapModalOpen}
-            onClose={mapModalHandler}
-            title="어디로 떠날까요?"
-          >
-            <div>input checkbox component 제작중 </div>
-          </MainModal>
         </Icons>
+        <DestinationModal/>
       </Nav>
     </NavWrapper>
   );
