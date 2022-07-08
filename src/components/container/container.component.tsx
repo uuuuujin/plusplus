@@ -1,10 +1,9 @@
 import styled from 'styled-components';
-import Footer from '../footer/footer.component'
 
 const ContainerStyle = styled.div`
   max-width: 768px;
   margin: 0 auto;
-  // background-color: pink;
+  margin-top: 76px;
 `;
 
 interface ContainerProp {

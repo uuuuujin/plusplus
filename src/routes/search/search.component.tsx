@@ -1,23 +1,23 @@
 import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
 import { modalAction } from '../../store/modules/modal/modal.slice';
-import { selectIsDestinationModalOpen } from '../../store/modules/modal/modal.select';
 import { selectSearchRegionName } from '../../store/modules/search/search.select';
-
 import { IoIosArrowDown } from 'react-icons/io';
-import { GrPowerReset } from 'react-icons/gr';
+import { GrPowerReset, GrFilter } from 'react-icons/gr';
 import Container from '../../components/container/container.component';
 import DestinationModal from '../../components/destination-modal/destinationModal.component';
+import Header from '../../components/header/header.component';
+import FilterModal from '../../components/filter-modal/filterModal.component';
 
 import {
-  Header,
   FilterTop,
   FilterWrap,
-  FilterBottom,
+  RowContainer,
   CategoryContainer,
   CategoryTitle,
   CagtegoryButton,
-  ResetButton,
+  IconButtonContainer,
+  IconButton,
 } from './search.style';
 
 export default function Search(): JSX.Element {
@@ -27,58 +27,62 @@ export default function Search(): JSX.Element {
   };
   const searchRegionName = useAppSelector(selectSearchRegionName);
 
+  const handleFilterModal = () => {
+    dispatch(modalAction.radioFilterModal());
+  }
+
   return (
     <Container>
       <div>
-        <Header>헤더 들어갈 자리</Header>
+        <Header/> 
 
-        <div>
-          <FilterTop>
-            <FilterWrap>
-              <CategoryContainer>
-                <CategoryTitle>여행지</CategoryTitle>
-                <CagtegoryButton onClick={handleDestinationModal}>
-                  <span>{searchRegionName ? searchRegionName : '여행지'}</span>
-                  <IoIosArrowDown />
-                </CagtegoryButton>
-              </CategoryContainer>
-              <CategoryContainer>
-                <CategoryTitle>체크인</CategoryTitle>
-                <CagtegoryButton>
-                  <span>체크인</span>
-                  <IoIosArrowDown />
-                </CagtegoryButton>
-              </CategoryContainer>
-              <CategoryContainer>
-                <CategoryTitle>체크아웃</CategoryTitle>
-                <CagtegoryButton>
-                  <span>체크아웃</span>
-                  <IoIosArrowDown />
-                </CagtegoryButton>
-              </CategoryContainer>
-            </FilterWrap>
+        <FilterTop>
+          <RowContainer>
+            <CategoryContainer>
+              <CategoryTitle>여행지</CategoryTitle>
+              <CagtegoryButton className='regionName' onClick={handleDestinationModal}>
+                <span>{searchRegionName ? searchRegionName : '여행지'}</span>
+                <IoIosArrowDown />
+              </CagtegoryButton>
+            </CategoryContainer>
+            <IconButtonContainer className='mobile'>
+              <IconButton>
+                <GrPowerReset />
+              </IconButton>
+              <IconButton onClick={handleFilterModal}>
+                <GrFilter />
+              </IconButton>
+            </IconButtonContainer>
+          </RowContainer>
+          <RowContainer>
+            <CategoryContainer>
+              <CategoryTitle>체크인</CategoryTitle>
+              <CagtegoryButton>
+                <span>체크인</span>
+                <IoIosArrowDown />
+              </CagtegoryButton>
+            </CategoryContainer>
+            <CategoryContainer>
+              <CategoryTitle>체크아웃</CategoryTitle>
+              <CagtegoryButton>
+                <span>체크아웃</span>
+                <IoIosArrowDown />
+              </CagtegoryButton>
+            </CategoryContainer>
+          </RowContainer>
 
-            <ResetButton>
-              <GrPowerReset />
-            </ResetButton>
-          </FilterTop>
-          {/* <FilterBottom>
-            <CagtegoryButton>
-              <span>가격</span>
-              <IoIosArrowDown />
-            </CagtegoryButton>
-            <CagtegoryButton>
-              <span>스테이 유형</span>
-              <IoIosArrowDown />
-            </CagtegoryButton>
-            <CagtegoryButton>
-              <span>테마</span>
-              <IoIosArrowDown />
-            </CagtegoryButton>
-          </FilterBottom> */}
-        </div>
+          <IconButtonContainer className='desktop'>
+            <IconButton >
+              <GrPowerReset/>
+            </IconButton>
+            <IconButton onClick={handleFilterModal}>
+              <GrFilter/>
+            </IconButton>
+          </IconButtonContainer>
+        </FilterTop>
 
         <DestinationModal />
+        <FilterModal/>
       </div>
     </Container>
   );

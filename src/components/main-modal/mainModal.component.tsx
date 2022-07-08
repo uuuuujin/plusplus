@@ -4,7 +4,6 @@ import {
   ModalContainer,
   ModalContent,
   ModalHeader,
-  ModalBody,
   ModalSubmitButton,
 } from './mainModal.style';
 
@@ -30,8 +29,7 @@ export default function MainModal({
       <ModalContent width={contentWidth} onClick={(e) => e.stopPropagation()}>
         <ModalHeader>{title}</ModalHeader>
         <GrClose className="closeButton" onClick={onClose} />
-        <ModalBody>{children}</ModalBody>
-
+        {children}
         {buttonTitle && (
           <ModalSubmitButton onClick={onClose}>
             <button>{buttonTitle}</button>
