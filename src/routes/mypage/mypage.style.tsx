@@ -15,7 +15,6 @@ export const InnerContainer = styled.div`
   padding: 10px;
   margin-top: 10px;
   background-color: #fff;
-  box-shadow: 1px 1px rgba(0, 0, 0, 0.2);
 `;
 
 export const HeaderText = styled.span`

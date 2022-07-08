@@ -7,9 +7,9 @@ export default function WishList(): JSX.Element {
     <InnerContainer>
       <TitleText>찜 목록</TitleText>
       <WishListItem />
-      <WishListItem />
-      <WishListItem />
-      <WishListItem />
+      {/*<WishListItem />*/}
+      {/*<WishListItem />*/}
+      {/*<WishListItem />*/}
     </InnerContainer>
   );
 }
