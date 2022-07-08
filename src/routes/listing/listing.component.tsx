@@ -1,6 +1,7 @@
 import Container from '../../components/container/container.component';
 import Header from '../../components/header/header.component';
 import Footer from '../../components/footer/footer.component';
+import { RiImageAddLine } from 'react-icons/ri'
 import {
   ListingForm,
   InputAddress,
@@ -14,7 +15,8 @@ import {
   Field,
   ListingButton,
   CancelButton,
-  ButtonContainer
+  ButtonContainer,
+  ImgLabel
 } from './listing.style';
 import { useDaumPostcodePopup } from 'react-daum-postcode';
 import { useState } from 'react';
@@ -61,12 +63,12 @@ export default function Listing(): JSX.Element {
         <Header />
         <ListingForm>
           <Field>
-            <label htmlFor="image">이미지</label>
+            <ImgLabel htmlFor="image"><RiImageAddLine/></ImgLabel>
             <InsertImage id="image" type="file" accept="image" />
           </Field>
           <Field>
             <AddressWrapper>
-              <InputAddress disabled value={address} placeholder='기본 주소'></InputAddress>
+              <InputAddress disabled value={address} placeholder="기본 주소"></InputAddress>
               <InputZonecode value={zonecode} placeholder='우편 번호'></InputZonecode>
             </AddressWrapper>
               <InputDetailedAddress placeholder='상세 주소'></InputDetailedAddress>
