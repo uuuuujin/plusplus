@@ -27,6 +27,25 @@ export const Field = styled.p`
   }
   
 `;
+
+export const ImgLabel = styled.label`
+  display: flex;
+  padding: 20px;
+  justify-content: center;
+  align-self: center;
+  width: 150px;
+  height: 150px;
+  border: 10px solid #aaa;
+  border-radius: 10px;
+  opacity: 0.4;
+  & > svg {
+    
+    width: 150px;
+    height: 150px;
+  }
+  
+`
+
 export const InputAddress = styled.input`
   width:70%;
   height: 40px;
@@ -67,8 +86,13 @@ export const Location = styled.input`
 `;
 
 export const InsertImage = styled.input`
-  height: 30px;
+  display: block;
+  align-self: center;
+  height: 150px;
+  width: 150px;
   background: white;
+  opacity: 0;
+  position: absolute;
 `;
 
 export const InputPrice = styled.input`
