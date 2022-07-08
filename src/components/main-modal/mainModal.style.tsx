@@ -26,8 +26,7 @@ export const ModalContent = styled.div<{ width: number }>`
   width: ${({ width }) => `${width}px`};
   background-color: #fff;
   border-radius: 10px;
-  padding: 20px 30px;
-
+  padding: 20px 0;
   .closeButton {
     width: 30px;
     height: 30px;
@@ -42,11 +41,7 @@ export const ModalHeader = styled.div`
   font-weight: bold;
   font-size: 24px;
   border-bottom: 1px solid gray;
-  padding: 10px 0 20px 0;
-`;
-
-export const ModalBody = styled.div`
-  padding: 10px;
+  padding: 10px 0 20px 20px;
 `;
 
 export const ModalSubmitButton = styled.div`
