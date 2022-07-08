@@ -12,25 +12,54 @@ export const ListingForm = styled.form`
 `;
 export const Field = styled.p`
   width: 80%;
-  background: ${theme.colors.main}
   display: flex;
   flex-direction: column;
   align-self: center;
   justify-content: center;
 
-  &:last-child {
-    margin-top: 150px;
+  & + & {
+    border-top: 3px solid #ddd;
+    padding: 10px 0 0 0;
   }
-  //이거 왜 안되는거야?
+
+  & > * {
+    margin-top: 6px;
+  }
+  
+`;
+export const InputAddress = styled.input`
+  width:70%;
+  height: 40px;
+  padding: 5px;
+  box-sizing: border-box;
+`;
+
+export const InputDetailedAddress = styled.input`
+  width: 100%;
+  height: 40px;
+  padding: 5px;
+  box-sizing: border-box;
+`;
+export const InputZonecode = styled.input`
+  width: 20%;
+  height: 40px;
+  padding: 5px;
+  box-sizing: border-box;
+`;
+export const AddressWrapper= styled.div`
+  display: flex;
+  justify-content: space-between;
 `;
 
 export const InputHotelName = styled.input`
   height: 30px;
   background: white;
+  padding: 7px;
 `;
 
 export const InputHotelDescription = styled.textarea`
   height: 150px;
+  padding: 7px;
 `;
 
 export const Location = styled.input`
@@ -44,4 +73,28 @@ export const InsertImage = styled.input`
 
 export const InputPrice = styled.input`
   height: 30px;
+  padding: 7px;
+`;
+
+export const ButtonContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+`
+export const ListingButton = styled.button`
+  background-color: #94b49f;
+  border: none;
+  cursor: pointer;
+  color: #fff;
+  font-size: 12px;
+  padding: 10px;
+`;
+
+export const CancelButton = styled.button`
+  background-color: #94b49f;
+  border: none;
+  cursor: pointer;
+  color: #fff;
+  font-size: 12px;
+  padding: 10px;
 `;
