@@ -14,6 +14,7 @@ import {
   UserInfo,
 } from './mypage.style';
 import WishList from '../../components/wishlist/wishlist.component';
+import BookingListComponent from '../../components/booking-list/bookinglist.component';
 
 const KAKAOCOLOR = '#FEE500';
 
@@ -67,7 +68,8 @@ export default function MyPage(): JSX.Element {
           </FlexRow>
         </UserInfo>
         <AdvertiseImg src="https://yaimg.yanolja.com/v5/2022/01/17/13/61e5740f544f02.81195355.png" />
-        <WishList />
+        {/*<WishList />*/}
+        <BookingListComponent />
       </MypageContainer>
     </Container>
   );
