@@ -11,21 +11,26 @@ export const FilterTop = styled.div`
   border-bottom: 1px solid #e6e6e6;
   padding: 10px 0;
   justify-content: space-between;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    padding: 10px;
+  }
 `;
 
 export const FilterWrap = styled.div`
   display: flex;
-`;
 
-export const FilterBottom = styled.div`
-  display: flex;
-  padding: 10px 0;
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 export const CategoryContainer = styled.div`
   display: flex;
   margin-right: 10px;
   align-items: center;
+  width: 100%;
 `;
 
 export const CategoryTitle = styled.span`
@@ -33,6 +38,12 @@ export const CategoryTitle = styled.span`
   font-weight: bold;
   display: inline-block;
   margin-right: 10px;
+  overflow:hiddlen; 
+  white-space:nowrap;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 export const CagtegoryButton = styled.button`
@@ -42,18 +53,65 @@ export const CagtegoryButton = styled.button`
   border-radius: 5px;
   background-color: #fff;
   cursor: pointer;
-  margin-right: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 10px;
+
+  &.regionName {
+    width: 150px;
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+
+    &.regionName {
+      width: 100%;
+    }
+  }
 `;
 
-export const ResetButton = styled.button`
+export const IconButton = styled.button`
   width: 36px;
   height: 36px;
   background-color: #fff;
   border: 1px solid #d9d9d9;
   border-radius: 5px;
   padding-top: 5px;
+  cursor: pointer;
 `;
+
+export const IconButtonContainer = styled.div`
+  display: flex;
+
+  & > * + * {
+    margin-left: 5px;
+  }
+
+  &.mobile {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    &.mobile {
+      display: flex;
+    }
+
+    &.desktop {
+      display: none;
+    }
+  }
+`
+
+export const RowContainer = styled.div`
+  display: flex;
+
+  @media (max-width: 768px) {
+    display: flex;
+    justify-content: space-between;
+
+    & + & {
+      margin-top: 10px;
+    }
+  }
+`
