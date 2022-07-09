@@ -16,7 +16,6 @@ function CompanyLogo() {
     </Link>
   );
 }
-
 export default function Header(): JSX.Element {
   const [isCalendarModalOpen, setCalendarModalOpen] = useState(false);
   const calendarModalHandler = () => {

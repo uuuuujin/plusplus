@@ -4,6 +4,7 @@ export const NavWrapper = styled.div`
   widht: 100vw;
 `;
 export const Nav = styled.div`
+  background: rgb(194, 220, 210);
   box-sizing: border-box;
   position: fixed;
   top: 0;
@@ -14,7 +15,8 @@ export const Nav = styled.div`
   align-items: center;
   padding: 5px 20px;
   height: 76px;
-  border: 1px solid black;
+  border: 1px solid #ddd;
+  z-index: 300;
 `;
 export const Logo = styled.img`
   width: 100px;
