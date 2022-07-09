@@ -1,7 +1,7 @@
 import Container from '../../components/container/container.component';
 import Header from '../../components/header/header.component';
 import Footer from '../../components/footer/footer.component';
-import { RiImageAddLine } from 'react-icons/ri'
+import { RiImageAddLine } from 'react-icons/ri';
 import {
   ListingForm,
   InputAddress,
@@ -16,62 +16,70 @@ import {
   ListingButton,
   CancelButton,
   ButtonContainer,
-  ImgLabel
+  ImgLabel,
 } from './listing.style';
 import { useDaumPostcodePopup } from 'react-daum-postcode';
 import { useState } from 'react';
-
-
 
 export default function Listing(): JSX.Element {
   const [address, setAddress] = useState('');
   const [zonecode, setZonecode] = useState();
   const Postcode = () => {
     const open = useDaumPostcodePopup();
-  
+
     const handleComplete = (data: any) => {
       let fullAddress = data.address;
       let extraAddress = '';
-  
+
       if (data.addressType === 'R') {
         if (data.bname !== '') {
           extraAddress += data.bname;
         }
         if (data.buildingName !== '') {
-          extraAddress += extraAddress !== '' ? `, ${data.buildingName}` : data.buildingName;
+          extraAddress +=
+            extraAddress !== '' ? `, ${data.buildingName}` : data.buildingName;
         }
         fullAddress += extraAddress !== '' ? ` (${extraAddress})` : '';
       }
-      setAddress(fullAddress)
-      setZonecode(data.zonecode)
+      setAddress(fullAddress);
+      setZonecode(data.zonecode);
     };
-  
+
     const handleClick = () => {
       open({ onComplete: handleComplete });
     };
-  
+
     return (
-      <button type='button' onClick={handleClick}>
+      <button type="button" onClick={handleClick}>
         주소 검색
       </button>
     );
   };
-  
+
   return (
     <Container>
       <div>
         <Header />
         <ListingForm>
           <Field>
-            <ImgLabel htmlFor="image"><RiImageAddLine/></ImgLabel>
+            <ImgLabel htmlFor="image">
+              <RiImageAddLine />
+            </ImgLabel>
             <InsertImage id="image" type="file" accept="image" />
           </Field>
           <Field>
             <AddressWrapper>
-              <InputAddress disabled value={address} placeholder="기본 주소"></InputAddress>
-              <InputZonecode value={zonecode} placeholder='우편 번호'></InputZonecode>
+              <InputAddress
+                disabled
+                value={address}
+                placeholder="기본 주소"
+              ></InputAddress>
+              <InputZonecode
+                value={zonecode}
+                placeholder="우편 번호"
+              ></InputZonecode>
             </AddressWrapper>
-              <InputDetailedAddress placeholder='상세 주소'></InputDetailedAddress>
+            <InputDetailedAddress placeholder="상세 주소"></InputDetailedAddress>
             <Postcode></Postcode>
           </Field>
 
@@ -97,12 +105,10 @@ export default function Listing(): JSX.Element {
             />
           </Field>
 
-          
           <ButtonContainer>
             <ListingButton>등록하기</ListingButton>
             <CancelButton>취소</CancelButton>
           </ButtonContainer>
-
         </ListingForm>
         <Footer></Footer>
       </div>

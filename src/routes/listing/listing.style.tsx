@@ -23,9 +23,12 @@ export const Field = styled.p`
   }
 
   & > * {
-    margin-top: 6px;
+    margin-top: 12px;
   }
-  
+
+  & > label {
+    font-weight: 700;
+  }
 `;
 
 export const ImgLabel = styled.label`
@@ -72,7 +75,6 @@ export const AddressWrapper= styled.div`
 
 export const InputHotelName = styled.input`
   height: 30px;
-  background: white;
   padding: 7px;
 `;
 
