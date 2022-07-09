@@ -11,10 +11,11 @@ const FooterStyle = styled.div`
     grid-template-columns: 1fr 1fr 1fr;
     align-items: center;
     justify-content: center;
-    position: absolute;
+    position: fixed;
     bottom: 0;
     height: 60px;
     border-top: solid 1px;
+    background-color: rgb(194, 220, 210);
 `
 
 const FooterBox = styled.div`
