@@ -38,8 +38,8 @@ export const CategoryTitle = styled.span`
   font-weight: bold;
   display: inline-block;
   margin-right: 10px;
-  overflow:hiddlen; 
-  white-space:nowrap;
+  overflow: hiddlen;
+  white-space: nowrap;
 
   @media (max-width: 768px) {
     display: none;
@@ -79,7 +79,6 @@ export const IconButton = styled.button`
   border-radius: 5px;
   padding-top: 5px;
   cursor: pointer;
-
 `;
 
 export const IconButtonContainer = styled.div`
@@ -102,7 +101,7 @@ export const IconButtonContainer = styled.div`
       display: none;
     }
   }
-`
+`;
 
 export const RowContainer = styled.div`
   display: flex;
@@ -115,4 +114,8 @@ export const RowContainer = styled.div`
       margin-top: 10px;
     }
   }
-`
+`;
+
+export const ProductListContainer = styled.div`
+  margin-top: 20px;
+`;
