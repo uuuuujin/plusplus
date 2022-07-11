@@ -7,6 +7,7 @@ import { GrPowerReset, GrFilter } from 'react-icons/gr';
 import Container from '../../components/container/container.component';
 import DestinationModal from '../../components/destination-modal/destinationModal.component';
 import Header from '../../components/header/header.component';
+import Footer from '../../components/footer/footer.component';
 import FilterModal from '../../components/filter-modal/filterModal.component';
 import ProductListItem from '../../components/product-list-item/productListItem.component';
 
@@ -108,7 +109,7 @@ export default function Search(): JSX.Element {
                 <IoIosArrowDown />
               </CagtegoryButton>
             </CategoryContainer>
-            <CategoryContainer>
+            <CategoryContainer className="checkout">
               <CategoryTitle>체크아웃</CategoryTitle>
               <CagtegoryButton>
                 <span>체크아웃</span>
@@ -138,6 +139,7 @@ export default function Search(): JSX.Element {
             />,
           ])}
         </ProductListContainer>
+        <Footer />
 
         <DestinationModal />
         <FilterModal />
