@@ -7,7 +7,7 @@ export const ItemContainer = styled.div`
   box-sizing: border-box;
   margin-bottom: 40px;
 
-  @media (max-width: 768px) {
+  @media (max-width: 780px) {
     width: 100%;
     margin-bottom: 50px;
   }
@@ -24,7 +24,7 @@ export const Bottom = styled.div`
   width: 100%;
   box-sizing: border-box;
 
-  @media (max-width: 768px) {
+  @media (max-width: 780px) {
     margin-top: 5px;
   }
 `;
