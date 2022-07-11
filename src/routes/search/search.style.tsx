@@ -31,6 +31,12 @@ export const CategoryContainer = styled.div`
   margin-right: 10px;
   align-items: center;
   width: 100%;
+
+  @media (max-width: 768px) {
+    &.checkout {
+      margin-right: 0;
+    }
+  }
 `;
 
 export const CategoryTitle = styled.span`
