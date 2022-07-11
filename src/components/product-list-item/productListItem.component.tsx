@@ -14,7 +14,7 @@ interface ProductListItemProp {
   productImageSrc: string;
   productTitle: string;
   productCost: string;
-  likeCount: string;
+  likeCount: number;
 }
 
 export default function ProductListItem(
