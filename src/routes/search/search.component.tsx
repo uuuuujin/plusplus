@@ -8,17 +8,21 @@ import Container from '../../components/container/container.component';
 import DestinationModal from '../../components/destination-modal/destinationModal.component';
 import Header from '../../components/header/header.component';
 import FilterModal from '../../components/filter-modal/filterModal.component';
+import ProductListItem from '../../components/product-list-item/productListItem.component';
 
 import {
   FilterTop,
-  FilterWrap,
   RowContainer,
   CategoryContainer,
   CategoryTitle,
   CagtegoryButton,
   IconButtonContainer,
   IconButton,
+  ProductListContainer,
 } from './search.style';
+
+import HotelImage1 from '../../assets/images/productImage1.jpg';
+import HotelImage2 from '../../assets/images/productImage2.jpg';
 
 export default function Search(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -29,23 +33,65 @@ export default function Search(): JSX.Element {
 
   const handleFilterModal = () => {
     dispatch(modalAction.radioFilterModal());
-  }
+  };
+
+  const hotelData = [
+    {
+      productImageSrc: HotelImage1,
+      productTitle: '서우주',
+      productCost: '₩200,000 ~ ₩300,000',
+      likeCount: 50,
+    },
+    {
+      productImageSrc: HotelImage2,
+      productTitle: '밤편지',
+      productCost: '₩200,000 ~ ₩300,000',
+      likeCount: 100,
+    },
+    {
+      productImageSrc: HotelImage1,
+      productTitle: '서우주',
+      productCost: '₩200,000 ~ ₩300,000',
+      likeCount: 50,
+    },
+    {
+      productImageSrc: HotelImage2,
+      productTitle: '밤편지',
+      productCost: '₩200,000 ~ ₩300,000',
+      likeCount: 100,
+    },
+    {
+      productImageSrc: HotelImage1,
+      productTitle: '서우주',
+      productCost: '₩200,000 ~ ₩300,000',
+      likeCount: 50,
+    },
+    {
+      productImageSrc: HotelImage2,
+      productTitle: '밤편지',
+      productCost: '₩200,000 ~ ₩300,000',
+      likeCount: 100,
+    },
+  ];
 
   return (
     <Container>
       <div>
-        <Header/> 
+        <Header />
 
         <FilterTop>
           <RowContainer>
             <CategoryContainer>
               <CategoryTitle>여행지</CategoryTitle>
-              <CagtegoryButton className='regionName' onClick={handleDestinationModal}>
+              <CagtegoryButton
+                className="regionName"
+                onClick={handleDestinationModal}
+              >
                 <span>{searchRegionName ? searchRegionName : '여행지'}</span>
                 <IoIosArrowDown />
               </CagtegoryButton>
             </CategoryContainer>
-            <IconButtonContainer className='mobile'>
+            <IconButtonContainer className="mobile">
               <IconButton>
                 <GrPowerReset />
               </IconButton>
@@ -71,18 +117,30 @@ export default function Search(): JSX.Element {
             </CategoryContainer>
           </RowContainer>
 
-          <IconButtonContainer className='desktop'>
-            <IconButton >
-              <GrPowerReset/>
+          <IconButtonContainer className="desktop">
+            <IconButton>
+              <GrPowerReset />
             </IconButton>
             <IconButton onClick={handleFilterModal}>
-              <GrFilter/>
+              <GrFilter />
             </IconButton>
           </IconButtonContainer>
         </FilterTop>
 
+        <ProductListContainer>
+          {hotelData.map((item, key) => [
+            <ProductListItem
+              key={key}
+              productImageSrc={item.productImageSrc}
+              productTitle={item.productTitle}
+              productCost={item.productCost}
+              likeCount={item.likeCount}
+            />,
+          ])}
+        </ProductListContainer>
+
         <DestinationModal />
-        <FilterModal/>
+        <FilterModal />
       </div>
     </Container>
   );
