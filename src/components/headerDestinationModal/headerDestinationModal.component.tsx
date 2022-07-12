@@ -5,11 +5,11 @@ import { selectIsHeaderDestinationModalOpen } from '../../store/modules/modal/mo
 import { selectSearchRegionName } from '../../store/modules/search/search.select';
 
 import MainModal from '../main-modal/mainModal.component';
-
+import { ROUTES } from '../../routes/routes';
 import {
   RegionButtonContainer,
   RegionButton,
-  SearchButton,
+  SearchLink,
   Bottom,
 } from './headerDestinationModal.style';
 
@@ -70,7 +70,9 @@ export default function HeaderDestinationModal(): JSX.Element {
           </ul>
         </RegionButtonContainer>
         <Bottom>
-          <SearchButton onClick={handleDestinationModal}>검색하기</SearchButton>
+          <SearchLink onClick={handleDestinationModal} to={ROUTES.SEARCH.path}>
+            검색하기
+          </SearchLink>
         </Bottom>
       </div>
     </MainModal>

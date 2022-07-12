@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import theme from '../../style/theme';
+import { Link } from 'react-router-dom';
 export const RegionButtonContainer = styled.div`
   margin-top: 20px;
   // border: 1px red solid;
@@ -47,7 +48,7 @@ export const Bottom = styled.div`
   border-top: 1px solid ${theme.colors.border};
 `;
 
-export const SearchButton = styled.button`
+export const SearchLink = styled(Link)`
   width: 150px;
   height: 50px;
   background-color: #000;
@@ -56,4 +57,7 @@ export const SearchButton = styled.button`
   border: none;
   font-size: 18px;
   cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+  line-height: 50px;
 `;
