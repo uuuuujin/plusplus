@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-
+import theme from '../../style/theme';
 export const ModalContainer = styled.div`
   position: fixed;
   left: 0;
@@ -40,7 +40,7 @@ export const ModalContent = styled.div<{ width: number }>`
 export const ModalHeader = styled.div`
   font-weight: bold;
   font-size: 24px;
-  border-bottom: 1px solid gray;
+  border-bottom: 1px solid ${theme.colors.border};
   padding: 10px 0 20px 20px;
 `;
 

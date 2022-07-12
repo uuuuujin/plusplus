@@ -14,21 +14,7 @@ import {
   Bottom,
 } from './headerDestinationModal.style';
 
-export default function DestinationModal(): JSX.Element {
-  const dispatch = useAppDispatch();
-
-  const isDestinationModalOpen = useAppSelector(selectIsDestinationModalOpen);
-  const searchRegionName = useAppSelector(selectSearchRegionName);
-
-  const handleDestinationModal = () => {
-    dispatch(modalAction.radioDestinationModal());
-  };
-
-  const handleRegionClick = (region: string) => {
-    dispatch(searchAction.setSearchRegionName(region));
-    handleDestinationModal();
-  };
-
+export default function HeaderDestinationModal(): JSX.Element {
   const REGIONAL_NAME = [
     '국내전체',
     '서울',
@@ -48,8 +34,8 @@ export default function DestinationModal(): JSX.Element {
 
   return (
     <MainModal
-      isOpen={isDestinationModalOpen}
-      onClose={handleDestinationModal}
+      isOpen={true}
+      onClose={true}
       title="어디로 떠날까요?"
       contentWidth={600}
     >
@@ -61,7 +47,8 @@ export default function DestinationModal(): JSX.Element {
                 <li key={item}>
                   <RegionButton
                     regionName={item}
-                    clickedRegionName={searchRegionName}
+                    clickedRegionName={item}
+                    // onClick={() => handleHeaderRegionClick(item)}
                   >
                     {item}
                   </RegionButton>

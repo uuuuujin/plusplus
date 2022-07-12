@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import theme from '../../style/theme';
 export const RegionButtonContainer = styled.div`
   margin-top: 20px;
-
+  // border: 1px red solid;
   ul {
     display: flex;
     flex-wrap: wrap;
