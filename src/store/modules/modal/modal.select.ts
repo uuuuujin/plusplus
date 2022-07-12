@@ -9,4 +9,12 @@ export const selectIsDestinationModalOpen = createSelector(
   (modal) => modal.isDestinationModalOpen
 );
 
-export const selectIsFilterModalOpen = createSelector([selectModalReducer], (modal) => modal.isFilterModalOpen)
+export const selectIsFilterModalOpen = createSelector(
+  [selectModalReducer],
+  (modal) => modal.isFilterModalOpen
+);
+
+export const selectIsHeaderDestinationModalOpen = createSelector(
+  [selectModalReducer],
+  (modal) => modal.isHeaderDestinationModalOpen
+);

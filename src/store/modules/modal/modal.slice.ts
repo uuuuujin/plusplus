@@ -3,11 +3,13 @@ import { createSlice } from '@reduxjs/toolkit';
 export interface ModalState {
   isDestinationModalOpen: boolean;
   isFilterModalOpen: boolean;
+  isHeaderDestinationModalOpen: boolean;
 }
 
 const initialState: ModalState = {
   isDestinationModalOpen: false,
   isFilterModalOpen: false,
+  isHeaderDestinationModalOpen: false,
 };
 
 export const modalSlice = createSlice({
@@ -19,7 +21,10 @@ export const modalSlice = createSlice({
     },
     radioFilterModal: (state) => {
       state.isFilterModalOpen = !state.isFilterModalOpen;
-    }
+    },
+    radioHeaderDestinationModal: (state) => {
+      state.isHeaderDestinationModalOpen = !state.isHeaderDestinationModalOpen;
+    },
   },
 });
 
