@@ -9,10 +9,11 @@ import { Link } from 'react-router-dom';
 import DestinationModal from '../headerDestinationModal/headerDestinationModal.component';
 
 import { modalAction } from '../../store/modules/modal/modal.slice';
+import { ROUTES } from '../../routes/routes';
 
 function CompanyLogo() {
   return (
-    <Link to="/">
+    <Link to={ROUTES.HOME.path}>
       <Logo src={CompanyLogoImage} />
     </Link>
   );
