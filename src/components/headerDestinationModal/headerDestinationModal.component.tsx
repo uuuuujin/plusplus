@@ -34,8 +34,8 @@ export default function HeaderDestinationModal(): JSX.Element {
 
   return (
     <MainModal
-      isOpen={true}
-      onClose={true}
+      isOpen={false}
+      onClose={() => {}}
       title="어디로 떠날까요?"
       contentWidth={600}
     >
