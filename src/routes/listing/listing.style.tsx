@@ -37,7 +37,7 @@ export const ImgLabel = styled.label`
   height: 150px;
   border: 10px solid #aaa;
   border-radius: 10px;
-  opacity: 0.4;
+  color: #808080;
   & > svg {
     
     width: 150px;

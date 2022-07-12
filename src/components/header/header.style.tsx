@@ -8,15 +8,14 @@ export const Nav = styled.div`
   box-sizing: border-box;
   position: fixed;
   top: 0;
-  // max-width: 768px;
-  width: 768px;
+  max-width: 768px;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 5px 20px;
+  margin: 0px;
   height: 76px;
-  border: 1px solid #ddd;
-  z-index: 300;
 `;
 export const Logo = styled.img`
   width: 100px;
@@ -28,8 +27,8 @@ export const Icons = styled.div`
   justify-content: flex-end;
 `;
 export const Icon = styled.button`
-  width: 50px;
-  height: 45px;
+  width: 55px;
+  height: 55px;
   border: none;
   border-radius: 35%;
   display: flex;
@@ -38,28 +37,15 @@ export const Icon = styled.button`
   justify-content: center;
   background: none;
 
-  & + & {
-    margin-left: 20px;
-  }
-
   &:hover {
     cursor: pointer;
   }
 
   & > * {
-    width: 30px;
-    height: 30px;
+    width: 32px;
+    height: 32px;
     display: flex;
     align-items: center;
     margin: auto;
-  }
-  & > span {
-    height: 20px;
-    margin-top: 5px;
-    text-align: center;
-    justify-content: center;
-    font-size: 0.7rem;
-    color: ${theme.colors.main};
-    font-weight: 700;
   }
 `;
