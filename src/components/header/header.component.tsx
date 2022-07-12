@@ -14,7 +14,7 @@ import { ROUTES } from '../../routes/routes';
 function CompanyLogo() {
   return (
     <Link to={ROUTES.HOME.path}>
-      <Logo src={CompanyLogoImage} />
+      <Logo src="logologo.png" />
     </Link>
   );
 }
