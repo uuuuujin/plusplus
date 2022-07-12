@@ -1,20 +1,32 @@
-import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
 import { modalAction } from '../../store/modules/modal/modal.slice';
 import { searchAction } from '../../store/modules/search/search.slice';
-import { selectIsDestinationModalOpen } from '../../store/modules/modal/modal.select';
+import { selectIsHeaderDestinationModalOpen } from '../../store/modules/modal/modal.select';
 import { selectSearchRegionName } from '../../store/modules/search/search.select';
 
 import MainModal from '../main-modal/mainModal.component';
-
+import { ROUTES } from '../../routes/routes';
 import {
   RegionButtonContainer,
   RegionButton,
-  SearchButton,
+  SearchLink,
   Bottom,
 } from './headerDestinationModal.style';
 
 export default function HeaderDestinationModal(): JSX.Element {
+  const dispatch = useAppDispatch();
+  const isHeaderDestinationModalOpen = useAppSelector(
+    selectIsHeaderDestinationModalOpen
+  );
+  const searchRegionName = useAppSelector(selectSearchRegionName);
+  const handleDestinationModal = () => {
+    dispatch(modalAction.radioHeaderDestinationModal());
+  };
+  const handleRegionClick = (region: string) => {
+    dispatch(searchAction.setSearchRegionName(region));
+    // handleDestinationModal();
+  };
+
   const REGIONAL_NAME = [
     '국내전체',
     '서울',
@@ -34,8 +46,8 @@ export default function HeaderDestinationModal(): JSX.Element {
 
   return (
     <MainModal
-      isOpen={false}
-      onClose={() => {}}
+      isOpen={isHeaderDestinationModalOpen}
+      onClose={handleDestinationModal}
       title="어디로 떠날까요?"
       contentWidth={600}
     >
@@ -47,8 +59,8 @@ export default function HeaderDestinationModal(): JSX.Element {
                 <li key={item}>
                   <RegionButton
                     regionName={item}
-                    clickedRegionName={item}
-                    // onClick={() => handleHeaderRegionClick(item)}
+                    clickedRegionName={searchRegionName}
+                    onClick={() => handleRegionClick(item)}
                   >
                     {item}
                   </RegionButton>
@@ -58,7 +70,9 @@ export default function HeaderDestinationModal(): JSX.Element {
           </ul>
         </RegionButtonContainer>
         <Bottom>
-          <SearchButton>검색하기</SearchButton>
+          <SearchLink onClick={handleDestinationModal} to={ROUTES.SEARCH.path}>
+            검색하기
+          </SearchLink>
         </Bottom>
       </div>
     </MainModal>

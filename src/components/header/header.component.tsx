@@ -2,8 +2,6 @@ import { NavWrapper, Nav, Icons, Icon, Logo } from './header.style';
 import { AiOutlineCalendar } from 'react-icons/ai';
 import { BsMap } from 'react-icons/bs';
 import { useAppDispatch } from '../../hooks/index.hook';
-import MainModal from '../main-modal/mainModal.component';
-import CompanyLogoImage from '../../assets/images/logologo.png';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import HeaderDestinationModal from '../headerDestinationModal/headerDestinationModal.component';
@@ -28,8 +26,8 @@ export default function Header(): JSX.Element {
   //   setMapModalOpen((e) => !e);
   // };
   const dispatch = useAppDispatch();
-  const handleDestinationModal = () => {
-    dispatch(modalAction.radioDestinationModal());
+  const handleHeaderDestinationModal = () => {
+    dispatch(modalAction.radioHeaderDestinationModal());
   };
   return (
     <NavWrapper>
@@ -40,7 +38,7 @@ export default function Header(): JSX.Element {
             <AiOutlineCalendar />
           </Icon>
           <HeaderDestinationModal />
-          <Icon onClick={handleDestinationModal}>
+          <Icon onClick={handleHeaderDestinationModal}>
             <BsMap />
           </Icon>
         </Icons>
