@@ -8,10 +8,11 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import DestinationModal from '../destination-modal/destinationModal.component';
 import { modalAction } from '../../store/modules/modal/modal.slice';
+import { ROUTES } from '../../routes/routes';
 
 function CompanyLogo() {
   return (
-    <Link to="/">
+    <Link to={ROUTES.HOME.path}>
       <Logo src={CompanyLogoImage} />
     </Link>
   );
@@ -28,7 +29,7 @@ export default function Header(): JSX.Element {
   const dispatch = useAppDispatch();
   const handleDestinationModal = () => {
     dispatch(modalAction.radioDestinationModal());
-  }
+  };
   return (
     <NavWrapper>
       <Nav>
@@ -38,13 +39,13 @@ export default function Header(): JSX.Element {
             <AiOutlineCalendar />
             <span>날짜</span>
           </Icon>
-          <DestinationModal/>
+          <DestinationModal />
           <Icon onClick={handleDestinationModal}>
             <BsMap />
             <span>지도</span>
           </Icon>
         </Icons>
-        <DestinationModal/>
+        <DestinationModal />
       </Nav>
     </NavWrapper>
   );

@@ -6,9 +6,11 @@ import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
 import {
     DescriptionContainer, 
     Intro, Info, Title, Body,
-    Slider, LeftSlideButton, RightSlideButton, ImageBox, SliderImageBox,
+    Slider, ImageBox,
     Rooms, Gallery, RoomDetail,  
 } from './description.style';
+
+import ImageSlider from '../../components/image-slider/imageSlider.component';
 
 export default function Description(): JSX.Element {
   return (
@@ -22,12 +24,9 @@ export default function Description(): JSX.Element {
             </Intro>
 
             <Slider>
-                <LeftSlideButton><AiOutlineLeft/></LeftSlideButton>
-                <SliderImageBox src="https://www.planetware.com/wpimages/2019/06/south-korea-seoul-best-hotels-four-seasons-hotel-seoul.jpg">  
-                </SliderImageBox>
-                <RightSlideButton><AiOutlineRight/></RightSlideButton>
+                 <ImageSlider></ImageSlider>
             </Slider>
-
+      
             <Rooms>
                 <Title> 객실 정보 </Title>
                 <Gallery> 
