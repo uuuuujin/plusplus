@@ -6,7 +6,8 @@ import MainModal from '../main-modal/mainModal.component';
 import CompanyLogoImage from '../../assets/images/logologo.png';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import DestinationModal from '../destination-modal/destinationModal.component';
+import DestinationModal from '../headerDestinationModal/headerDestinationModal.component';
+
 import { modalAction } from '../../store/modules/modal/modal.slice';
 import { ROUTES } from '../../routes/routes';
 
@@ -37,12 +38,10 @@ export default function Header(): JSX.Element {
         <Icons>
           <Icon onClick={calendarModalHandler}>
             <AiOutlineCalendar />
-            <span>날짜</span>
           </Icon>
           <DestinationModal />
           <Icon onClick={handleDestinationModal}>
             <BsMap />
-            <span>지도</span>
           </Icon>
         </Icons>
         <DestinationModal />
