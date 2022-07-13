@@ -69,6 +69,7 @@ export default function SwiperComponent({
           </SwiperSlide>
         );
       })}
+
       <NavigationButtonContainer>
         <NavigationButton ref={navigationPrevRef}>
           <IoIosArrowBack />
