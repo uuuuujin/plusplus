@@ -3,6 +3,13 @@ import Header from '../../components/header/header.component';
 import Footer from '../../components/footer/footer.component';
 import SwiperComponent from '../../components/swiper/swiper.component';
 
+import {
+  MainBanner,
+  MainBannerImage,
+  SliderContainer,
+  SliderTitle,
+} from './home.style';
+
 export default function Home(): JSX.Element {
   const dummyData = [
     {
@@ -26,9 +33,22 @@ export default function Home(): JSX.Element {
   return (
     <Container>
       <div>
-        <Header></Header>
-        <span>메인 화면입니다요~</span>
-        <SwiperComponent swiperDataArr={dummyData}></SwiperComponent>
+        <Header />
+
+        <MainBanner>
+          <MainBannerImage src="main_banner.jpg" alt="배너이미지" />
+        </MainBanner>
+
+        <SliderContainer>
+          <SliderTitle>현재 진행중인 이벤트</SliderTitle>
+          <SwiperComponent swiperDataArr={dummyData}></SwiperComponent>
+        </SliderContainer>
+
+        <SliderContainer>
+          <SliderTitle>인기순</SliderTitle>
+          <SwiperComponent swiperDataArr={dummyData}></SwiperComponent>
+        </SliderContainer>
+
         <Footer></Footer>
       </div>
     </Container>

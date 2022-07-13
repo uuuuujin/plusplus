@@ -1,4 +1,10 @@
 import styled from 'styled-components';
+import { Swiper } from 'swiper/react';
+
+export const SwiperContainer = styled(Swiper)`
+  z-index: 0;
+  padding: 0 20px;
+`;
 
 export const SlideContainer = styled.div`
   display: flex;
@@ -24,7 +30,7 @@ export const SlideTitle = styled.div`
 
 export const NavigationButtonContainer = styled.div`
   width: 150px;
-  margin: 20px auto 0;
+  margin: 10px auto 0;
   display: flex;
   justify-content: center;
 `;

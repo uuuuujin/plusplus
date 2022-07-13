@@ -8,6 +8,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 
 import {
+  SwiperContainer,
   SlideContainer,
   SlideImage,
   SlideTitle,
@@ -57,7 +58,7 @@ export default function SwiperComponent({
   };
 
   return (
-    <Swiper {...swiperParams}>
+    <SwiperContainer {...swiperParams}>
       {swiperDataArr.map((itme, index) => {
         return (
           <SwiperSlide key={index}>
@@ -68,6 +69,7 @@ export default function SwiperComponent({
           </SwiperSlide>
         );
       })}
+
       <NavigationButtonContainer>
         <NavigationButton ref={navigationPrevRef}>
           <IoIosArrowBack />
@@ -76,6 +78,6 @@ export default function SwiperComponent({
           <IoIosArrowForward />
         </NavigationButton>
       </NavigationButtonContainer>
-    </Swiper>
+    </SwiperContainer>
   );
 }
