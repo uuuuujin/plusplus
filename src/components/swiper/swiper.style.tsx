@@ -1,4 +1,9 @@
 import styled from 'styled-components';
+import { Swiper } from 'swiper/react';
+
+export const SwiperContainer = styled(Swiper)`
+  z-index: 0;
+`;
 
 export const SlideContainer = styled.div`
   display: flex;
