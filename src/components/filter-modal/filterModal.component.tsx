@@ -12,14 +12,13 @@ import {
   CheckboxContainer,
   CheckboxElement,
   CheckboxInput,
-  CheckboxLabel
+  CheckboxLabel,
 } from './filterModal.style';
 
 interface FilterType {
   title: string;
   id: string;
 }
-
 
 export default function FilterModal(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -28,7 +27,7 @@ export default function FilterModal(): JSX.Element {
   const handleFilterModal = () => {
     dispatch(modalAction.radioFilterModal());
   };
-  
+
   const STAY_TYPE: FilterType[] = [
     {
       title: '게스트 하우스',
@@ -45,55 +44,55 @@ export default function FilterModal(): JSX.Element {
     {
       title: '민박',
       id: 'bnb',
-    },{
+    },
+    {
       title: '호텔',
       id: 'hotel',
-    }
-  ]
+    },
+  ];
 
   const THEME_TYPE: FilterType[] = [
     {
       title: '도심 속 휴식',
-      id: 'rest_in_city'
+      id: 'rest_in_city',
     },
     {
       title: '자연 속 휴식',
-      id: 'rest_in_nature'
+      id: 'rest_in_nature',
     },
     {
       title: '수영장',
-      id: 'swimming_pool'
+      id: 'swimming_pool',
     },
     {
       title: '오션뷰',
-      id: 'ocean_view'
+      id: 'ocean_view',
     },
     {
       title: '시티뷰',
-      id: 'city_view'
+      id: 'city_view',
     },
     {
       title: '아웃도어',
-      id: 'outdoor'
+      id: 'outdoor',
     },
     {
       title: '파티하우스',
-      id: 'party_house'
+      id: 'party_house',
     },
     {
       title: '여행자 교류',
-      id: 'traveler_interact'
+      id: 'traveler_interact',
     },
     {
       title: '스파',
-      id: 'spa'
+      id: 'spa',
     },
     {
       title: '노천탕',
-      id: 'open_air_bath'
+      id: 'open_air_bath',
     },
-    
-  ]
+  ];
 
   return (
     <MainModal
@@ -106,9 +105,7 @@ export default function FilterModal(): JSX.Element {
         <FilterModalContainer>
           <CategoryContainer>
             <CategoryTitle>가격 범위</CategoryTitle>
-            <div>
-              가격 레이아웃은 추후에 정하기..
-            </div>
+            <div>가격 레이아웃은 추후에 정하기..</div>
           </CategoryContainer>
           <CategoryContainer>
             <CategoryTitle>스테이 유형</CategoryTitle>
@@ -116,10 +113,12 @@ export default function FilterModal(): JSX.Element {
               {STAY_TYPE.map((item, key) => {
                 return (
                   <CheckboxElement key={key}>
-                    <CheckboxInput type="checkbox" id={item.id}/>
-                    <CheckboxLabel htmlFor={item.id}>{item.title}</CheckboxLabel>
+                    <CheckboxInput type="checkbox" id={item.id} />
+                    <CheckboxLabel htmlFor={item.id}>
+                      {item.title}
+                    </CheckboxLabel>
                   </CheckboxElement>
-                )
+                );
               })}
             </CheckboxContainer>
           </CategoryContainer>
@@ -130,19 +129,20 @@ export default function FilterModal(): JSX.Element {
               {THEME_TYPE.map((item, key) => {
                 return (
                   <CheckboxElement key={key}>
-                    <CheckboxInput type="checkbox" id={item.id}/>
-                    <CheckboxLabel htmlFor={item.id}>{item.title}</CheckboxLabel>
+                    <CheckboxInput type="checkbox" id={item.id} />
+                    <CheckboxLabel htmlFor={item.id}>
+                      {item.title}
+                    </CheckboxLabel>
                   </CheckboxElement>
-                )
+                );
               })}
             </CheckboxContainer>
-          </CategoryContainer> 
+          </CategoryContainer>
         </FilterModalContainer>
         <Bottom>
           <SearchButton onClick={handleFilterModal}>검색하기</SearchButton>
         </Bottom>
       </div>
-      
     </MainModal>
-  )
+  );
 }

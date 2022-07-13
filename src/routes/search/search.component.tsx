@@ -22,9 +22,6 @@ import {
   ProductListContainer,
 } from './search.style';
 
-import HotelImage1 from '../../assets/images/productImage1.jpg';
-import HotelImage2 from '../../assets/images/productImage2.jpg';
-
 export default function Search(): JSX.Element {
   const dispatch = useAppDispatch();
   const handleDestinationModal = () => {
@@ -38,37 +35,37 @@ export default function Search(): JSX.Element {
 
   const hotelData = [
     {
-      productImageSrc: HotelImage1,
+      productImageSrc: 'productImage1.jpg',
       productTitle: '서우주',
       productCost: '₩200,000 ~ ₩300,000',
       likeCount: 50,
     },
     {
-      productImageSrc: HotelImage2,
+      productImageSrc: 'productImage2.jpg',
       productTitle: '밤편지',
       productCost: '₩200,000 ~ ₩300,000',
       likeCount: 100,
     },
     {
-      productImageSrc: HotelImage1,
+      productImageSrc: 'productImage2.jpg',
       productTitle: '서우주',
       productCost: '₩200,000 ~ ₩300,000',
       likeCount: 50,
     },
     {
-      productImageSrc: HotelImage2,
+      productImageSrc: 'productImage1.jpg',
       productTitle: '밤편지',
       productCost: '₩200,000 ~ ₩300,000',
       likeCount: 100,
     },
     {
-      productImageSrc: HotelImage1,
+      productImageSrc: 'productImage1.jpg',
       productTitle: '서우주',
       productCost: '₩200,000 ~ ₩300,000',
       likeCount: 50,
     },
     {
-      productImageSrc: HotelImage2,
+      productImageSrc: 'productImage2.jpg',
       productTitle: '밤편지',
       productCost: '₩200,000 ~ ₩300,000',
       likeCount: 100,
