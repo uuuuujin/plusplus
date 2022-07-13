@@ -53,7 +53,6 @@ export default function Description(): JSX.Element {
 
             <Info>
                 <Title> 기타 정보 </Title>
-
             </Info>
         </DescriptionContainer>
       </div>
