@@ -5,23 +5,25 @@ export const Slider = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100%;
+    height: 375px;
 `
 
 export const SliderImageBox = styled.img`
-    width: 105%;
-    max-width: 768px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 `
-// 이미지 사이즈 이슈
 
 export const LeftSlideButton = styled.div`
     position: relative;
-    left: 6%;
+    left: 7%;
     display: flex;
     align-items: center;
-    justify-contents: center;
+    justify-content: center;
     color: white;
     background-color: rgb(0, 0, 0, 0.5);
-    font-size: 32px;
+    font-size: 40px;
 
     &:hover{
         background-color: rgb(0, 0, 0);
@@ -30,13 +32,13 @@ export const LeftSlideButton = styled.div`
 
 export const RightSlideButton = styled.div`
     position: relative;
-    right: 6%;
+    right: 7%;
     display: flex;
     align-items: center;
-    justify-contents: center;
+    justify-content: center;
     color: white;
     background-color: rgb(0, 0, 0, 0.5);
-    font-size: 32px;
+    font-size: 40px;
 
     &:hover{
         background-color: rgb(0, 0, 0);

@@ -34,8 +34,6 @@ export const Slider = styled.div`
     justify-content: center;
 `
 
-// container의 html margin, padding 수정 후 width 100%로 조정
-
 export const ImageBox = styled.img`
     justify-content: center;
     width: 100%;
