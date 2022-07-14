@@ -33,8 +33,6 @@ export default function Home(): JSX.Element {
   return (
     <Container>
       <div>
-        <Header />
-
         <MainBanner>
           <MainBannerImage src="main_banner.jpg" alt="배너이미지" />
         </MainBanner>
@@ -49,7 +47,8 @@ export default function Home(): JSX.Element {
           <SwiperComponent swiperDataArr={dummyData}></SwiperComponent>
         </SliderContainer>
 
-        <Footer></Footer>
+        <Header />
+        <Footer />
       </div>
     </Container>
   );
