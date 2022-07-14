@@ -4,6 +4,7 @@ export interface ModalState {
   isDestinationModalOpen: boolean;
   isFilterModalOpen: boolean;
   isHeaderDestinationModalOpen: boolean;
+  isUserInfoModalOpen: boolean;
   isCalendarModalOpen: boolean;
 }
 
@@ -11,6 +12,7 @@ const initialState: ModalState = {
   isDestinationModalOpen: false,
   isFilterModalOpen: false,
   isHeaderDestinationModalOpen: false,
+  isUserInfoModalOpen: false,
   isCalendarModalOpen: false,
 };
 
@@ -26,6 +28,9 @@ export const modalSlice = createSlice({
     },
     radioHeaderDestinationModal: (state) => {
       state.isHeaderDestinationModalOpen = !state.isHeaderDestinationModalOpen;
+    },
+    radioUserInfoModal: (state) => {
+      state.isUserInfoModalOpen = !state.isUserInfoModalOpen;
     },
     setCalendarModal: (state) => {
       state.isCalendarModalOpen = !state.isCalendarModalOpen;
