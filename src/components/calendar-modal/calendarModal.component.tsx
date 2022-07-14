@@ -22,9 +22,9 @@ const CalendarModal = () => {
 
   const isCalendarModalOpen = useAppSelector(selectIsCalendarModalOpen);
   let today = new Date();
-  let nextMonthDate = new Date(today.setMonth(today.getMonth() + 4));
-  let nextNextMonthDate = new Date(today.setMonth(today.getMonth() + 2));
-  today.setMonth(today.getMonth() - 1);
+  let nextMonthDate = new Date(today.setMonth(today.getMonth() + 1));
+  let nextNextMonthDate = new Date(today.setMonth(today.getMonth() + 1));
+  today.setMonth(today.getMonth() - 2);
 
   const checkInDate = useAppSelector(selectCalendarReducerSetCheckIn);
   const checkOutDate = useAppSelector(selectCalendarReducerCheckOut);
@@ -102,7 +102,6 @@ const CalendarModal = () => {
     >
       <CalendarWrapper>
         <CalendarBox>
-          <ArrowBack onClick={onClickLeftBtn} />
           <Calendar year={thisMonth.year} month={thisMonth.month + 1} />
           <Calendar
             year={nextMonth.year}
@@ -113,7 +112,6 @@ const CalendarModal = () => {
             year={nextNextMonthDate.getFullYear()}
             month={nextNextMonthDate.getMonth() + 1}
           />
-          <ArrowForward onClick={onClickRightBtn} />
         </CalendarBox>
         <ReservationButton onClick={onModalClose}>
           {checkInOutText()} 검색

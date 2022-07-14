@@ -21,7 +21,7 @@ export const CalendarBox = styled.div`
   display: flex;
   flex-direction: column;
   border-bottom: 1px solid #ddd;
-  margin-bottom: 20px;
+
   overflow-y: auto;
 
   /* 스크롤 바 안보이게 처리 */
@@ -31,10 +31,6 @@ export const CalendarBox = styled.div`
 
   position: relative;
   max-height: calc(100vh - 200px);
-
-  > div:first-child {
-    margin-right: 20px;
-  }
 
   @media screen and (max-width: 768px) {
   }
