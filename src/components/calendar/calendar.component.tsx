@@ -1,6 +1,4 @@
 import {
-  ArrowBack,
-  ArrowForward,
   CalendarBox,
   CalendarContainer,
   DateBox,
@@ -8,31 +6,90 @@ import {
   DayBox,
   DayHeaderBox,
   DayTxt,
-  InfoBox,
-  InfoTxt,
   MonthBox,
   MonthText,
   ReservationIcon,
   YearText,
 } from './calendar.style';
-import { getCalendar } from '../../utils/calendar';
-import { useRef } from 'react';
+import { CompareDate, getCalendar } from '../../utils/calendar';
+
+import {
+  selectCalendarReducerCheckOut,
+  selectCalendarReducerSetCheckIn,
+} from '../../store/modules/calendar/calendar.select';
+import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
+import { calendarAction } from '../../store/modules/calendar/calendar.slice';
 
 const mockData = [4, 8, 10, 12, 13, 15, 16, 20, 25, 30];
 
-const Calendar = (): JSX.Element => {
-  const { startDay, totalOfDay } = getCalendar(2022, 6);
-  const dayArray = useRef(new Array(startDay + totalOfDay!).fill(0));
+type CalendarProps = {
+  year: number;
+  month: number;
+  str?: string;
+};
 
-  const renderCalendar = dayArray.current.map((key, index) => {
+const Calendar = ({ year, month, str }: CalendarProps): JSX.Element => {
+  const dispatch = useAppDispatch();
+  const { startDay, totalOfDay } = getCalendar(year, month);
+  const todayDate = new Date();
+
+  const checkInDate = useAppSelector(selectCalendarReducerSetCheckIn);
+  const checkOutDate = useAppSelector(selectCalendarReducerCheckOut);
+
+  const dayArray = new Array(startDay + totalOfDay!).fill(0);
+
+  const onClickDate = (year: number, month: number, day: number) => {
+    const clickedDate = new Date(year, month - 1, day);
+    if (checkInDate === undefined) {
+      dispatch(calendarAction.setCheckInDate(clickedDate));
+    } else if (checkOutDate === undefined) {
+      if (
+        year === checkInDate!.getFullYear() &&
+        month === checkInDate!.getMonth() &&
+        day === checkInDate!.getDate()
+      ) {
+        return;
+      }
+      if (checkInDate > clickedDate) {
+        dispatch(calendarAction.setCheckInDate(clickedDate));
+      } else {
+        dispatch(calendarAction.setCheckOutDate(clickedDate));
+      }
+    } else {
+      dispatch(calendarAction.setCheckInDate(clickedDate));
+      dispatch(calendarAction.setCheckOutDate(undefined));
+    }
+  };
+
+  const renderCalendar = dayArray.map((key, index) => {
     if (index % 7 === 0) {
       return (
         <DayBox key={index}>
-          {dayArray.current.slice(index, index + 7).map((value, i) => {
+          {dayArray.slice(index, index + 7).map((value, i) => {
             if (index + i >= startDay) {
               return (
-                <DateBox key={index + i} className={'date_box'}>
+                <DateBox
+                  key={index + i}
+                  className={CompareDate(
+                    year,
+                    month,
+                    index + i + 1 - startDay,
+                    todayDate,
+                    checkInDate,
+                    checkOutDate
+                  )}
+                  onClick={() =>
+                    onClickDate(year, month, index + i + 1 - startDay)
+                  }
+                >
                   <DateTxt>{index + i + 1 - startDay}</DateTxt>
+                  {todayDate.getFullYear() === year &&
+                  todayDate.getMonth() === month - 1 &&
+                  todayDate.getDate() === index + i + 1 - startDay ? (
+                    <span className={'today-span'}>오늘</span>
+                  ) : (
+                    ''
+                  )}
                   {mockData.indexOf(index + i + 1 - startDay) > -1 && (
                     <ReservationIcon />
                   )}
@@ -46,16 +103,16 @@ const Calendar = (): JSX.Element => {
   });
 
   return (
-    <CalendarContainer>
-      <YearText>2022</YearText>
-      <InfoBox>
-        <ReservationIcon />
-        <InfoTxt>예약이 존재하는 날입니다.</InfoTxt>
-      </InfoBox>
+    <CalendarContainer className={str}>
+      {/*<InfoBox>*/}
+      {/*  <ReservationIcon />*/}
+      {/*  <InfoTxt>예약이 존재하는 날입니다.</InfoTxt>*/}
+      {/*</InfoBox>*/}
       <MonthBox>
-        <ArrowBack />
-        <MonthText>1월</MonthText>
-        <ArrowForward />
+        {/*<ArrowBack />*/}
+        <MonthText>{month}월</MonthText>
+        <YearText>{year}년 </YearText>
+        {/*<ArrowForward />*/}
       </MonthBox>
       <CalendarBox>
         <DayHeaderBox>

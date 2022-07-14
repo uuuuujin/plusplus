@@ -15,6 +15,11 @@ import {
 } from './mypage.style';
 import WishList from '../../components/wishlist/wishlist.component';
 import BookingListComponent from '../../components/booking-list/bookinglist.component';
+import Header from '../../components/header/header.component';
+import Footer from '../../components/footer/footer.component';
+import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
+import { modalAction } from '../../store/modules/modal/modal.slice';
+import CalendarModal from '../../components/calendar-modal/calendarModal.component';
 
 const KAKAOCOLOR = '#FEE500';
 
@@ -38,12 +43,19 @@ const LoginIconBox = ({ color, text }: LoginProps) => {
 };
 
 export default function MyPage(): JSX.Element {
+  const dispatch = useAppDispatch();
+
+  const handleCalendarModal = () => {
+    dispatch(modalAction.setCalendarModal());
+  };
+
   return (
     <Container>
       <MypageContainer>
+        <Header />
         <UserInfo>
           <HeaderText>MY PAGE</HeaderText>
-          <UserIcon className={'override'} />
+          <UserIcon className={'override'} onClick={handleCalendarModal} />
           <FlexRow>
             <span>"OOO" 님 반가워요!</span>
             <LoginIconBox color={KAKAOCOLOR} text={'kakao'} />
@@ -68,8 +80,10 @@ export default function MyPage(): JSX.Element {
           </FlexRow>
         </UserInfo>
         <AdvertiseImg src="https://yaimg.yanolja.com/v5/2022/01/17/13/61e5740f544f02.81195355.png" />
-        {/*<WishList />*/}
+        <WishList />
         <BookingListComponent />
+        <CalendarModal />
+        <Footer />
       </MypageContainer>
     </Container>
   );

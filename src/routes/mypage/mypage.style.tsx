@@ -58,6 +58,8 @@ export const UserInfo = styled.div`
   align-items: center;
   margin: 10px 0px;
   padding: 10px;
+  height: 100px;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 10%);
 
   background-color: #ffffff;
   justify-content: center;
@@ -65,7 +67,7 @@ export const UserInfo = styled.div`
 
 export const UserIcon = styled(MdPersonPin)`
   &.override {
-    font-size: 50px;
+    font-size: 20px;
     border: 1px solid #000000;
     border-radius: 10px;
     margin-bottom: 10px;
@@ -81,6 +83,9 @@ export const FlexRow = styled.div`
   margin-bottom: 10px;
   width: 100%;
 
+  > span {
+    font-size: 14px;
+  }
   .icon {
     font-size: 30px;
     margin-bottom: 8px;
@@ -105,10 +110,11 @@ export const ItemMenu = styled.div`
   width: 33.3%;
   font-size: 12px;
   padding: 5px;
+  height: 50px;
   border-right: 1px solid #000;
 
   > span {
-    font-size: 15px;
+    font-size: 12px;
   }
 
   &:last-child {
