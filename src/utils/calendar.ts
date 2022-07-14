@@ -51,71 +51,71 @@ export const CompareDate = (
   month: number,
   day: number,
   today: Date,
-  checkInDay?: Date,
-  checkOutDay?: Date
+  checkInDay?: number[],
+  checkOutDay?: number[]
 ) => {
   /* 체크인 날짜와 체크아웃 날짜가 지정되었을 때 */
   if (checkInDay !== undefined && checkOutDay !== undefined) {
     if (
-      year === checkInDay.getFullYear() &&
-      month === checkInDay.getMonth() + 1 &&
-      day === checkInDay.getDate()
+      year === checkInDay[0] &&
+      month === checkInDay[1] + 1 &&
+      day === checkInDay[2]
     ) {
       return 'startDay';
     } else if (
-      year === checkOutDay.getFullYear() &&
-      month === checkOutDay.getMonth() + 1 &&
-      day === checkOutDay.getDate()
+      year === checkOutDay[0] &&
+      month === checkOutDay[1] + 1 &&
+      day === checkOutDay[2]
     ) {
       return 'endDay';
     } /* 로직 리펙토링 예정*/ else if (
-      (checkInDay.getFullYear() <= year &&
-        year <= checkOutDay.getFullYear() &&
-        checkInDay.getMonth() + 1 <= month &&
-        month <= checkOutDay.getMonth() + 1 &&
-        checkInDay.getDate() <= day &&
-        day <= checkOutDay.getDate()) ||
-      (checkInDay.getFullYear() <= year &&
-        year <= checkOutDay.getFullYear() &&
-        checkInDay.getMonth() + 1 < month &&
-        month < checkOutDay.getMonth() + 1) ||
+      (checkInDay[0] <= year &&
+        year <= checkOutDay[0] &&
+        checkInDay[1] + 1 <= month &&
+        month <= checkOutDay[1] + 1 &&
+        checkInDay[2] <= day &&
+        day <= checkOutDay[2]) ||
+      (checkInDay[0] <= year &&
+        year <= checkOutDay[0] &&
+        checkInDay[1] + 1 < month &&
+        month < checkOutDay[1] + 1) ||
       // 년도가 다르면 기간추가
-      (checkInDay.getFullYear() < year && year < checkOutDay.getFullYear()) ||
+      (checkInDay[0] < year && year < checkOutDay[0]) ||
       /* 체크인 날짜년도는 같은데 체크아웃 년도가 다를 때 처리 */
       // 체크인 년도는 같은데 checkout 년도가 다른경우
-      (checkInDay.getFullYear() === year &&
-        year < checkOutDay.getFullYear() &&
-        month > checkInDay.getMonth() + 1) ||
-      (checkInDay.getFullYear() === year &&
-        year < checkOutDay.getFullYear() &&
-        month === checkInDay.getMonth() + 1 &&
-        day > checkInDay.getDate()) ||
-      (checkInDay.getFullYear() < year &&
-        year === checkOutDay.getFullYear() &&
-        month < checkOutDay.getMonth() + 1) ||
-      (checkInDay.getFullYear() < year &&
-        year === checkOutDay.getFullYear() &&
-        month === checkOutDay.getMonth() + 1 &&
-        day <= checkOutDay.getDate()) ||
+      (checkInDay[0] === year &&
+        year < checkOutDay[0] &&
+        month > checkInDay[1] + 1) ||
+      (checkInDay[0] === year &&
+        year < checkOutDay[0] &&
+        month === checkInDay[1] + 1 &&
+        day > checkInDay[2]) ||
+      (checkInDay[0] < year &&
+        year === checkOutDay[0] &&
+        month < checkOutDay[1] + 1) ||
+      (checkInDay[0] < year &&
+        year === checkOutDay[0] &&
+        month === checkOutDay[1] + 1 &&
+        day <= checkOutDay[2]) ||
       /* 같은 년도 의 체크인 체크아웃 날짜 확인*/
-      (checkInDay.getFullYear() === year &&
-        year === checkOutDay.getFullYear() &&
-        checkInDay.getMonth() + 1 === month &&
-        checkOutDay.getMonth() + 1 > month &&
-        day > checkInDay.getDate()) ||
-      (checkInDay.getFullYear() === year &&
-        year === checkOutDay.getFullYear() &&
-        checkOutDay.getMonth() + 1 === month &&
-        checkInDay.getMonth() + 1 < month &&
-        day < checkOutDay.getDate())
+      (checkInDay[0] === year &&
+        year === checkOutDay[0] &&
+        checkInDay[1] + 1 === month &&
+        checkOutDay[1] + 1 > month &&
+        day > checkInDay[2]) ||
+      (checkInDay[0] === year &&
+        year === checkOutDay[0] &&
+        checkOutDay[1] + 1 === month &&
+        checkInDay[1] + 1 < month &&
+        day < checkOutDay[2])
     ) {
       return 'period';
     }
   } else if (checkInDay !== undefined && checkOutDay === undefined) {
     if (
-      year === checkInDay.getFullYear() &&
-      month === checkInDay.getMonth() + 1 &&
-      day === checkInDay.getDate()
+      year === checkInDay[0] &&
+      month === checkInDay[1] + 1 &&
+      day === checkInDay[2]
     ) {
       return 'onlyStartDay';
     }
@@ -147,14 +147,8 @@ export const CompareDate = (
  * ( yyyy.mm.dd ) 형식으로 반환
  * @param date
  */
-export const formatDate = (date: Date) => {
+export const formatDate = (date: number[]) => {
   let formatted_date =
-    '( ' +
-    date.getFullYear() +
-    '.' +
-    (date.getMonth() + 1) +
-    '.' +
-    date.getDate() +
-    ' )';
+    '( ' + date[0] + '.' + (date[1] + 1) + '.' + date[2] + ' )';
   return formatted_date;
 };

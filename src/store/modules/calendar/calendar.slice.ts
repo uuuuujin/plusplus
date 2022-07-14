@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 export interface CalendarState {
-  checkInDate: Date | undefined;
-  checkOutDate: Date | undefined;
+  checkInDate: number[] | undefined;
+  checkOutDate: number[] | undefined;
 }
 
 const initialState: CalendarState = {

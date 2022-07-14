@@ -33,24 +33,24 @@ const Calendar = ({ year, month, str }: CalendarProps): JSX.Element => {
   const { startDay, totalOfDay } = getCalendar(year, month);
   const todayDate = new Date();
 
-  const checkInDate = useAppSelector(selectCalendarReducerSetCheckIn);
-  const checkOutDate = useAppSelector(selectCalendarReducerCheckOut);
+  const checkIn = useAppSelector(selectCalendarReducerSetCheckIn);
+  const checkOut = useAppSelector(selectCalendarReducerCheckOut);
 
   const dayArray = new Array(startDay + totalOfDay!).fill(0);
 
   const onClickDate = (year: number, month: number, day: number) => {
-    const clickedDate = new Date(year, month - 1, day);
-    if (checkInDate === undefined) {
+    const clickedDate = new Array<number>(year, month - 1, day);
+    if (checkIn === undefined) {
       dispatch(calendarAction.setCheckInDate(clickedDate));
-    } else if (checkOutDate === undefined) {
-      if (
-        year === checkInDate!.getFullYear() &&
-        month === checkInDate!.getMonth() &&
-        day === checkInDate!.getDate()
-      ) {
+    } else if (checkOut === undefined) {
+      if (year === checkIn[0] && month === checkIn[1] && day === checkIn[2]) {
         return;
       }
-      if (checkInDate > clickedDate) {
+      if (
+        year < checkIn[0] ||
+        (year === checkIn[0] && month < checkIn[1] + 1) ||
+        (year === checkIn[0] && month === checkIn[1] + 1 && day < checkIn[2])
+      ) {
         dispatch(calendarAction.setCheckInDate(clickedDate));
       } else {
         dispatch(calendarAction.setCheckOutDate(clickedDate));
@@ -75,8 +75,8 @@ const Calendar = ({ year, month, str }: CalendarProps): JSX.Element => {
                     month,
                     index + i + 1 - startDay,
                     todayDate,
-                    checkInDate,
-                    checkOutDate
+                    checkIn,
+                    checkOut
                   )}
                   onClick={() =>
                     onClickDate(year, month, index + i + 1 - startDay)
