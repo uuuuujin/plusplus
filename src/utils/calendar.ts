@@ -37,3 +37,118 @@ export const getCalendar = (year: number, month: number) => {
   }
   return { startDay, totalOfDay };
 };
+
+/**
+ * 달력 생성시 날짜에 따른 className 값 지정
+ * @param year 년도
+ * @param month 월
+ * @param day 일
+ * @param today 오늘 날짜
+ * @constructor
+ */
+export const CompareDate = (
+  year: number,
+  month: number,
+  day: number,
+  today: Date,
+  checkInDay?: number[],
+  checkOutDay?: number[]
+) => {
+  /* 체크인 날짜와 체크아웃 날짜가 지정되었을 때 */
+  if (checkInDay !== undefined && checkOutDay !== undefined) {
+    if (
+      year === checkInDay[0] &&
+      month === checkInDay[1] + 1 &&
+      day === checkInDay[2]
+    ) {
+      return 'startDay';
+    } else if (
+      year === checkOutDay[0] &&
+      month === checkOutDay[1] + 1 &&
+      day === checkOutDay[2]
+    ) {
+      return 'endDay';
+    } /* 로직 리펙토링 예정*/ else if (
+      (checkInDay[0] <= year &&
+        year <= checkOutDay[0] &&
+        checkInDay[1] + 1 <= month &&
+        month <= checkOutDay[1] + 1 &&
+        checkInDay[2] <= day &&
+        day <= checkOutDay[2]) ||
+      (checkInDay[0] <= year &&
+        year <= checkOutDay[0] &&
+        checkInDay[1] + 1 < month &&
+        month < checkOutDay[1] + 1) ||
+      // 년도가 다르면 기간추가
+      (checkInDay[0] < year && year < checkOutDay[0]) ||
+      /* 체크인 날짜년도는 같은데 체크아웃 년도가 다를 때 처리 */
+      // 체크인 년도는 같은데 checkout 년도가 다른경우
+      (checkInDay[0] === year &&
+        year < checkOutDay[0] &&
+        month > checkInDay[1] + 1) ||
+      (checkInDay[0] === year &&
+        year < checkOutDay[0] &&
+        month === checkInDay[1] + 1 &&
+        day > checkInDay[2]) ||
+      (checkInDay[0] < year &&
+        year === checkOutDay[0] &&
+        month < checkOutDay[1] + 1) ||
+      (checkInDay[0] < year &&
+        year === checkOutDay[0] &&
+        month === checkOutDay[1] + 1 &&
+        day <= checkOutDay[2]) ||
+      /* 같은 년도 의 체크인 체크아웃 날짜 확인*/
+      (checkInDay[0] === year &&
+        year === checkOutDay[0] &&
+        checkInDay[1] + 1 === month &&
+        checkOutDay[1] + 1 > month &&
+        day > checkInDay[2]) ||
+      (checkInDay[0] === year &&
+        year === checkOutDay[0] &&
+        checkOutDay[1] + 1 === month &&
+        checkInDay[1] + 1 < month &&
+        day < checkOutDay[2])
+    ) {
+      return 'period';
+    }
+  } else if (checkInDay !== undefined && checkOutDay === undefined) {
+    if (
+      year === checkInDay[0] &&
+      month === checkInDay[1] + 1 &&
+      day === checkInDay[2]
+    ) {
+      return 'onlyStartDay';
+    }
+  }
+
+  if (
+    today.getFullYear() === year &&
+    today.getMonth() + 1 === month &&
+    today.getDate() === day
+  ) {
+    return 'today';
+  }
+  if (today.getFullYear() > year) {
+    return 'disable';
+  } else if (today.getFullYear() < year) {
+    return 'date_box';
+  } else if (today.getMonth() + 1 > month) {
+    return 'disable';
+  } else if (today.getMonth() + 1 < month) {
+    return 'date_box';
+  } else if (today.getDate() > day) {
+    return 'disable';
+  } else {
+    return 'date_box';
+  }
+};
+
+/**
+ * ( yyyy.mm.dd ) 형식으로 반환
+ * @param date
+ */
+export const formatDate = (date: number[]) => {
+  let formatted_date =
+    '( ' + date[0] + '.' + (date[1] + 1) + '.' + date[2] + ' )';
+  return formatted_date;
+};

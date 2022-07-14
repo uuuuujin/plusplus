@@ -76,7 +76,6 @@ export default function Search(): JSX.Element {
     <Container>
       <div>
         <Header />
-
         <FilterTop>
           <RowContainer>
             <CategoryContainer>

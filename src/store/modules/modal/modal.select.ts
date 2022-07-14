@@ -23,3 +23,8 @@ export const selectIsUserInfoModalOpen = createSelector(
   [selectModalReducer],
   (modal) => modal.isUserInfoModalOpen
 );
+
+export const selectIsCalendarModalOpen = createSelector(
+  [selectModalReducer],
+  (modal) => modal.isCalendarModalOpen
+);
