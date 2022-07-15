@@ -44,7 +44,7 @@ export const CategoryTitle = styled.span`
   font-weight: bold;
   display: inline-block;
   margin-right: 10px;
-  overflow: hiddlen;
+  overflow: hidden;
   white-space: nowrap;
 
   @media (max-width: 768px) {

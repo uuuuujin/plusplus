@@ -3,6 +3,7 @@ import modalReducer from './modules/modal/modal.slice';
 import searchReducer from './modules/search/search.slice';
 import sliderReducer from './modules/slider/slider.slice';
 import calendarReducer from './modules/calendar/calendar.slice';
+import navigatorReducer from './modules/navigator/navigator.slice';
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     search: searchReducer,
     slider: sliderReducer,
     calendar: calendarReducer,
+    navigator: navigatorReducer,
   },
 });
 

@@ -1,21 +1,18 @@
-import { NavWrapper, Nav, Icons, Icon, Logo } from './header.style';
-import { AiOutlineCalendar } from 'react-icons/ai';
-import { BsMap } from 'react-icons/bs';
-import { useAppDispatch } from '../../hooks/index.hook';
 import { useState } from 'react';
+import { useAppDispatch } from '../../hooks/index.hook';
 import { Link } from 'react-router-dom';
-import HeaderDestinationModal from '../headerDestinationModal/headerDestinationModal.component';
-
 import { modalAction } from '../../store/modules/modal/modal.slice';
 import { ROUTES } from '../../routes/routes';
+import HeaderDestinationModal from '../headerDestinationModal/headerDestinationModal.component';
+import { NavWrapper, Nav, Icons, Icon, Logo } from './header.style';
 
-function CompanyLogo() {
-  return (
-    <Link to={ROUTES.HOME.path}>
-      <Logo src="logologo.png" />
-    </Link>
-  );
-}
+import {
+  BsMap,
+  BsMapFill,
+  BsCalendarCheck,
+  BsCalendarCheckFill,
+} from 'react-icons/bs';
+
 export default function Header(): JSX.Element {
   const [isCalendarModalOpen, setCalendarModalOpen] = useState(false);
   const calendarModalHandler = () => {
@@ -32,18 +29,22 @@ export default function Header(): JSX.Element {
   return (
     <NavWrapper>
       <Nav>
-        <CompanyLogo></CompanyLogo>
+        <Link to={ROUTES.HOME.path}>
+          <Logo src="logologo.png" />
+        </Link>
         <Icons>
           <Icon onClick={calendarModalHandler}>
-            <AiOutlineCalendar />
+            <BsCalendarCheck className="normal" />
+            <BsCalendarCheckFill className="hover" />
           </Icon>
           <HeaderDestinationModal />
-          <Icon onClick={handleHeaderDestinationModal}>
-            <BsMap />
+          <Icon className="map" onClick={handleHeaderDestinationModal}>
+            <BsMap className="normal" />
+            <BsMapFill className="hover" />
           </Icon>
         </Icons>
-        <HeaderDestinationModal />
       </Nav>
+      <HeaderDestinationModal />
     </NavWrapper>
   );
 }
