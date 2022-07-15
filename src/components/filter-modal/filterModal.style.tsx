@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import theme from '../../style/theme';
 
 export const FilterModalContainer = styled.div`
   padding: 0 20px;
@@ -6,6 +7,11 @@ export const FilterModalContainer = styled.div`
   overflow-y: auto;
   position: relative;
   margin-bottom: 70px;
+`;
+
+export const CostSliderContainer = styled.div`
+  width: 280px;
+  padding-left: 15px;
 `;
 
 export const CategoryContainer = styled.div`
@@ -66,4 +72,33 @@ export const CheckboxLabel = styled.label`
   display: inline-block;
   width: 100%;
   cursor: pointer;
+`;
+
+export const CostContainer = styled.div`
+  display: flex;
+  padding: 15px 0 0 10px;
+
+  & > span {
+    margin: 20px;
+    padding-top: 3px;
+  }
+`;
+
+export const CostTitle = styled.div`
+  font-size: 12px;
+  color: ${theme.colors.subTitle};
+`;
+
+export const CostInputContainer = styled.div`
+  border: 1px solid ${theme.colors.border};
+  padding: 8px;
+  width: 70px;
+  text-align: right;
+
+  & > input {
+    border: none;
+    outline: none;
+    text-align: right;
+    width: 85px;
+  }
 `;
