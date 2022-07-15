@@ -8,7 +8,6 @@ import UserList from '../components/user-list/user-list.component';
 import RoomList from '../components/room-list/room-list.component';
 import BookingList from '../components/admin-booking-list/admin-booking-list.component';
 import LoginPage from './login/login.component';
-import AdminPage from './admin-page/admin-page.component';
 
 export const ROUTES = {
   HOME: {
