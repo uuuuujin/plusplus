@@ -1,7 +1,10 @@
+import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
+import { modalAction } from '../../store/modules/modal/modal.slice';
 import Container from '../../components/container/container.component';
 import Header from '../../components/header/header.component';
 import Footer from '../../components/footer/footer.component';
 import SwiperComponent from '../../components/swiper/swiper.component';
+import UserInfoModal from '../../components/user-info-modal/userInfoModal.component';
 
 import {
   MainBanner,
@@ -11,6 +14,11 @@ import {
 } from './home.style';
 
 export default function Home(): JSX.Element {
+  const dispatch = useAppDispatch();
+  const handleUserInfoModal = () => {
+    dispatch(modalAction.radioUserInfoModal());
+  };
+
   const dummyData = [
     {
       imgUrl: 'productImage1.jpg',
@@ -33,11 +41,10 @@ export default function Home(): JSX.Element {
   return (
     <Container>
       <div>
-        <Header />
-
         <MainBanner>
           <MainBannerImage src="main_banner.jpg" alt="배너이미지" />
         </MainBanner>
+        <button onClick={handleUserInfoModal}>유저정보 모달 테스트 버튼</button>
 
         <SliderContainer>
           <SliderTitle>현재 진행중인 이벤트</SliderTitle>
@@ -49,7 +56,9 @@ export default function Home(): JSX.Element {
           <SwiperComponent swiperDataArr={dummyData}></SwiperComponent>
         </SliderContainer>
 
-        <Footer></Footer>
+        <Header />
+        <Footer />
+        <UserInfoModal />
       </div>
     </Container>
   );

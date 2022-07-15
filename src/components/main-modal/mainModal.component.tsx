@@ -10,7 +10,7 @@ import {
 export interface ModalProp {
   isOpen: boolean;
   onClose: () => void;
-  title: string;
+  title?: string;
   children: JSX.Element;
   contentWidth?: number;
   buttonTitle?: string;
@@ -27,7 +27,7 @@ export default function MainModal({
   return (
     <ModalContainer className={isOpen ? 'show' : ''} onClick={onClose}>
       <ModalContent width={contentWidth} onClick={(e) => e.stopPropagation()}>
-        <ModalHeader>{title}</ModalHeader>
+        {title && <ModalHeader>{title}</ModalHeader>}
         <GrClose className="closeButton" onClick={onClose} />
         {children}
         {buttonTitle && (

@@ -2,7 +2,8 @@ import styled from 'styled-components';
 
 const ContainerStyle = styled.div`
   max-width: 768px;
-  margin: 76px auto;
+  margin: 76px auto 60px;
+  background-color: #fff;
 `;
 
 interface ContainerProp {

@@ -3,21 +3,23 @@ import { BsDot } from 'react-icons/bs';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 
 export const CalendarContainer = styled.div`
-  position: relative;
-  width: 100%;
-  max-width: 768px;
-  margin: 0 auto;
   display: flex;
   flex-direction: column;
+  position: relative;
+
+  width: 100%;
+  max-width: 368px;
+  margin: 0 auto;
+  background-color: #fff;
+
   align-items: center;
 `;
 
 export const YearText = styled.span`
   display: block;
-  font-size: 14px;
+  font-size: 12px;
   letter-spacing: -0.5px;
   opacity: 0.4;
-  margin-bottom: 15px;
 `;
 
 export const InfoBox = styled.div`
@@ -38,16 +40,18 @@ export const InfoTxt = styled.span`
 
 export const MonthBox = styled.div`
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: start;
+  align-items: baseline;
+  margin: 10px 0px;
+
   min-width: 100px;
-  width: 15%;
-  margin-bottom: 30px;
+  width: 100%;
 `;
 
 export const MonthText = styled.span`
-  font-size: 25px;
+  font-size: 20px;
   font-weight: 500;
+  margin-right: 3px;
 `;
 
 export const CalendarBox = styled.div`
@@ -66,10 +70,79 @@ export const DayBox = styled.div`
   display: flex;
   width: 100%;
   margin-bottom: 10px;
-  height: 70px;
+  height: 40px;
+  font-size: 12px;
+
+  .disable {
+    color: #ddd;
+    /*포인터 이벤트 막기*/
+    pointer-events: none;
+  }
+
+  .today {
+    border-radius: 30px;
+    background-color: #ddd;
+    .today-span {
+      font-size: 12px;
+      padding: 0 4px;
+      border-radius: 2px;
+    }
+  }
+
+  .onlyStartDay {
+    color: #94b49f;
+    border: 2px solid #94b49f;
+    border-radius: 10px;
+  }
+
+  .period {
+    color: #fff;
+    border-top: 2px solid #94b49f;
+    border-bottom: 2px solid #94b49f;
+    background-color: #94b49f;
+  }
+
+  .startDay {
+    color: #fff;
+    border-top: 2px solid #94b49f;
+    border-bottom: 2px solid #94b49f;
+    border-left: 2px solid #94b49f;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    background-color: #94b49f;
+  }
+
+  .endDay {
+    color: #fff;
+    border-top: 2px solid #94b49f;
+    border-bottom: 2px solid #94b49f;
+    border-right: 2px solid #94b49f;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    background-color: #94b49f;
+  }
+
+  .date_box,
+  .today {
+    &:hover {
+      background-color: #e9e9e9;
+      opacity: 0.5;
+    }
+    &:nth-child(1) {
+      color: #ff6969;
+    }
+    &:nth-child(7) {
+      color: #2196f3;
+    }
+  }
 
   &:nth-last-child(1) {
-    > .date_box {
+    > .date_box,
+    .disable,
+    .startDay,
+    .onlyStartDay,
+    .endDay,
+    .period {
       width: calc(100% / 7);
       flex: initial;
     }
@@ -80,6 +153,8 @@ export const DayTxt = styled.span`
   flex: 1;
   height: 30px;
   text-align: center;
+  font-size: 13px;
+  font-weight: 700;
 
   &:nth-child(1) {
     color: #ff6969;
@@ -95,17 +170,13 @@ export const DateBox = styled.div`
   flex-direction: column;
   align-items: center;
   cursor: pointer;
-
-  &:nth-child(1) {
-    color: #ff6969;
-  }
-  &:nth-child(7) {
-    color: #2196f3;
-  }
+  box-sizing: border-box;
+  padding: 5px 0;
 `;
 
 export const DateTxt = styled.span`
   display: inline-block;
+  font-size: 13px;
   margin-bottom: 5px;
 `;
 
@@ -115,11 +186,17 @@ export const ReservationIcon = styled(BsDot)`
 `;
 
 export const ArrowBack = styled(IoIosArrowBack)`
-  font-size: 18px;
-  opacity: 0.5;
+  font-size: 20px;
+  position: absolute;
+  cursor: pointer;
+  top: 50%;
+  left: 0;
 `;
 
 export const ArrowForward = styled(IoIosArrowForward)`
-  font-size: 18px;
-  opacity: 0.5;
+  font-size: 20px;
+  position: absolute;
+  cursor: pointer;
+  top: 50%;
+  right: 0;
 `;
