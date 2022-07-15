@@ -8,8 +8,10 @@ function App(): JSX.Element {
 
   return (
     <Routes>
-      {ROUTES_ARR.map((el) => {
-        return <Route path={el.path} element={<el.component />}></Route>;
+      {ROUTES_ARR.map((el, index) => {
+        return (
+          <Route path={el.path} element={<el.component />} key={index}></Route>
+        );
       })}
     </Routes>
   );
