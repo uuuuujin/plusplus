@@ -13,7 +13,7 @@ import {
 import { VscCalendar } from 'react-icons/vsc';
 import { FiUsers } from 'react-icons/fi';
 import { MdOutlineHotel } from 'react-icons/md';
-export default function AdminPage(): JSX.Element {
+export default function Admin(): JSX.Element {
   return (
     <Container>
       <div>

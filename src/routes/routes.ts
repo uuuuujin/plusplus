@@ -3,7 +3,10 @@ import Description from './description/description.component';
 import Search from './search/search.component';
 import Listing from './listing/listing.component';
 import MyPage from './mypage/mypage.component';
-import AdminPage from './admin-page/admin-page.component';
+import Admin from './admin-page/admin-page.component';
+import UserList from '../components/user-list/user-list.component';
+import RoomList from '../components/room-list/room-list.component';
+import BookingList from '../components/admin-booking-list/admin-booking-list.component';
 
 export const ROUTES = {
   HOME: {
@@ -32,9 +35,27 @@ export const ROUTES = {
     component: MyPage,
   },
 
-  ADMINPAGE: {
-    path: '/adminpage',
-    link: '/adminpage',
-    component: AdminPage,
+  ADMIN: {
+    path: '/admin',
+    link: '/admin',
+    component: Admin,
+  },
+
+  USERLIST: {
+    path: '/admin/user-list',
+    link: '/admin/user-list',
+    component: UserList,
+  },
+
+  ROOMLIST: {
+    path: '/admin/room-list',
+    link: '/admin/room-list',
+    component: RoomList,
+  },
+
+  BOOKINGLIST: {
+    path: '/admin/booking-list',
+    link: '/admin/booking-list',
+    component: BookingList,
   },
 };
