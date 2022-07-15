@@ -1,4 +1,3 @@
-import { ProductListContainer } from '../../routes/search/search.style';
 import ProductListItem from '../product-list-item/productListItem.component';
 import {
   Filter,
@@ -10,6 +9,7 @@ import {
   CheckboxLabel,
   CheckboxContainer,
   HeaderText,
+  ProductListContainer,
 } from './room-list.style';
 
 interface FilterType {

@@ -62,3 +62,8 @@ export const CheckboxLabel = styled.label`
   font-weight: 700;
   line-height: 19px;
 `;
+
+export const ProductListContainer = styled.div`
+  margin-top: 20px;
+  display: block;
+`;
