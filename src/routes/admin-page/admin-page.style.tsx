@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import { RiAdminLine } from 'react-icons/ri';
 import theme from '../../style/theme';
 export const AdminInfo = styled.div`
@@ -37,15 +38,17 @@ export const AdminContent = styled.div`
   box-sizing: border-box;
 `;
 
-export const ContentItem = styled.div`
+export const ContentItem = styled(Link)`
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 33.3%;
   font-size: 12px;
+  font-weight: 700;
+  color: #000;
   padding: 5px;
   border-right: 1px solid ${theme.colors.border};
-
+  text-decoration: none;
   &:last-child {
     border: none;
   }

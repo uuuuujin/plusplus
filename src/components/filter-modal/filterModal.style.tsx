@@ -57,7 +57,6 @@ export const CheckboxContainer = styled.div`
   flex-flow: row wrap;
   width: 96%;
 `;
-
 export const CheckboxElement = styled.div`
   flex-basis: 48%;
   display: flex;
