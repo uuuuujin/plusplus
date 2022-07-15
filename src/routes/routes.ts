@@ -3,6 +3,7 @@ import Description from './description/description.component';
 import Search from './search/search.component';
 import Listing from './listing/listing.component';
 import MyPage from './mypage/mypage.component';
+import AdminPage from './admin-page/admin-page.component';
 
 export const ROUTES = {
   HOME: {
@@ -29,5 +30,11 @@ export const ROUTES = {
     path: '/mypage',
     link: '/mypage',
     component: MyPage,
+  },
+
+  ADMINPAGE: {
+    path: '/adminpage',
+    link: '/adminpage',
+    component: AdminPage,
   },
 };

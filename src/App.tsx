@@ -4,6 +4,7 @@ import Home from './routes/home/home.component';
 import Search from './routes/search/search.component';
 import Listing from './routes/listing/listing.component';
 import MyPage from './routes/mypage/mypage.component';
+import AdminPage from './routes/admin-page/admin-page.component';
 
 // description page
 import Description from './routes/description/description.component';
@@ -17,6 +18,7 @@ function App(): JSX.Element {
       <Route path="/search" element={<Search />}></Route>
       <Route path="/listing" element={<Listing />}></Route>
       <Route path="/mypage" element={<MyPage />}></Route>
+      <Route path="/adminpage" element={<AdminPage />}></Route>
       <Route path="/description" element={<Description />}></Route>
     </Routes>
   );
