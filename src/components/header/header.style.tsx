@@ -1,10 +1,11 @@
 import styled from 'styled-components';
 import theme from '../../style/theme';
+
 export const NavWrapper = styled.div`
   widht: 100vw;
 `;
 export const Nav = styled.div`
-  background: rgb(194, 220, 210);
+  background-color: #fff;
   box-sizing: border-box;
   position: fixed;
   top: 0;
@@ -16,13 +17,13 @@ export const Nav = styled.div`
   padding: 5px 20px;
   margin: 0px;
   height: 76px;
+  border-bottom: 1px solid ${theme.colors.border};
 `;
 export const Logo = styled.img`
   width: 100px;
   height: 45px;
 `;
 export const Icons = styled.div`
-  // background: green;
   display: flex;
   justify-content: flex-end;
 `;
@@ -36,16 +37,28 @@ export const Icon = styled.button`
   align-items: center;
   justify-content: center;
   background: none;
-
-  &:hover {
-    cursor: pointer;
-  }
+  cursor: pointer;
 
   & > * {
-    width: 32px;
-    height: 32px;
+    width: 25px;
+    height: 25px;
     display: flex;
     align-items: center;
     margin: auto;
+    color: ${theme.colors.main};
+  }
+
+  & > *.hover {
+    display: none;
+  }
+
+  &:hover {
+    & > *.normal {
+      display: none;
+    }
+
+    & > *.hover {
+      display: block;
+    }
   }
 `;
