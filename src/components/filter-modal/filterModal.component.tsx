@@ -1,3 +1,6 @@
+import { useState } from 'react';
+import Slider from '@mui/material/Slider';
+
 import MainModal from '../main-modal/mainModal.component';
 import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
 import { modalAction } from '../../store/modules/modal/modal.slice';
@@ -5,6 +8,10 @@ import { selectIsFilterModalOpen } from '../../store/modules/modal/modal.select'
 
 import {
   FilterModalContainer,
+  CostSliderContainer,
+  CostContainer,
+  CostTitle,
+  CostInputContainer,
   CategoryContainer,
   CategoryTitle,
   Bottom,
@@ -27,6 +34,47 @@ export default function FilterModal(): JSX.Element {
   const handleFilterModal = () => {
     dispatch(modalAction.radioFilterModal());
   };
+
+  const MIN_DISTANCE: number = 5;
+  const [costValue, setCostValue] = useState([0, 100]);
+
+  const handleCostRange = (
+    event: Event,
+    newValue: number | number[],
+    activeThumb: number
+  ) => {
+    if (!Array.isArray(newValue)) {
+      return;
+    }
+
+    if (activeThumb === 0) {
+      setCostValue([
+        Math.min(newValue[0], costValue[1] - MIN_DISTANCE),
+        costValue[1],
+      ]);
+    } else {
+      setCostValue([
+        costValue[0],
+        Math.max(newValue[1], costValue[0] + MIN_DISTANCE),
+      ]);
+    }
+  };
+
+  // 가격 input에 직접 입력한다면 사용할 함수..
+  // const handleCostMinimum = (e: any) => {
+  //   if (e.target.value > 100) setCostValue([95, costValue[1]]);
+  //   else if (e.target.value > costValue[1])
+  //     setCostValue([costValue[1] - MIN_DISTANCE, costValue[1]]);
+  //   else if (!e.target.value) setCostValue([1, costValue[1]]);
+  //   else setCostValue([e.target.value, costValue[1]]);
+  // };
+
+  // const handleCostMaximum = (e: any) => {
+  //   if (e.target.value > 100) setCostValue([costValue[0], 100]);
+  //   else if (e.target.value < costValue[0])
+  //     setCostValue([costValue[0], Number(costValue[0]) + MIN_DISTANCE]);
+  //   else setCostValue([costValue[0], e.target.value]);
+  // };
 
   const STAY_TYPE: FilterType[] = [
     {
@@ -105,7 +153,26 @@ export default function FilterModal(): JSX.Element {
         <FilterModalContainer>
           <CategoryContainer>
             <CategoryTitle>가격 범위</CategoryTitle>
-            <div>가격 레이아웃은 추후에 정하기..</div>
+            <CostSliderContainer>
+              <Slider
+                getAriaLabel={() => 'Minimum distance'}
+                value={costValue}
+                onChange={handleCostRange}
+                valueLabelDisplay="auto"
+                disableSwap
+              />
+            </CostSliderContainer>
+            <CostContainer>
+              <div>
+                <CostTitle>최저요금</CostTitle>
+                <CostInputContainer>{costValue[0]}만원</CostInputContainer>
+              </div>
+              <span> ~ </span>
+              <div>
+                <CostTitle>최고요금</CostTitle>
+                <CostInputContainer>{costValue[1]}만원</CostInputContainer>
+              </div>
+            </CostContainer>
           </CategoryContainer>
           <CategoryContainer>
             <CategoryTitle>스테이 유형</CategoryTitle>
