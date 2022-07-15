@@ -9,10 +9,11 @@ import {
   GreetingText,
   IconText,
 } from './admin-page.style';
-
+import { ROUTES } from '../../routes/routes';
 import { VscCalendar } from 'react-icons/vsc';
 import { FiUsers } from 'react-icons/fi';
 import { MdOutlineHotel } from 'react-icons/md';
+
 export default function Admin(): JSX.Element {
   return (
     <Container>
@@ -24,15 +25,15 @@ export default function Admin(): JSX.Element {
           <AdminIcon />
         </AdminInfo>
         <AdminContent>
-          <ContentItem>
+          <ContentItem to={ROUTES.USERLIST.path}>
             <FiUsers className="icon" />
             <IconText>유저리스트</IconText>
           </ContentItem>
-          <ContentItem>
+          <ContentItem to={ROUTES.BOOKINGLIST.path}>
             <VscCalendar className="icon" />
             <IconText>예약리스트</IconText>
           </ContentItem>
-          <ContentItem>
+          <ContentItem to={ROUTES.ROOMLIST.path}>
             <MdOutlineHotel className="icon" />
             <IconText>숙소리스트</IconText>
           </ContentItem>
