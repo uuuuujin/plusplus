@@ -50,6 +50,7 @@ export const ContentItem = styled.div`
     border: none;
   }
   .icon {
+    color: ${theme.colors.main};
     font-size: 30px;
     margin-bottom: 8px;
     &:hover {
