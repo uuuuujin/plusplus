@@ -1,9 +1,7 @@
-import Container from '../container/container.component';
-import styled from 'styled-components';
+import Container, { ContainerStyle } from '../container/container.component';
 import Header from '../header/header.component';
 import { MdOutlineLocationOn } from 'react-icons/md';
 import { LocationBox } from '../wishlist-Item/wishlitsitem.style';
-import { BsMap } from 'react-icons/bs';
 import { useState } from 'react';
 import {
   CheckInBox,
@@ -37,6 +35,7 @@ import {
   UserInfoBox,
   UserInputBox,
 } from './payment.style';
+import styled from 'styled-components';
 
 interface UserInfo {
   name: string;
@@ -85,8 +84,12 @@ export const Payment = () => {
     });
   };
 
+  const StyledContainer = styled(ContainerStyle)`
+    background-color: #fafafa;
+  `;
+
   return (
-    <Container>
+    <StyledContainer>
       <PaymentWrapper>
         <Header />
         <OrderInfoBox>
@@ -193,7 +196,7 @@ export const Payment = () => {
         </PaymentInfoBox>
         <PaymentButton>85,000원 결제하기</PaymentButton>
       </PaymentWrapper>
-    </Container>
+    </StyledContainer>
   );
 };
 
