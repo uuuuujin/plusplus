@@ -65,5 +65,7 @@ export const CheckboxLabel = styled.label`
 
 export const ProductListContainer = styled.div`
   margin-top: 20px;
-  display: block;
+  display: grid;
+
+  grid-template-columns: repeat(4, 25%);
 `;

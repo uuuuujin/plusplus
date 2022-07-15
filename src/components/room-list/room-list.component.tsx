@@ -111,25 +111,25 @@ const REGION_TYPE: FilterType[] = [
 
 const hotelData = [
   {
-    productImageSrc: 'productImage1.jpg',
+    productImageSrc: '../productImage1.jpg',
     productTitle: '살려줘',
     productCost: '₩200,000 ~ ₩300,000',
     likeCount: 50,
   },
   {
-    productImageSrc: 'productImage2.jpg',
+    productImageSrc: '../productImage2.jpg',
     productTitle: '주말반납',
     productCost: '₩200,000 ~ ₩300,000',
     likeCount: 100,
   },
   {
-    productImageSrc: 'productImage2.jpg',
+    productImageSrc: '../productImage2.jpg',
     productTitle: '코딩좋아',
     productCost: '₩200,000 ~ ₩300,000',
     likeCount: 50,
   },
   {
-    productImageSrc: 'productImage1.jpg',
+    productImageSrc: '../productImage1.jpg',
     productTitle: '즐거운 리액트',
     productCost: '₩200,000 ~ ₩300,000',
     likeCount: 100,
