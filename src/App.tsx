@@ -1,25 +1,18 @@
-import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Home from './routes/home/home.component';
-import Search from './routes/search/search.component';
-import Listing from './routes/listing/listing.component';
-import MyPage from './routes/mypage/mypage.component';
-import AdminPage from './routes/admin-page/admin-page.component';
-
-// description page
-import Description from './routes/description/description.component';
+import { ROUTES } from './routes/routes';
 
 import './App.css';
 
 function App(): JSX.Element {
+  const ROUTES_ARR = Object.values(ROUTES);
+
   return (
     <Routes>
-      <Route path="/" element={<Home />}></Route>
-      <Route path="/search" element={<Search />}></Route>
-      <Route path="/listing" element={<Listing />}></Route>
-      <Route path="/mypage" element={<MyPage />}></Route>
-      <Route path="/adminpage" element={<AdminPage />}></Route>
-      <Route path="/description" element={<Description />}></Route>
+      {ROUTES_ARR.map((el, index) => {
+        return (
+          <Route path={el.path} element={<el.component />} key={index}></Route>
+        );
+      })}
     </Routes>
   );
 }
