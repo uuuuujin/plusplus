@@ -1,15 +1,13 @@
 import styled from 'styled-components';
 
-export const Header = styled.div`
-  background-color: #000;
-  height: 70px;
-  color: #fff;
+export const Wrapper = styled.div`
+  padding-bottom: 60px;
 `;
 
 export const FilterTop = styled.div`
   display: flex;
   border-bottom: 1px solid #e6e6e6;
-  padding: 10px 0;
+  padding: 10px;
   justify-content: space-between;
 
   @media (max-width: 768px) {

@@ -11,6 +11,7 @@ import {
   MainBannerImage,
   SliderContainer,
   SliderTitle,
+  Wrapper,
 } from './home.style';
 
 export default function Home(): JSX.Element {
@@ -40,7 +41,7 @@ export default function Home(): JSX.Element {
 
   return (
     <Container>
-      <div>
+      <Wrapper>
         <MainBanner>
           <MainBannerImage src="main_banner.jpg" alt="배너이미지" />
         </MainBanner>
@@ -59,7 +60,7 @@ export default function Home(): JSX.Element {
         <Header />
         <Footer />
         <UserInfoModal />
-      </div>
+      </Wrapper>
     </Container>
   );
 }
