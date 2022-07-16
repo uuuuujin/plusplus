@@ -11,16 +11,19 @@ export const InnerContainer = styled.div`
   flex-direction: column;
 
   width: 100%;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 20%);
+  border: 1px solid #d7e2eb;
   box-sizing: border-box;
   padding: 10px;
   margin-top: 10px;
-  margin-bottom: 100px;
+  margin-bottom: 10px;
   background-color: #fff;
 `;
 
 export const HeaderText = styled.span`
   font-size: 20px;
   font-weight: bold;
+  margin-top: 10px;
   font-style: italic;
   margin-bottom: 10px;
 `;
@@ -57,9 +60,10 @@ export const UserInfo = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 10px 0px;
-  padding: 10px;
-  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 10%);
+  margin-top: 10px;
+
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 20%);
+  border: 1px solid #d7e2eb;
 
   background-color: #ffffff;
   justify-content: center;
@@ -80,7 +84,7 @@ export const FlexRow = styled.div`
   justify-content: center;
   align-items: center;
   text-align: center;
-  margin-bottom: 10px;
+  margin: 10px 0;
   width: 100%;
 
   > span {

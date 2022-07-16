@@ -44,8 +44,9 @@ interface UserInfo {
   age: number;
 }
 
-const StyledContainer = styled(ContainerStyle)`
+export const StyledContainer = styled(ContainerStyle)`
   background-color: #fafafa;
+  margin-bottom: 60px;
 `;
 
 export const Payment = () => {

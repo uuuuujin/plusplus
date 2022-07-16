@@ -8,6 +8,8 @@ export const ItemBox = styled.div`
   border: 1px solid #e9e9e9;
   cursor: pointer;
   width: 90%;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 20%);
+  border: 1px solid #d7e2eb;
 
   margin: 0 auto;
   margin-top: 10px;

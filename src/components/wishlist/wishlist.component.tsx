@@ -43,12 +43,12 @@ export default function WishList(): JSX.Element {
       <Line />
       {mockData.map((item, index) => {
         return (
-          <>
-            <WishListItem item={item} key={index} />
+          <div key={index}>
+            <WishListItem item={item} />
             <CurrentStatistic>
               &lt; {index + 1}/{mockData.length} &gt;
             </CurrentStatistic>
-          </>
+          </div>
         );
       })}
     </InnerContainer>
