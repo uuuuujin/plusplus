@@ -38,6 +38,8 @@ export const RoomName = styled.span`
 
 export const RoomImg = styled.img`
   width: 30%;
+  /* 이미지를 고정된 크기에 맞춰서 깨지지 않게 해준다*/
+  object-fit: cover;
   align-items: center;
   cursor: pointer;
   &:hover {

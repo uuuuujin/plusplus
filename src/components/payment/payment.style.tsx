@@ -19,6 +19,8 @@ export const ImgBox = styled.div`
   box-sizing: border-box;
   > img {
     width: 100%;
+    height: 400px;
+    object-fit: cover;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
   }
@@ -139,7 +141,7 @@ export const UserInputBox = styled.div`
 
   > span {
     font-size: 11px;
-    color: #ccc;
+    color: #000;
     font-weight: 500;
     padding: 3px 0;
     &::after {

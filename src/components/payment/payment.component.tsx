@@ -2,7 +2,7 @@ import Container, { ContainerStyle } from '../container/container.component';
 import Header from '../header/header.component';
 import { MdOutlineLocationOn } from 'react-icons/md';
 import { LocationBox } from '../wishlist-Item/wishlitsitem.style';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   CheckInBox,
   CheckInOutBox,
@@ -44,6 +44,10 @@ interface UserInfo {
   age: number;
 }
 
+const StyledContainer = styled(ContainerStyle)`
+  background-color: #fafafa;
+`;
+
 export const Payment = () => {
   const [userInfo, setUserInfo] = useState<UserInfo>({
     name: '',
@@ -83,10 +87,6 @@ export const Payment = () => {
       [e.target.id]: e.target.value,
     });
   };
-
-  const StyledContainer = styled(ContainerStyle)`
-    background-color: #fafafa;
-  `;
 
   return (
     <StyledContainer>
@@ -128,18 +128,20 @@ export const Payment = () => {
             <InputBox
               id="name"
               onChange={handleInputChange}
+              value={userInfo.name}
               isErr={isNameError}
               placeholder="성명을 입력해주세요"
               type="text"
             />
             {isNameError && <ErrorText>성명을 입력해주세요</ErrorText>}
           </UserInputBox>
+
           <UserInputBox>
             <span>전화번호 </span>
             <InputBox
               id="phoneNumber"
               isErr={true}
-              placeholder="01012345678"
+              placeholder="-를 뺴고 입력하세요"
               type="text"
               onChange={handleInputChange}
             />

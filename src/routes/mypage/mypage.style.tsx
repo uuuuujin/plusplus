@@ -14,6 +14,7 @@ export const InnerContainer = styled.div`
   box-sizing: border-box;
   padding: 10px;
   margin-top: 10px;
+  margin-bottom: 100px;
   background-color: #fff;
 `;
 
@@ -58,7 +59,6 @@ export const UserInfo = styled.div`
   align-items: center;
   margin: 10px 0px;
   padding: 10px;
-  height: 100px;
   box-shadow: 0 1px 3px 0 rgb(0 0 0 / 10%);
 
   background-color: #ffffff;
@@ -67,7 +67,7 @@ export const UserInfo = styled.div`
 
 export const UserIcon = styled(MdPersonPin)`
   &.override {
-    font-size: 20px;
+    font-size: 30px;
     border: 1px solid #000000;
     border-radius: 10px;
     margin-bottom: 10px;
