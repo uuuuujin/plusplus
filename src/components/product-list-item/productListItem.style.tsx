@@ -51,12 +51,13 @@ export const ProductCost = styled.div`
 export const LikeContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-end;
+  padding-bottom: 3px;
 
   & > span {
     display: inline-block;
     font-size: 12px;
-    margin-top: 5px;
+    // margin-top: 5px;
     text-align: center;
   }
 `;

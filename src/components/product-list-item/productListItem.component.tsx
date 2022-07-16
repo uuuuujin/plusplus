@@ -1,3 +1,4 @@
+import { likeCategorization } from '../../utils/likeCategorization';
 import {
   ItemContainer,
   ProductImage,
@@ -8,7 +9,7 @@ import {
   LikeContainer,
   LikeIconContainer,
 } from './productListItem.style';
-import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
+import { AiOutlineHeart } from 'react-icons/ai';
 
 interface ProductListItemProp {
   productImageSrc: string;
@@ -34,8 +35,7 @@ export default function ProductListItem(
           <LikeIconContainer>
             <AiOutlineHeart />
           </LikeIconContainer>
-
-          <span>{likeCount}</span>
+          <span>{likeCategorization(likeCount)}</span>
         </LikeContainer>
       </Bottom>
     </ItemContainer>
