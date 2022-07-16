@@ -9,6 +9,7 @@ export const Nav = styled.div`
   box-sizing: border-box;
   position: fixed;
   top: 0;
+  z-index: 1;
   max-width: 768px;
   width: 100%;
   display: flex;

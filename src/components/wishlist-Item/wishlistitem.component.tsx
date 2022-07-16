@@ -17,8 +17,12 @@ import { RoomItem } from '../wishlist/wishlist.component';
 import { styled } from '@mui/material';
 import { LikeIconContainer } from '../product-list-item/productListItem.style';
 import { AiFillHeart } from 'react-icons/ai';
+import WishListModal from '../like-mange-modal/wishListModal.component';
+import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
+import { modalAction } from '../../store/modules/modal/modal.slice';
+import { selectIsWishManageModalOpen } from '../../store/modules/modal/modal.select';
 
-interface WishListItemProps {
+export interface WishListItemProps {
   item: RoomItem;
 }
 
@@ -43,12 +47,18 @@ export const LikeIconWrap = styled(LikeIconContainer)`
 `;
 
 export default function WishListItem({ item }: WishListItemProps): JSX.Element {
+  const dispatch = useAppDispatch();
+  const isWishManageModalOpen = useAppSelector(selectIsWishManageModalOpen);
+
+  const onClickHeart = () => {
+    dispatch(modalAction.radioWishManageModal());
+  };
   return (
     <ItemContainer>
       <ItemBox>
         <ItemInfo>
           <LikeIconWrap>
-            <AiFillHeart />
+            <AiFillHeart onClick={onClickHeart} />
             <span>15</span>
           </LikeIconWrap>
           <div>
@@ -72,6 +82,7 @@ export default function WishListItem({ item }: WishListItemProps): JSX.Element {
         <ItemImgBox src={item.image} />
       </ItemBox>
       <RegisterButton>예약하기</RegisterButton>
+      {isWishManageModalOpen && <WishListModal item={item} />}
     </ItemContainer>
   );
 }
