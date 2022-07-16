@@ -6,7 +6,7 @@ export const ItemContainer = styled.div`
   flex-direction: column;
   box-shadow: 0 0 5px 0 rgb(0 0 0 / 20%);
 
-  margin: 10px 0px;
+  margin: 10px 0;
   border-top: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
 `;
@@ -85,6 +85,5 @@ export const RegisterButton = styled.button`
 export const LocationBox = styled.div`
   display: flex;
   font-size: 12px;
-  opacity: 0.7;
   margin-bottom: 20px;
 `;

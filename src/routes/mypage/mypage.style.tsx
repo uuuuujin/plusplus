@@ -103,7 +103,7 @@ export const ModifyButton = styled.button`
   border: none;
   background-color: transparent;
   cursor: pointer;
-  opacity: 0.4;
+  color: gray;
   font-size: 12px;
 `;
 
