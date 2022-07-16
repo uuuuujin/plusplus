@@ -60,37 +60,37 @@ export default function Search(): JSX.Element {
       productImageSrc: 'productImage1.jpg',
       productTitle: '서우주',
       productCost: '₩200,000 ~ ₩300,000',
-      likeCount: 50,
+      likeCount: 7,
     },
     {
       productImageSrc: 'productImage2.jpg',
       productTitle: '밤편지',
       productCost: '₩200,000 ~ ₩300,000',
-      likeCount: 100,
+      likeCount: 25,
     },
     {
       productImageSrc: 'productImage2.jpg',
       productTitle: '서우주',
       productCost: '₩200,000 ~ ₩300,000',
-      likeCount: 50,
+      likeCount: 57,
     },
     {
       productImageSrc: 'productImage1.jpg',
       productTitle: '밤편지',
       productCost: '₩200,000 ~ ₩300,000',
-      likeCount: 100,
+      likeCount: 89,
     },
     {
       productImageSrc: 'productImage1.jpg',
       productTitle: '서우주',
       productCost: '₩200,000 ~ ₩300,000',
-      likeCount: 50,
+      likeCount: 200,
     },
     {
       productImageSrc: 'productImage2.jpg',
       productTitle: '밤편지',
       productCost: '₩200,000 ~ ₩300,000',
-      likeCount: 100,
+      likeCount: 67,
     },
   ];
 
