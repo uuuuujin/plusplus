@@ -4,8 +4,8 @@ import { BiStar } from 'react-icons/bi';
 export const ItemContainer = styled.div`
   display: flex;
   flex-direction: column;
+  box-shadow: 0 0 5px 0 rgb(0 0 0 / 20%);
 
-  padding: 10px;
   margin: 10px 0px;
   border-top: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
@@ -14,6 +14,7 @@ export const ItemContainer = styled.div`
 export const ItemImgBox = styled.img`
   width: 50%;
   height: 250px;
+  object-fit: cover;
 `;
 
 export const StarIcon = styled(BiStar)`
@@ -22,8 +23,6 @@ export const StarIcon = styled(BiStar)`
 
 export const ItemBox = styled.div`
   display: flex;
-  padding: 10px 0px;
-
   @media screen and (max-width: 768px) {
     flex-direction: column;
     > div {
@@ -38,7 +37,11 @@ export const ItemBox = styled.div`
 
 export const ItemInfo = styled.div`
   display: flex;
+  position: relative;
   flex-direction: column;
+  box-sizing: border-box;
+  padding: 20px 10px 0 10px;
+
   width: 50%;
   height: 250px;
 `;

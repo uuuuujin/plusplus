@@ -20,6 +20,7 @@ import Footer from '../../components/footer/footer.component';
 import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
 import { modalAction } from '../../store/modules/modal/modal.slice';
 import CalendarModal from '../../components/calendar-modal/calendarModal.component';
+import { StyledContainer } from '../../components/payment/payment.component';
 
 const KAKAOCOLOR = '#FEE500';
 
@@ -50,7 +51,7 @@ export default function MyPage(): JSX.Element {
   };
 
   return (
-    <Container>
+    <StyledContainer>
       <MypageContainer>
         <Header />
         <UserInfo>
@@ -62,8 +63,9 @@ export default function MyPage(): JSX.Element {
             <ModifyButton>회원정보 수정</ModifyButton>
           </FlexRow>
         </UserInfo>
-        <AdvertiseImg src="https://yaimg.yanolja.com/v5/2022/07/05/18/62c4875e44a3a5.95392979.png" />
+
         <UserInfo>
+          <AdvertiseImg src="https://yaimg.yanolja.com/v5/2022/07/05/18/62c4875e44a3a5.95392979.png" />
           <FlexRow>
             <ItemMenu>
               <MdOutlineFavoriteBorder className={'icon'} />
@@ -78,13 +80,13 @@ export default function MyPage(): JSX.Element {
               <span>나의 후기</span>
             </ItemMenu>
           </FlexRow>
+          <AdvertiseImg src="https://yaimg.yanolja.com/v5/2022/01/17/13/61e5740f544f02.81195355.png" />
         </UserInfo>
-        <AdvertiseImg src="https://yaimg.yanolja.com/v5/2022/01/17/13/61e5740f544f02.81195355.png" />
         <WishList />
         <BookingListComponent />
         <CalendarModal />
         <Footer />
       </MypageContainer>
-    </Container>
+    </StyledContainer>
   );
 }

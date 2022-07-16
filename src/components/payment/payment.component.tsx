@@ -1,10 +1,8 @@
-import Container from '../container/container.component';
-import styled from 'styled-components';
+import Container, { ContainerStyle } from '../container/container.component';
 import Header from '../header/header.component';
 import { MdOutlineLocationOn } from 'react-icons/md';
 import { LocationBox } from '../wishlist-Item/wishlitsitem.style';
-import { BsMap } from 'react-icons/bs';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   CheckInBox,
   CheckInOutBox,
@@ -37,6 +35,7 @@ import {
   UserInfoBox,
   UserInputBox,
 } from './payment.style';
+import styled from 'styled-components';
 
 interface UserInfo {
   name: string;
@@ -44,6 +43,11 @@ interface UserInfo {
   sex: number;
   age: number;
 }
+
+export const StyledContainer = styled(ContainerStyle)`
+  background-color: #fafafa;
+  margin-bottom: 60px;
+`;
 
 export const Payment = () => {
   const [userInfo, setUserInfo] = useState<UserInfo>({
@@ -86,7 +90,7 @@ export const Payment = () => {
   };
 
   return (
-    <Container>
+    <StyledContainer>
       <PaymentWrapper>
         <Header />
         <OrderInfoBox>
@@ -125,18 +129,20 @@ export const Payment = () => {
             <InputBox
               id="name"
               onChange={handleInputChange}
+              value={userInfo.name}
               isErr={isNameError}
               placeholder="성명을 입력해주세요"
               type="text"
             />
             {isNameError && <ErrorText>성명을 입력해주세요</ErrorText>}
           </UserInputBox>
+
           <UserInputBox>
             <span>전화번호 </span>
             <InputBox
               id="phoneNumber"
               isErr={true}
-              placeholder="01012345678"
+              placeholder="-를 뺴고 입력하세요"
               type="text"
               onChange={handleInputChange}
             />
@@ -193,7 +199,7 @@ export const Payment = () => {
         </PaymentInfoBox>
         <PaymentButton>85,000원 결제하기</PaymentButton>
       </PaymentWrapper>
-    </Container>
+    </StyledContainer>
   );
 };
 
