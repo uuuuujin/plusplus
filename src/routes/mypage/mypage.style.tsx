@@ -106,6 +106,7 @@ export const FlexRow = styled.div`
   .icon {
     font-size: 30px;
     margin-bottom: 8px;
+    cursor: pointer;
     &:hover {
       transform: scale(1.1);
     }

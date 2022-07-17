@@ -82,11 +82,15 @@ const CalendarModal = () => {
     );
   };
 
-  const onModalClose = () => {
+  const onSubmit = () => {
     dispatch(modalAction.setCalendarModal());
     if (!location.pathname.slice(1).includes('search')) {
       navigate(`/search`);
     }
+  };
+
+  const onModalClose = () => {
+    dispatch(modalAction.setCalendarModal());
   };
 
   const onCalendarReset = () => {
@@ -119,7 +123,7 @@ const CalendarModal = () => {
             month={nextNextMonthDate.getMonth() + 1}
           />
         </CalendarBox>
-        <ReservationButton onClick={onModalClose}>
+        <ReservationButton onClick={onSubmit}>
           {checkInOutText()} 검색
         </ReservationButton>
       </CalendarWrapper>

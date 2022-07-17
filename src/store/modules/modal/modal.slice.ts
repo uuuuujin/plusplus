@@ -7,6 +7,7 @@ export interface ModalState {
   isUserInfoModalOpen: boolean;
   isCalendarModalOpen: boolean;
   isWishManageModalOpen: boolean;
+  isPaymentCompleteModalOpen: boolean;
 }
 
 const initialState: ModalState = {
@@ -16,6 +17,7 @@ const initialState: ModalState = {
   isUserInfoModalOpen: false,
   isCalendarModalOpen: false,
   isWishManageModalOpen: false,
+  isPaymentCompleteModalOpen: false,
 };
 
 export const modalSlice = createSlice({
@@ -39,6 +41,9 @@ export const modalSlice = createSlice({
     },
     radioWishManageModal: (state) => {
       state.isWishManageModalOpen = !state.isWishManageModalOpen;
+    },
+    radioPaymentCompleteModal: (state) => {
+      state.isPaymentCompleteModalOpen = !state.isPaymentCompleteModalOpen;
     },
   },
 });
