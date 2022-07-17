@@ -38,7 +38,7 @@ const BookingListItem = () => {
         </CheckInOutTimeBox>
         <ButtonBox>
           <CalendarIcon />
-          <span>예약 변경 및 취소</span>
+          <span>예약 취소</span>
         </ButtonBox>
       </InfoBox>
       <RoomImg src="http://images.stayfolio.com/system/pictures/images/000/102/357/display/278e1b5048400bac804b3647f00c3fc3738ce20e.jpg?1638171725" />
