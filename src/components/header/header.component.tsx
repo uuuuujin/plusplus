@@ -1,7 +1,7 @@
-import { useState } from 'react';
 import { useAppDispatch } from '../../hooks/index.hook';
 import { Link } from 'react-router-dom';
 import { modalAction } from '../../store/modules/modal/modal.slice';
+import { navigatorAction } from '../../store/modules/navigator/navigator.slice';
 import { ROUTES } from '../../routes/routes';
 import HeaderDestinationModal from '../headerDestinationModal/headerDestinationModal.component';
 import CalendarModal from '../calendar-modal/calendarModal.component';
@@ -23,10 +23,14 @@ export default function Header(): JSX.Element {
     dispatch(modalAction.setCalendarModal());
   };
 
+  const clickLogoHandler = (pageName: string) => {
+    dispatch(navigatorAction.setCurrnetPage(pageName));
+  };
+
   return (
     <NavWrapper>
       <Nav>
-        <Link to={ROUTES.HOME.path}>
+        <Link to={ROUTES.HOME.path} onClick={() => clickLogoHandler('home')}>
           <Logo src="logologo.png" />
         </Link>
         <Icons>

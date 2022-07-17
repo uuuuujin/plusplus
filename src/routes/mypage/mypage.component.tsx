@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import Container from '../../components/container/container.component';
 import { MdOutlineFavoriteBorder, MdFavorite } from 'react-icons/md';
 import { VscCalendar } from 'react-icons/vsc';
@@ -21,7 +22,9 @@ import BookingListComponent from '../../components/booking-list/bookinglist.comp
 import Header from '../../components/header/header.component';
 import Footer from '../../components/footer/footer.component';
 import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
+import { useLocation } from 'react-router-dom';
 import { modalAction } from '../../store/modules/modal/modal.slice';
+import { navigatorAction } from '../../store/modules/navigator/navigator.slice';
 import CalendarModal from '../../components/calendar-modal/calendarModal.component';
 import { StyledContainer } from '../../components/payment/payment.component';
 import { useState } from 'react';
@@ -73,6 +76,8 @@ const LoginIconBox = ({ color, text }: LoginProps) => {
 
 export default function MyPage(): JSX.Element {
   const dispatch = useAppDispatch();
+  const location = useLocation();
+
   const [mypageComponent, setMypageComponent] = useState<MYPAGE_STATUS>(
     MYPAGE_STATUS.WISHLIST
   );
@@ -84,6 +89,10 @@ export default function MyPage(): JSX.Element {
   const handleOnClickMenu = (type: MYPAGE_STATUS) => {
     setMypageComponent(type);
   };
+
+  useEffect(() => {
+    dispatch(navigatorAction.setCurrnetPage(location.pathname.slice(1)));
+  }, [dispatch, location]);
 
   return (
     <StyledContainer>
