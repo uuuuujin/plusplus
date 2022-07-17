@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
 import { modalAction } from '../../store/modules/modal/modal.slice';
 import { calendarAction } from '../../store/modules/calendar/calendar.slice';
 import { searchAction } from '../../store/modules/search/search.slice';
+import { navigatorAction } from '../../store/modules/navigator/navigator.slice';
 import { selectSearchRegionName } from '../../store/modules/search/search.select';
 import {
   selectCalendarReducerSetCheckIn,
@@ -33,6 +35,7 @@ import {
 
 export default function Search(): JSX.Element {
   const dispatch = useAppDispatch();
+  const location = useLocation();
   const searchRegionName = useAppSelector(selectSearchRegionName);
   const checkInDate = useAppSelector(selectCalendarReducerSetCheckIn);
   const checkOutDate = useAppSelector(selectCalendarReducerCheckOut);
@@ -55,7 +58,11 @@ export default function Search(): JSX.Element {
     dispatch(calendarAction.setCheckOutDate(undefined));
   };
 
-  const hotelData = [
+  useEffect(() => {
+    dispatch(navigatorAction.setCurrnetPage(location.pathname.slice(1)));
+  }, [dispatch, location]);
+
+  const dummyData = [
     {
       productImageSrc: 'productImage1.jpg',
       productTitle: '서우주',
@@ -157,7 +164,7 @@ export default function Search(): JSX.Element {
         </FilterTop>
 
         <ProductListContainer>
-          {hotelData.map((item, key) => [
+          {dummyData.map((item, key) => [
             <ProductListItem
               key={key}
               productImageSrc={item.productImageSrc}
