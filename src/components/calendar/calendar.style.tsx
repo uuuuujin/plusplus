@@ -97,19 +97,17 @@ export const DayBox = styled.div`
 
   .period {
     color: #fff;
-    border-top: 2px solid #94b49f;
-    border-bottom: 2px solid #94b49f;
+    border-right: 0.1px solid #ddd;
     background-color: #94b49f;
+    box-sizing: border-box;
   }
 
   .startDay {
     color: #fff;
-    border-top: 2px solid #94b49f;
-    border-bottom: 2px solid #94b49f;
-    border-left: 2px solid #94b49f;
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
     background-color: #94b49f;
+    border-right: 0.1px solid #ddd;
   }
 
   .endDay {
@@ -136,16 +134,15 @@ export const DayBox = styled.div`
     }
   }
 
-  &:nth-last-child(1) {
-    > .date_box,
-    .disable,
-    .startDay,
-    .onlyStartDay,
-    .endDay,
-    .period {
-      width: calc(100% / 7);
-      flex: initial;
-    }
+  .date_box,
+  .disable,
+  .startDay,
+  .onlyStartDay,
+  .endDay,
+  .period {
+    width: calc(100% / 7);
+    flex: initial;
+    box-sizing: border-box;
   }
 `;
 

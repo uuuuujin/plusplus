@@ -1,11 +1,12 @@
 import MainModal from '../main-modal/mainModal.component';
 import { useState } from 'react';
 import Calendar from '../calendar/calendar.component';
-import { ArrowBack, ArrowForward, MonthText } from '../calendar/calendar.style';
 import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
 import { selectIsCalendarModalOpen } from '../../store/modules/modal/modal.select';
 import { modalAction } from '../../store/modules/modal/modal.slice';
 import { formatDate } from '../../utils/calendar';
+import { useLocation, useNavigate } from 'react-router-dom';
+
 import {
   selectCalendarReducerCheckOut,
   selectCalendarReducerSetCheckIn,
@@ -19,6 +20,8 @@ import {
 
 const CalendarModal = () => {
   const dispatch = useAppDispatch();
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const isCalendarModalOpen = useAppSelector(selectIsCalendarModalOpen);
   let today = new Date();
@@ -81,6 +84,9 @@ const CalendarModal = () => {
 
   const onModalClose = () => {
     dispatch(modalAction.setCalendarModal());
+    if (!location.pathname.slice(1).includes('search')) {
+      navigate(`/search`);
+    }
   };
 
   const onCalendarReset = () => {
