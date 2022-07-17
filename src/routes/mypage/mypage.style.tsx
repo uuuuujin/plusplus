@@ -1,6 +1,18 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import theme from '../../style/theme';
-import { MdPersonPin } from 'react-icons/md';
+import { MdFavorite, MdPersonPin } from 'react-icons/md';
+import { AiFillCalendar, AiOutlineComment } from 'react-icons/ai';
+import { FaComments } from 'react-icons/fa';
+
+const componentFade = keyframes`
+  0% {
+    opacity: 0;
+  }
+  
+  100% {
+    opacity: 1;
+  }
+`;
 
 export const Text = styled.span`
   color: ${theme.colors.main};
@@ -11,6 +23,7 @@ export const InnerContainer = styled.div`
   flex-direction: column;
 
   width: 100%;
+  animation: ${componentFade} 0.5s linear;
   box-shadow: 0 1px 3px 0 rgb(0 0 0 / 20%);
   border: 1px solid #d7e2eb;
   box-sizing: border-box;
@@ -133,6 +146,18 @@ export const ItemMenu = styled.div`
       font-size: 10px;
     }
   }
+`;
+
+export const FillFavoriteIcon = styled(MdFavorite)`
+  color: rgb(237, 73, 86);
+`;
+
+export const FillCalendar = styled(AiFillCalendar)`
+  color: #68a790;
+`;
+
+export const FillComments = styled(AiOutlineComment)`
+  color: #68a790;
 `;
 
 export const Coupon = styled.div`
