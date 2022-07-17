@@ -58,55 +58,55 @@ export const CompareDate = (
   if (checkInDay !== undefined && checkOutDay !== undefined) {
     if (
       year === checkInDay[0] &&
-      month === checkInDay[1] + 1 &&
+      month === checkInDay[1] &&
       day === checkInDay[2]
     ) {
       return 'startDay';
     } else if (
       year === checkOutDay[0] &&
-      month === checkOutDay[1] + 1 &&
+      month === checkOutDay[1] &&
       day === checkOutDay[2]
     ) {
       return 'endDay';
     } /* 로직 리펙토링 예정*/ else if (
       (checkInDay[0] <= year &&
         year <= checkOutDay[0] &&
-        checkInDay[1] + 1 <= month &&
-        month <= checkOutDay[1] + 1 &&
+        checkInDay[1] <= month &&
+        month <= checkOutDay[1] &&
         checkInDay[2] <= day &&
         day <= checkOutDay[2]) ||
       (checkInDay[0] <= year &&
         year <= checkOutDay[0] &&
-        checkInDay[1] + 1 < month &&
-        month < checkOutDay[1] + 1) ||
+        checkInDay[1] < month &&
+        month < checkOutDay[1]) ||
       // 년도가 다르면 기간추가
       (checkInDay[0] < year && year < checkOutDay[0]) ||
       /* 체크인 날짜년도는 같은데 체크아웃 년도가 다를 때 처리 */
       // 체크인 년도는 같은데 checkout 년도가 다른경우
       (checkInDay[0] === year &&
         year < checkOutDay[0] &&
-        month > checkInDay[1] + 1) ||
+        month > checkInDay[1]) ||
       (checkInDay[0] === year &&
         year < checkOutDay[0] &&
-        month === checkInDay[1] + 1 &&
+        month === checkInDay[1] &&
         day > checkInDay[2]) ||
       (checkInDay[0] < year &&
         year === checkOutDay[0] &&
-        month < checkOutDay[1] + 1) ||
+        month < checkOutDay[1]) ||
       (checkInDay[0] < year &&
         year === checkOutDay[0] &&
-        month === checkOutDay[1] + 1 &&
+        month === checkOutDay[1] &&
         day <= checkOutDay[2]) ||
       /* 같은 년도 의 체크인 체크아웃 날짜 확인*/
       (checkInDay[0] === year &&
         year === checkOutDay[0] &&
-        checkInDay[1] + 1 === month &&
-        checkOutDay[1] + 1 > month &&
+        checkInDay[1] === month &&
+        checkOutDay[1] > month &&
         day > checkInDay[2]) ||
       (checkInDay[0] === year &&
         year === checkOutDay[0] &&
-        checkOutDay[1] + 1 === month &&
-        checkInDay[1] + 1 < month &&
+        checkOutDay[1] === month &&
+        checkInDay[1] < month &&
         day < checkOutDay[2])
     ) {
       return 'period';
@@ -114,7 +114,7 @@ export const CompareDate = (
   } else if (checkInDay !== undefined && checkOutDay === undefined) {
     if (
       year === checkInDay[0] &&
-      month === checkInDay[1] + 1 &&
+      month === checkInDay[1] &&
       day === checkInDay[2]
     ) {
       return 'onlyStartDay';
@@ -148,7 +148,6 @@ export const CompareDate = (
  * @param date
  */
 export const formatDate = (date: number[]) => {
-  let formatted_date =
-    '( ' + date[0] + '.' + (date[1] + 1) + '.' + date[2] + ' )';
+  let formatted_date = '( ' + date[0] + '.' + date[1] + '.' + date[2] + ' )';
   return formatted_date;
 };

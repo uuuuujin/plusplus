@@ -32,6 +32,7 @@ import {
   IconButton,
   ProductListContainer,
 } from './search.style';
+import { selectIsCalendarModalOpen } from '../../store/modules/modal/modal.select';
 
 export default function Search(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -39,6 +40,7 @@ export default function Search(): JSX.Element {
   const searchRegionName = useAppSelector(selectSearchRegionName);
   const checkInDate = useAppSelector(selectCalendarReducerSetCheckIn);
   const checkOutDate = useAppSelector(selectCalendarReducerCheckOut);
+  const isCalendarModalOpen = useAppSelector(selectIsCalendarModalOpen);
 
   const handleDestinationModal = () => {
     dispatch(modalAction.radioDestinationModal());
@@ -178,7 +180,7 @@ export default function Search(): JSX.Element {
 
         <DestinationModal />
         <FilterModal />
-        <CalendarModal />
+        {isCalendarModalOpen && <CalendarModal />}
       </Wrapper>
     </Container>
   );

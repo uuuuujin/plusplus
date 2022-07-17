@@ -39,17 +39,18 @@ const Calendar = ({ year, month, str }: CalendarProps): JSX.Element => {
   const dayArray = new Array(startDay + totalOfDay!).fill(0);
 
   const onClickDate = (year: number, month: number, day: number) => {
-    const clickedDate = new Array<number>(year, month - 1, day);
+    const clickedDate = new Array<number>(year, month, day);
     if (checkIn === undefined) {
       dispatch(calendarAction.setCheckInDate(clickedDate));
     } else if (checkOut === undefined) {
       if (year === checkIn[0] && month === checkIn[1] && day === checkIn[2]) {
+        dispatch(calendarAction.setCheckInDate(undefined));
         return;
       }
       if (
         year < checkIn[0] ||
-        (year === checkIn[0] && month < checkIn[1] + 1) ||
-        (year === checkIn[0] && month === checkIn[1] + 1 && day < checkIn[2])
+        (year === checkIn[0] && month < checkIn[1]) ||
+        (year === checkIn[0] && month === checkIn[1] && day < checkIn[2])
       ) {
         dispatch(calendarAction.setCheckInDate(clickedDate));
       } else {
