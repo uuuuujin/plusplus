@@ -36,6 +36,10 @@ import {
   UserInputBox,
 } from './payment.style';
 import styled from 'styled-components';
+import CompletePaymentModal from '../complete-payment-modal/CompletePaymentModal.component';
+import { modalAction } from '../../store/modules/modal/modal.slice';
+import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
+import { selectIsPaymentCompleteModalOpen } from '../../store/modules/modal/modal.select';
 
 interface UserInfo {
   name: string;
@@ -50,6 +54,10 @@ export const StyledContainer = styled(ContainerStyle)`
 `;
 
 export const Payment = () => {
+  const dispatch = useAppDispatch();
+  const isPaymentCompleteModalOpen = useAppSelector(
+    selectIsPaymentCompleteModalOpen
+  );
   const [userInfo, setUserInfo] = useState<UserInfo>({
     name: '',
     phoneNumber: 0,
@@ -87,6 +95,10 @@ export const Payment = () => {
       ...userInfo,
       [e.target.id]: e.target.value,
     });
+  };
+
+  const handleCompleteModalOpen = () => {
+    dispatch(modalAction.radioPaymentCompleteModal());
   };
 
   return (
@@ -197,8 +209,11 @@ export const Payment = () => {
             <TotalPrice> 85,000원</TotalPrice>
           </PaymentPriceBox>
         </PaymentInfoBox>
-        <PaymentButton>85,000원 결제하기</PaymentButton>
+        <PaymentButton onClick={handleCompleteModalOpen}>
+          85,000원 결제하기
+        </PaymentButton>
       </PaymentWrapper>
+      {isPaymentCompleteModalOpen && <CompletePaymentModal />}
     </StyledContainer>
   );
 };

@@ -33,3 +33,8 @@ export const selectIsWishManageModalOpen = createSelector(
   [selectModalReducer],
   (modal) => modal.isWishManageModalOpen
 );
+
+export const selectIsPaymentCompleteModalOpen = createSelector(
+  [selectModalReducer],
+  (modal) => modal.isPaymentCompleteModalOpen
+);

@@ -25,10 +25,8 @@ import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
 import { useLocation } from 'react-router-dom';
 import { modalAction } from '../../store/modules/modal/modal.slice';
 import { navigatorAction } from '../../store/modules/navigator/navigator.slice';
-import CalendarModal from '../../components/calendar-modal/calendarModal.component';
 import { StyledContainer } from '../../components/payment/payment.component';
 import { useState } from 'react';
-import { TitleText } from '../../components/wishlist/wishlist.style';
 import ReviewComponent from '../../components/review/review.component';
 
 const KAKAOCOLOR = '#FEE500';
@@ -82,10 +80,6 @@ export default function MyPage(): JSX.Element {
     MYPAGE_STATUS.WISHLIST
   );
 
-  const handleCalendarModal = () => {
-    dispatch(modalAction.setCalendarModal());
-  };
-
   const handleOnClickMenu = (type: MYPAGE_STATUS) => {
     setMypageComponent(type);
   };
@@ -100,7 +94,7 @@ export default function MyPage(): JSX.Element {
         <Header />
         <UserInfo>
           <HeaderText>MY PAGE</HeaderText>
-          <UserIcon className={'override'} onClick={handleCalendarModal} />
+          <UserIcon className={'override'} />
           <FlexRow>
             <span>"OOO" 님 반가워요!</span>
             <LoginIconBox color={KAKAOCOLOR} text={'kakao'} />
@@ -127,7 +121,6 @@ export default function MyPage(): JSX.Element {
               ) : (
                 <VscCalendar className={'icon'} />
               )}
-
               <span>예약리스트</span>
             </ItemMenu>
             <ItemMenu onClick={() => handleOnClickMenu(MYPAGE_STATUS.REVIEW)}>
