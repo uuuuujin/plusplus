@@ -1,5 +1,6 @@
 import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
 import { modalAction } from '../../store/modules/modal/modal.slice';
+import { userAction } from '../../store/modules/user/user.slice';
 import Container from '../../components/container/container.component';
 import Header from '../../components/header/header.component';
 import Footer from '../../components/footer/footer.component';
@@ -39,6 +40,10 @@ export default function Home(): JSX.Element {
     },
   ];
 
+  const logout = () => {
+    dispatch(userAction.logOut());
+  };
+
   return (
     <Container>
       <Wrapper>
@@ -46,6 +51,7 @@ export default function Home(): JSX.Element {
           <MainBannerImage src="main_banner.jpg" alt="배너이미지" />
         </MainBanner>
         <button onClick={handleUserInfoModal}>유저정보 모달 테스트 버튼</button>
+        <button onClick={logout}>로그아웃 테스트</button>
 
         <SliderContainer>
           <SliderTitle>현재 진행중인 이벤트</SliderTitle>
