@@ -1,10 +1,8 @@
-import Container from '../container/container.component';
-import styled from 'styled-components';
+import Container, { ContainerStyle } from '../container/container.component';
 import Header from '../header/header.component';
 import { MdOutlineLocationOn } from 'react-icons/md';
 import { LocationBox } from '../wishlist-Item/wishlitsitem.style';
-import { BsMap } from 'react-icons/bs';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
   CheckInBox,
   CheckInOutBox,
@@ -37,23 +35,43 @@ import {
   UserInfoBox,
   UserInputBox,
 } from './payment.style';
+import styled from 'styled-components';
+import CompletePaymentModal from '../complete-payment-modal/CompletePaymentModal.component';
+import { modalAction } from '../../store/modules/modal/modal.slice';
+import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
+import { selectIsPaymentCompleteModalOpen } from '../../store/modules/modal/modal.select';
 
 interface UserInfo {
   name: string;
-  phoneNumber: number;
+  phoneNumber: string;
   sex: number;
   age: number;
 }
 
+export const StyledContainer = styled(ContainerStyle)`
+  background-color: #fafafa;
+  margin-bottom: 60px;
+`;
+
 export const Payment = () => {
+  const dispatch = useAppDispatch();
+  const nameRef = useRef<HTMLInputElement>(null);
+  const telRef = useRef<HTMLInputElement>(null);
+  const selectRef = useRef<HTMLSelectElement>(null);
+  const radioRef = useRef<HTMLDivElement>(null);
+
+  const isPaymentCompleteModalOpen = useAppSelector(
+    selectIsPaymentCompleteModalOpen
+  );
   const [userInfo, setUserInfo] = useState<UserInfo>({
     name: '',
-    phoneNumber: 0,
+    phoneNumber: '',
     sex: 1,
     age: 0,
   });
 
   const [isNameError, setIsNameError] = useState<boolean>(true);
+  const [isTelError, setIsTelError] = useState<boolean>(true);
 
   const selectOptions = [
     { value: 0, text: '나이대를 선택하세요' },
@@ -71,6 +89,21 @@ export const Payment = () => {
     });
   };
 
+  const handleUserTel = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const regex = /^[0-9]{0,13}$/;
+    if (e.target.value.length < 10) {
+      setIsTelError(true);
+    } else setIsTelError(false);
+
+    if (regex.test(e.target.value)) {
+      setUserInfo({
+        ...userInfo,
+        phoneNumber: e.target.value,
+      });
+      console.log(userInfo);
+    }
+  };
+
   const handleChangeSelectBox = (e: any) => {
     setUserInfo({
       ...userInfo,
@@ -79,14 +112,34 @@ export const Payment = () => {
   };
 
   const handleInputChange = (e: any) => {
+    if (e.target.value.length < 1) {
+      setIsNameError(true);
+    } else setIsNameError(false);
+
     setUserInfo({
       ...userInfo,
-      [e.target.id]: e.target.value,
+      name: e.target.value,
     });
+    console.log(userInfo);
+  };
+
+  const handleCompleteModalOpen = () => {
+    if (isNameError && nameRef.current) {
+      nameRef.current.focus();
+      return;
+    } else if (isTelError && telRef.current) {
+      telRef.current.focus();
+      return;
+    } else if (userInfo.age === 0 && selectRef.current) {
+      selectRef.current.focus();
+      return;
+    }
+    console.log(userInfo.age === 0);
+    dispatch(modalAction.radioPaymentCompleteModal());
   };
 
   return (
-    <Container>
+    <StyledContainer>
       <PaymentWrapper>
         <Header />
         <OrderInfoBox>
@@ -125,25 +178,38 @@ export const Payment = () => {
             <InputBox
               id="name"
               onChange={handleInputChange}
+              value={userInfo.name}
               isErr={isNameError}
               placeholder="성명을 입력해주세요"
               type="text"
+              ref={nameRef}
             />
             {isNameError && <ErrorText>성명을 입력해주세요</ErrorText>}
           </UserInputBox>
+
           <UserInputBox>
             <span>전화번호 </span>
             <InputBox
               id="phoneNumber"
-              isErr={true}
-              placeholder="01012345678"
+              isErr={isTelError}
+              maxLength={11}
+              value={userInfo.phoneNumber}
+              placeholder="-를 뺴고 입력하세요"
               type="text"
-              onChange={handleInputChange}
+              onChange={handleUserTel}
+              ref={telRef}
             />
+            {isTelError && (
+              <ErrorText>전화번호 11자리를 입력해주세요</ErrorText>
+            )}
           </UserInputBox>
           <UserInputBox>
             <span>나이</span>
-            <SelectBox value={userInfo.age} onChange={handleChangeSelectBox}>
+            <SelectBox
+              value={userInfo.age}
+              onChange={handleChangeSelectBox}
+              ref={selectRef}
+            >
               {selectOptions.map((option: any) => (
                 <option key={option.value} value={option.value}>
                   {option.text}
@@ -153,7 +219,7 @@ export const Payment = () => {
           </UserInputBox>
           <UserInputBox>
             <span>성별 </span>
-            <RadioBox>
+            <RadioBox ref={radioRef}>
               <input
                 type="radio"
                 id="man"
@@ -191,9 +257,12 @@ export const Payment = () => {
             <TotalPrice> 85,000원</TotalPrice>
           </PaymentPriceBox>
         </PaymentInfoBox>
-        <PaymentButton>85,000원 결제하기</PaymentButton>
+        <PaymentButton onClick={handleCompleteModalOpen}>
+          85,000원 결제하기
+        </PaymentButton>
       </PaymentWrapper>
-    </Container>
+      {isPaymentCompleteModalOpen && <CompletePaymentModal />}
+    </StyledContainer>
   );
 };
 

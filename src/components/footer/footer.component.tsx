@@ -2,6 +2,7 @@ import { ROUTES } from '../../routes/routes';
 import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
 import { navigatorAction } from '../../store/modules/navigator/navigator.slice';
 import { selectCurrentPage } from '../../store/modules/navigator/navigator.select';
+import { selectIsLoggedIn } from '../../store/modules/user/user.select';
 import { FooterStyle, FooterBox } from './footer.style';
 
 //icons
@@ -18,6 +19,7 @@ export default function Footer(): JSX.Element {
   };
 
   const currentPage = useAppSelector(selectCurrentPage);
+  const isLoggedIn = useAppSelector(selectIsLoggedIn);
 
   return (
     <FooterStyle>
@@ -31,7 +33,7 @@ export default function Footer(): JSX.Element {
         {currentPage === 'search' ? <RiSearchFill /> : <RiSearchLine />}
       </FooterBox>
       <FooterBox
-        to={ROUTES.MYPAGE.path}
+        to={isLoggedIn ? ROUTES.MYPAGE.path : ROUTES.LOGIN.path}
         onClick={() => clickIconHandler('mypage')}
       >
         {currentPage === 'mypage' ? <BsPersonFill /> : <BsPerson />}

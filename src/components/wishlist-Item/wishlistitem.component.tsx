@@ -13,37 +13,77 @@ import {
   SaleRate,
   StarIcon,
 } from './wishlitsitem.style';
+import { RoomItem } from '../wishlist/wishlist.component';
+import { styled } from '@mui/material';
+import { LikeIconContainer } from '../product-list-item/productListItem.style';
+import { AiFillHeart } from 'react-icons/ai';
+import WishListModal from '../like-mange-modal/wishListModal.component';
+import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
+import { modalAction } from '../../store/modules/modal/modal.slice';
+import { selectIsWishManageModalOpen } from '../../store/modules/modal/modal.select';
+import { likeCategorization } from '../../utils/likeCategorization';
 
-export default function WishListItem(): JSX.Element {
+export interface WishListItemProps {
+  item: RoomItem;
+}
+
+export const LikeIconWrap = styled(LikeIconContainer)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  & > span {
+    margin-top: 2px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+  & > svg {
+    color: rgb(237, 73, 86);
+    fill: rgb(237, 73, 86);
+    width: 24px;
+    height: 24px;
+  }
+`;
+
+export default function WishListItem({ item }: WishListItemProps): JSX.Element {
+  const dispatch = useAppDispatch();
+  const isWishManageModalOpen = useAppSelector(selectIsWishManageModalOpen);
+
+  const onClickHeart = () => {
+    dispatch(modalAction.radioWishManageModal());
+  };
   return (
     <ItemContainer>
       <ItemBox>
         <ItemInfo>
+          <LikeIconWrap>
+            <AiFillHeart onClick={onClickHeart} />
+            <span>{likeCategorization(15)}</span>
+          </LikeIconWrap>
           <div>
-            스테이 보리
-            <StarIcon />
-            <span>4.4</span>
+            {item.name}
+            {/*<StarIcon />*/}
+            {/*<span>4.4</span>*/}
           </div>
           <LocationBox>
             <MdOutlineLocationOn />
             <span>제주도 서귀포시 중문관광로72번길 35</span>
           </LocationBox>
-          <RoomInfoBox>
-            김치치즈 탕수육김치치즈 탕수육김치치즈 탕수육김치치즈 탕수육김치치즈
-            탕수육김치치즈 탕수육김치치즈 탕수육김치치즈 탕수육김치치즈
-            탕수육김치치즈 탕수육김치치즈 탕수육
-          </RoomInfoBox>
+          <RoomInfoBox>{item.content}</RoomInfoBox>
           <PriceInfoBox>
-            <NormalPrice>150,000원</NormalPrice>
+            <NormalPrice>{item.price}</NormalPrice>
             <div>
               <SaleRate>25%</SaleRate>
               <SalePrice>75,000원</SalePrice>
             </div>
           </PriceInfoBox>
         </ItemInfo>
-        <ItemImgBox src="http://images.stayfolio.com/system/pictures/images/000/102/357/display/278e1b5048400bac804b3647f00c3fc3738ce20e.jpg?1638171725" />
+        <ItemImgBox src={item.image} />
       </ItemBox>
       <RegisterButton>예약하기</RegisterButton>
+      {isWishManageModalOpen && <WishListModal item={item} />}
     </ItemContainer>
   );
 }

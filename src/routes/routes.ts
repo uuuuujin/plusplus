@@ -8,6 +8,8 @@ import UserList from '../components/user-list/user-list.component';
 import RoomList from '../components/room-list/room-list.component';
 import BookingList from '../components/admin-booking-list/admin-booking-list.component';
 import LoginPage from './login/login.component';
+import Payment from '../components/payment/payment.component';
+import Auth from './auth/auth.component';
 
 export const ROUTES = {
   HOME: {
@@ -62,5 +64,15 @@ export const ROUTES = {
     path: '/admin/booking-list',
     link: '/admin/booking-list',
     component: BookingList,
+  },
+  PAYMENT: {
+    path: '/payment',
+    link: '/payment',
+    component: Payment,
+  },
+  AUTH: {
+    path: 'auth/*',
+    link: 'auth/*',
+    component: Auth,
   },
 };

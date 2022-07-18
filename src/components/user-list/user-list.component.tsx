@@ -40,9 +40,9 @@ export default function UserList(props: UserDetailProp): JSX.Element {
       <HeaderText>유저 리스트</HeaderText>
       <UsersContainer>
         <User>
-          {userData.map((item, key) => {
+          {/* {userData.map((item, key) => {
             return <UserDetail key={key} gender={item.gender}></UserDetail>;
-          })}
+          })} */}
         </User>
       </UsersContainer>
     </div>

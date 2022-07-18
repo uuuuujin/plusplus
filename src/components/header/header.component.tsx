@@ -1,9 +1,10 @@
-import { useState } from 'react';
 import { useAppDispatch } from '../../hooks/index.hook';
 import { Link } from 'react-router-dom';
 import { modalAction } from '../../store/modules/modal/modal.slice';
+import { navigatorAction } from '../../store/modules/navigator/navigator.slice';
 import { ROUTES } from '../../routes/routes';
 import HeaderDestinationModal from '../headerDestinationModal/headerDestinationModal.component';
+import CalendarModal from '../calendar-modal/calendarModal.component';
 import { NavWrapper, Nav, Icons, Icon, Logo } from './header.style';
 
 import {
@@ -14,26 +15,26 @@ import {
 } from 'react-icons/bs';
 
 export default function Header(): JSX.Element {
-  const [isCalendarModalOpen, setCalendarModalOpen] = useState(false);
-  const calendarModalHandler = () => {
-    setCalendarModalOpen((e) => !e);
-  };
-  // const [isMapModalOpen, setMapModalOpen] = useState(false);
-  // const mapModalHandler = () => {
-  //   setMapModalOpen((e) => !e);
-  // };
   const dispatch = useAppDispatch();
   const handleHeaderDestinationModal = () => {
     dispatch(modalAction.radioHeaderDestinationModal());
   };
+  const handleCalendarModal = () => {
+    dispatch(modalAction.setCalendarModal());
+  };
+
+  const clickLogoHandler = (pageName: string) => {
+    dispatch(navigatorAction.setCurrnetPage(pageName));
+  };
+
   return (
     <NavWrapper>
       <Nav>
-        <Link to={ROUTES.HOME.path}>
+        <Link to={ROUTES.HOME.path} onClick={() => clickLogoHandler('home')}>
           <Logo src="logologo.png" />
         </Link>
         <Icons>
-          <Icon onClick={calendarModalHandler}>
+          <Icon onClick={handleCalendarModal}>
             <BsCalendarCheck className="normal" />
             <BsCalendarCheckFill className="hover" />
           </Icon>
@@ -45,6 +46,7 @@ export default function Header(): JSX.Element {
         </Icons>
       </Nav>
       <HeaderDestinationModal />
+      <CalendarModal />
     </NavWrapper>
   );
 }

@@ -9,16 +9,20 @@ export const PaymentWrapper = styled.div`
 export const OrderInfoBox = styled.div`
   margin: 10px 0;
   width: 100%;
+
   background-color: #fff;
+  border-radius: 20px;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 20%);
 `;
 
 export const ImgBox = styled.div`
   width: 100%;
-  padding: 10px 0 0 0;
 
   box-sizing: border-box;
   > img {
     width: 100%;
+    height: 400px;
+    object-fit: cover;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
   }
@@ -119,8 +123,11 @@ export const UserInfoBox = styled.div`
   display: flex;
   flex-direction: column;
   padding: 20px;
+
   background-color: #fff;
   border-radius: 20px;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 20%);
+  border: 1px solid #d7e2eb;
 `;
 
 export const HeadText = styled.span`
@@ -139,7 +146,7 @@ export const UserInputBox = styled.div`
 
   > span {
     font-size: 11px;
-    color: #ccc;
+    color: #000;
     font-weight: 500;
     padding: 3px 0;
     &::after {
@@ -152,7 +159,7 @@ export const UserInputBox = styled.div`
 export const InputBox = styled.input<{ isErr: boolean }>`
   border: none;
   border-bottom: ${(props) =>
-    props.isErr ? '1px solid #ddd;' : '1px solid red;'}
+    props.isErr ? '1px solid red;' : '1px solid #ddd;'}
   width: 100%;
   padding: 8px 0;
   &::placeholder {
@@ -165,8 +172,11 @@ export const PaymentInfoBox = styled.div`
   flex-direction: column;
   padding: 20px;
   margin: 10px 0;
+
   background-color: #fff;
   border-radius: 20px;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 20%);
+  border: 1px solid #d7e2eb;
 `;
 
 export const PaymentPriceBox = styled.div`
@@ -216,10 +226,13 @@ export const TotalPrice = styled(SalePrice)`
 
 export const PaymentButton = styled.button`
   width: 100%;
-  height: 50px;
+  max-width: 768px;
+  height: 60px;
+  position: fixed;
+  bottom: 0;
   padding: 10px 0;
   margin: 0 auto;
-  font-size: 14px;
+  font-size: 16px;
   border: none;
   text-align: center;
   color: #fff;

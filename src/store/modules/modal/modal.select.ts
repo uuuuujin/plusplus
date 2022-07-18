@@ -28,3 +28,13 @@ export const selectIsCalendarModalOpen = createSelector(
   [selectModalReducer],
   (modal) => modal.isCalendarModalOpen
 );
+
+export const selectIsWishManageModalOpen = createSelector(
+  [selectModalReducer],
+  (modal) => modal.isWishManageModalOpen
+);
+
+export const selectIsPaymentCompleteModalOpen = createSelector(
+  [selectModalReducer],
+  (modal) => modal.isPaymentCompleteModalOpen
+);

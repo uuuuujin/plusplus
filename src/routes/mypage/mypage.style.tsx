@@ -1,6 +1,18 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import theme from '../../style/theme';
-import { MdPersonPin } from 'react-icons/md';
+import { MdFavorite, MdPersonPin } from 'react-icons/md';
+import { AiFillCalendar, AiOutlineComment } from 'react-icons/ai';
+import { FaComments } from 'react-icons/fa';
+
+const componentFade = keyframes`
+  0% {
+    opacity: 0;
+  }
+  
+  100% {
+    opacity: 1;
+  }
+`;
 
 export const Text = styled.span`
   color: ${theme.colors.main};
@@ -11,15 +23,20 @@ export const InnerContainer = styled.div`
   flex-direction: column;
 
   width: 100%;
+  animation: ${componentFade} 0.5s linear;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 20%);
+  border: 1px solid #d7e2eb;
   box-sizing: border-box;
   padding: 10px;
   margin-top: 10px;
+  margin-bottom: 10px;
   background-color: #fff;
 `;
 
 export const HeaderText = styled.span`
   font-size: 20px;
   font-weight: bold;
+  margin-top: 10px;
   font-style: italic;
   margin-bottom: 10px;
 `;
@@ -56,10 +73,10 @@ export const UserInfo = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 10px 0px;
-  padding: 10px;
-  height: 100px;
-  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 10%);
+  margin-top: 10px;
+
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 20%);
+  border: 1px solid #d7e2eb;
 
   background-color: #ffffff;
   justify-content: center;
@@ -67,7 +84,7 @@ export const UserInfo = styled.div`
 
 export const UserIcon = styled(MdPersonPin)`
   &.override {
-    font-size: 20px;
+    font-size: 30px;
     border: 1px solid #000000;
     border-radius: 10px;
     margin-bottom: 10px;
@@ -80,7 +97,7 @@ export const FlexRow = styled.div`
   justify-content: center;
   align-items: center;
   text-align: center;
-  margin-bottom: 10px;
+  margin: 10px 0;
   width: 100%;
 
   > span {
@@ -89,6 +106,7 @@ export const FlexRow = styled.div`
   .icon {
     font-size: 30px;
     margin-bottom: 8px;
+    cursor: pointer;
     &:hover {
       transform: scale(1.1);
     }
@@ -99,7 +117,7 @@ export const ModifyButton = styled.button`
   border: none;
   background-color: transparent;
   cursor: pointer;
-  opacity: 0.4;
+  color: gray;
   font-size: 12px;
 `;
 
@@ -129,6 +147,18 @@ export const ItemMenu = styled.div`
       font-size: 10px;
     }
   }
+`;
+
+export const FillFavoriteIcon = styled(MdFavorite)`
+  color: rgb(237, 73, 86);
+`;
+
+export const FillCalendar = styled(AiFillCalendar)`
+  color: #68a790;
+`;
+
+export const FillComments = styled(AiOutlineComment)`
+  color: #68a790;
 `;
 
 export const Coupon = styled.div`
