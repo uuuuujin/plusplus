@@ -22,7 +22,7 @@ const Map = ({ y, x }: MapProps): JSX.Element => {
   useEffect(() => {
     let map = new window.kakao.maps.Map(ref.current, options);
     let coords = new window.kakao.maps.LatLng(y, x);
-    let content = `<div class='customOverlay'><span class='roomText'>숙소</span></div>`;
+    let content = `<div class='customOverlay'><span class='roomText'>호근머들</span></div>`;
 
     // 위치를 마커로 표시합니다.
     let marker = new window.kakao.maps.Marker({

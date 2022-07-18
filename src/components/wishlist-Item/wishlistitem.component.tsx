@@ -21,6 +21,7 @@ import WishListModal from '../like-mange-modal/wishListModal.component';
 import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
 import { modalAction } from '../../store/modules/modal/modal.slice';
 import { selectIsWishManageModalOpen } from '../../store/modules/modal/modal.select';
+import { likeCategorization } from '../../utils/likeCategorization';
 
 export interface WishListItemProps {
   item: RoomItem;
@@ -59,7 +60,7 @@ export default function WishListItem({ item }: WishListItemProps): JSX.Element {
         <ItemInfo>
           <LikeIconWrap>
             <AiFillHeart onClick={onClickHeart} />
-            <span>15</span>
+            <span>{likeCategorization(15)}</span>
           </LikeIconWrap>
           <div>
             {item.name}

@@ -159,7 +159,7 @@ export const UserInputBox = styled.div`
 export const InputBox = styled.input<{ isErr: boolean }>`
   border: none;
   border-bottom: ${(props) =>
-    props.isErr ? '1px solid #ddd;' : '1px solid red;'}
+    props.isErr ? '1px solid red;' : '1px solid #ddd;'}
   width: 100%;
   padding: 8px 0;
   &::placeholder {
