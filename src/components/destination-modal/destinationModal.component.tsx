@@ -1,45 +1,60 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
+import axios from 'axios';
 import { modalAction } from '../../store/modules/modal/modal.slice';
 import { searchAction } from '../../store/modules/search/search.slice';
 import { selectIsDestinationModalOpen } from '../../store/modules/modal/modal.select';
-import { selectSearchRegionName } from '../../store/modules/search/search.select';
+import {
+  selectLocal,
+  selectSearchRegion,
+  selectSearchCostRange,
+  selectSearchStayType,
+  selectSearchTheme,
+} from '../../store/modules/search/search.select';
+import { fetchLocal, getSearchResult } from '../../api/search';
 
 import MainModal from '../main-modal/mainModal.component';
-
 import { RegionButtonContainer, RegionButton } from './destinationModal.style';
 
 export default function DestinationModal(): JSX.Element {
   const dispatch = useAppDispatch();
 
   const isDestinationModalOpen = useAppSelector(selectIsDestinationModalOpen);
-  const searchRegionName = useAppSelector(selectSearchRegionName);
+  const searchRegion = useAppSelector(selectSearchRegion);
+  const local = useAppSelector(selectLocal);
+
+  const stayIds = useAppSelector(selectSearchStayType);
+  const themeIds = useAppSelector(selectSearchTheme);
+  const [minprice, maxprice] = useAppSelector(selectSearchCostRange);
 
   const handleDestinationModal = () => {
     dispatch(modalAction.radioDestinationModal());
   };
 
-  const handleRegionClick = (region: string) => {
-    dispatch(searchAction.setSearchRegionName(region));
+  const handleRegionClick = (props: { id: number; name: string }) => {
+    dispatch(searchAction.setSearchRegionName(props));
+    fetchSearchResult(props.id);
     handleDestinationModal();
   };
 
-  const REGIONAL_NAME = [
-    '국내전체',
-    '서울',
-    '경기',
-    '인천',
-    '강원',
-    '대전',
-    '충청',
-    '경상',
-    '부산',
-    '울산',
-    '대구',
-    '전라',
-    '광주',
-    '제주',
-  ];
+  useEffect(() => {
+    const fetchData = async () => {
+      await dispatch(fetchLocal());
+    };
+
+    fetchData();
+  }, [dispatch]);
+
+  const fetchSearchResult = async (clickedRegionIdx: number) => {
+    const data = {
+      localId: clickedRegionIdx,
+      stayIds: stayIds,
+      themeIds: themeIds,
+      minprice: minprice,
+      maxprice: maxprice,
+    };
+    await dispatch(getSearchResult(data));
+  };
 
   return (
     <MainModal
@@ -50,15 +65,17 @@ export default function DestinationModal(): JSX.Element {
     >
       <RegionButtonContainer>
         <ul>
-          {REGIONAL_NAME.map((item) => {
+          {local.map((item) => {
             return (
-              <li key={item}>
+              <li key={item.name}>
                 <RegionButton
-                  regionName={item}
-                  clickedRegionName={searchRegionName}
-                  onClick={() => handleRegionClick(item)}
+                  regionName={item.name}
+                  clickedRegionName={searchRegion.name}
+                  onClick={() =>
+                    handleRegionClick({ id: item.id, name: item.name })
+                  }
                 >
-                  {item}
+                  {item.name}
                 </RegionButton>
               </li>
             );

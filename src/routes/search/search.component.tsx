@@ -5,7 +5,10 @@ import { modalAction } from '../../store/modules/modal/modal.slice';
 import { calendarAction } from '../../store/modules/calendar/calendar.slice';
 import { searchAction } from '../../store/modules/search/search.slice';
 import { navigatorAction } from '../../store/modules/navigator/navigator.slice';
-import { selectSearchRegionName } from '../../store/modules/search/search.select';
+import {
+  selectSearchRegion,
+  selectSearchResult,
+} from '../../store/modules/search/search.select';
 import {
   selectCalendarReducerSetCheckIn,
   selectCalendarReducerCheckOut,
@@ -23,7 +26,10 @@ import ProductListItem from '../../components/product-list-item/productListItem.
 
 import {
   Wrapper,
+  FilterWrap,
   FilterTop,
+  SearchButtonContainer,
+  SearchButton,
   RowContainer,
   CategoryContainer,
   CategoryTitle,
@@ -37,10 +43,11 @@ import { selectIsCalendarModalOpen } from '../../store/modules/modal/modal.selec
 export default function Search(): JSX.Element {
   const dispatch = useAppDispatch();
   const location = useLocation();
-  const searchRegionName = useAppSelector(selectSearchRegionName);
+  const searchRegionName = useAppSelector(selectSearchRegion);
   const checkInDate = useAppSelector(selectCalendarReducerSetCheckIn);
   const checkOutDate = useAppSelector(selectCalendarReducerCheckOut);
   const isCalendarModalOpen = useAppSelector(selectIsCalendarModalOpen);
+  const searchResult = useAppSelector(selectSearchResult);
 
   const handleDestinationModal = () => {
     dispatch(modalAction.radioDestinationModal());
@@ -107,20 +114,58 @@ export default function Search(): JSX.Element {
     <Container>
       <Wrapper>
         <Header />
-        <FilterTop>
-          <RowContainer>
-            <CategoryContainer>
-              <CategoryTitle>여행지</CategoryTitle>
-              <CagtegoryButton
-                className="regionName"
-                onClick={handleDestinationModal}
-              >
-                <span>{searchRegionName ? searchRegionName : '여행지'}</span>
-                <IoIosArrowDown />
-              </CagtegoryButton>
-            </CategoryContainer>
+        <FilterWrap>
+          <FilterTop>
+            <RowContainer>
+              <CategoryContainer>
+                <CategoryTitle>여행지</CategoryTitle>
+                <CagtegoryButton
+                  className="regionName"
+                  onClick={handleDestinationModal}
+                >
+                  <span>
+                    {searchRegionName.name ? searchRegionName.name : '여행지'}
+                  </span>
+                  <IoIosArrowDown />
+                </CagtegoryButton>
+              </CategoryContainer>
 
-            <IconButtonContainer className="mobile">
+              <IconButtonContainer className="mobile">
+                <IconButton onClick={resetFilter}>
+                  <GrPowerReset />
+                </IconButton>
+                <IconButton onClick={handleFilterModal}>
+                  <GrFilter />
+                </IconButton>
+              </IconButtonContainer>
+            </RowContainer>
+
+            <RowContainer>
+              <CategoryContainer>
+                <CategoryTitle>체크인</CategoryTitle>
+                <CagtegoryButton onClick={handleCalendarModal}>
+                  <span>
+                    {checkInDate
+                      ? `${checkInDate[0]}-${checkInDate[1]}-${checkInDate[2]}`
+                      : '체크인'}
+                  </span>
+                  <IoIosArrowDown />
+                </CagtegoryButton>
+              </CategoryContainer>
+              <CategoryContainer className="checkout">
+                <CategoryTitle>체크아웃</CategoryTitle>
+                <CagtegoryButton onClick={handleCalendarModal}>
+                  <span>
+                    {checkOutDate
+                      ? `${checkOutDate[0]}-${checkOutDate[1]}-${checkOutDate[2]}`
+                      : '체크아웃'}
+                  </span>
+                  <IoIosArrowDown />
+                </CagtegoryButton>
+              </CategoryContainer>
+            </RowContainer>
+
+            <IconButtonContainer className="desktop">
               <IconButton onClick={resetFilter}>
                 <GrPowerReset />
               </IconButton>
@@ -128,45 +173,14 @@ export default function Search(): JSX.Element {
                 <GrFilter />
               </IconButton>
             </IconButtonContainer>
-          </RowContainer>
-
-          <RowContainer>
-            <CategoryContainer>
-              <CategoryTitle>체크인</CategoryTitle>
-              <CagtegoryButton onClick={handleCalendarModal}>
-                <span>
-                  {checkInDate
-                    ? `${checkInDate[0]}-${checkInDate[1]}-${checkInDate[2]}`
-                    : '체크인'}
-                </span>
-                <IoIosArrowDown />
-              </CagtegoryButton>
-            </CategoryContainer>
-            <CategoryContainer className="checkout">
-              <CategoryTitle>체크아웃</CategoryTitle>
-              <CagtegoryButton onClick={handleCalendarModal}>
-                <span>
-                  {checkOutDate
-                    ? `${checkOutDate[0]}-${checkOutDate[1]}-${checkOutDate[2]}`
-                    : '체크아웃'}
-                </span>
-                <IoIosArrowDown />
-              </CagtegoryButton>
-            </CategoryContainer>
-          </RowContainer>
-
-          <IconButtonContainer className="desktop">
-            <IconButton onClick={resetFilter}>
-              <GrPowerReset />
-            </IconButton>
-            <IconButton onClick={handleFilterModal}>
-              <GrFilter />
-            </IconButton>
-          </IconButtonContainer>
-        </FilterTop>
+          </FilterTop>
+          <SearchButtonContainer>
+            <SearchButton>검색하기</SearchButton>
+          </SearchButtonContainer>
+        </FilterWrap>
 
         <ProductListContainer>
-          {dummyData.map((item, key) => [
+          {/* {dummyData.map((item, key) => [
             <ProductListItem
               key={key}
               productImageSrc={item.productImageSrc}
@@ -174,7 +188,18 @@ export default function Search(): JSX.Element {
               productCost={item.productCost}
               likeCount={item.likeCount}
             />,
-          ])}
+          ])} */}
+          {searchResult.count === 0
+            ? '검색 결과가 없습니다.'
+            : searchResult.stations.map((item, key) => [
+                <ProductListItem
+                  key={key}
+                  productImageSrc={item.station_image}
+                  productTitle={item.station_name}
+                  productCost={`${item.station_minprice} ~ ${item.station_maxprice}`}
+                  likeCount={item.like_cnt}
+                />,
+              ])}
         </ProductListContainer>
         <Footer />
 
