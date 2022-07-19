@@ -79,6 +79,13 @@ export const DayBox = styled.div`
     pointer-events: none;
   }
 
+  .disable-room {
+    color: #e9e9e9;
+    /*포인터 이벤트 막기*/
+    pointer-events: none;
+    text-decoration: line-through;
+  }
+
   .today {
     border-radius: 30px;
     background-color: #ddd;
@@ -136,6 +143,7 @@ export const DayBox = styled.div`
 
   .date_box,
   .disable,
+  .disable-room,
   .startDay,
   .onlyStartDay,
   .endDay,
