@@ -46,6 +46,15 @@ export default function DestinationModal(): JSX.Element {
     >
       <RegionButtonContainer>
         <ul>
+          <li>
+            <RegionButton
+              regionName="국내전체"
+              clickedRegionName={searchRegion.name}
+              onClick={() => handleRegionClick({ id: 0, name: '국내전체' })}
+            >
+              국내전체
+            </RegionButton>
+          </li>
           {local.map((item) => {
             return (
               <li key={item.name}>

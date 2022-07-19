@@ -41,6 +41,7 @@ import {
   IconButtonContainer,
   IconButton,
   ProductListContainer,
+  EmptySearchResult,
 } from './search.style';
 import { selectIsCalendarModalOpen } from '../../store/modules/modal/modal.select';
 
@@ -70,7 +71,7 @@ export default function Search(): JSX.Element {
   };
 
   const resetFilter = () => {
-    dispatch(searchAction.setSearchRegionName(''));
+    dispatch(searchAction.setSearchRegionName({ id: 0, name: '' }));
     dispatch(calendarAction.setCheckInDate(undefined));
     dispatch(calendarAction.setCheckOutDate(undefined));
   };
@@ -79,60 +80,22 @@ export default function Search(): JSX.Element {
     dispatch(navigatorAction.setCurrnetPage(location.pathname.slice(1)));
   }, [dispatch, location]);
 
-  const fetchSearchResult = async () => {
-    const data = {
-      localId: searchRegionName.id,
-      stayIds: searchStayType,
-      themeIds: searchTheme,
-      minprice: minprice,
-      maxprice: maxprice,
-    };
-    await dispatch(getSearchResult(data));
+  const searchProps = {
+    localId: searchRegionName.id,
+    stayIds: searchStayType,
+    themeIds: searchTheme,
+    minprice: Number(`${minprice}0000`),
+    maxprice: Number(`${maxprice}0000`),
   };
 
-  const dummyData = [
-    {
-      productImageSrc: 'productImage1.jpg',
-      productTitle: '서우주',
-      productCost: '₩200,000 ~ ₩300,000',
-      likeCount: 7,
-    },
-    {
-      productImageSrc: 'productImage2.jpg',
-      productTitle: '밤편지',
-      productCost: '₩200,000 ~ ₩300,000',
-      likeCount: 25,
-    },
-    {
-      productImageSrc: 'productImage2.jpg',
-      productTitle: '서우주',
-      productCost: '₩200,000 ~ ₩300,000',
-      likeCount: 57,
-    },
-    {
-      productImageSrc: 'productImage1.jpg',
-      productTitle: '밤편지',
-      productCost: '₩200,000 ~ ₩300,000',
-      likeCount: 89,
-    },
-    {
-      productImageSrc: 'productImage1.jpg',
-      productTitle: '서우주',
-      productCost: '₩200,000 ~ ₩300,000',
-      likeCount: 200,
-    },
-    {
-      productImageSrc: 'productImage2.jpg',
-      productTitle: '밤편지',
-      productCost: '₩200,000 ~ ₩300,000',
-      likeCount: 67,
-    },
-  ];
+  const fetchSearchResult = async () => {
+    await dispatch(getSearchResult(searchProps));
+  };
 
   return (
     <Container>
       <Wrapper>
-        {/* <Header /> */}
+        <Header />
         <FilterWrap>
           <FilterTop>
             <RowContainer>
@@ -199,17 +162,21 @@ export default function Search(): JSX.Element {
         </FilterWrap>
 
         <ProductListContainer>
-          {searchResult.count === 0
-            ? '검색 결과가 없습니다.'
-            : searchResult.stations.map((item, key) => [
-                <ProductListItem
-                  key={key}
-                  productImageSrc={item.station_image}
-                  productTitle={item.station_name}
-                  productCost={`₩${item.station_minprice} ~ ₩${item.station_maxprice}`}
-                  likeCount={item.like_cnt}
-                />,
-              ])}
+          {searchResult.count === 0 ? (
+            <EmptySearchResult> 검색 결과가 없습니다.</EmptySearchResult>
+          ) : (
+            searchResult.stations.map((item, key) => [
+              <ProductListItem
+                key={key}
+                productImageSrc={item.station_image}
+                productTitle={item.station_name}
+                productCost={`₩${item.station_minprice.toLocaleString()} ~ ₩${item.station_maxprice.toLocaleString()}`}
+                likeCount={item.like_cnt}
+                productRegion={item.local_name}
+                productStayType={item.stay_name}
+              />,
+            ])
+          )}
         </ProductListContainer>
         <Footer />
 

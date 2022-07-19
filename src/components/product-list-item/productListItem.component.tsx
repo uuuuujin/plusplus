@@ -5,9 +5,11 @@ import {
   Bottom,
   DescriptionContainer,
   ProductTitle,
-  ProductCost,
+  ProductInfo,
   LikeContainer,
   LikeIconContainer,
+  ProductDescription,
+  ProductInfoEle,
 } from './productListItem.style';
 import { AiOutlineHeart } from 'react-icons/ai';
 
@@ -16,12 +18,21 @@ interface ProductListItemProp {
   productTitle: string;
   productCost: string;
   likeCount: number;
+  productRegion: string;
+  productStayType: string;
 }
 
 export default function ProductListItem(
   props: ProductListItemProp
 ): JSX.Element {
-  const { productTitle, productCost, likeCount, productImageSrc } = props;
+  const {
+    productTitle,
+    productCost,
+    productRegion,
+    productStayType,
+    likeCount,
+    productImageSrc,
+  } = props;
 
   return (
     <ItemContainer>
@@ -29,7 +40,13 @@ export default function ProductListItem(
       <Bottom>
         <DescriptionContainer>
           <ProductTitle>{productTitle}</ProductTitle>
-          <ProductCost>{productCost}</ProductCost>
+          <ProductDescription>
+            <ProductInfo>
+              <ProductInfoEle className="left">{productRegion}</ProductInfoEle>
+              <ProductInfoEle>{productStayType}</ProductInfoEle>
+            </ProductInfo>
+            <ProductInfoEle>{productCost}</ProductInfoEle>
+          </ProductDescription>
         </DescriptionContainer>
         <LikeContainer>
           <LikeIconContainer>
