@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import theme from '../../style/theme';
-
+import { Link } from 'react-router-dom';
 export const NavWrapper = styled.div`
   widht: 100vw;
 `;
@@ -20,9 +20,11 @@ export const Nav = styled.div`
   height: 76px;
   border-bottom: 1px solid ${theme.colors.border};
 `;
+export const LogoLink = styled(Link)`
+  width: 20%;
+`;
 export const Logo = styled.img`
-  width: 50%;
-  height: 100%;
+  width: 100%;
 `;
 export const Icons = styled.div`
   display: flex;
