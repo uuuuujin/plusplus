@@ -21,8 +21,8 @@ export const Nav = styled.div`
   border-bottom: 1px solid ${theme.colors.border};
 `;
 export const Logo = styled.img`
-  width: 100px;
-  height: 45px;
+  width: 50%;
+  height: 100%;
 `;
 export const Icons = styled.div`
   display: flex;

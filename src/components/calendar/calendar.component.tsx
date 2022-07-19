@@ -15,26 +15,28 @@ import { CompareDate, getCalendar } from '../../utils/calendar';
 
 import {
   selectCalendarReducerCheckOut,
+  selectCalendarReducerDisable,
   selectCalendarReducerSetCheckIn,
 } from '../../store/modules/calendar/calendar.select';
 import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
 import { calendarAction } from '../../store/modules/calendar/calendar.slice';
 
-const mockData = [4, 8, 10, 12, 13, 15, 16, 20, 25, 30];
+const mockData = [4, 16, 20, 25, 30];
 
 type CalendarProps = {
   year: number;
   month: number;
-  str?: string;
+  roomId?: number;
 };
 
-const Calendar = ({ year, month, str }: CalendarProps): JSX.Element => {
+const Calendar = ({ year, month, roomId }: CalendarProps): JSX.Element => {
   const dispatch = useAppDispatch();
   const { startDay, totalOfDay } = getCalendar(year, month);
   const todayDate = new Date();
 
   const checkIn = useAppSelector(selectCalendarReducerSetCheckIn);
   const checkOut = useAppSelector(selectCalendarReducerCheckOut);
+  const disableDay = useAppSelector(selectCalendarReducerDisable);
 
   const dayArray = new Array(startDay + totalOfDay!).fill(0);
 
@@ -76,6 +78,13 @@ const Calendar = ({ year, month, str }: CalendarProps): JSX.Element => {
                     month,
                     index + i + 1 - startDay,
                     todayDate,
+                    roomId
+                      ? [
+                          true,
+                          mockData.includes(index + i + 1 - startDay),
+                          disableDay,
+                        ]
+                      : [false, false, [0, 0, 0]],
                     checkIn,
                     checkOut
                   )}
@@ -91,9 +100,9 @@ const Calendar = ({ year, month, str }: CalendarProps): JSX.Element => {
                   ) : (
                     ''
                   )}
-                  {mockData.indexOf(index + i + 1 - startDay) > -1 && (
-                    <ReservationIcon />
-                  )}
+                  {/*{mockData.indexOf(index + i + 1 - startDay) > -1 && (*/}
+                  {/*  <ReservationIcon />*/}
+                  {/*)}*/}
                 </DateBox>
               );
             } else return <DayTxt key={index + i}></DayTxt>;
@@ -104,7 +113,7 @@ const Calendar = ({ year, month, str }: CalendarProps): JSX.Element => {
   });
 
   return (
-    <CalendarContainer className={str}>
+    <CalendarContainer>
       {/*<InfoBox>*/}
       {/*  <ReservationIcon />*/}
       {/*  <InfoTxt>예약이 존재하는 날입니다.</InfoTxt>*/}

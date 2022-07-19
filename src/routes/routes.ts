@@ -10,6 +10,7 @@ import BookingList from '../components/admin-booking-list/admin-booking-list.com
 import LoginPage from './login/login.component';
 import Payment from '../components/payment/payment.component';
 import Auth from './auth/auth.component';
+import DescriptionRoom from '../components/description-room/descriptionRoom.component';
 
 export const ROUTES = {
   HOME: {
@@ -74,5 +75,10 @@ export const ROUTES = {
     path: 'auth/*',
     link: 'auth/*',
     component: Auth,
+  },
+  ROOM: {
+    path: 'search/room',
+    link: 'search/room',
+    component: DescriptionRoom,
   },
 };
