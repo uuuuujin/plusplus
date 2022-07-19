@@ -1,11 +1,11 @@
 import { useAppDispatch } from '../../hooks/index.hook';
-import { Link } from 'react-router-dom';
+
 import { modalAction } from '../../store/modules/modal/modal.slice';
 import { navigatorAction } from '../../store/modules/navigator/navigator.slice';
 import { ROUTES } from '../../routes/routes';
 import HeaderDestinationModal from '../headerDestinationModal/headerDestinationModal.component';
 import CalendarModal from '../calendar-modal/calendarModal.component';
-import { NavWrapper, Nav, Icons, Icon, Logo } from './header.style';
+import { NavWrapper, Nav, Icons, Icon, Logo, LogoLink } from './header.style';
 
 import {
   BsMap,
@@ -30,9 +30,12 @@ export default function Header(): JSX.Element {
   return (
     <NavWrapper>
       <Nav>
-        <Link to={ROUTES.HOME.path} onClick={() => clickLogoHandler('home')}>
+        <LogoLink
+          to={ROUTES.HOME.path}
+          onClick={() => clickLogoHandler('home')}
+        >
           <Logo src="PLUSPLUS.png" />
-        </Link>
+        </LogoLink>
         <Icons>
           <Icon onClick={handleCalendarModal}>
             <BsCalendarCheck className="normal" />
