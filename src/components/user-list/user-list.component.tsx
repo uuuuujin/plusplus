@@ -11,6 +11,11 @@ import {
   UsersContainer,
 } from './user-list.style';
 import User from '../user/user.component';
+import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
+import {
+  selectUserlistReducer,
+  selectUserResult,
+} from '../../store/modules/userlist/userlist.select';
 
 const userData: UserDetailProp[] = [
   {
@@ -44,6 +49,9 @@ const userData: UserDetailProp[] = [
 ];
 
 export default function UserList(): JSX.Element {
+  const userlistResult = useAppSelector(selectUserResult);
+  console.log(userlistResult);
+
   return (
     <div>
       <HeaderText>유저 리스트</HeaderText>
@@ -57,7 +65,7 @@ export default function UserList(): JSX.Element {
         </DetailWrapper>
       </DetailCategory>
       <UsersContainer>
-        {userData.map((item, key) => {
+        {/* {userData.map((item, key) => {
           return (
             <User
               key={key}
@@ -68,7 +76,10 @@ export default function UserList(): JSX.Element {
               email={item.email}
             />
           );
-        })}
+        })} */}
+        {/* {userlistResult.map((item, key) => {
+          
+        })} */}
       </UsersContainer>
     </div>
   );
