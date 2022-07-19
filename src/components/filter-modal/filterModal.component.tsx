@@ -5,10 +5,11 @@ import { modalAction } from '../../store/modules/modal/modal.slice';
 import { searchAction } from '../../store/modules/search/search.slice';
 import { selectIsFilterModalOpen } from '../../store/modules/modal/modal.select';
 import {
+  selectSearchRegion,
   selectStayType,
   selectTheme,
 } from '../../store/modules/search/search.select';
-import { fetchStayType, fetchTheme } from '../../api/search';
+import { fetchStayType, fetchTheme, getSearchResult } from '../../api/search';
 import MainModal from '../main-modal/mainModal.component';
 import {
   FilterModalContainer,
@@ -30,13 +31,35 @@ export default function FilterModal(): JSX.Element {
   const dispatch = useAppDispatch();
 
   const isFilterModalOpen = useAppSelector(selectIsFilterModalOpen);
+  const region = useAppSelector(selectSearchRegion);
   const stayType = useAppSelector(selectStayType);
   const theme = useAppSelector(selectTheme);
 
+  const MIN_DISTANCE: number = 5;
+  const [costValue, setCostValue] = useState([0, 100]);
   const [stayCheckedList, setStayCheckedList] = useState<number[]>([]);
   const [themeCheckedList, setThemeCheckedList] = useState<number[]>([]);
 
+  const fetchSearchResult = async () => {
+    const data = {
+      localId: region.id,
+      stayIds: stayCheckedList,
+      themeIds: themeCheckedList,
+      minprice: Number(`${costValue[0]}0000`),
+      maxprice: Number(`${costValue[1]}0000`),
+    };
+    await dispatch(getSearchResult(data));
+  };
+
   const searchByFilter = () => {
+    const filteredData = {
+      cost: costValue,
+      stayType: stayCheckedList,
+      theme: themeCheckedList,
+    };
+    console.log('필터링된 데이터', filteredData);
+    fetchSearchResult();
+    dispatch(searchAction.filterCategory(filteredData));
     dispatch(modalAction.radioFilterModal());
   };
 
@@ -49,9 +72,6 @@ export default function FilterModal(): JSX.Element {
     if (checked) setThemeCheckedList((prev) => [...prev, item]);
     else setThemeCheckedList(themeCheckedList.filter((el) => el !== item));
   };
-
-  const MIN_DISTANCE: number = 5;
-  const [costValue, setCostValue] = useState([0, 100]);
 
   const handleCostRange = (
     event: Event,

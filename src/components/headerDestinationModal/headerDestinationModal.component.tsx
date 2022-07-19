@@ -8,6 +8,7 @@ import {
   selectLocal,
 } from '../../store/modules/search/search.select';
 import { fetchLocal } from '../../api/search';
+import { IndexNameType } from '../../store/modules/search/search.typs';
 
 import MainModal from '../main-modal/mainModal.component';
 import { ROUTES } from '../../routes/routes';
@@ -29,7 +30,7 @@ export default function HeaderDestinationModal(): JSX.Element {
   const handleDestinationModal = () => {
     dispatch(modalAction.radioHeaderDestinationModal());
   };
-  const handleRegionClick = (props: { id: number; name: string }) => {
+  const handleRegionClick = (props: IndexNameType) => {
     dispatch(searchAction.setSearchRegionName(props));
   };
 

@@ -60,7 +60,7 @@ export const searchSlice = createSlice({
     setSearchRegionName: (state, action) => {
       state.searchRegion = action.payload;
     },
-    fliterCategory: (state, action) => {
+    filterCategory: (state, action) => {
       state.searchCostRange = action.payload.cost;
       state.searchStayType = action.payload.stayType;
       state.searchTheme = action.payload.theme;
