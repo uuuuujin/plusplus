@@ -37,13 +37,13 @@ export const Bottom = styled.div`
   position: absolute;
   bottom: 0;
   left: 0;
-  border-top: 1px solid #d9d9d9;
+  border-top: 1px solid ${theme.colors.border};
 `;
 
 export const SearchButton = styled.button`
   width: 150px;
   height: 50px;
-  background-color: #000;
+  background-color: ${theme.colors.main};
   border-radius: 10px;
   color: #fff;
   border: none;

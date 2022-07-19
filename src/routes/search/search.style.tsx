@@ -136,4 +136,13 @@ export const RowContainer = styled.div`
 
 export const ProductListContainer = styled.div`
   margin-top: 20px;
+  // height: 60vh;
+`;
+
+export const EmptySearchResult = styled.div`
+  height: 60vh;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
