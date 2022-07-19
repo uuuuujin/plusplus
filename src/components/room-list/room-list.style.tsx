@@ -64,8 +64,21 @@ export const CheckboxLabel = styled.label`
 `;
 
 export const ProductListContainer = styled.div`
-  margin-top: 20px;
+  margin-top: 30px;
+  margin: auto;
+  width: 90%;
   display: grid;
-
+  border-top: 1px solid ${theme.colors.border};
   grid-template-columns: repeat(4, 25%);
+  padding: 30px;
+
+  @media (max-width: 1500px) {
+    grid-template-columns: repeat(3, 33%);
+  }
+  @media (max-width: 1200px) {
+    grid-template-columns: repeat(2, 50%);
+  }
+  @media (max-width: 800px) {
+    grid-template-columns: repeat(1, 100%);
+  }
 `;
