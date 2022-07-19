@@ -31,7 +31,7 @@ export default function Header(): JSX.Element {
     <NavWrapper>
       <Nav>
         <Link to={ROUTES.HOME.path} onClick={() => clickLogoHandler('home')}>
-          <Logo src="logologo.png" />
+          <Logo src="PLUSPLUS.png" />
         </Link>
         <Icons>
           <Icon onClick={handleCalendarModal}>

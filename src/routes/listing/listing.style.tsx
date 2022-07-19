@@ -5,7 +5,6 @@ export const ListingForm = styled.form`
   height: 100vh;
   display: flex;
   flex-direction: column;
-
   align-items: center;
   justify-content: center;
   padding: 15px 0;
@@ -42,15 +41,13 @@ export const ImgLabel = styled.label`
   border-radius: 10px;
   color: #808080;
   & > svg {
-    
     width: 150px;
     height: 150px;
   }
-  
-`
+`;
 
 export const InputAddress = styled.input`
-  width:70%;
+  width: 70%;
   height: 40px;
   padding: 5px;
   box-sizing: border-box;
@@ -68,7 +65,7 @@ export const InputZonecode = styled.input`
   padding: 5px;
   box-sizing: border-box;
 `;
-export const AddressWrapper= styled.div`
+export const AddressWrapper = styled.div`
   display: flex;
   justify-content: space-between;
 `;
@@ -106,7 +103,7 @@ export const ButtonContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-around;
-`
+`;
 export const ListingButton = styled.button`
   background-color: #94b49f;
   border: none;
