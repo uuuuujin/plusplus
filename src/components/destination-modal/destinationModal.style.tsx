@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import theme from '../../style/theme';
 
 export const RegionButtonContainer = styled.div`
   padding: 20px 20px 0 20px;
@@ -31,7 +32,7 @@ export const RegionButton = styled.button<{
   ${({ regionName, clickedRegionName }) => {
     return (
       regionName === clickedRegionName &&
-      'background-color: #000; color: #fff; font-weight: bold;'
+      `background-color: ${theme.colors.main}; color: #fff; font-weight: bold;`
     );
   }}
 `;

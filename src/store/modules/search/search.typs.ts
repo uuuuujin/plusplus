@@ -1,4 +1,4 @@
-interface IndexNameType {
+export interface IndexNameType {
   id: number;
   name: string;
 }

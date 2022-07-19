@@ -31,7 +31,7 @@ export default function LoginModal(): JSX.Element {
         <Title>로그인 페이지로 이동하시겠습니까?</Title>
         <ButtonContainer>
           <Link to={ROUTES.LOGIN.path}>
-            <Button>예</Button>
+            <Button onClick={handleLoginModal}>예</Button>
           </Link>
 
           <Button className="no" onClick={handleLoginModal}>

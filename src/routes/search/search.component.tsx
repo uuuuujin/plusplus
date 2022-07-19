@@ -7,12 +7,16 @@ import { searchAction } from '../../store/modules/search/search.slice';
 import { navigatorAction } from '../../store/modules/navigator/navigator.slice';
 import {
   selectSearchRegion,
+  selectSearchCostRange,
+  selectSearchStayType,
+  selectSearchTheme,
   selectSearchResult,
 } from '../../store/modules/search/search.select';
 import {
   selectCalendarReducerSetCheckIn,
   selectCalendarReducerCheckOut,
 } from '../../store/modules/calendar/calendar.select';
+import { getSearchResult } from '../../api/search';
 import { IoIosArrowDown } from 'react-icons/io';
 import { GrPowerReset, GrFilter } from 'react-icons/gr';
 import Container from '../../components/container/container.component';
@@ -21,6 +25,7 @@ import Footer from '../../components/footer/footer.component';
 import DestinationModal from '../../components/destination-modal/destinationModal.component';
 import FilterModal from '../../components/filter-modal/filterModal.component';
 import CalendarModal from '../../components/calendar-modal/calendarModal.component';
+import LoginModal from '../../components/login-modal/loginModal.component';
 
 import ProductListItem from '../../components/product-list-item/productListItem.component';
 
@@ -37,16 +42,21 @@ import {
   IconButtonContainer,
   IconButton,
   ProductListContainer,
+  EmptySearchResult,
 } from './search.style';
 import { selectIsCalendarModalOpen } from '../../store/modules/modal/modal.select';
 
 export default function Search(): JSX.Element {
   const dispatch = useAppDispatch();
   const location = useLocation();
+
+  const isCalendarModalOpen = useAppSelector(selectIsCalendarModalOpen);
   const searchRegionName = useAppSelector(selectSearchRegion);
   const checkInDate = useAppSelector(selectCalendarReducerSetCheckIn);
   const checkOutDate = useAppSelector(selectCalendarReducerCheckOut);
-  const isCalendarModalOpen = useAppSelector(selectIsCalendarModalOpen);
+  const searchStayType = useAppSelector(selectSearchStayType);
+  const searchTheme = useAppSelector(selectSearchTheme);
+  const [minprice, maxprice] = useAppSelector(selectSearchCostRange);
   const searchResult = useAppSelector(selectSearchResult);
 
   const handleDestinationModal = () => {
@@ -62,7 +72,7 @@ export default function Search(): JSX.Element {
   };
 
   const resetFilter = () => {
-    dispatch(searchAction.setSearchRegionName(''));
+    dispatch(searchAction.setSearchRegionName({ id: 0, name: '' }));
     dispatch(calendarAction.setCheckInDate(undefined));
     dispatch(calendarAction.setCheckOutDate(undefined));
   };
@@ -71,44 +81,17 @@ export default function Search(): JSX.Element {
     dispatch(navigatorAction.setCurrnetPage(location.pathname.slice(1)));
   }, [dispatch, location]);
 
-  const dummyData = [
-    {
-      productImageSrc: 'productImage1.jpg',
-      productTitle: '서우주',
-      productCost: '₩200,000 ~ ₩300,000',
-      likeCount: 7,
-    },
-    {
-      productImageSrc: 'productImage2.jpg',
-      productTitle: '밤편지',
-      productCost: '₩200,000 ~ ₩300,000',
-      likeCount: 25,
-    },
-    {
-      productImageSrc: 'productImage2.jpg',
-      productTitle: '서우주',
-      productCost: '₩200,000 ~ ₩300,000',
-      likeCount: 57,
-    },
-    {
-      productImageSrc: 'productImage1.jpg',
-      productTitle: '밤편지',
-      productCost: '₩200,000 ~ ₩300,000',
-      likeCount: 89,
-    },
-    {
-      productImageSrc: 'productImage1.jpg',
-      productTitle: '서우주',
-      productCost: '₩200,000 ~ ₩300,000',
-      likeCount: 200,
-    },
-    {
-      productImageSrc: 'productImage2.jpg',
-      productTitle: '밤편지',
-      productCost: '₩200,000 ~ ₩300,000',
-      likeCount: 67,
-    },
-  ];
+  const searchProps = {
+    localId: searchRegionName.id,
+    stayIds: searchStayType,
+    themeIds: searchTheme,
+    minprice: Number(`${minprice}0000`),
+    maxprice: Number(`${maxprice}0000`),
+  };
+
+  const fetchSearchResult = async () => {
+    await dispatch(getSearchResult(searchProps));
+  };
 
   return (
     <Container>
@@ -175,36 +158,32 @@ export default function Search(): JSX.Element {
             </IconButtonContainer>
           </FilterTop>
           <SearchButtonContainer>
-            <SearchButton>검색하기</SearchButton>
+            <SearchButton onClick={fetchSearchResult}>검색하기</SearchButton>
           </SearchButtonContainer>
         </FilterWrap>
 
         <ProductListContainer>
-          {/* {dummyData.map((item, key) => [
-            <ProductListItem
-              key={key}
-              productImageSrc={item.productImageSrc}
-              productTitle={item.productTitle}
-              productCost={item.productCost}
-              likeCount={item.likeCount}
-            />,
-          ])} */}
-          {searchResult.count === 0
-            ? '검색 결과가 없습니다.'
-            : searchResult.stations.map((item, key) => [
-                <ProductListItem
-                  key={key}
-                  productImageSrc={item.station_image}
-                  productTitle={item.station_name}
-                  productCost={`${item.station_minprice} ~ ${item.station_maxprice}`}
-                  likeCount={item.like_cnt}
-                />,
-              ])}
+          {searchResult.count === 0 ? (
+            <EmptySearchResult> 검색 결과가 없습니다.</EmptySearchResult>
+          ) : (
+            searchResult.stations.map((item, key) => [
+              <ProductListItem
+                key={key}
+                productImageSrc={item.station_image}
+                productTitle={item.station_name}
+                productCost={`₩${item.station_minprice.toLocaleString()} ~ ₩${item.station_maxprice.toLocaleString()}`}
+                likeCount={item.like_cnt}
+                productRegion={item.local_name}
+                productStayType={item.stay_name}
+              />,
+            ])
+          )}
         </ProductListContainer>
         <Footer />
 
         <DestinationModal />
         <FilterModal />
+        <LoginModal />
         {isCalendarModalOpen && <CalendarModal />}
       </Wrapper>
     </Container>
