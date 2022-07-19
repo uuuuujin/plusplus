@@ -4,7 +4,9 @@ const theme: DefaultTheme = {
   borderRadius: '5px', // 임의로 넣은거
   colors: {
     main: '#68A790',
-    secondary: '#fff', // 임의로 넣은거
+    border: '#ddd',
+    subTitle: '#808080',
+    discount: '#fa622f',
   },
 };
 

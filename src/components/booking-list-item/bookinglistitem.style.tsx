@@ -8,6 +8,8 @@ export const ItemBox = styled.div`
   border: 1px solid #e9e9e9;
   cursor: pointer;
   width: 90%;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 20%);
+  border: 1px solid #d7e2eb;
 
   margin: 0 auto;
   margin-top: 10px;
@@ -38,6 +40,8 @@ export const RoomName = styled.span`
 
 export const RoomImg = styled.img`
   width: 30%;
+  /* 이미지를 고정된 크기에 맞춰서 깨지지 않게 해준다*/
+  object-fit: cover;
   align-items: center;
   cursor: pointer;
   &:hover {

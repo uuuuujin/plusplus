@@ -29,8 +29,7 @@ export default function ImageSlider(): JSX.Element {
     return (
         <Slider>
             <LeftSlideButton onClick={prev}><AiOutlineLeft/></LeftSlideButton>
-            <SliderImageBox src={images[index]}>  
-            </SliderImageBox>
+            <SliderImageBox src={images[index]}></SliderImageBox>
             <RightSlideButton onClick={next}><AiOutlineRight/></RightSlideButton>
         </Slider>
     )

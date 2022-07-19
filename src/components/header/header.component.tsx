@@ -1,51 +1,52 @@
-import { NavWrapper, Nav, Icons, Icon, Logo } from './header.style';
-import { AiOutlineCalendar } from 'react-icons/ai';
-import { BsMap } from 'react-icons/bs';
 import { useAppDispatch } from '../../hooks/index.hook';
-import MainModal from '../main-modal/mainModal.component';
-import CompanyLogoImage from '../../assets/images/logologo.png';
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import DestinationModal from '../headerDestinationModal/headerDestinationModal.component';
-
 import { modalAction } from '../../store/modules/modal/modal.slice';
+import { navigatorAction } from '../../store/modules/navigator/navigator.slice';
 import { ROUTES } from '../../routes/routes';
+import HeaderDestinationModal from '../headerDestinationModal/headerDestinationModal.component';
+import CalendarModal from '../calendar-modal/calendarModal.component';
+import { NavWrapper, Nav, Icons, Icon, Logo } from './header.style';
 
-function CompanyLogo() {
-  return (
-    <Link to={ROUTES.HOME.path}>
-      <Logo src={CompanyLogoImage} />
-    </Link>
-  );
-}
+import {
+  BsMap,
+  BsMapFill,
+  BsCalendarCheck,
+  BsCalendarCheckFill,
+} from 'react-icons/bs';
+
 export default function Header(): JSX.Element {
-  const [isCalendarModalOpen, setCalendarModalOpen] = useState(false);
-  const calendarModalHandler = () => {
-    setCalendarModalOpen((e) => !e);
-  };
-  // const [isMapModalOpen, setMapModalOpen] = useState(false);
-  // const mapModalHandler = () => {
-  //   setMapModalOpen((e) => !e);
-  // };
   const dispatch = useAppDispatch();
-  const handleDestinationModal = () => {
-    dispatch(modalAction.radioDestinationModal());
+  const handleHeaderDestinationModal = () => {
+    dispatch(modalAction.radioHeaderDestinationModal());
   };
+  const handleCalendarModal = () => {
+    dispatch(modalAction.setCalendarModal());
+  };
+
+  const clickLogoHandler = (pageName: string) => {
+    dispatch(navigatorAction.setCurrnetPage(pageName));
+  };
+
   return (
     <NavWrapper>
       <Nav>
-        <CompanyLogo></CompanyLogo>
+        <Link to={ROUTES.HOME.path} onClick={() => clickLogoHandler('home')}>
+          <Logo src="logologo.png" />
+        </Link>
         <Icons>
-          <Icon onClick={calendarModalHandler}>
-            <AiOutlineCalendar />
+          <Icon onClick={handleCalendarModal}>
+            <BsCalendarCheck className="normal" />
+            <BsCalendarCheckFill className="hover" />
           </Icon>
-          <DestinationModal />
-          <Icon onClick={handleDestinationModal}>
-            <BsMap />
+          <HeaderDestinationModal />
+          <Icon className="map" onClick={handleHeaderDestinationModal}>
+            <BsMap className="normal" />
+            <BsMapFill className="hover" />
           </Icon>
         </Icons>
-        <DestinationModal />
       </Nav>
+      <HeaderDestinationModal />
+      <CalendarModal />
     </NavWrapper>
   );
 }

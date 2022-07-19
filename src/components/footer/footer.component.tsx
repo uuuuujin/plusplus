@@ -1,39 +1,43 @@
-import styled from 'styled-components';
+import { ROUTES } from '../../routes/routes';
+import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
+import { navigatorAction } from '../../store/modules/navigator/navigator.slice';
+import { selectCurrentPage } from '../../store/modules/navigator/navigator.select';
+import { selectIsLoggedIn } from '../../store/modules/user/user.select';
+import { FooterStyle, FooterBox } from './footer.style';
 
 //icons
-import {AiOutlineHome, AiOutlineHeart} from 'react-icons/ai';
-import {BsPerson} from 'react-icons/bs';
-
-const FooterStyle = styled.div`
-    width: 100%;
-    max-width: 768px;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    align-items: center;
-    justify-content: center;
-    position: fixed;
-    bottom: 0;
-    height: 60px;
-    border-top: solid 1px;
-    background-color: rgb(194, 220, 210);
-`
-
-const FooterBox = styled.div`
-    display: grid;
-    justify-self: center;
-    color: black;
-    font-size: 2rem;
-`
+import { AiOutlineHome, AiFillHome } from 'react-icons/ai';
+import { RiSearchLine, RiSearchFill } from 'react-icons/ri';
+import { BsPerson, BsPersonFill } from 'react-icons/bs';
 
 // 이동 route 지정(redirect?) 필요
 export default function Footer(): JSX.Element {
-    return (
-        <div> 
-            <FooterStyle> 
-                <FooterBox as="a" href=""> <AiOutlineHome/> </FooterBox>
-                <FooterBox as="a" href=""> <AiOutlineHeart/>  </FooterBox>
-                <FooterBox as="a" href=""> <BsPerson/> </FooterBox>
-            </FooterStyle> 
-        </div>
-    )
+  const dispatch = useAppDispatch();
+
+  const clickIconHandler = (pageName: string) => {
+    dispatch(navigatorAction.setCurrnetPage(pageName));
+  };
+
+  const currentPage = useAppSelector(selectCurrentPage);
+  const isLoggedIn = useAppSelector(selectIsLoggedIn);
+
+  return (
+    <FooterStyle>
+      <FooterBox to={ROUTES.HOME.path} onClick={() => clickIconHandler('home')}>
+        {currentPage === 'home' ? <AiFillHome /> : <AiOutlineHome />}
+      </FooterBox>
+      <FooterBox
+        to={ROUTES.SEARCH.path}
+        onClick={() => clickIconHandler('search')}
+      >
+        {currentPage === 'search' ? <RiSearchFill /> : <RiSearchLine />}
+      </FooterBox>
+      <FooterBox
+        to={isLoggedIn ? ROUTES.MYPAGE.path : ROUTES.LOGIN.path}
+        onClick={() => clickIconHandler('mypage')}
+      >
+        {currentPage === 'mypage' ? <BsPersonFill /> : <BsPerson />}
+      </FooterBox>
+    </FooterStyle>
+  );
 }
