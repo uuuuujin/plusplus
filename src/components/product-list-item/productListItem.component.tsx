@@ -1,3 +1,6 @@
+import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
+import { modalAction } from '../../store/modules/modal/modal.slice';
+import { selectIsLoggedIn } from '../../store/modules/user/user.select';
 import { likeCategorization } from '../../utils/likeCategorization';
 import {
   ItemContainer,
@@ -34,6 +37,14 @@ export default function ProductListItem(
     productImageSrc,
   } = props;
 
+  const dispatch = useAppDispatch();
+
+  const isLoggedIn = useAppSelector(selectIsLoggedIn);
+
+  const handleLike = () => {
+    if (!isLoggedIn) dispatch(modalAction.radioLoginModal());
+  };
+
   return (
     <ItemContainer>
       <ProductImage src={productImageSrc}></ProductImage>
@@ -49,7 +60,7 @@ export default function ProductListItem(
           </ProductDescription>
         </DescriptionContainer>
         <LikeContainer>
-          <LikeIconContainer>
+          <LikeIconContainer onClick={handleLike}>
             <AiOutlineHeart />
           </LikeIconContainer>
           <span>{likeCategorization(likeCount)}</span>

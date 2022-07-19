@@ -25,6 +25,7 @@ import Footer from '../../components/footer/footer.component';
 import DestinationModal from '../../components/destination-modal/destinationModal.component';
 import FilterModal from '../../components/filter-modal/filterModal.component';
 import CalendarModal from '../../components/calendar-modal/calendarModal.component';
+import LoginModal from '../../components/login-modal/loginModal.component';
 
 import ProductListItem from '../../components/product-list-item/productListItem.component';
 
@@ -182,6 +183,7 @@ export default function Search(): JSX.Element {
 
         <DestinationModal />
         <FilterModal />
+        <LoginModal />
         {isCalendarModalOpen && <CalendarModal />}
       </Wrapper>
     </Container>
