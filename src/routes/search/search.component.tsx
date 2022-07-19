@@ -7,12 +7,16 @@ import { searchAction } from '../../store/modules/search/search.slice';
 import { navigatorAction } from '../../store/modules/navigator/navigator.slice';
 import {
   selectSearchRegion,
+  selectSearchCostRange,
+  selectSearchStayType,
+  selectSearchTheme,
   selectSearchResult,
 } from '../../store/modules/search/search.select';
 import {
   selectCalendarReducerSetCheckIn,
   selectCalendarReducerCheckOut,
 } from '../../store/modules/calendar/calendar.select';
+import { getSearchResult } from '../../api/search';
 import { IoIosArrowDown } from 'react-icons/io';
 import { GrPowerReset, GrFilter } from 'react-icons/gr';
 import Container from '../../components/container/container.component';
@@ -43,10 +47,14 @@ import { selectIsCalendarModalOpen } from '../../store/modules/modal/modal.selec
 export default function Search(): JSX.Element {
   const dispatch = useAppDispatch();
   const location = useLocation();
+
+  const isCalendarModalOpen = useAppSelector(selectIsCalendarModalOpen);
   const searchRegionName = useAppSelector(selectSearchRegion);
   const checkInDate = useAppSelector(selectCalendarReducerSetCheckIn);
   const checkOutDate = useAppSelector(selectCalendarReducerCheckOut);
-  const isCalendarModalOpen = useAppSelector(selectIsCalendarModalOpen);
+  const searchStayType = useAppSelector(selectSearchStayType);
+  const searchTheme = useAppSelector(selectSearchTheme);
+  const [minprice, maxprice] = useAppSelector(selectSearchCostRange);
   const searchResult = useAppSelector(selectSearchResult);
 
   const handleDestinationModal = () => {
@@ -70,6 +78,17 @@ export default function Search(): JSX.Element {
   useEffect(() => {
     dispatch(navigatorAction.setCurrnetPage(location.pathname.slice(1)));
   }, [dispatch, location]);
+
+  const fetchSearchResult = async () => {
+    const data = {
+      localId: searchRegionName.id,
+      stayIds: searchStayType,
+      themeIds: searchTheme,
+      minprice: minprice,
+      maxprice: maxprice,
+    };
+    await dispatch(getSearchResult(data));
+  };
 
   const dummyData = [
     {
@@ -113,7 +132,7 @@ export default function Search(): JSX.Element {
   return (
     <Container>
       <Wrapper>
-        <Header />
+        {/* <Header /> */}
         <FilterWrap>
           <FilterTop>
             <RowContainer>
@@ -175,20 +194,11 @@ export default function Search(): JSX.Element {
             </IconButtonContainer>
           </FilterTop>
           <SearchButtonContainer>
-            <SearchButton>검색하기</SearchButton>
+            <SearchButton onClick={fetchSearchResult}>검색하기</SearchButton>
           </SearchButtonContainer>
         </FilterWrap>
 
         <ProductListContainer>
-          {/* {dummyData.map((item, key) => [
-            <ProductListItem
-              key={key}
-              productImageSrc={item.productImageSrc}
-              productTitle={item.productTitle}
-              productCost={item.productCost}
-              likeCount={item.likeCount}
-            />,
-          ])} */}
           {searchResult.count === 0
             ? '검색 결과가 없습니다.'
             : searchResult.stations.map((item, key) => [
@@ -196,7 +206,7 @@ export default function Search(): JSX.Element {
                   key={key}
                   productImageSrc={item.station_image}
                   productTitle={item.station_name}
-                  productCost={`${item.station_minprice} ~ ${item.station_maxprice}`}
+                  productCost={`₩${item.station_minprice} ~ ₩${item.station_maxprice}`}
                   likeCount={item.like_cnt}
                 />,
               ])}

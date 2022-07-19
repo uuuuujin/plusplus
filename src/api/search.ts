@@ -2,12 +2,7 @@ import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { useAppDispatch, useAppSelector } from '../hooks/index.hook';
 import { arrDestruct } from '../utils/arrDestruct';
-import {
-  selectSearchRegion,
-  selectSearchCostRange,
-  selectSearchStayType,
-  selectSearchTheme,
-} from '../store/modules/search/search.select';
+
 export const fetchLocal = createAsyncThunk('search/local', async () => {
   const response = await axios.get(
     `${process.env.REACT_APP_API_URL}/categories/local`

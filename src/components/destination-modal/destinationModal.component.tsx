@@ -1,17 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
-import axios from 'axios';
 import { modalAction } from '../../store/modules/modal/modal.slice';
 import { searchAction } from '../../store/modules/search/search.slice';
 import { selectIsDestinationModalOpen } from '../../store/modules/modal/modal.select';
 import {
   selectLocal,
   selectSearchRegion,
-  selectSearchCostRange,
-  selectSearchStayType,
-  selectSearchTheme,
 } from '../../store/modules/search/search.select';
-import { fetchLocal, getSearchResult } from '../../api/search';
+import { fetchLocal } from '../../api/search';
 
 import MainModal from '../main-modal/mainModal.component';
 import { RegionButtonContainer, RegionButton } from './destinationModal.style';
@@ -23,17 +19,12 @@ export default function DestinationModal(): JSX.Element {
   const searchRegion = useAppSelector(selectSearchRegion);
   const local = useAppSelector(selectLocal);
 
-  const stayIds = useAppSelector(selectSearchStayType);
-  const themeIds = useAppSelector(selectSearchTheme);
-  const [minprice, maxprice] = useAppSelector(selectSearchCostRange);
-
   const handleDestinationModal = () => {
     dispatch(modalAction.radioDestinationModal());
   };
 
   const handleRegionClick = (props: { id: number; name: string }) => {
     dispatch(searchAction.setSearchRegionName(props));
-    fetchSearchResult(props.id);
     handleDestinationModal();
   };
 
@@ -44,17 +35,6 @@ export default function DestinationModal(): JSX.Element {
 
     fetchData();
   }, [dispatch]);
-
-  const fetchSearchResult = async (clickedRegionIdx: number) => {
-    const data = {
-      localId: clickedRegionIdx,
-      stayIds: stayIds,
-      themeIds: themeIds,
-      minprice: minprice,
-      maxprice: maxprice,
-    };
-    await dispatch(getSearchResult(data));
-  };
 
   return (
     <MainModal

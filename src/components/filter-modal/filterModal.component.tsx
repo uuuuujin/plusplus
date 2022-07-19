@@ -36,7 +36,7 @@ export default function FilterModal(): JSX.Element {
   const [stayCheckedList, setStayCheckedList] = useState<number[]>([]);
   const [themeCheckedList, setThemeCheckedList] = useState<number[]>([]);
 
-  const handleFilterModal = () => {
+  const searchByFilter = () => {
     dispatch(modalAction.radioFilterModal());
   };
 
@@ -87,7 +87,7 @@ export default function FilterModal(): JSX.Element {
   return (
     <MainModal
       isOpen={isFilterModalOpen}
-      onClose={handleFilterModal}
+      onClose={searchByFilter}
       title="필터"
       contentWidth={700}
     >
@@ -163,7 +163,7 @@ export default function FilterModal(): JSX.Element {
           </CategoryContainer>
         </FilterModalContainer>
         <Bottom>
-          <SearchButton onClick={handleFilterModal}>검색하기</SearchButton>
+          <SearchButton onClick={searchByFilter}>검색하기</SearchButton>
         </Bottom>
       </div>
     </MainModal>
