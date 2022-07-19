@@ -21,14 +21,30 @@ export const UsersContainer = styled.div`
   padding: 10px;
 `;
 
-export const User = styled.div`
-  border-radius: 8px;
-  border: 1px solid ${theme.colors.border};
-  background: white;
-  &:not(:last-of-type) {
-    margin-bottom: 10px;
+export const DetailCategory = styled.div`
+  display: flex;
+  width: 66%;
+  margin: auto;
+  font-weight: bold;
+  font-size: 18px;
+`;
+export const FillerDiv = styled.div`
+  width: 10%;
+`;
+export const DetailWrapper = styled.div`
+  width: 90%;
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  & > * {
+    width: 25%;
+    border-right: 1px solid ${theme.colors.border};
+  }
+  & > :last-child {
+    border: none;
   }
 `;
-export const UserDetail = styled.div`
-  background: red;
-`;
+export const Nickname = styled.span``;
+export const Sex = styled.span``;
+export const Age = styled.span``;
+export const Email = styled.span``;
