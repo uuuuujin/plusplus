@@ -3,11 +3,13 @@ import { createSlice } from '@reduxjs/toolkit';
 export interface CalendarState {
   checkInDate: number[] | undefined;
   checkOutDate: number[] | undefined;
+  disableDate: number[] | undefined;
 }
 
 const initialState: CalendarState = {
   checkInDate: undefined,
   checkOutDate: undefined,
+  disableDate: undefined,
 };
 
 export const calendarSlice = createSlice({
@@ -19,6 +21,9 @@ export const calendarSlice = createSlice({
     },
     setCheckOutDate: (state, action) => {
       state.checkOutDate = action.payload;
+    },
+    setDisableDate: (state, action) => {
+      state.disableDate = action.payload;
     },
   },
 });

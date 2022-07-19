@@ -12,3 +12,8 @@ export const selectCalendarReducerCheckOut = createSelector(
   [selectCalendarReducer],
   (calendar) => calendar.checkOutDate
 );
+
+export const selectCalendarReducerDisable = createSelector(
+  [selectCalendarReducer],
+  (calendar) => calendar.disableDate
+);
