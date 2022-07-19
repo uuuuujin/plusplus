@@ -1,27 +1,41 @@
 import styled from 'styled-components';
+import theme from '../../style/theme';
 
 export const Wrapper = styled.div`
   padding-bottom: 60px;
 `;
 
-export const FilterTop = styled.div`
+export const FilterWrap = styled.div`
   display: flex;
+  flex-direction: column;
   border-bottom: 1px solid #e6e6e6;
   padding: 10px;
+`;
+
+export const FilterTop = styled.div`
+  display: flex;
+  margin-bottom: 20px;
   justify-content: space-between;
 
   @media (max-width: 768px) {
     flex-direction: column;
-    padding: 10px;
+    margin-bottom: 10px;
   }
 `;
 
-export const FilterWrap = styled.div`
+export const SearchButtonContainer = styled.div`
   display: flex;
+  justify-content: center;
+`;
 
-  @media (max-width: 768px) {
-    flex-direction: column;
-  }
+export const SearchButton = styled.button`
+  background-color: ${theme.colors.main};
+  border: 0;
+  padding: 10px 20px;
+  color: #fff;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
 `;
 
 export const CategoryContainer = styled.div`

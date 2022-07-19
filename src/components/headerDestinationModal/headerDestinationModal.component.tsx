@@ -1,8 +1,13 @@
+import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
 import { modalAction } from '../../store/modules/modal/modal.slice';
 import { searchAction } from '../../store/modules/search/search.slice';
 import { selectIsHeaderDestinationModalOpen } from '../../store/modules/modal/modal.select';
-import { selectSearchRegionName } from '../../store/modules/search/search.select';
+import {
+  selectSearchRegion,
+  selectLocal,
+} from '../../store/modules/search/search.select';
+import { fetchLocal } from '../../api/search';
 
 import MainModal from '../main-modal/mainModal.component';
 import { ROUTES } from '../../routes/routes';
@@ -18,31 +23,23 @@ export default function HeaderDestinationModal(): JSX.Element {
   const isHeaderDestinationModalOpen = useAppSelector(
     selectIsHeaderDestinationModalOpen
   );
-  const searchRegionName = useAppSelector(selectSearchRegionName);
+  const searchRegionName = useAppSelector(selectSearchRegion);
+  const local = useAppSelector(selectLocal);
+
   const handleDestinationModal = () => {
     dispatch(modalAction.radioHeaderDestinationModal());
   };
-  const handleRegionClick = (region: string) => {
-    dispatch(searchAction.setSearchRegionName(region));
-    // handleDestinationModal();
+  const handleRegionClick = (props: { id: number; name: string }) => {
+    dispatch(searchAction.setSearchRegionName(props));
   };
 
-  const REGIONAL_NAME = [
-    '국내전체',
-    '서울',
-    '경기',
-    '인천',
-    '강원',
-    '대전',
-    '충청',
-    '경상',
-    '부산',
-    '울산',
-    '대구',
-    '전라',
-    '광주',
-    '제주',
-  ];
+  useEffect(() => {
+    const fetchData = async () => {
+      await dispatch(fetchLocal());
+    };
+
+    fetchData();
+  }, [dispatch]);
 
   return (
     <MainModal
@@ -54,15 +51,17 @@ export default function HeaderDestinationModal(): JSX.Element {
       <div>
         <RegionButtonContainer>
           <ul>
-            {REGIONAL_NAME.map((item) => {
+            {local.map((item) => {
               return (
-                <li key={item}>
+                <li key={item.name}>
                   <RegionButton
-                    regionName={item}
-                    clickedRegionName={searchRegionName}
-                    onClick={() => handleRegionClick(item)}
+                    regionName={item.name}
+                    clickedRegionName={searchRegionName.name}
+                    onClick={() =>
+                      handleRegionClick({ id: item.id, name: item.name })
+                    }
                   >
-                    {item}
+                    {item.name}
                   </RegionButton>
                 </li>
               );

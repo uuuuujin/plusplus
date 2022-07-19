@@ -1,11 +1,15 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Slider from '@mui/material/Slider';
-
-import MainModal from '../main-modal/mainModal.component';
 import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
 import { modalAction } from '../../store/modules/modal/modal.slice';
+import { searchAction } from '../../store/modules/search/search.slice';
 import { selectIsFilterModalOpen } from '../../store/modules/modal/modal.select';
-
+import {
+  selectStayType,
+  selectTheme,
+} from '../../store/modules/search/search.select';
+import { fetchStayType, fetchTheme } from '../../api/search';
+import MainModal from '../main-modal/mainModal.component';
 import {
   FilterModalContainer,
   CostSliderContainer,
@@ -22,17 +26,28 @@ import {
   CheckboxLabel,
 } from './filterModal.style';
 
-interface FilterType {
-  title: string;
-  id: string;
-}
-
 export default function FilterModal(): JSX.Element {
   const dispatch = useAppDispatch();
 
   const isFilterModalOpen = useAppSelector(selectIsFilterModalOpen);
+  const stayType = useAppSelector(selectStayType);
+  const theme = useAppSelector(selectTheme);
+
+  const [stayCheckedList, setStayCheckedList] = useState<number[]>([]);
+  const [themeCheckedList, setThemeCheckedList] = useState<number[]>([]);
+
   const handleFilterModal = () => {
     dispatch(modalAction.radioFilterModal());
+  };
+
+  const onCheckedStay = (checked: boolean, item: number) => {
+    if (checked) setStayCheckedList((prev) => [...prev, item]);
+    else setStayCheckedList(stayCheckedList.filter((el) => el !== item));
+  };
+
+  const onCheckedTheme = (checked: boolean, item: number) => {
+    if (checked) setThemeCheckedList((prev) => [...prev, item]);
+    else setThemeCheckedList(themeCheckedList.filter((el) => el !== item));
   };
 
   const MIN_DISTANCE: number = 5;
@@ -60,87 +75,14 @@ export default function FilterModal(): JSX.Element {
     }
   };
 
-  // 가격 input에 직접 입력한다면 사용할 함수..
-  // const handleCostMinimum = (e: any) => {
-  //   if (e.target.value > 100) setCostValue([95, costValue[1]]);
-  //   else if (e.target.value > costValue[1])
-  //     setCostValue([costValue[1] - MIN_DISTANCE, costValue[1]]);
-  //   else if (!e.target.value) setCostValue([1, costValue[1]]);
-  //   else setCostValue([e.target.value, costValue[1]]);
-  // };
+  useEffect(() => {
+    const fetchData = async () => {
+      await dispatch(fetchStayType());
+      await dispatch(fetchTheme());
+    };
 
-  // const handleCostMaximum = (e: any) => {
-  //   if (e.target.value > 100) setCostValue([costValue[0], 100]);
-  //   else if (e.target.value < costValue[0])
-  //     setCostValue([costValue[0], Number(costValue[0]) + MIN_DISTANCE]);
-  //   else setCostValue([costValue[0], e.target.value]);
-  // };
-
-  const STAY_TYPE: FilterType[] = [
-    {
-      title: '게스트 하우스',
-      id: 'guest_house',
-    },
-    {
-      title: '한옥',
-      id: 'hanok',
-    },
-    {
-      title: '캠핑 & 아웃도어',
-      id: 'camping_outdoor',
-    },
-    {
-      title: '민박',
-      id: 'bnb',
-    },
-    {
-      title: '호텔',
-      id: 'hotel',
-    },
-  ];
-
-  const THEME_TYPE: FilterType[] = [
-    {
-      title: '도심 속 휴식',
-      id: 'rest_in_city',
-    },
-    {
-      title: '자연 속 휴식',
-      id: 'rest_in_nature',
-    },
-    {
-      title: '수영장',
-      id: 'swimming_pool',
-    },
-    {
-      title: '오션뷰',
-      id: 'ocean_view',
-    },
-    {
-      title: '시티뷰',
-      id: 'city_view',
-    },
-    {
-      title: '아웃도어',
-      id: 'outdoor',
-    },
-    {
-      title: '파티하우스',
-      id: 'party_house',
-    },
-    {
-      title: '여행자 교류',
-      id: 'traveler_interact',
-    },
-    {
-      title: '스파',
-      id: 'spa',
-    },
-    {
-      title: '노천탕',
-      id: 'open_air_bath',
-    },
-  ];
+    fetchData();
+  }, [dispatch]);
 
   return (
     <MainModal
@@ -177,12 +119,19 @@ export default function FilterModal(): JSX.Element {
           <CategoryContainer>
             <CategoryTitle>스테이 유형</CategoryTitle>
             <CheckboxContainer>
-              {STAY_TYPE.map((item, key) => {
+              {stayType.map((item, key) => {
                 return (
                   <CheckboxElement key={key}>
-                    <CheckboxInput type="checkbox" id={item.id} />
-                    <CheckboxLabel htmlFor={item.id}>
-                      {item.title}
+                    <CheckboxInput
+                      type="checkbox"
+                      id={String(item.id)}
+                      value={item.id}
+                      onChange={(e) =>
+                        onCheckedStay(e.target.checked, Number(e.target.value))
+                      }
+                    />
+                    <CheckboxLabel htmlFor={String(item.id)}>
+                      {item.name}
                     </CheckboxLabel>
                   </CheckboxElement>
                 );
@@ -193,12 +142,19 @@ export default function FilterModal(): JSX.Element {
           <CategoryContainer>
             <CategoryTitle>테마</CategoryTitle>
             <CheckboxContainer>
-              {THEME_TYPE.map((item, key) => {
+              {theme.map((item, key) => {
                 return (
                   <CheckboxElement key={key}>
-                    <CheckboxInput type="checkbox" id={item.id} />
-                    <CheckboxLabel htmlFor={item.id}>
-                      {item.title}
+                    <CheckboxInput
+                      type="checkbox"
+                      id={String(item.id)}
+                      value={item.id}
+                      onChange={(e) =>
+                        onCheckedTheme(e.target.checked, Number(e.target.value))
+                      }
+                    />
+                    <CheckboxLabel htmlFor={String(item.id)}>
+                      {item.name}
                     </CheckboxLabel>
                   </CheckboxElement>
                 );
