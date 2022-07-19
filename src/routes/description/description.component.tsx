@@ -16,6 +16,7 @@ import {
   RoomTitle,
   RoomCost,
 } from './description.style';
+import Map from '../../components/map/map.component';
 
 interface RoomType {
   roomTitle: string;
@@ -94,6 +95,7 @@ export default function Description(props?: StationType): JSX.Element {
 
         <ContentsContainer>
           <SubTitle>Map</SubTitle>
+          <Map y={33.308704704334026} x={126.76810471045683} />
         </ContentsContainer>
       </div>
     </Container>

@@ -82,6 +82,7 @@ export const DescriptionText = styled.div`
 export const ContentsContainer = styled.div`
   margin: 30px 40px 0 40px;
   border-top: 1px solid ${theme.colors.border};
+  margin-bottom: 100px;
 
   @media (max-width: 768px) {
     margin: 30px 20px 0 20px;
