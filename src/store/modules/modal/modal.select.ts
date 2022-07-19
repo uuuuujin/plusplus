@@ -38,3 +38,8 @@ export const selectIsPaymentCompleteModalOpen = createSelector(
   [selectModalReducer],
   (modal) => modal.isPaymentCompleteModalOpen
 );
+
+export const selectIsLoginModalOpen = createSelector(
+  [selectModalReducer],
+  (modal) => modal.isLoginModalOpen
+);
