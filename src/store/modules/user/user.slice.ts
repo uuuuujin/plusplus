@@ -17,8 +17,8 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     logIn: (state, action) => {
-      state.accessToken = action.payload;
-      state.refreshToken = action.payload;
+      state.accessToken = action.payload.accessToken;
+      state.refreshToken = action.payload.refreshToken;
       state.isLoggedIn = true;
     },
     logOut: (state) => {
