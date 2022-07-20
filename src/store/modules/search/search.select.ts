@@ -1,4 +1,3 @@
-import { create } from 'domain';
 import { createSelector } from 'reselect';
 
 import { RootState } from '../../store';
