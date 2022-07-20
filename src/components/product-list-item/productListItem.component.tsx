@@ -5,39 +5,49 @@ import { likeCategorization } from '../../utils/likeCategorization';
 import {
   ItemContainer,
   ProductImage,
-  Bottom,
+  Top,
   DescriptionContainer,
   ProductTitle,
   ProductInfo,
-  LikeContainer,
   LikeIconContainer,
   ProductDescription,
   ProductInfoEle,
+  NormalCost,
+  DiscountedCostContainer,
+  DiscountRate,
 } from './productListItem.style';
 import { AiOutlineHeart } from 'react-icons/ai';
 
 interface ProductListItemProp {
   productImageSrc: string;
   productTitle: string;
-  productCost: string;
-  likeCount: number;
+  minPrice: number;
+  maxPrice: number;
   productRegion: string;
   productStayType: string;
+  event?: {
+    id: number;
+    name: string;
+    start_date: string;
+    end_date: string;
+    rate: number;
+  };
 }
 
 export default function ProductListItem(
   props: ProductListItemProp
 ): JSX.Element {
+  const dispatch = useAppDispatch();
+
   const {
     productTitle,
-    productCost,
+    minPrice,
+    maxPrice,
     productRegion,
     productStayType,
-    likeCount,
     productImageSrc,
+    event,
   } = props;
-
-  const dispatch = useAppDispatch();
 
   const isLoggedIn = useAppSelector(selectIsLoggedIn);
 
@@ -45,27 +55,40 @@ export default function ProductListItem(
     if (!isLoggedIn) dispatch(modalAction.radioLoginModal());
   };
 
+  const discounted_minprice = event && (100 - event.rate) * minPrice * 0.01;
+  const discounted_maxprice = event && (100 - event.rate) * maxPrice * 0.01;
+
   return (
     <ItemContainer>
       <ProductImage src={productImageSrc}></ProductImage>
-      <Bottom>
-        <DescriptionContainer>
+      <DescriptionContainer>
+        <Top>
           <ProductTitle>{productTitle}</ProductTitle>
-          <ProductDescription>
-            <ProductInfo>
-              <ProductInfoEle className="left">{productRegion}</ProductInfoEle>
-              <ProductInfoEle>{productStayType}</ProductInfoEle>
-            </ProductInfo>
-            <ProductInfoEle>{productCost}</ProductInfoEle>
-          </ProductDescription>
-        </DescriptionContainer>
-        <LikeContainer>
           <LikeIconContainer onClick={handleLike}>
             <AiOutlineHeart />
           </LikeIconContainer>
-          <span>{likeCategorization(likeCount)}</span>
-        </LikeContainer>
-      </Bottom>
+        </Top>
+
+        <ProductDescription>
+          <ProductInfo>
+            <ProductInfoEle className="left">{productRegion}</ProductInfoEle>
+            <ProductInfoEle>{productStayType}</ProductInfoEle>
+          </ProductInfo>
+
+          <NormalCost
+            className={event && 'discount'}
+          >{`₩${minPrice.toLocaleString()} ~ ₩${maxPrice.toLocaleString()}`}</NormalCost>
+
+          {event && (
+            <DiscountedCostContainer>
+              <DiscountRate>{event?.rate}%</DiscountRate>
+              <span>
+                {`₩${discounted_minprice?.toLocaleString()} ~ ₩${discounted_maxprice?.toLocaleString()}`}
+              </span>
+            </DiscountedCostContainer>
+          )}
+        </ProductDescription>
+      </DescriptionContainer>
     </ItemContainer>
   );
 }

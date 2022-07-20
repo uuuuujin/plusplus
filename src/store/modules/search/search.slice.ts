@@ -39,15 +39,43 @@ const initialState: SearchStateType = {
     count: 0,
     stations: [
       {
-        station_id: 0,
-        station_name: '',
-        station_image: '',
-        station_content: '',
-        station_minprice: 0,
-        station_maxprice: 0,
-        local_name: '',
-        stay_name: '',
-        like_cnt: 0,
+        id: 0,
+        name: '',
+        image: '',
+        content: '',
+        minprice: 0,
+        maxprice: 0,
+        local_id: {
+          id: 0,
+          name: '',
+          classification: '',
+        },
+        stay_id: {
+          id: 0,
+          name: '',
+          classification: '',
+        },
+        theme: [
+          {
+            id: 0,
+            name: '',
+          },
+        ],
+        event_id: {
+          id: 0,
+          name: '',
+          start_date: '',
+          end_date: '',
+          rate: 0,
+        },
+        likes: [
+          {
+            id: 0,
+            station_id: 0,
+            user_id: 0,
+          },
+        ],
+        likesCount: 0,
       },
     ],
   },

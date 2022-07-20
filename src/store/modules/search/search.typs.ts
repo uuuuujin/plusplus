@@ -11,15 +11,43 @@ interface SearchResultType {
   count: number;
   stations: [
     {
-      station_id: number;
-      station_name: string;
-      station_image: string;
-      station_content: string;
-      station_minprice: number;
-      station_maxprice: number;
-      local_name: string;
-      stay_name: string;
-      like_cnt: number;
+      id: number;
+      name: string;
+      image: string;
+      content: string;
+      minprice: number;
+      maxprice: number;
+      local_id: {
+        id: number;
+        name: string;
+        classification: string;
+      };
+      stay_id: {
+        id: number;
+        name: string;
+        classification: string;
+      };
+      theme: [
+        {
+          id: number;
+          name: string;
+        }
+      ];
+      event_id: {
+        id: number;
+        name: string;
+        start_date: string;
+        end_date: string;
+        rate: number;
+      };
+      likes: [
+        {
+          id: number;
+          station_id: number;
+          user_id: number;
+        }
+      ];
+      likesCount: number;
     }
   ];
 }

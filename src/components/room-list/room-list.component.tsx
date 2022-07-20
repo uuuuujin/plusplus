@@ -114,66 +114,122 @@ const hotelData = [
   {
     productImageSrc: '../productImage1.jpg',
     productTitle: '살려줘',
-    productCost: '₩200,000 ~ ₩300,000',
-    likeCount: 50,
     productRegion: '서울',
     productStayType: '민박',
+    minPrice: 200000,
+    maxPrice: 300000,
+    event_id: {
+      id: 0,
+      name: '여름 바캉스 이벤트',
+      start_date: '2022-07-13',
+      end_date: '2022-08-05',
+      rate: 30,
+    },
   },
   {
     productImageSrc: '../productImage2.jpg',
     productTitle: '주말반납',
-    productCost: '₩200,000 ~ ₩300,000',
-    likeCount: 100,
     productRegion: '서울',
     productStayType: '민박',
+    minPrice: 200000,
+    maxPrice: 300000,
+    event_id: {
+      id: 0,
+      name: '여름 바캉스 이벤트',
+      start_date: '2022-07-13',
+      end_date: '2022-08-05',
+      rate: 30,
+    },
   },
   {
     productImageSrc: '../productImage2.jpg',
     productTitle: '코딩좋아',
-    productCost: '₩200,000 ~ ₩300,000',
-    likeCount: 50,
     productRegion: '서울',
     productStayType: '민박',
+    minPrice: 200000,
+    maxPrice: 300000,
+    event_id: {
+      id: 0,
+      name: '여름 바캉스 이벤트',
+      start_date: '2022-07-13',
+      end_date: '2022-08-05',
+      rate: 30,
+    },
   },
   {
     productImageSrc: '../productImage1.jpg',
     productTitle: '즐거운 리액트',
-    productCost: '₩200,000 ~ ₩300,000',
-    likeCount: 100,
     productRegion: '서울',
     productStayType: '민박',
+    minPrice: 200000,
+    maxPrice: 300000,
+    event_id: {
+      id: 0,
+      name: '여름 바캉스 이벤트',
+      start_date: '2022-07-13',
+      end_date: '2022-08-05',
+      rate: 30,
+    },
   },
   {
     productImageSrc: '../productImage1.jpg',
     productTitle: '살려줘',
-    productCost: '₩200,000 ~ ₩300,000',
-    likeCount: 50,
     productRegion: '서울',
     productStayType: '민박',
+    minPrice: 200000,
+    maxPrice: 300000,
+    event_id: {
+      id: 0,
+      name: '여름 바캉스 이벤트',
+      start_date: '2022-07-13',
+      end_date: '2022-08-05',
+      rate: 30,
+    },
   },
   {
     productImageSrc: '../productImage2.jpg',
     productTitle: '주말반납',
-    productCost: '₩200,000 ~ ₩300,000',
-    likeCount: 100,
     productRegion: '서울',
     productStayType: '민박',
+    minPrice: 200000,
+    maxPrice: 300000,
+    event_id: {
+      id: 0,
+      name: '여름 바캉스 이벤트',
+      start_date: '2022-07-13',
+      end_date: '2022-08-05',
+      rate: 30,
+    },
   },
   {
     productImageSrc: '../productImage2.jpg',
     productTitle: '코딩좋아',
-    productCost: '₩200,000 ~ ₩300,000',
-    likeCount: 50,
     productRegion: '서울',
     productStayType: '민박',
+    minPrice: 200000,
+    maxPrice: 300000,
+    event_id: {
+      id: 0,
+      name: '여름 바캉스 이벤트',
+      start_date: '2022-07-13',
+      end_date: '2022-08-05',
+      rate: 30,
+    },
   },
   {
     productImageSrc: '../productImage1.jpg',
     productTitle: '즐거운 리액트',
-    productCost: '₩200,000 ~ ₩300,000',
-    likeCount: 100,
     productRegion: '서울',
     productStayType: '민박',
+    minPrice: 200000,
+    maxPrice: 300000,
+    event_id: {
+      id: 0,
+      name: '여름 바캉스 이벤트',
+      start_date: '2022-07-13',
+      end_date: '2022-08-05',
+      rate: 30,
+    },
   },
 ];
 export default function RoomList(): JSX.Element {
@@ -240,10 +296,11 @@ export default function RoomList(): JSX.Element {
             key={key}
             productImageSrc={item.productImageSrc}
             productTitle={item.productTitle}
-            productCost={item.productCost}
-            likeCount={item.likeCount}
+            minPrice={item.minPrice}
+            maxPrice={item.maxPrice}
             productRegion={item.productRegion}
             productStayType={item.productStayType}
+            event={item.event_id}
           />,
         ])}
       </ProductListContainer>

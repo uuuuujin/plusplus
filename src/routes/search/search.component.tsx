@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
 import { modalAction } from '../../store/modules/modal/modal.slice';
@@ -77,10 +77,6 @@ export default function Search(): JSX.Element {
     dispatch(calendarAction.setCheckOutDate(undefined));
   };
 
-  useEffect(() => {
-    dispatch(navigatorAction.setCurrnetPage(location.pathname.slice(1)));
-  }, [dispatch, location]);
-
   const searchProps = {
     localId: searchRegionName.id,
     stayIds: searchStayType,
@@ -88,6 +84,22 @@ export default function Search(): JSX.Element {
     minprice: Number(`${minprice}0000`),
     maxprice: Number(`${maxprice}0000`),
   };
+
+  useEffect(() => {
+    dispatch(navigatorAction.setCurrnetPage(location.pathname.slice(1)));
+    const defaultProps = {
+      localId: 0,
+      stayIds: [],
+      themeIds: [],
+      minprice: 0,
+      maxprice: 1000000,
+    };
+
+    const fetchSearchResult = async () => {
+      await dispatch(getSearchResult(defaultProps));
+    };
+    fetchSearchResult();
+  }, [dispatch, location]);
 
   const fetchSearchResult = async () => {
     await dispatch(getSearchResult(searchProps));
@@ -169,12 +181,13 @@ export default function Search(): JSX.Element {
             searchResult.stations.map((item, key) => [
               <ProductListItem
                 key={key}
-                productImageSrc={item.station_image}
-                productTitle={item.station_name}
-                productCost={`₩${item.station_minprice.toLocaleString()} ~ ₩${item.station_maxprice.toLocaleString()}`}
-                likeCount={item.like_cnt}
-                productRegion={item.local_name}
-                productStayType={item.stay_name}
+                productImageSrc={item.image}
+                productTitle={item.name}
+                minPrice={item.minprice}
+                maxPrice={item.maxprice}
+                productRegion={item.local_id.name}
+                productStayType={item.stay_id.name}
+                event={item.event_id}
               />,
             ])
           )}

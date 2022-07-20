@@ -24,21 +24,14 @@ export const ProductImage = styled.img`
   }
 `;
 
-export const Bottom = styled.div`
-  display: flex;
-  justify-content: space-between;
-  padding: 0 10px;
-  width: 100%;
-  box-sizing: border-box;
-
-  @media (max-width: 780px) {
-    margin-top: 5px;
-  }
-`;
-
 export const DescriptionContainer = styled.div`
   margin-top: 10px;
-  width: 85%;
+`;
+
+export const Top = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding-right: 6px;
 `;
 
 export const ProductTitle = styled.div`
@@ -78,10 +71,26 @@ export const ProductInfoEle = styled.span`
   }
 `;
 
+export const NormalCost = styled(ProductInfoEle)`
+  &.discount {
+    text-decoration: line-through;
+    color: ${theme.colors.subTitle};
+  }
+`;
+export const DiscountedCostContainer = styled.div`
+  display: flex;
+  font-size: 13px;
+`;
+
+export const DiscountRate = styled.span`
+  color: ${theme.colors.discount};
+  margin-right: 10px;
+`;
+
 export const LikeContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   padding-bottom: 3px;
 
   & > span {
