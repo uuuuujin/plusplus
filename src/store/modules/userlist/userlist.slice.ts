@@ -29,11 +29,11 @@ export const userlistSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchUser.fulfilled, (state, action) => {
       state.user = {
-        userImageURL: action.payload.userImageURL,
-        nickname: action.payload.nickname,
-        age: action.payload.age,
-        email: action.payload.email,
-        gender: action.payload.gender,
+        userImageURL: action.payload.data.userImageURL,
+        nickname: action.payload.data.nickname,
+        age: action.payload.data.age,
+        email: action.payload.data.email,
+        gender: action.payload.data.gender,
       };
     });
   },

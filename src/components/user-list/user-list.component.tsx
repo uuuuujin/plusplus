@@ -1,4 +1,5 @@
 import { UserDetailProp } from '../user/user.component';
+import axios from 'axios';
 import {
   Age,
   DetailCategory,
@@ -16,42 +17,33 @@ import {
   selectUserlistReducer,
   selectUserResult,
 } from '../../store/modules/userlist/userlist.select';
-
-const userData: UserDetailProp[] = [
-  {
-    sex: 'male',
-    nickname: 'testname',
-    age: 10,
-    email: 'test1@gmail.com',
-    imageSrc: 'https://cdn-icons-png.flaticon.com/512/3577/3577349.png',
-  },
-  {
-    sex: 'female',
-    nickname: 'testname',
-    age: 20,
-    email: 'test2@gmail.com',
-    imageSrc: 'https://cdn-icons-png.flaticon.com/512/3577/3577349.png',
-  },
-  {
-    sex: 'male',
-    nickname: 'testname',
-    age: 20,
-    email: 'test3@gmail.com',
-    imageSrc: 'https://cdn-icons-png.flaticon.com/512/3577/3577349.png',
-  },
-  {
-    sex: 'female',
-    nickname: 'testname',
-    age: 30,
-    email: 'test4@gmail.com',
-    imageSrc: 'https://cdn-icons-png.flaticon.com/512/3577/3577349.png',
-  },
-];
+import { useEffect } from 'react';
+import { userlistAction } from '../../store/modules/userlist/userlist.slice';
+import { fetchUser } from '../../api/user';
+import { selectAccessToken } from '../../store/modules/user/user.select';
 
 export default function UserList(): JSX.Element {
-  const userlistResult = useAppSelector(selectUserResult);
-  console.log(userlistResult);
+  // const userlistResult = useAppSelector(selectUserResult);
+  // const dispatch = useAppDispatch();
+  const token = useAppSelector(selectAccessToken);
+  const userlistResult: any = [];
+  useEffect(() => {
+    const data = async () => {
+      const response = await axios.get(
+        `${process.env.REACT_APP_API_URL}/users`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      return response.data;
+    };
+    const temp = data();
+    temp.then((res) => {
+      console.log(res);
+    });
+  }, []);
 
+  console.log(userlistResult);
   return (
     <div>
       <HeaderText>유저 리스트</HeaderText>
