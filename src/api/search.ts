@@ -38,7 +38,6 @@ export const getSearchResult = createAsyncThunk(
   'search/getSearchResult',
   async (props: SearchPropsType) => {
     const { localId, stayIds, themeIds, minprice, maxprice } = props;
-    console.log('props: ', props);
     const stayIdArr = arrDestruct(stayIds);
     const themeIdArr = arrDestruct(themeIds);
     console.log(
