@@ -185,7 +185,6 @@ export default function Search(): JSX.Element {
                 productTitle={item.name}
                 minPrice={item.minprice}
                 maxPrice={item.maxprice}
-                likeCount={item.likesCount}
                 productRegion={item.local_id.name}
                 productStayType={item.stay_id.name}
                 event={item.event_id}
