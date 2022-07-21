@@ -13,7 +13,7 @@ import {
   SaleRate,
   StarIcon,
 } from './wishlitsitem.style';
-import { RoomItem } from '../wishlist/wishlist.component';
+import { RoomItem } from '../../api/wishlist';
 import { styled } from '@mui/material';
 import { LikeIconContainer } from '../product-list-item/productListItem.style';
 import { AiFillHeart } from 'react-icons/ai';
@@ -22,9 +22,11 @@ import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
 import { modalAction } from '../../store/modules/modal/modal.slice';
 import { selectIsWishManageModalOpen } from '../../store/modules/modal/modal.select';
 import { likeCategorization } from '../../utils/likeCategorization';
+import { useState } from 'react';
 
 export interface WishListItemProps {
   item: RoomItem;
+  setList: React.Dispatch<React.SetStateAction<[] | RoomItem[]>>;
 }
 
 export const LikeIconWrap = styled(LikeIconContainer)`
@@ -47,12 +49,15 @@ export const LikeIconWrap = styled(LikeIconContainer)`
   }
 `;
 
-export default function WishListItem({ item }: WishListItemProps): JSX.Element {
+export default function WishListItem({
+  item,
+  setList,
+}: WishListItemProps): JSX.Element {
   const dispatch = useAppDispatch();
-  const isWishManageModalOpen = useAppSelector(selectIsWishManageModalOpen);
+  const [isWishManageModalOpen, SetIsWishManageModalOpen] = useState(false);
 
   const onClickHeart = () => {
-    dispatch(modalAction.radioWishManageModal());
+    SetIsWishManageModalOpen(!isWishManageModalOpen);
   };
   return (
     <ItemContainer>
@@ -63,7 +68,7 @@ export default function WishListItem({ item }: WishListItemProps): JSX.Element {
             <span>{likeCategorization(15)}</span>
           </LikeIconWrap>
           <div>
-            {item.name}
+            {item.station_name}
             {/*<StarIcon />*/}
             {/*<span>4.4</span>*/}
           </div>
@@ -71,19 +76,26 @@ export default function WishListItem({ item }: WishListItemProps): JSX.Element {
             <MdOutlineLocationOn />
             <span>제주도 서귀포시 중문관광로72번길 35</span>
           </LocationBox>
-          <RoomInfoBox>{item.content}</RoomInfoBox>
+          <RoomInfoBox>{item.station_content}</RoomInfoBox>
           <PriceInfoBox>
-            <NormalPrice>{item.price}</NormalPrice>
+            <NormalPrice>
+              {item.station_minprice} ~ {item.station_maxprice}
+            </NormalPrice>
             <div>
               <SaleRate>25%</SaleRate>
-              <SalePrice>75,000원</SalePrice>
+              <SalePrice>
+                {item.station_minprice * 0.75}원 ~{' '}
+                {item.station_maxprice * 0.75}원
+              </SalePrice>
             </div>
           </PriceInfoBox>
         </ItemInfo>
-        <ItemImgBox src={item.image} />
+        <ItemImgBox src={item.station_image} />
       </ItemBox>
       <RegisterButton>예약하기</RegisterButton>
-      {isWishManageModalOpen && <WishListModal item={item} />}
+      {isWishManageModalOpen && (
+        <WishListModal item={item} setList={setList} setModal={onClickHeart} />
+      )}
     </ItemContainer>
   );
 }

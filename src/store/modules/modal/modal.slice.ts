@@ -44,7 +44,7 @@ export const modalSlice = createSlice({
       state.isCalendarModalOpen = !state.isCalendarModalOpen;
     },
     radioWishManageModal: (state) => {
-      state.isWishManageModalOpen = !state.isWishManageModalOpen;
+      state.isWishManageModalOpen = false;
     },
     radioPaymentCompleteModal: (state) => {
       state.isPaymentCompleteModalOpen = !state.isPaymentCompleteModalOpen;
