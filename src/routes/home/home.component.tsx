@@ -1,9 +1,10 @@
 import { useEffect } from 'react';
-import axios from 'axios';
 import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
 import { persistor } from '../../store/store';
 import { modalAction } from '../../store/modules/modal/modal.slice';
-import { userAction } from '../../store/modules/user/user.slice';
+import { fetchEvent } from '../../api/event';
+import { selectEvent } from '../../store/modules/event/event.select';
+
 import Container from '../../components/container/container.component';
 import Header from '../../components/header/header.component';
 import Footer from '../../components/footer/footer.component';
@@ -17,15 +18,15 @@ import {
   SliderTitle,
   Wrapper,
 } from './home.style';
-import { selectAccessToken } from '../../store/modules/user/user.select';
 
 export default function Home(): JSX.Element {
   const dispatch = useAppDispatch();
+
+  const events = useAppSelector(selectEvent);
+
   const handleUserInfoModal = () => {
     dispatch(modalAction.radioUserInfoModal());
   };
-
-  const accessToken = useAppSelector(selectAccessToken);
 
   const dummyData = [
     {
@@ -54,17 +55,13 @@ export default function Home(): JSX.Element {
     purge();
   };
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     console.log(accessToken);
-  //     const response = await axios.get(
-  //       `${process.env.REACT_APP_API_URL}/users/info`,
-  //       { headers: { Authorization: `Bearer ${accessToken}` } }
-  //     );
-  //     console.log(response.data);
-  //   };
-  //   fetchData();
-  // }, [accessToken]);
+  useEffect(() => {
+    const getEvents = () => {
+      dispatch(fetchEvent());
+    };
+
+    getEvents();
+  }, [dispatch]);
 
   return (
     <Container>
@@ -77,12 +74,12 @@ export default function Home(): JSX.Element {
 
         <SliderContainer>
           <SliderTitle>현재 진행중인 이벤트</SliderTitle>
-          <SwiperComponent swiperDataArr={dummyData}></SwiperComponent>
+          <SwiperComponent swiperDataArr={events}></SwiperComponent>
         </SliderContainer>
 
         <SliderContainer>
           <SliderTitle>인기순</SliderTitle>
-          <SwiperComponent swiperDataArr={dummyData}></SwiperComponent>
+          {/* <SwiperComponent swiperDataArr={dummyData}></SwiperComponent> */}
         </SliderContainer>
 
         <Header />

@@ -7,6 +7,7 @@ const theme: DefaultTheme = {
     border: '#ddd',
     subTitle: '#808080',
     discount: '#fa622f',
+    filledHeart: '#ed4956',
   },
 };
 

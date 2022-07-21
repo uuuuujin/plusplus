@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Swiper } from 'swiper/react';
+import { Link } from 'react-router-dom';
 
 export const SwiperContainer = styled(Swiper)`
   z-index: 0;
@@ -14,8 +15,14 @@ export const SlideContainer = styled.div`
   cursor: pointer;
 `;
 
+export const LinkEvent = styled(Link)`
+  text-decoration: none;
+  color: #000;
+`;
+
 export const SlideImage = styled.img`
-  width: 100%;
+  // width: 100%;
+  height: 570px;
 
   @media (min-width: 480 and max-width: 768px) {
     width: 90%;
@@ -25,14 +32,18 @@ export const SlideImage = styled.img`
 export const SlideTitle = styled.div`
   font-size: 18px;
   font-weight: 500;
-  margin-top: 20px;
+  margin: 20px 0 10px;
 `;
 
-export const NavigationButtonContainer = styled.div`
+export const NavigationButtonContainer = styled.div<{ visible: boolean }>`
   width: 150px;
   margin: 10px auto 0;
-  display: flex;
+  display: ${({ visible }) => (visible ? 'flex' : 'none')};
   justify-content: center;
+
+  @media (max-width: 768px) {
+    display: flex;
+  }
 `;
 
 export const NavigationButton = styled.button`
