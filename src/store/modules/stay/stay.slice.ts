@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { getStay } from '../../../api/stay';
+import { getStay, getRoom } from '../../../api/stay';
 import { StayType } from './stay.type';
 
 const initialState: StayType = {
@@ -57,6 +57,33 @@ const initialState: StayType = {
       },
     ],
   },
+
+  roomData: {
+    id: 0,
+    name: '',
+    image: '',
+    content: '',
+    price: 0,
+    max_cnt: 0,
+    checkin_time: '',
+    checkout_time: '',
+    created_at: '',
+    updated_at: '',
+    station_id: {
+      id: 0,
+      name: '',
+      image: '',
+      content: '',
+      minprice: 0,
+      maxprice: 0,
+      address: '',
+      x: '',
+      y: '',
+      status: '',
+      created_at: '',
+      updated_at: '',
+    },
+  },
 };
 
 export const staySlice = createSlice({
@@ -64,9 +91,13 @@ export const staySlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getStay.fulfilled, (state, action) => {
-      state.stayData = action.payload.data;
-    });
+    builder
+      .addCase(getStay.fulfilled, (state, action) => {
+        state.stayData = action.payload.data;
+      })
+      .addCase(getRoom.fulfilled, (state, action) => {
+        state.roomData = action.payload.data;
+      });
   },
 });
 

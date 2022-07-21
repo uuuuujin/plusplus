@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
 import { selectStayData } from '../../store/modules/stay/stay.select';
 import { getStay } from '../../api/stay';
+import { ROUTES } from '../routes';
 
 import Container from '../../components/container/container.component';
 import Header from '../../components/header/header.component';
@@ -21,10 +22,11 @@ import {
   RoomDescription,
   RoomTitle,
   RoomCost,
-} from './description.style';
+  RoomLink,
+} from './stayDescription.style';
 import Map from '../../components/map/map.component';
 
-export default function Description(): JSX.Element {
+export default function StayDescription(): JSX.Element {
   const location = useLocation();
   const dispatch = useAppDispatch();
 
@@ -36,18 +38,16 @@ export default function Description(): JSX.Element {
 
   useEffect(() => {
     const fetchData = async () => {
-      dispatch(getStay(STAY_ID));
+      await dispatch(getStay(STAY_ID));
     };
 
     fetchData();
   }, [STAY_ID, dispatch]);
 
-  useEffect(() => {
-    console.log(stayData);
-    const coord = [parseFloat(stayData.y), parseFloat(stayData.x)];
-    setCoordinate(coord);
-    console.log(coord);
-  }, [stayData]);
+  // useEffect(() => {
+  //   const coord = [parseFloat(stayData.y), parseFloat(stayData.x)];
+  //   setCoordinate(coord);
+  // }, [stayData]);
 
   return (
     <Container>
@@ -68,13 +68,18 @@ export default function Description(): JSX.Element {
           <SubTitle>Rooms</SubTitle>
           {stayData.rooms.map((el, index) => {
             return (
-              <Room key={index}>
-                <img src={el.image} alt="방 이미지" />
-                <RoomDescription>
-                  <RoomTitle>{el.name}</RoomTitle>
-                  <RoomCost>₩{el.price.toLocaleString()}</RoomCost>
-                </RoomDescription>
-              </Room>
+              <RoomLink
+                to={`${ROUTES.ROOM.link}/${STAY_ID}/${el.id}`}
+                key={index}
+              >
+                <Room>
+                  <img src={el.image} alt="방 이미지" />
+                  <RoomDescription>
+                    <RoomTitle>{el.name}</RoomTitle>
+                    <RoomCost>₩{el.price.toLocaleString()}</RoomCost>
+                  </RoomDescription>
+                </Room>
+              </RoomLink>
             );
           })}
         </ContentsContainer>
@@ -82,7 +87,9 @@ export default function Description(): JSX.Element {
         <ContentsContainer>
           <SubTitle>Map</SubTitle>
           {/* <Map y={parseFloat(stayData.y)} x={parseFloat(stayData.x)} />
+          
           <Map y={33.308704704334026} x={126.76810471045683} />
+
           <Map y={coordinate[0]} x={coordinate[1]} /> */}
         </ContentsContainer>
       </div>

@@ -52,4 +52,31 @@ export interface StayType {
       }
     ];
   };
+
+  roomData: {
+    id: number;
+    name: string;
+    image: string;
+    content: string;
+    price: number;
+    max_cnt: number;
+    checkin_time: string;
+    checkout_time: string;
+    created_at: string;
+    updated_at: string;
+    station_id: {
+      id: number;
+      name: string;
+      image: string;
+      content: string;
+      minprice: number;
+      maxprice: number;
+      address: string;
+      x: string;
+      y: string;
+      status: string;
+      created_at: string;
+      updated_at: string;
+    };
+  };
 }

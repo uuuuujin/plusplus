@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+import axios from 'axios';
 import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
 import { persistor } from '../../store/store';
 import { modalAction } from '../../store/modules/modal/modal.slice';
@@ -45,14 +47,24 @@ export default function Home(): JSX.Element {
   ];
 
   const logout = () => {
-    // dispatch(userAction.logOut());
-
     const purge = async () => {
       await persistor.purge();
     };
 
     purge();
   };
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     console.log(accessToken);
+  //     const response = await axios.get(
+  //       `${process.env.REACT_APP_API_URL}/users/info`,
+  //       { headers: { Authorization: `Bearer ${accessToken}` } }
+  //     );
+  //     console.log(response.data);
+  //   };
+  //   fetchData();
+  // }, [accessToken]);
 
   return (
     <Container>

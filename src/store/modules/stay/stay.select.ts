@@ -7,3 +7,8 @@ export const selectStayData = createSelector(
   [selectStayReducer],
   (stay) => stay.stayData
 );
+
+export const selectRoomData = createSelector(
+  [selectStayReducer],
+  (stay) => stay.roomData
+);

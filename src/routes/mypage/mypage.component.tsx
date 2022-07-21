@@ -109,18 +109,6 @@ export default function MyPage(): JSX.Element {
     dispatch(modalAction.radioUserModifyModal());
   };
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     console.log(accessToken);
-  //     const response = await axios.get(
-  //       `${process.env.REACT_APP_API_URL}/users/info`,
-  //       { headers: { Authorization: `Bearer ${accessToken}` } }
-  //     );
-  //     console.log(response.data);
-  //   };
-  //   fetchData();
-  // }, [accessToken]);
-
   return (
     <StyledContainer>
       {userInfo && (

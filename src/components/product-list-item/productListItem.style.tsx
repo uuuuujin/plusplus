@@ -20,7 +20,7 @@ export const Container = styled.div`
 export const LikeIconContainer = styled.div`
   cursor: pointer;
   position: absolute;
-  bottom: 50px;
+  top: 60%;
   right: 20px;
   z-index: 1;
 
