@@ -1,3 +1,5 @@
+import { StayBaseType } from '../popular-stay/popularStay.type';
+
 export interface IndexNameType {
   id: number;
   name: string;
@@ -9,47 +11,7 @@ interface CategoryType extends IndexNameType {
 
 export interface SearchResultType {
   count: number;
-  stations: [
-    {
-      id: number;
-      name: string;
-      image: string;
-      content: string;
-      minprice: number;
-      maxprice: number;
-      local_id: {
-        id: number;
-        name: string;
-        classification: string;
-      };
-      stay_id: {
-        id: number;
-        name: string;
-        classification: string;
-      };
-      theme: [
-        {
-          id: number;
-          name: string;
-        }
-      ];
-      event_id: {
-        id: number;
-        name: string;
-        start_date: string;
-        end_date: string;
-        rate: number;
-      };
-      likes: [
-        {
-          id: number;
-          station_id: number;
-          user_id: number;
-        }
-      ];
-      likesCount: number;
-    }
-  ];
+  stations: StayBaseType[];
 }
 
 export interface SearchStateType {
