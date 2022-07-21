@@ -15,6 +15,21 @@ import {
   TitleText,
 } from './CompletePaymentModal.style';
 import { useNavigate } from 'react-router-dom';
+import { navigatorAction } from '../../store/modules/navigator/navigator.slice';
+
+export interface IPaymentModalProps {
+  checkInDate: string;
+  checkOutDate: string;
+  nickName: string;
+  x: string;
+  y: string;
+  phoneNumber: string;
+  stationName: string;
+  roomName: string;
+}
+export interface PaymentModalProps {
+  props: IPaymentModalProps;
+}
 
 declare global {
   interface Window {
@@ -22,22 +37,24 @@ declare global {
   }
 }
 
-const CompletePaymentModal = () => {
+const CompletePaymentModal = (props: IPaymentModalProps) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const isPaymentModalOpen = useAppSelector(selectIsPaymentCompleteModalOpen);
-
+  console.log(props.x, props.y);
   const onCloseModal = () => {
     dispatch(modalAction.radioPaymentCompleteModal());
   };
 
   const onClickHomeButton = () => {
     onCloseModal();
+    dispatch(navigatorAction.setCurrnetPage('home'));
     navigate(`/`);
   };
 
   const onClickMyPageButton = () => {
     onCloseModal();
+    dispatch(navigatorAction.setCurrnetPage('mypage'));
     navigate(`/mypage`);
   };
 
@@ -53,19 +70,29 @@ const CompletePaymentModal = () => {
         <BookingInfoWrap>
           <BookingInfoBox>
             <TitleText>예약자:</TitleText>
-            <BookingText>이용준</BookingText>
+            <BookingText>{props.nickName}</BookingText>
           </BookingInfoBox>
           <BookingInfoBox>
             <TitleText>전화번호:</TitleText>
-            <BookingText>010-1234-5678</BookingText>
+            <BookingText>{props.phoneNumber}</BookingText>
           </BookingInfoBox>
           <BookingInfoBox>
             <TitleText>방정보:</TitleText>
-            <BookingText>호근머들 101호실(1인실)</BookingText>
+            <BookingText>
+              {props.stationName}({props.roomName})
+            </BookingText>
+          </BookingInfoBox>
+          <BookingInfoBox>
+            <TitleText>체크인 날짜:</TitleText>
+            <BookingText>{props.checkInDate}</BookingText>
+          </BookingInfoBox>
+          <BookingInfoBox>
+            <TitleText>체크아웃 날짜:</TitleText>
+            <BookingText>{props.checkOutDate}</BookingText>
           </BookingInfoBox>
         </BookingInfoWrap>
         <HeadText>위치정보</HeadText>
-        <Map y={33.244578611023655} x={126.5345669720284} />
+        <Map y={parseFloat(props.y)} x={parseFloat(props.x)} />
         <ButtonBox>
           <MoveHomeButton onClick={onClickHomeButton}>
             홈으로 이동

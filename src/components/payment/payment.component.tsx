@@ -52,6 +52,7 @@ import {
 } from '../../api/mypage';
 import { selectAccessToken } from '../../store/modules/user/user.select';
 import { paymentProps } from '../../routes/room-description/roomDescription.component';
+import { calendarAction } from '../../store/modules/calendar/calendar.slice';
 
 export const StyledContainer = styled(ContainerStyle)`
   background-color: #fafafa;
@@ -171,6 +172,8 @@ export const Payment = () => {
     };
     const res2 = postOrder(postData, accessToken);
     res2.then((res) => console.log('주문 완료'));
+    dispatch(calendarAction.setCheckInDate(undefined));
+    dispatch(calendarAction.setCheckOutDate(undefined));
     dispatch(modalAction.radioPaymentCompleteModal());
   };
 
@@ -305,7 +308,18 @@ export const Payment = () => {
           </PaymentButton>
         </PaymentWrapper>
       )}
-      {isPaymentCompleteModalOpen && <CompletePaymentModal />}
+      {isPaymentCompleteModalOpen && (
+        <CompletePaymentModal
+          checkInDate={formatDate(state.checkInDate)}
+          checkOutDate={formatDate(state.checkOutDate)}
+          nickName={userInfo.nickName}
+          x={state.station_id.x}
+          y={state.station_id.y}
+          phoneNumber={userInfo.phoneNumber}
+          stationName={state.station_id.name}
+          roomName={state.name}
+        />
+      )}
     </StyledContainer>
   );
 };
