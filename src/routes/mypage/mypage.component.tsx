@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { MdOutlineFavoriteBorder, MdFavorite } from 'react-icons/md';
+import { MdOutlineFavoriteBorder } from 'react-icons/md';
 import { VscCalendar } from 'react-icons/vsc';
 import { AiOutlineComment } from 'react-icons/ai';
 import {
@@ -27,10 +27,10 @@ import { StyledContainer } from '../../components/payment/payment.component';
 import { useState } from 'react';
 import ReviewComponent from '../../components/review/review.component';
 import { selectAccessToken } from '../../store/modules/user/user.select';
-import { getUser, getUserLike, InitialData, userData } from '../../api/mypage';
 import { selectIsUserModifyModalOpen } from '../../store/modules/modal/modal.select';
 import UserModifyModal from '../../components/user-modify-modal/userModifyModal.component';
 import { modalAction } from '../../store/modules/modal/modal.slice';
+import { getUser, InitialData, userData } from '../../api/mypage';
 
 const KAKAOCOLOR = '#FEE500';
 const NAVERCOLOR = '#2DB400';
