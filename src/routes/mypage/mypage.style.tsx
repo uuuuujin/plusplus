@@ -51,7 +51,6 @@ export const AdvertiseImg = styled.img`
 export const LoginIcon = styled.div`
   margin: 0 1px;
   width: 35px;
-  height: 15px;
   line-height: 15px;
   background-color: ${(props) => props.color};
   color: ${(props) => (props.color === '#2DB400' ? '#fff' : '#000')};

@@ -112,6 +112,7 @@ export const PaymentButton = styled.button`
   text-align: center;
   color: #fff;
   background-color: rgb(194, 220, 210);
+  cursor: pointer;
 `;
 
 export const ContentBox = styled.div`

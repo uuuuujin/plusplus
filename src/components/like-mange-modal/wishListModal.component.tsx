@@ -17,10 +17,11 @@ interface WishListItemModalProps extends WishListItemProps {
 
 const WishListModal = ({ item, setList, setModal }: WishListItemModalProps) => {
   const accessToken = useAppSelector(selectAccessToken);
+  console.log(item);
 
   const onDeleteWishItem = () => {
     const res = deleteWishItem(accessToken, item.station_id);
-    res.then((result) => {
+    res.then(() => {
       const data = getWishList(accessToken);
       data.then((result) => setList(result.data));
     });

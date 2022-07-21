@@ -177,11 +177,18 @@ export const CompareDate = (
  * @param date
  */
 export const formatDate = (date: number[]) => {
-  let formatted_date = `( ${date[0]} - ${date[1] < 10 ? '0' + date[1] : date[1]}
-  - ${date[2] < 10 ? '0' + date[2] : date[2]} )`;
+  const d = new Date(date[0], date[1] - 1, date[2]);
+  const days = ['(일)', '(월)', '(화)', '(수)', '(목)', '(금)', '(토)'];
+  const day = days[d.getDay()];
+  let formatted_date = ` ${date[0]} - ${date[1] < 10 ? '0' + date[1] : date[1]}
+  - ${date[2] < 10 ? '0' + date[2] : date[2]} ${day}  `;
   return formatted_date;
 };
 
+/**
+ *
+ * @param date [year, month, day]
+ */
 export const formatDateInSearch = (date: number[]) => {
   let formatted_date = `${date[0]}-${date[1] < 10 ? '0' + date[1] : date[1]}-${
     date[2] < 10 ? '0' + date[2] : date[2]

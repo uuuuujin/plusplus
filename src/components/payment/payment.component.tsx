@@ -2,7 +2,7 @@ import { ContainerStyle } from '../container/container.component';
 import Header from '../header/header.component';
 import { MdOutlineLocationOn } from 'react-icons/md';
 import { LocationBox } from '../wishlist-Item/wishlitsitem.style';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
   CheckInBox,
   CheckInOutBox,
@@ -40,19 +40,18 @@ import CompletePaymentModal from '../complete-payment-modal/CompletePaymentModal
 import { modalAction } from '../../store/modules/modal/modal.slice';
 import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
 import { selectIsPaymentCompleteModalOpen } from '../../store/modules/modal/modal.select';
+import { formatDate, formatDateInSearch } from '../../utils/calendar';
+import { useLocation } from 'react-router-dom';
+import { postOrder, postOrderProps } from '../../api/payment';
 import {
-  selectCalendarReducerCheckOut,
-  selectCalendarReducerSetCheckIn,
-} from '../../store/modules/calendar/calendar.select';
-import { formatDate } from '../../utils/calendar';
-
-export interface UserInfo {
-  firstsign: number;
-  nickname: string;
-  phoneNumber: string;
-  sex: number;
-  age: number;
-}
+  getUser,
+  InitialData,
+  postUser,
+  userData,
+  userDetail,
+} from '../../api/mypage';
+import { selectAccessToken } from '../../store/modules/user/user.select';
+import { paymentProps } from '../../routes/room-description/roomDescription.component';
 
 export const StyledContainer = styled(ContainerStyle)`
   background-color: #fafafa;
@@ -61,26 +60,32 @@ export const StyledContainer = styled(ContainerStyle)`
 
 export const Payment = () => {
   const dispatch = useAppDispatch();
+  const location = useLocation();
   const nameRef = useRef<HTMLInputElement>(null);
   const telRef = useRef<HTMLInputElement>(null);
   const selectRef = useRef<HTMLSelectElement>(null);
-  const radioRef = useRef<HTMLDivElement>(null);
-  const checkInDate = useAppSelector(selectCalendarReducerSetCheckIn);
-  const checkOutDate = useAppSelector(selectCalendarReducerCheckOut);
+
+  const accessToken = useAppSelector(selectAccessToken);
+
+  // 룸에 대한 데이터를 명시적으로 표현해주었다.
+  const state = location.state as paymentProps;
 
   const isPaymentCompleteModalOpen = useAppSelector(
     selectIsPaymentCompleteModalOpen
   );
-  const [userInfo, setUserInfo] = useState<UserInfo>({
-    firstsign: 1,
-    nickname: '',
-    phoneNumber: '',
-    sex: 1,
-    age: 0,
-  });
+  const [userInfo, setUserInfo] = useState<userData>(InitialData);
 
-  const [isNameError, setIsNameError] = useState<boolean>(true);
-  const [isTelError, setIsTelError] = useState<boolean>(true);
+  useEffect(() => {
+    const user = getUser(accessToken);
+    user.then((res) => {
+      setUserInfo(res.data.user);
+      setIsNameError(res.data.user.nickName.length < 1);
+      setIsTelError(res.data.user.phoneNumber.length < 1);
+    });
+  }, []);
+
+  const [isNameError, setIsNameError] = useState<boolean>(false);
+  const [isTelError, setIsTelError] = useState<boolean>(false);
 
   const selectOptions = [
     { value: 0, text: '나이대를 선택하세요' },
@@ -94,7 +99,7 @@ export const Payment = () => {
   const handleClickRadioButton = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserInfo({
       ...userInfo,
-      sex: Number(e.target.value),
+      sex: Number(e.target.value) === 1 ? 'MALE' : 'FEMALE',
     });
   };
 
@@ -109,7 +114,6 @@ export const Payment = () => {
         ...userInfo,
         phoneNumber: e.target.value,
       });
-      console.log(userInfo);
     }
   };
 
@@ -127,9 +131,8 @@ export const Payment = () => {
 
     setUserInfo({
       ...userInfo,
-      nickname: e.target.value,
+      nickName: e.target.value,
     });
-    console.log(userInfo);
   };
 
   const handleCompleteModalOpen = () => {
@@ -143,141 +146,165 @@ export const Payment = () => {
       selectRef.current.focus();
       return;
     }
+    // 처음에 개인정보를 입력 안했을 경우
 
+    const updateUser: userDetail = {
+      firstSign: true,
+      nickName: userInfo.nickName,
+      sex: userInfo.sex,
+      phoneNumber: userInfo.phoneNumber,
+      age: userInfo.age,
+    };
+
+    const res1 = postUser(updateUser, accessToken);
+    res1.then((result) => console.log('업데이트가 완료되었습니다.'));
+
+    const postData: postOrderProps = {
+      startDate: formatDateInSearch(state.checkInDate),
+      endDate: formatDateInSearch(state.checkOutDate),
+      price: state.price,
+      SpecialRequest: '감사합니다.',
+      stationId: state.station_id.id,
+      userId: userInfo.id,
+      roomId: state.id,
+      eventId: 1,
+    };
+    const res2 = postOrder(postData, accessToken);
+    res2.then((res) => console.log('주문 완료'));
     dispatch(modalAction.radioPaymentCompleteModal());
   };
 
   return (
     <StyledContainer>
-      <PaymentWrapper>
-        <Header />
-        <OrderInfoBox>
-          <ImgBox>
-            <img src="https://images.stayfolio.com/system/pictures/images/000/101/850/original/a16d062fb0fe04c53b90be300e9ef66422fab7d4.jpg?1637731090" />
-          </ImgBox>
-          <InfoBox>
-            <TitleBox>
-              <InfoTitle>동산리 해변 옆 몽환적인 로지(Lodge)</InfoTitle>
-              <LocationBox>
-                <MdOutlineLocationOn />
-                <span>제주도 서귀포시 중문관광로72번길 35 </span>
-              </LocationBox>
-              <MapIcon />
-            </TitleBox>
+      {userInfo && (
+        <PaymentWrapper>
+          <Header />
+          <OrderInfoBox>
+            <ImgBox>
+              <img src={state.image} />
+            </ImgBox>
+            <InfoBox>
+              <TitleBox>
+                <InfoTitle>
+                  {state.station_id.name}({state.name})
+                </InfoTitle>
+                <LocationBox>
+                  <MdOutlineLocationOn />
+                  <span>제주도 서귀포시 중문관광로72번길 35 </span>
+                </LocationBox>
+                <MapIcon />
+              </TitleBox>
 
-            <CheckInOutBox>
-              <CheckInBox>
-                <CheckInOutText>체크인 날짜</CheckInOutText>
-                <DateText>
-                  {checkInDate !== undefined
-                    ? formatDate(checkInDate)
-                    : '날짜 선택오류'}
-                </DateText>
-                <CheckInTimeText>15:00</CheckInTimeText>
-              </CheckInBox>
-              <CheckOutBox>
-                <CheckInOutText>체크아웃 날짜</CheckInOutText>{' '}
-                <DateText>
-                  {checkOutDate !== undefined
-                    ? formatDate(checkOutDate)
-                    : '날짜 선택오류'}
-                </DateText>
-                <CheckOutTimeText>11:00</CheckOutTimeText>
-              </CheckOutBox>
-              <Line />
-            </CheckInOutBox>
-          </InfoBox>
-        </OrderInfoBox>
-        <UserInfoBox>
-          <HeadText>예약자 정보*</HeadText>
-          <UserInputBox>
-            <span>예약자 </span>
-            <InputBox
-              id="name"
-              onChange={handleInputChange}
-              value={userInfo.nickname}
-              isErr={isNameError}
-              placeholder="성명을 입력해주세요"
-              type="text"
-              ref={nameRef}
-            />
-            {isNameError && <ErrorText>성명을 입력해주세요</ErrorText>}
-          </UserInputBox>
+              <CheckInOutBox>
+                <CheckInBox>
+                  <CheckInOutText>체크인 날짜</CheckInOutText>
+                  <DateText>{formatDate(state.checkInDate)}</DateText>
+                  <CheckInTimeText>
+                    {state.checkin_time ? state.checkin_time : '15:00'}
+                  </CheckInTimeText>
+                </CheckInBox>
+                <CheckOutBox>
+                  <CheckInOutText>체크아웃 날짜</CheckInOutText>{' '}
+                  <DateText>{formatDate(state.checkOutDate)}</DateText>
+                  <CheckOutTimeText>
+                    {state.checkout_time ? state.checkout_time : '11:00'}
+                  </CheckOutTimeText>
+                </CheckOutBox>
+                <Line />
+              </CheckInOutBox>
+            </InfoBox>
+          </OrderInfoBox>
+          <UserInfoBox>
+            <HeadText>예약자 정보*</HeadText>
+            <UserInputBox>
+              <span>예약자 </span>
+              <InputBox
+                id="name"
+                onChange={handleInputChange}
+                value={userInfo.nickName}
+                isErr={isNameError}
+                placeholder="성명을 입력해주세요"
+                type="text"
+                ref={nameRef}
+              />
+              {isNameError && <ErrorText>성명을 입력해주세요</ErrorText>}
+            </UserInputBox>
 
-          <UserInputBox>
-            <span>전화번호 </span>
-            <InputBox
-              id="phoneNumber"
-              isErr={isTelError}
-              maxLength={11}
-              value={userInfo.phoneNumber}
-              placeholder="-를 뺴고 입력하세요"
-              type="text"
-              onChange={handleUserTel}
-              ref={telRef}
-            />
-            {isTelError && (
-              <ErrorText>전화번호 11자리를 입력해주세요</ErrorText>
-            )}
-          </UserInputBox>
-          <UserInputBox>
-            <span>나이</span>
-            <SelectBox
-              value={userInfo.age}
-              onChange={handleChangeSelectBox}
-              ref={selectRef}
-            >
-              {selectOptions.map((option: any) => (
-                <option key={option.value} value={option.value}>
-                  {option.text}
-                </option>
-              ))}
-            </SelectBox>
-          </UserInputBox>
-          <UserInputBox>
-            <span>성별 </span>
-            <RadioBox ref={radioRef}>
-              <input
-                type="radio"
-                id="man"
-                name="man"
-                value={1}
-                checked={userInfo.sex === 1}
-                onChange={handleClickRadioButton}
+            <UserInputBox>
+              <span>전화번호 </span>
+              <InputBox
+                id="phoneNumber"
+                isErr={isTelError}
+                maxLength={11}
+                value={userInfo.phoneNumber}
+                placeholder="-를 뺴고 입력하세요"
+                type="text"
+                onChange={handleUserTel}
+                ref={telRef}
               />
-              <label>남성</label>
-              <input
-                type="radio"
-                id="woman"
-                name="woman"
-                value={2}
-                checked={userInfo.sex === 2}
-                onChange={handleClickRadioButton}
-              />
-              <label>여성</label>
-            </RadioBox>
-          </UserInputBox>
-        </UserInfoBox>
-        <PaymentInfoBox>
-          <HeadText>금액 및 할인 정보*</HeadText>
-          <PaymentPriceBox>
-            <PaymentPriceText>총 예약 금액</PaymentPriceText>
-            <SalePrice> 85,000원</SalePrice>
-          </PaymentPriceBox>
-          <PaymentEventBox>
-            <PaymentPriceText>적용가능 이벤트</PaymentPriceText>
-            <EventButton>이벤트 조회/적용</EventButton>
-          </PaymentEventBox>
-          <Line />
-          <PaymentPriceBox>
-            <PaymentPriceText>결제 금액</PaymentPriceText>
-            <TotalPrice> 85,000원</TotalPrice>
-          </PaymentPriceBox>
-        </PaymentInfoBox>
-        <PaymentButton onClick={handleCompleteModalOpen}>
-          85,000원 결제하기
-        </PaymentButton>
-      </PaymentWrapper>
+              {isTelError && (
+                <ErrorText>전화번호 11자리를 입력해주세요</ErrorText>
+              )}
+            </UserInputBox>
+            <UserInputBox>
+              <span>나이</span>
+              <SelectBox
+                value={userInfo.age}
+                onChange={handleChangeSelectBox}
+                ref={selectRef}
+              >
+                {selectOptions.map((option: any) => (
+                  <option key={option.value} value={option.value}>
+                    {option.text}
+                  </option>
+                ))}
+              </SelectBox>
+            </UserInputBox>
+            <UserInputBox>
+              <span>성별 </span>
+              <RadioBox>
+                <input
+                  type="radio"
+                  id="man"
+                  name="man"
+                  value={1}
+                  checked={userInfo.sex === 'MALE'}
+                  onChange={handleClickRadioButton}
+                />
+                <label>남성</label>
+                <input
+                  type="radio"
+                  id="woman"
+                  name="woman"
+                  value={2}
+                  checked={userInfo.sex === 'FEMALE'}
+                  onChange={handleClickRadioButton}
+                />
+                <label>여성</label>
+              </RadioBox>
+            </UserInputBox>
+          </UserInfoBox>
+          <PaymentInfoBox>
+            <HeadText>금액 및 할인 정보*</HeadText>
+            <PaymentPriceBox>
+              <PaymentPriceText>총 예약 금액</PaymentPriceText>
+              <SalePrice> 85,000원</SalePrice>
+            </PaymentPriceBox>
+            <PaymentEventBox>
+              <PaymentPriceText>적용가능 이벤트</PaymentPriceText>
+              <EventButton>이벤트 조회/적용</EventButton>
+            </PaymentEventBox>
+            <Line />
+            <PaymentPriceBox>
+              <PaymentPriceText>결제 금액</PaymentPriceText>
+              <TotalPrice> 85,000원</TotalPrice>
+            </PaymentPriceBox>
+          </PaymentInfoBox>
+          <PaymentButton onClick={handleCompleteModalOpen}>
+            85,000원 결제하기
+          </PaymentButton>
+        </PaymentWrapper>
+      )}
       {isPaymentCompleteModalOpen && <CompletePaymentModal />}
     </StyledContainer>
   );

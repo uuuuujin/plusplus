@@ -136,7 +136,7 @@ const UserModifyModal = ({ info }: UserModifyModalProps) => {
     }
 
     const postData: userDetail = {
-      firstsign: 1,
+      firstSign: true,
       nickName: userInfo.nickName,
       sex: userInfo.sex,
       phoneNumber: userInfo.phoneNumber,

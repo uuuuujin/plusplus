@@ -1,7 +1,5 @@
 import axios from 'axios';
 
-export {};
-
 export interface RoomItem {
   station_id: number;
   station_name: string;
