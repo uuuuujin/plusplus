@@ -21,10 +21,24 @@ import { useState, useEffect } from 'react';
 import { userlistAction } from '../../store/modules/userlist/userlist.slice';
 import { fetchUser } from '../../api/user';
 import { selectAccessToken } from '../../store/modules/user/user.select';
-
+interface userDetailProp {
+  age: number;
+  created_at: string;
+  email: string;
+  firstSign: number;
+  id: number;
+  nickName: string;
+  oauthId: string;
+  oauthName: string;
+  phoneNumber: string;
+  profile: string;
+  sex: string;
+  updated_at: string;
+  userLevel: number;
+  userRefreshToken: string;
+}
 export default function UserList(): JSX.Element {
-  // const userlistResult = useAppSelector(selectUserResult);
-  const [userData, setUserData] = useState<any[]>([]);
+  const [userData, setUserData] = useState<userDetailProp[]>([]);
   const token = useAppSelector(selectAccessToken);
   const dispatch = useAppDispatch();
   useEffect(() => {
@@ -37,43 +51,14 @@ export default function UserList(): JSX.Element {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
-      setUserData(response.data);
+      setUserData(response.data.data);
     };
     if (token) {
       getUser();
-      // console.log(userData.data);
+      console.log(userData);
     }
   }, [token]);
-  // const token = useAppSelector(selectAccessToken);
-  // const userlistResult: any = [];
 
-  // const userProps = {
-  //   imageSrc: String,
-  //   sex: String,
-  //   nickname: String,
-  //   age: Number,
-  //   email: String,
-  // };
-  // useEffect(() => {
-  //   const data = async () => {
-  //     const response = await axios.get(
-  //       `${process.env.REACT_APP_API_URL}/users`,
-  //       {
-  //         headers: { Authorization: `Bearer ${token}` },
-  //       }
-  //     );
-  //     return response.data;
-  //   };
-  //   const temp = data();
-  //   temp.then((res) => {
-  //     console.log(res);
-  //     res.data.map((user, key) => {
-  //       console.log(user.email);
-  //     });
-  //   });
-  // }, []);
-
-  // console.log(userlistResult);
   return (
     <div>
       <HeaderText>유저 리스트</HeaderText>
@@ -87,18 +72,19 @@ export default function UserList(): JSX.Element {
         </DetailWrapper>
       </DetailCategory>
       <UsersContainer>
-        {/* {userData.map((item, key) => {
-          return (
-            <User
-              key={key}
-              imageSrc={item.imageSrc}
-              sex={item.sex}
-              nickname={item.nickname}
-              age={item.age}
-              email={item.email}
-            />
-          );
-        })} */}
+        {userData &&
+          userData.map((item, key) => {
+            return (
+              <User
+                key={key}
+                imageSrc={item.profile}
+                sex={item.sex}
+                nickname={item.nickName}
+                age={item.age}
+                email={item.email}
+              />
+            );
+          })}
       </UsersContainer>
     </div>
   );
