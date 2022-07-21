@@ -10,38 +10,62 @@ import {
   ItemBox,
   RoomImg,
   RoomName,
+  StyledLink,
 } from './bookinglistitem.style';
+import { Link } from 'react-router-dom';
+import { ROUTES } from '../../routes/routes';
+import { AiOutlineComment } from 'react-icons/ai';
 
-const BookingListItem = () => {
+export interface bookingListItemProps {
+  stationId: number;
+  stationName: string;
+  roomId: number;
+  roomName: string;
+  address: string;
+  checkInDate: string;
+  checkOutDate: string;
+  checkInTime: string;
+  checkOutTime: string;
+  roomImg: string;
+}
+
+const BookingListItem = (props: bookingListItemProps) => {
   return (
     <ItemBox>
       <InfoBox>
-        <RoomName>앤디앤라라홈</RoomName>
+        <RoomName>
+          {props.stationName}({props.roomName})
+        </RoomName>
         <LocationBox>
           <MdOutlineLocationOn />
           <span>제주도 서귀포시 중문관광로72번길 35 </span>
         </LocationBox>
         <CheckInOutTimeBox>
           <CheckInOutTime>
-            2022년 7월 8일(금)
+            {props.checkInDate}
             <span>
-              ✨ 체크인 시간 <strong>15:00</strong>
+              ✨ 체크인 시간 <strong>{props.checkInTime}</strong>
             </span>
           </CheckInOutTime>
           <ArrowIcon />
           <CheckInOutTime>
-            2022년 7월 9일(토)
+            {props.checkOutDate}
             <span>
-              ✅ 체크아웃 시간 <strong>11:00</strong>
+              ✅ 체크아웃 시간 <strong>{props.checkOutTime}</strong>
             </span>
           </CheckInOutTime>
         </CheckInOutTimeBox>
         <ButtonBox>
           <CalendarIcon />
           <span>예약 취소</span>
+          <AiOutlineComment />
+          <span>리뷰 달기</span>
         </ButtonBox>
       </InfoBox>
-      <RoomImg src="http://images.stayfolio.com/system/pictures/images/000/102/357/display/278e1b5048400bac804b3647f00c3fc3738ce20e.jpg?1638171725" />
+
+      <StyledLink to={`${ROUTES.ROOM.link}/${props.stationId}/${props.roomId}`}>
+        <RoomImg src={props.roomImg} />
+      </StyledLink>
     </ItemBox>
   );
 };
