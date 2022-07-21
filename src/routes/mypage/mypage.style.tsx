@@ -54,6 +54,7 @@ export const LoginIcon = styled.div`
   height: 15px;
   line-height: 15px;
   background-color: ${(props) => props.color};
+  color: ${(props) => (props.color === '#2DB400' ? '#fff' : '#000')};
 
   > span {
     font-size: 8px;
@@ -82,14 +83,12 @@ export const UserInfo = styled.div`
   justify-content: center;
 `;
 
-export const UserIcon = styled(MdPersonPin)`
-  &.override {
-    font-size: 30px;
-    border: 1px solid #000000;
-    border-radius: 10px;
-    margin-bottom: 10px;
-    padding: 10px;
-  }
+export const UserIcon = styled.img`
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+  padding: 10px;
 `;
 
 export const FlexRow = styled.div`
