@@ -22,6 +22,7 @@ export const fetchStayType = createAsyncThunk(
 
 export const fetchTheme = createAsyncThunk('search/getTheme', async () => {
   const response = await axios.get(`${process.env.REACT_APP_API_URL}/themes`);
+
   return response.data;
 });
 

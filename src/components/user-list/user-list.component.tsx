@@ -1,4 +1,5 @@
 import { UserDetailProp } from '../user/user.component';
+import axios from 'axios';
 import {
   Age,
   DetailCategory,
@@ -11,39 +12,53 @@ import {
   UsersContainer,
 } from './user-list.style';
 import User from '../user/user.component';
-
-const userData: UserDetailProp[] = [
-  {
-    sex: 'male',
-    nickname: 'testname',
-    age: 10,
-    email: 'test1@gmail.com',
-    imageSrc: 'https://cdn-icons-png.flaticon.com/512/3577/3577349.png',
-  },
-  {
-    sex: 'female',
-    nickname: 'testname',
-    age: 20,
-    email: 'test2@gmail.com',
-    imageSrc: 'https://cdn-icons-png.flaticon.com/512/3577/3577349.png',
-  },
-  {
-    sex: 'male',
-    nickname: 'testname',
-    age: 20,
-    email: 'test3@gmail.com',
-    imageSrc: 'https://cdn-icons-png.flaticon.com/512/3577/3577349.png',
-  },
-  {
-    sex: 'female',
-    nickname: 'testname',
-    age: 30,
-    email: 'test4@gmail.com',
-    imageSrc: 'https://cdn-icons-png.flaticon.com/512/3577/3577349.png',
-  },
-];
-
+import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
+import {
+  selectUserlistReducer,
+  selectUserResult,
+} from '../../store/modules/userlist/userlist.select';
+import { useState, useEffect } from 'react';
+import { userlistAction } from '../../store/modules/userlist/userlist.slice';
+import { fetchUser } from '../../api/user';
+import { selectAccessToken } from '../../store/modules/user/user.select';
+interface userDetailProp {
+  age: number;
+  created_at: string;
+  email: string;
+  firstSign: number;
+  id: number;
+  nickName: string;
+  oauthId: string;
+  oauthName: string;
+  phoneNumber: string;
+  profile: string;
+  sex: string;
+  updated_at: string;
+  userLevel: number;
+  userRefreshToken: string;
+}
 export default function UserList(): JSX.Element {
+  const [userData, setUserData] = useState<userDetailProp[]>([]);
+  const token = useAppSelector(selectAccessToken);
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    console.log(token);
+    const getUser = async () => {
+      // await dispatch(fetchUser(token));
+      const response = await axios.get(
+        `${process.env.REACT_APP_API_URL}/users`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      setUserData(response.data.data);
+    };
+    if (token) {
+      getUser();
+      console.log(userData);
+    }
+  }, [token]);
+
   return (
     <div>
       <HeaderText>유저 리스트</HeaderText>
@@ -57,23 +72,20 @@ export default function UserList(): JSX.Element {
         </DetailWrapper>
       </DetailCategory>
       <UsersContainer>
-        {userData.map((item, key) => {
-          return (
-            <User
-              key={key}
-              imageSrc={item.imageSrc}
-              sex={item.sex}
-              nickname={item.nickname}
-              age={item.age}
-              email={item.email}
-            />
-          );
-        })}
+        {userData &&
+          userData.map((item, key) => {
+            return (
+              <User
+                key={key}
+                imageSrc={item.profile}
+                sex={item.sex}
+                nickname={item.nickName}
+                age={item.age}
+                email={item.email}
+              />
+            );
+          })}
       </UsersContainer>
     </div>
   );
 }
-
-// {/* {userData.map((item, key) => {
-//   return <UserDetail key={key} gender={item.gender}></UserDetail>;
-// })} */}
