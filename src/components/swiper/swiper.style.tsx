@@ -23,6 +23,13 @@ export const LinkEvent = styled(Link)`
 export const SlideImage = styled.img`
   width: 100%;
 
+  border-radius: 10px;
+
+  &.stay {
+    height: 254px;
+    object-fit: cover;
+  }
+
   @media (min-width: 480 and max-width: 768px) {
     width: 90%;
   }

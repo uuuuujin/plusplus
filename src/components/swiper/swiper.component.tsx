@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Navigation, Pagination } from 'swiper';
+import { StayBaseType } from '../../store/modules/popular-stay/popularStay.type';
 
 import { ROUTES } from '../../routes/routes';
 
@@ -31,7 +32,7 @@ interface SwiperDataType {
 }
 
 interface swiperDataArrType {
-  swiperDataArr: SwiperDataType[];
+  swiperDataArr: SwiperDataType[] | StayBaseType[];
 }
 
 export default function SwiperComponent({
@@ -69,10 +70,19 @@ export default function SwiperComponent({
       {swiperDataArr.map((item, index) => {
         return (
           <SwiperSlide key={index}>
-            <LinkEvent to={`${ROUTES.EVENT.link}/${item.id}`}>
+            <LinkEvent
+              to={
+                item.name.includes('이벤트')
+                  ? `${ROUTES.EVENT.link}/${item.id}`
+                  : `${ROUTES.STAY.link}/${item.id}`
+              }
+            >
               <SlideContainer>
                 <SlideTitle>{item.name}</SlideTitle>
-                <SlideImage src={item.image} />
+                <SlideImage
+                  className={item.name.includes('이벤트') ? 'event' : 'stay'}
+                  src={item.image}
+                />
               </SlideContainer>
             </LinkEvent>
           </SwiperSlide>
