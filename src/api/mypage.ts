@@ -37,7 +37,6 @@ export interface userDetail {
 }
 
 export const getUser = async (token: string) => {
-  console.log(token);
   const response = await axios.get(
     `${process.env.REACT_APP_API_URL}/users/info`,
     {
