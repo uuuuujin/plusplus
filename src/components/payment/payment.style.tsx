@@ -89,10 +89,13 @@ export const Line = styled.div`
 `;
 
 export const DateText = styled.span`
-  width: 15%;
+  width: 18%;
+  min-width: 50px;
   text-align: center;
+  height: 15px;
   background-color: #f0f5fa;
   color: black;
+  font-weight: 700;
   border-radius: 0.3rem;
   padding: 3px 6px;
   font-size: 12px;
@@ -103,6 +106,7 @@ export const CheckInTimeText = styled.span`
   text-align: center;
   background-color: #f0f5fa;
   border-radius: 0.3rem;
+  height: 15px;
   padding: 3px 6px;
   font-size: 12px;
   margin-left: 3%;
@@ -112,6 +116,7 @@ export const CheckOutTimeText = styled.span`
   width: 10%;
   text-align: center;
   background-color: #f0f5fa;
+  height: 15px;
   margin-left: 3%;
   color: red;
   border-radius: 0.3rem;

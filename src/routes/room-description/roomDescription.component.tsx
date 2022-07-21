@@ -1,7 +1,7 @@
-import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useEffect, useRef } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
-import { formatDate } from '../../utils/calendar';
+import { formatDate, formatDateInSearch } from '../../utils/calendar';
 import { getRoom } from '../../api/stay';
 
 import { modalAction } from '../../store/modules/modal/modal.slice';
@@ -31,10 +31,18 @@ import {
   PaymentButton,
   ContentBox,
 } from './roomDescription.style';
+import { roomData } from '../../api/payment';
+
+export interface paymentProps extends roomData {
+  checkInDate: number[];
+  checkOutDate: number[];
+}
 
 const RoomDescription = () => {
   const dispatch = useAppDispatch();
   const location = useLocation();
+  const dateRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
 
   const isCalendarModalOpen = useAppSelector(selectIsCalendarModalOpen);
   const checkInDate = useAppSelector(selectCalendarReducerSetCheckIn);
@@ -44,6 +52,23 @@ const RoomDescription = () => {
 
   const handleOnClickCalender = () => {
     dispatch(modalAction.setCalendarModal());
+  };
+
+  const handleOnClickPayment = () => {
+    if (
+      (checkInDate === undefined || checkOutDate === undefined) &&
+      dateRef.current
+    ) {
+    } else {
+      if (checkInDate !== undefined && checkOutDate !== undefined) {
+        const newData = {
+          ...roomData,
+          checkInDate: checkInDate,
+          checkOutDate: checkOutDate,
+        };
+        navigate('/payment', { state: newData });
+      }
+    }
   };
 
   const ROOM_ID = Number(location.pathname.split('/')[3]);
@@ -63,7 +88,7 @@ const RoomDescription = () => {
         <CalendarBox>
           <RoomInFormationText>예약 정보</RoomInFormationText>
           <DescriptionName>{roomData.station_id.name}</DescriptionName>
-          <SelectCalendarText onClick={handleOnClickCalender}>
+          <SelectCalendarText ref={dateRef} onClick={handleOnClickCalender}>
             <span>
               {checkInDate !== undefined
                 ? checkOutDate === undefined
@@ -74,7 +99,7 @@ const RoomDescription = () => {
                 : '날짜를 선택해주세요.'}
             </span>
           </SelectCalendarText>
-          <CheckInDate>
+          <CheckInDate ref={dateRef}>
             체크인: <span>{roomData.checkin_time}</span>
           </CheckInDate>
           <CheckOutDate>
@@ -91,9 +116,9 @@ const RoomDescription = () => {
           <ContentBox>{roomData.content}</ContentBox>
         </RoomHeadBox>
 
-        <PaymentButton>결제하기</PaymentButton>
+        <PaymentButton onClick={handleOnClickPayment}>결제하기</PaymentButton>
       </DescriptionRoomContainer>
-      {isCalendarModalOpen && <CalendarModal roomId={1234} />}
+      {isCalendarModalOpen && <CalendarModal roomId={ROOM_ID} />}
     </StyledContainer>
   );
 };

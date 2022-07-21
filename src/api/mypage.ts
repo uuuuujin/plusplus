@@ -29,7 +29,7 @@ export const InitialData: userData = {
 };
 
 export interface userDetail {
-  firstsign: number;
+  firstSign: boolean;
   nickName: string;
   sex: string;
   phoneNumber: string;
@@ -66,7 +66,7 @@ export const postUser = async (userData: userDetail, token: string) => {
     const response = await axios.patch(
       `${process.env.REACT_APP_API_URL}/users`,
       {
-        firstsign: userData.firstsign,
+        firstSign: 1,
         nickName: userData.nickName,
         sex: userData.sex,
         age: userData.age,
@@ -78,6 +78,7 @@ export const postUser = async (userData: userDetail, token: string) => {
         },
       }
     );
+
     return response;
   } catch (e) {
     console.log(e);

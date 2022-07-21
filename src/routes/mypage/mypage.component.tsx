@@ -118,9 +118,7 @@ export default function MyPage(): JSX.Element {
             <HeaderText>MyPAGE</HeaderText>
             <UserIcon src={userInfo.profile} />
             <FlexRow>
-              <span>
-                {userInfo.nickName}({userInfo.phoneNumber}) 반가워요!
-              </span>
+              <span>{userInfo.nickName} 반가워요!</span>
               <LoginIconBox
                 color={userInfo.oauthName === 'NAVER' ? NAVERCOLOR : KAKAOCOLOR}
                 text={userInfo.oauthName === 'NAVER' ? 'NAVER' : 'KAKAO'}

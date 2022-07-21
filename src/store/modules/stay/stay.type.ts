@@ -64,6 +64,7 @@ export interface StayType {
     checkout_time: string;
     created_at: string;
     updated_at: string;
+
     station_id: {
       id: number;
       name: string;

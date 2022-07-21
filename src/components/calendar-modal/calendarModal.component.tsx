@@ -18,6 +18,12 @@ import {
   ReservationButton,
 } from './calendarModal.style';
 
+/**
+ * 체크인 날짜 이후의 예약 불가능한 날짜 값을 확인합니다.
+ * @param checkInDay 체크인 날짜
+ * @param mockData 예약이 된 날짜 리스트
+ * @constructor
+ */
 const FindDate = (checkInDay: number[], mockData: any) => {
   let checkIn = new Date(checkInDay[0], checkInDay[1], checkInDay[2]);
   for (let i = 0; i < 3; i++) {
@@ -192,37 +198,37 @@ const CalendarModal = ({ roomId }: CalendarModalProps) => {
     month: nextMonthDate.getMonth(),
   });
 
-  const onClickLeftBtn = () => {
-    setThisMonth(
-      thisMonth.month !== 0
-        ? { ...thisMonth, month: thisMonth.month - 1 }
-        : { ...thisMonth, year: thisMonth.year - 1, month: 11 }
-    );
+  // const onClickLeftBtn = () => {
+  //   setThisMonth(
+  //     thisMonth.month !== 0
+  //       ? { ...thisMonth, month: thisMonth.month - 1 }
+  //       : { ...thisMonth, year: thisMonth.year - 1, month: 11 }
+  //   );
+  //
+  //   setNextMonth(
+  //     nextMonth.month !== 0
+  //       ? { ...nextMonth, month: nextMonth.month - 1 }
+  //       : { ...nextMonth, year: nextMonth.year - 1, month: 11 }
+  //   );
+  // };
 
-    setNextMonth(
-      nextMonth.month !== 0
-        ? { ...nextMonth, month: nextMonth.month - 1 }
-        : { ...nextMonth, year: nextMonth.year - 1, month: 11 }
-    );
-  };
-
-  const onClickRightBtn = () => {
-    setThisMonth(
-      thisMonth.month !== 11
-        ? { ...thisMonth, month: thisMonth.month + 1 }
-        : { ...thisMonth, year: thisMonth.year + 1, month: 0 }
-    );
-
-    setNextMonth(
-      nextMonth.month !== 11
-        ? { ...nextMonth, month: nextMonth.month + 1 }
-        : { ...nextMonth, year: nextMonth.year + 1, month: 0 }
-    );
-  };
+  // const onClickRightBtn = () => {
+  //   setThisMonth(
+  //     thisMonth.month !== 11
+  //       ? { ...thisMonth, month: thisMonth.month + 1 }
+  //       : { ...thisMonth, year: thisMonth.year + 1, month: 0 }
+  //   );
+  //
+  //   setNextMonth(
+  //     nextMonth.month !== 11
+  //       ? { ...nextMonth, month: nextMonth.month + 1 }
+  //       : { ...nextMonth, year: nextMonth.year + 1, month: 0 }
+  //   );
+  // };
 
   const onSubmit = () => {
     dispatch(modalAction.setCalendarModal());
-    if (!location.pathname.slice(1).includes('search')) {
+    if (!location.pathname.slice(1).includes('stay')) {
       navigate(`/search`);
     }
   };
