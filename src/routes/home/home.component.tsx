@@ -2,8 +2,8 @@ import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
 import { persistor } from '../../store/store';
 import { modalAction } from '../../store/modules/modal/modal.slice';
-import { fetchEvent } from '../../api/event';
-import { selectEvent } from '../../store/modules/event/event.select';
+import { fetchAllEvents } from '../../api/event';
+import { selectAllEvents } from '../../store/modules/event/event.select';
 
 import Container from '../../components/container/container.component';
 import Header from '../../components/header/header.component';
@@ -22,30 +22,7 @@ import {
 export default function Home(): JSX.Element {
   const dispatch = useAppDispatch();
 
-  const events = useAppSelector(selectEvent);
-
-  const handleUserInfoModal = () => {
-    dispatch(modalAction.radioUserInfoModal());
-  };
-
-  const dummyData = [
-    {
-      imgUrl: 'productImage1.jpg',
-      title: '여름 특별 할인',
-    },
-    {
-      imgUrl: 'productImage2.jpg',
-      title: '바캉스 이벤트',
-    },
-    {
-      imgUrl: 'productImage1.jpg',
-      title: '여름 특별 할인',
-    },
-    {
-      imgUrl: 'productImage2.jpg',
-      title: '바캉스 이벤트',
-    },
-  ];
+  const events = useAppSelector(selectAllEvents);
 
   const logout = () => {
     const purge = async () => {
@@ -57,7 +34,7 @@ export default function Home(): JSX.Element {
 
   useEffect(() => {
     const getEvents = () => {
-      dispatch(fetchEvent());
+      dispatch(fetchAllEvents());
     };
 
     getEvents();
@@ -69,7 +46,6 @@ export default function Home(): JSX.Element {
         <MainBanner>
           <MainBannerImage src="main_banner.jpg" alt="배너이미지" />
         </MainBanner>
-        <button onClick={handleUserInfoModal}>유저정보 모달 테스트 버튼</button>
         <button onClick={logout}>로그아웃 테스트</button>
 
         <SliderContainer>
