@@ -181,3 +181,10 @@ export const formatDate = (date: number[]) => {
   - ${date[2] < 10 ? '0' + date[2] : date[2]} )`;
   return formatted_date;
 };
+
+export const formatDateInSearch = (date: number[]) => {
+  let formatted_date = `${date[0]}-${date[1] < 10 ? '0' + date[1] : date[1]}-${
+    date[2] < 10 ? '0' + date[2] : date[2]
+  }`;
+  return formatted_date;
+};

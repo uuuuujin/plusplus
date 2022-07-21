@@ -18,14 +18,14 @@ export default function LoginPage(): JSX.Element {
           <Title>
             <span>로그인</span>
           </Title>
-          <a href="http://localhost:5050/users/auth/kakao">
+          <a href={`${process.env.REACT_APP_API_URL}/users/auth/kakao`}>
             <LoginButton
               src="kakao_login_large_wide.png"
               alt="카카오로 시작하기 버튼"
             />
           </a>
 
-          <a href="http://localhost:5050/users/auth/naver">
+          <a href={`${process.env.REACT_APP_API_URL}/users/auth/naver`}>
             <NaverLoginButton>
               <img src="naver_icon.png" alt="네이버 아이콘" />
               <div>네이버로 시작하기</div>

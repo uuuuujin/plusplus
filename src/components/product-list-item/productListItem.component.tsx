@@ -6,10 +6,8 @@ import { ROUTES } from '../../routes/routes';
 import {
   Container,
   StayLink,
-  ItemContainer,
   ProductImage,
-  Top,
-  DescriptionContainer,
+  Bottom,
   ProductTitle,
   ProductInfo,
   LikeIconContainer,
@@ -65,20 +63,13 @@ export default function ProductListItem(
 
   return (
     <Container>
-      <LikeIconContainer onClick={handleLike}>
-        <AiOutlineHeart />
-      </LikeIconContainer>
-      <StayLink to={`${ROUTES.STAY.link}/${stayId}`}>
-        <ItemContainer>
+      <div>
+        <StayLink to={`${ROUTES.STAY.link}/${stayId}`}>
           <ProductImage src={stayImageSrc}></ProductImage>
-          <DescriptionContainer>
-            <Top>
-              <ProductTitle>{stayTitle}</ProductTitle>
-              {/* <LikeIconContainer onClick={handleLike}>
-                <AiOutlineHeart />
-              </LikeIconContainer> */}
-            </Top>
-
+        </StayLink>
+        <Bottom>
+          <StayLink to={`${ROUTES.STAY.link}/${stayId}`}>
+            <ProductTitle>{stayTitle}</ProductTitle>
             <ProductDescription>
               <ProductInfo>
                 <ProductInfoEle className="left">{stayRegion}</ProductInfoEle>
@@ -98,9 +89,12 @@ export default function ProductListItem(
                 </DiscountedCostContainer>
               )}
             </ProductDescription>
-          </DescriptionContainer>
-        </ItemContainer>
-      </StayLink>
+          </StayLink>
+          <LikeIconContainer onClick={handleLike}>
+            <AiOutlineHeart />
+          </LikeIconContainer>
+        </Bottom>
+      </div>
     </Container>
   );
 }

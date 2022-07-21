@@ -93,6 +93,11 @@ export const searchSlice = createSlice({
       state.searchStayType = action.payload.stayType;
       state.searchTheme = action.payload.theme;
     },
+    resetFilter: (state) => {
+      state.searchCostRange = [0, 1000000];
+      state.searchStayType = [];
+      state.searchTheme = [];
+    },
   },
   extraReducers: (builder) => {
     builder

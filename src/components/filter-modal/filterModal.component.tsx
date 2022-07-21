@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
 import Slider from '@mui/material/Slider';
 import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
+import { fetchStayType, fetchTheme, getSearchResult } from '../../api/search';
+import { formatDateInSearch } from '../../utils/calendar';
+
 import { modalAction } from '../../store/modules/modal/modal.slice';
 import { searchAction } from '../../store/modules/search/search.slice';
 import { selectIsFilterModalOpen } from '../../store/modules/modal/modal.select';
@@ -9,7 +12,11 @@ import {
   selectStayType,
   selectTheme,
 } from '../../store/modules/search/search.select';
-import { fetchStayType, fetchTheme, getSearchResult } from '../../api/search';
+import {
+  selectCalendarReducerSetCheckIn,
+  selectCalendarReducerCheckOut,
+} from '../../store/modules/calendar/calendar.select';
+
 import MainModal from '../main-modal/mainModal.component';
 import {
   FilterModalContainer,
@@ -21,6 +28,7 @@ import {
   CategoryTitle,
   Bottom,
   SearchButton,
+  ResetButton,
   CheckboxContainer,
   CheckboxElement,
   CheckboxInput,
@@ -34,6 +42,11 @@ export default function FilterModal(): JSX.Element {
   const region = useAppSelector(selectSearchRegion);
   const stayType = useAppSelector(selectStayType);
   const theme = useAppSelector(selectTheme);
+  const checkInDate = useAppSelector(selectCalendarReducerSetCheckIn);
+  const checkOutDate = useAppSelector(selectCalendarReducerCheckOut);
+
+  const formattedCheckIn = checkInDate && formatDateInSearch(checkInDate);
+  const formattedCheckOut = checkOutDate && formatDateInSearch(checkOutDate);
 
   const MIN_DISTANCE: number = 5;
   const [costValue, setCostValue] = useState([0, 100]);
@@ -47,6 +60,8 @@ export default function FilterModal(): JSX.Element {
       themeIds: themeCheckedList,
       minprice: Number(`${costValue[0]}0000`),
       maxprice: Number(`${costValue[1]}0000`),
+      checkIn: checkInDate ? formattedCheckIn : '',
+      checkOut: checkOutDate ? formattedCheckOut : '',
     };
     await dispatch(getSearchResult(data));
   };
@@ -57,10 +72,16 @@ export default function FilterModal(): JSX.Element {
       stayType: stayCheckedList,
       theme: themeCheckedList,
     };
-    console.log('필터링된 데이터', filteredData);
     fetchSearchResult();
     dispatch(searchAction.filterCategory(filteredData));
     dispatch(modalAction.radioFilterModal());
+  };
+
+  const resetFilter = () => {
+    setCostValue([0, 100]);
+    setStayCheckedList([]);
+    setThemeCheckedList([]);
+    dispatch(searchAction.resetFilter());
   };
 
   const onCheckedStay = (checked: boolean, item: number) => {
@@ -149,6 +170,7 @@ export default function FilterModal(): JSX.Element {
                       onChange={(e) =>
                         onCheckedStay(e.target.checked, Number(e.target.value))
                       }
+                      checked={stayCheckedList.includes(item.id) ? true : false}
                     />
                     <CheckboxLabel htmlFor={String(item.id)}>
                       {item.name}
@@ -172,6 +194,9 @@ export default function FilterModal(): JSX.Element {
                       onChange={(e) =>
                         onCheckedTheme(e.target.checked, Number(e.target.value))
                       }
+                      checked={
+                        themeCheckedList.includes(item.id) ? true : false
+                      }
                     />
                     <CheckboxLabel htmlFor={String(item.id)}>
                       {item.name}
@@ -183,6 +208,7 @@ export default function FilterModal(): JSX.Element {
           </CategoryContainer>
         </FilterModalContainer>
         <Bottom>
+          <ResetButton onClick={resetFilter}>전체 해제</ResetButton>
           <SearchButton onClick={searchByFilter}>검색하기</SearchButton>
         </Bottom>
       </div>
