@@ -28,13 +28,13 @@ export const BookingInfoBox = styled.div`
 `;
 
 export const TitleText = styled.span`
-  width: 15%;
+  width: 25%;
   font-size: 14px;
   font-weight: 500;
 `;
 
 export const BookingText = styled.span`
-  width: 40%;
+  width: 60%;
   font-size: 14px;
   font-weight: 400;
 `;
