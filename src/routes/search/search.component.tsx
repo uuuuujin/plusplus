@@ -1,9 +1,9 @@
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
 import { formatDateInSearch } from '../../utils/calendar';
 import { getSearchResult } from '../../api/search';
-
+import { SearchResultType } from '../../store/modules/search/search.typs';
 import { modalAction } from '../../store/modules/modal/modal.slice';
 import { calendarAction } from '../../store/modules/calendar/calendar.slice';
 import { searchAction } from '../../store/modules/search/search.slice';
@@ -92,6 +92,10 @@ export default function Search(): JSX.Element {
     checkOut: checkOutDate ? formattedCheckOut : '',
   };
 
+  const fetchSearchResult = async () => {
+    await dispatch(getSearchResult(searchProps));
+  };
+
   useEffect(() => {
     dispatch(navigatorAction.setCurrnetPage(location.pathname.slice(1)));
     const defaultProps = {
@@ -110,9 +114,9 @@ export default function Search(): JSX.Element {
     fetchSearchResult();
   }, [dispatch, location]);
 
-  const fetchSearchResult = async () => {
-    await dispatch(getSearchResult(searchProps));
-  };
+  // const [searchListArr, setSearchListArr] = useState<SearchResultType[]>([]);
+  // const observerRef = useRef<IntersectionObserver>();
+  // const listRef = useRef<HTMLDivElement>(null);
 
   return (
     <Container>

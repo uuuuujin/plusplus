@@ -7,7 +7,7 @@ interface CategoryType extends IndexNameType {
   classification: string;
 }
 
-interface SearchResultType {
+export interface SearchResultType {
   count: number;
   stations: [
     {

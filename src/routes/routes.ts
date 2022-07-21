@@ -11,6 +11,7 @@ import LoginPage from './login/login.component';
 import Payment from '../components/payment/payment.component';
 import Auth from './auth/auth.component';
 import RoomDescription from './room-description/roomDescription.component';
+import Event from './event/event.component';
 
 export const ROUTES = {
   HOME: {
@@ -32,6 +33,11 @@ export const ROUTES = {
     path: '/stay/:stationId/:roomId',
     link: '/stay',
     component: RoomDescription,
+  },
+  EVENT: {
+    path: '/event/:eventId',
+    link: '/event',
+    component: Event,
   },
   LISTING: {
     path: '/listing',

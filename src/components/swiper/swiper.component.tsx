@@ -2,6 +2,8 @@ import { useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Navigation, Pagination } from 'swiper';
 
+import { ROUTES } from '../../routes/routes';
+
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -14,13 +16,18 @@ import {
   SlideTitle,
   NavigationButtonContainer,
   NavigationButton,
+  LinkEvent,
 } from './swiper.style';
 
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 
 interface SwiperDataType {
-  imgUrl: string;
-  title: string;
+  id: number;
+  name: string;
+  start_date: string;
+  end_date: string;
+  rate: number;
+  image: string;
 }
 
 interface swiperDataArrType {
@@ -59,18 +66,22 @@ export default function SwiperComponent({
 
   return (
     <SwiperContainer {...swiperParams}>
-      {swiperDataArr.map((itme, index) => {
+      {swiperDataArr.map((item, index) => {
         return (
           <SwiperSlide key={index}>
-            <SlideContainer>
-              <SlideImage src={itme.imgUrl} />
-              <SlideTitle>{itme.title}</SlideTitle>
-            </SlideContainer>
+            <LinkEvent to={`${ROUTES.EVENT.link}/${item.id}`}>
+              <SlideContainer>
+                <SlideTitle>{item.name}</SlideTitle>
+                <SlideImage src={item.image} />
+              </SlideContainer>
+            </LinkEvent>
           </SwiperSlide>
         );
       })}
 
-      <NavigationButtonContainer>
+      <NavigationButtonContainer
+        visible={swiperDataArr.length > 2 ? true : false}
+      >
         <NavigationButton ref={navigationPrevRef}>
           <IoIosArrowBack />
         </NavigationButton>
