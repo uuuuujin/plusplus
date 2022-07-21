@@ -23,9 +23,9 @@ export const ROUTES = {
     link: '/search',
     component: Search,
   },
-  DESCRIPTION: {
-    path: '/description',
-    link: '/description',
+  STAY: {
+    path: '/stay/:stationId',
+    link: '/stay',
     component: Description,
   },
   LISTING: {

@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import axios from 'axios';
 import Container from '../../components/container/container.component';
 import { MdOutlineFavoriteBorder, MdFavorite } from 'react-icons/md';
 import { VscCalendar } from 'react-icons/vsc';
@@ -28,6 +29,7 @@ import { navigatorAction } from '../../store/modules/navigator/navigator.slice';
 import { StyledContainer } from '../../components/payment/payment.component';
 import { useState } from 'react';
 import ReviewComponent from '../../components/review/review.component';
+import { selectAccessToken } from '../../store/modules/user/user.select';
 
 const KAKAOCOLOR = '#FEE500';
 
@@ -75,6 +77,7 @@ const LoginIconBox = ({ color, text }: LoginProps) => {
 export default function MyPage(): JSX.Element {
   const dispatch = useAppDispatch();
   const location = useLocation();
+  const accessToken = useAppSelector(selectAccessToken);
 
   const [mypageComponent, setMypageComponent] = useState<MYPAGE_STATUS>(
     MYPAGE_STATUS.WISHLIST
@@ -87,6 +90,18 @@ export default function MyPage(): JSX.Element {
   useEffect(() => {
     dispatch(navigatorAction.setCurrnetPage(location.pathname.slice(1)));
   }, [dispatch, location]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      console.log(accessToken);
+      const response = await axios.get(
+        `${process.env.REACT_APP_API_URL}/users/info`,
+        { headers: { Authorization: `Bearer ${accessToken}` } }
+      );
+      console.log(response.data);
+    };
+    fetchData();
+  }, [accessToken]);
 
   return (
     <StyledContainer>

@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { PURGE } from 'redux-persist';
 
 export interface UserState {
   accessToken: string;
@@ -26,6 +27,9 @@ export const userSlice = createSlice({
       state.refreshToken = '';
       state.isLoggedIn = false;
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(PURGE, () => initialState);
   },
 });
 
