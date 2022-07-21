@@ -31,25 +31,35 @@ interface SearchPropsType {
   themeIds?: number[];
   minprice?: number;
   maxprice?: number;
+  checkIn?: string;
+  checkOut?: string;
 }
 
 export const getSearchResult = createAsyncThunk(
   'search/getSearchResult',
   async (props: SearchPropsType) => {
-    const { localId, stayIds, themeIds, minprice, maxprice } = props;
+    const {
+      localId,
+      stayIds,
+      themeIds,
+      minprice,
+      maxprice,
+      checkIn,
+      checkOut,
+    } = props;
     const stayIdArr = arrDestruct(stayIds);
     const themeIdArr = arrDestruct(themeIds);
     console.log(
       'url: ',
       `${process.env.REACT_APP_API_URL}/stations/search?localId=${
         localId === 0 ? '' : localId
-      }&stayIds=${stayIdArr}&themeIds=${themeIdArr}&minprice=${minprice}&maxprice=${maxprice}`
+      }&stayIds=${stayIdArr}&themeIds=${themeIdArr}&minprice=${minprice}&maxprice=${maxprice}&checkIn=${checkIn}&checkOut=${checkOut}`
     );
 
     const response = await axios.get(
       `${process.env.REACT_APP_API_URL}/stations/search?localId=${
         localId === 0 ? '' : localId
-      }&stayIds=${stayIdArr}&themeIds=${themeIdArr}&minprice=${minprice}&maxprice=${maxprice}`
+      }&stayIds=${stayIdArr}&themeIds=${themeIdArr}&minprice=${minprice}&maxprice=${maxprice}&checkIn=${checkIn}&checkOut=${checkOut}`
     );
 
     console.log('response: ', response);
