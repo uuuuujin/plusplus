@@ -112,6 +112,7 @@ const REGION_TYPE: FilterType[] = [
 
 const hotelData = [
   {
+    id: 1,
     productImageSrc: '../productImage1.jpg',
     productTitle: '살려줘',
     productRegion: '서울',
@@ -127,6 +128,7 @@ const hotelData = [
     },
   },
   {
+    id: 1,
     productImageSrc: '../productImage2.jpg',
     productTitle: '주말반납',
     productRegion: '서울',
@@ -142,6 +144,7 @@ const hotelData = [
     },
   },
   {
+    id: 1,
     productImageSrc: '../productImage2.jpg',
     productTitle: '코딩좋아',
     productRegion: '서울',
@@ -157,6 +160,7 @@ const hotelData = [
     },
   },
   {
+    id: 1,
     productImageSrc: '../productImage1.jpg',
     productTitle: '즐거운 리액트',
     productRegion: '서울',
@@ -172,6 +176,7 @@ const hotelData = [
     },
   },
   {
+    id: 1,
     productImageSrc: '../productImage1.jpg',
     productTitle: '살려줘',
     productRegion: '서울',
@@ -187,6 +192,7 @@ const hotelData = [
     },
   },
   {
+    id: 1,
     productImageSrc: '../productImage2.jpg',
     productTitle: '주말반납',
     productRegion: '서울',
@@ -202,6 +208,7 @@ const hotelData = [
     },
   },
   {
+    id: 1,
     productImageSrc: '../productImage2.jpg',
     productTitle: '코딩좋아',
     productRegion: '서울',
@@ -217,6 +224,7 @@ const hotelData = [
     },
   },
   {
+    id: 1,
     productImageSrc: '../productImage1.jpg',
     productTitle: '즐거운 리액트',
     productRegion: '서울',
@@ -294,12 +302,13 @@ export default function RoomList(): JSX.Element {
         {hotelData.map((item, key) => [
           <ProductListItem
             key={key}
-            productImageSrc={item.productImageSrc}
-            productTitle={item.productTitle}
+            stayId={item.id}
+            stayImageSrc={item.productImageSrc}
+            stayTitle={item.productTitle}
             minPrice={item.minPrice}
             maxPrice={item.maxPrice}
-            productRegion={item.productRegion}
-            productStayType={item.productStayType}
+            stayRegion={item.productRegion}
+            StayType={item.productStayType}
             event={item.event_id}
           />,
         ])}

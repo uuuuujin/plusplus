@@ -24,6 +24,8 @@ import calendarReducer from './modules/calendar/calendar.slice';
 import navigatorReducer from './modules/navigator/navigator.slice';
 import userReducer from './modules/user//user.slice';
 import userlistReducer from './modules/userlist/userlist.slice';
+import stayReducer from './modules/stay/stay.slice';
+
 const persistConfig = {
   key: 'root',
   version: 1,
@@ -39,6 +41,7 @@ const rootReducer = combineReducers({
   navigator: navigatorReducer,
   user: userReducer,
   userlist: userlistReducer,
+  stay: stayReducer,
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

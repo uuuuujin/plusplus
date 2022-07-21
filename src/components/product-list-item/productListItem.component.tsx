@@ -1,12 +1,13 @@
 import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
+import { Link } from 'react-router-dom';
 import { modalAction } from '../../store/modules/modal/modal.slice';
 import { selectIsLoggedIn } from '../../store/modules/user/user.select';
-import { likeCategorization } from '../../utils/likeCategorization';
+import { ROUTES } from '../../routes/routes';
 import {
-  ItemContainer,
+  Container,
+  StayLink,
   ProductImage,
-  Top,
-  DescriptionContainer,
+  Bottom,
   ProductTitle,
   ProductInfo,
   LikeIconContainer,
@@ -19,12 +20,13 @@ import {
 import { AiOutlineHeart } from 'react-icons/ai';
 
 interface ProductListItemProp {
-  productImageSrc: string;
-  productTitle: string;
+  stayId: number;
+  stayImageSrc: string;
+  stayTitle: string;
   minPrice: number;
   maxPrice: number;
-  productRegion: string;
-  productStayType: string;
+  stayRegion: string;
+  StayType: string;
   event?: {
     id: number;
     name: string;
@@ -40,12 +42,13 @@ export default function ProductListItem(
   const dispatch = useAppDispatch();
 
   const {
-    productTitle,
+    stayId,
+    stayImageSrc,
+    stayTitle,
     minPrice,
     maxPrice,
-    productRegion,
-    productStayType,
-    productImageSrc,
+    stayRegion,
+    StayType,
     event,
   } = props;
 
@@ -59,36 +62,39 @@ export default function ProductListItem(
   const discounted_maxprice = event && (100 - event.rate) * maxPrice * 0.01;
 
   return (
-    <ItemContainer>
-      <ProductImage src={productImageSrc}></ProductImage>
-      <DescriptionContainer>
-        <Top>
-          <ProductTitle>{productTitle}</ProductTitle>
+    <Container>
+      <div>
+        <StayLink to={`${ROUTES.STAY.link}/${stayId}`}>
+          <ProductImage src={stayImageSrc}></ProductImage>
+        </StayLink>
+        <Bottom>
+          <StayLink to={`${ROUTES.STAY.link}/${stayId}`}>
+            <ProductTitle>{stayTitle}</ProductTitle>
+            <ProductDescription>
+              <ProductInfo>
+                <ProductInfoEle className="left">{stayRegion}</ProductInfoEle>
+                <ProductInfoEle>{StayType}</ProductInfoEle>
+              </ProductInfo>
+
+              <NormalCost
+                className={event && 'discount'}
+              >{`₩${minPrice.toLocaleString()} ~ ₩${maxPrice.toLocaleString()}`}</NormalCost>
+
+              {event && (
+                <DiscountedCostContainer>
+                  <DiscountRate>{event?.rate}%</DiscountRate>
+                  <span>
+                    {`₩${discounted_minprice?.toLocaleString()} ~ ₩${discounted_maxprice?.toLocaleString()}`}
+                  </span>
+                </DiscountedCostContainer>
+              )}
+            </ProductDescription>
+          </StayLink>
           <LikeIconContainer onClick={handleLike}>
             <AiOutlineHeart />
           </LikeIconContainer>
-        </Top>
-
-        <ProductDescription>
-          <ProductInfo>
-            <ProductInfoEle className="left">{productRegion}</ProductInfoEle>
-            <ProductInfoEle>{productStayType}</ProductInfoEle>
-          </ProductInfo>
-
-          <NormalCost
-            className={event && 'discount'}
-          >{`₩${minPrice.toLocaleString()} ~ ₩${maxPrice.toLocaleString()}`}</NormalCost>
-
-          {event && (
-            <DiscountedCostContainer>
-              <DiscountRate>{event?.rate}%</DiscountRate>
-              <span>
-                {`₩${discounted_minprice?.toLocaleString()} ~ ₩${discounted_maxprice?.toLocaleString()}`}
-              </span>
-            </DiscountedCostContainer>
-          )}
-        </ProductDescription>
-      </DescriptionContainer>
-    </ItemContainer>
+        </Bottom>
+      </div>
+    </Container>
   );
 }

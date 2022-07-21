@@ -32,12 +32,40 @@ export const CategoryTitle = styled.h2`
 export const Bottom = styled.div`
   width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   padding: 20px 0;
   position: absolute;
   bottom: 0;
   left: 0;
   border-top: 1px solid ${theme.colors.border};
+  align-items: center;
+`;
+
+export const ResetButton = styled.button`
+  padding: 10px 10px 3px 10px;
+  height: 50px;
+  margin-left: 40px;
+  background-color: #fff;
+  border: 0;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  align-items: center;
+  box-sizing: border-box;
+
+  &:after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 1px;
+    background: #000;
+    margin-top: 2px;
+  }
+
+  &:hover {
+    background-color: #f2f2f2;
+  }
 `;
 
 export const SearchButton = styled.button`
@@ -49,6 +77,8 @@ export const SearchButton = styled.button`
   border: none;
   font-size: 18px;
   cursor: pointer;
+  margin-right: 50px;
+  font-weight: bold;
 `;
 
 export const CheckboxContainer = styled.div`

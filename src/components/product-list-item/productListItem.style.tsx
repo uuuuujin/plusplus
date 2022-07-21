@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 import theme from '../../style/theme';
+import { Link } from 'react-router-dom';
 
-export const ItemContainer = styled.div`
+export const Container = styled.div`
   width: 383px;
   display: inline-block;
   padding: 0 18px;
@@ -14,6 +15,19 @@ export const ItemContainer = styled.div`
   }
 `;
 
+export const LikeIconContainer = styled.div`
+  & > svg {
+    width: 26px;
+    height: 26px;
+    cursor: pointer;
+  }
+`;
+
+export const StayLink = styled(Link)`
+  color: #000;
+  text-decoration: none;
+`;
+
 export const ProductImage = styled.img`
   width: 100%;
   height: 230px;
@@ -24,14 +38,10 @@ export const ProductImage = styled.img`
   }
 `;
 
-export const DescriptionContainer = styled.div`
+export const Bottom = styled.div`
   margin-top: 10px;
-`;
-
-export const Top = styled.div`
   display: flex;
   justify-content: space-between;
-  padding-right: 6px;
 `;
 
 export const ProductTitle = styled.div`
@@ -85,26 +95,4 @@ export const DiscountedCostContainer = styled.div`
 export const DiscountRate = styled.span`
   color: ${theme.colors.discount};
   margin-right: 10px;
-`;
-
-export const LikeContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  padding-bottom: 3px;
-
-  & > span {
-    display: inline-block;
-    font-size: 12px;
-    text-align: center;
-  }
-`;
-
-export const LikeIconContainer = styled.div`
-  cursor: pointer;
-
-  & > svg {
-    width: 26px;
-    height: 26px;
-  }
 `;

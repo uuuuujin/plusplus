@@ -1,6 +1,9 @@
 import { useEffect, useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
+import { formatDateInSearch } from '../../utils/calendar';
+import { getSearchResult } from '../../api/search';
+
 import { modalAction } from '../../store/modules/modal/modal.slice';
 import { calendarAction } from '../../store/modules/calendar/calendar.slice';
 import { searchAction } from '../../store/modules/search/search.slice';
@@ -16,9 +19,7 @@ import {
   selectCalendarReducerSetCheckIn,
   selectCalendarReducerCheckOut,
 } from '../../store/modules/calendar/calendar.select';
-import { getSearchResult } from '../../api/search';
-import { IoIosArrowDown } from 'react-icons/io';
-import { GrPowerReset, GrFilter } from 'react-icons/gr';
+
 import Container from '../../components/container/container.component';
 import Header from '../../components/header/header.component';
 import Footer from '../../components/footer/footer.component';
@@ -26,9 +27,10 @@ import DestinationModal from '../../components/destination-modal/destinationModa
 import FilterModal from '../../components/filter-modal/filterModal.component';
 import CalendarModal from '../../components/calendar-modal/calendarModal.component';
 import LoginModal from '../../components/login-modal/loginModal.component';
-
 import ProductListItem from '../../components/product-list-item/productListItem.component';
 
+import { IoIosArrowDown } from 'react-icons/io';
+import { GrPowerReset, GrFilter } from 'react-icons/gr';
 import {
   Wrapper,
   FilterWrap,
@@ -59,6 +61,9 @@ export default function Search(): JSX.Element {
   const [minprice, maxprice] = useAppSelector(selectSearchCostRange);
   const searchResult = useAppSelector(selectSearchResult);
 
+  const formattedCheckIn = checkInDate && formatDateInSearch(checkInDate);
+  const formattedCheckOut = checkOutDate && formatDateInSearch(checkOutDate);
+
   const handleDestinationModal = () => {
     dispatch(modalAction.radioDestinationModal());
   };
@@ -73,8 +78,8 @@ export default function Search(): JSX.Element {
 
   const resetFilter = () => {
     dispatch(searchAction.setSearchRegionName({ id: 0, name: '' }));
-    dispatch(calendarAction.setCheckInDate(undefined));
-    dispatch(calendarAction.setCheckOutDate(undefined));
+    dispatch(calendarAction.setCheckInDate(''));
+    dispatch(calendarAction.setCheckOutDate(''));
   };
 
   const searchProps = {
@@ -83,6 +88,8 @@ export default function Search(): JSX.Element {
     themeIds: searchTheme,
     minprice: Number(`${minprice}0000`),
     maxprice: Number(`${maxprice}0000`),
+    checkIn: checkInDate ? formattedCheckIn : '',
+    checkOut: checkOutDate ? formattedCheckOut : '',
   };
 
   useEffect(() => {
@@ -93,6 +100,8 @@ export default function Search(): JSX.Element {
       themeIds: [],
       minprice: 0,
       maxprice: 1000000,
+      checkIn: '',
+      checkOut: '',
     };
 
     const fetchSearchResult = async () => {
@@ -139,22 +148,14 @@ export default function Search(): JSX.Element {
               <CategoryContainer>
                 <CategoryTitle>체크인</CategoryTitle>
                 <CagtegoryButton onClick={handleCalendarModal}>
-                  <span>
-                    {checkInDate
-                      ? `${checkInDate[0]}-${checkInDate[1]}-${checkInDate[2]}`
-                      : '체크인'}
-                  </span>
+                  <span>{checkInDate ? formattedCheckIn : '체크인'}</span>
                   <IoIosArrowDown />
                 </CagtegoryButton>
               </CategoryContainer>
               <CategoryContainer className="checkout">
                 <CategoryTitle>체크아웃</CategoryTitle>
                 <CagtegoryButton onClick={handleCalendarModal}>
-                  <span>
-                    {checkOutDate
-                      ? `${checkOutDate[0]}-${checkOutDate[1]}-${checkOutDate[2]}`
-                      : '체크아웃'}
-                  </span>
+                  <span>{checkOutDate ? formattedCheckOut : '체크아웃'}</span>
                   <IoIosArrowDown />
                 </CagtegoryButton>
               </CategoryContainer>
@@ -181,12 +182,13 @@ export default function Search(): JSX.Element {
             searchResult.stations.map((item, key) => [
               <ProductListItem
                 key={key}
-                productImageSrc={item.image}
-                productTitle={item.name}
+                stayId={item.id}
+                stayImageSrc={item.image}
+                stayTitle={item.name}
                 minPrice={item.minprice}
                 maxPrice={item.maxprice}
-                productRegion={item.local_id.name}
-                productStayType={item.stay_id.name}
+                stayRegion={item.local_id.name}
+                StayType={item.stay_id.name}
                 event={item.event_id}
               />,
             ])

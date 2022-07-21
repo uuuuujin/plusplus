@@ -1,8 +1,8 @@
-import Container, { ContainerStyle } from '../container/container.component';
+import { ContainerStyle } from '../container/container.component';
 import Header from '../header/header.component';
 import { MdOutlineLocationOn } from 'react-icons/md';
 import { LocationBox } from '../wishlist-Item/wishlitsitem.style';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import {
   CheckInBox,
   CheckInOutBox,
@@ -40,9 +40,15 @@ import CompletePaymentModal from '../complete-payment-modal/CompletePaymentModal
 import { modalAction } from '../../store/modules/modal/modal.slice';
 import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
 import { selectIsPaymentCompleteModalOpen } from '../../store/modules/modal/modal.select';
+import {
+  selectCalendarReducerCheckOut,
+  selectCalendarReducerSetCheckIn,
+} from '../../store/modules/calendar/calendar.select';
+import { formatDate } from '../../utils/calendar';
 
-interface UserInfo {
-  name: string;
+export interface UserInfo {
+  firstsign: number;
+  nickname: string;
   phoneNumber: string;
   sex: number;
   age: number;
@@ -59,12 +65,15 @@ export const Payment = () => {
   const telRef = useRef<HTMLInputElement>(null);
   const selectRef = useRef<HTMLSelectElement>(null);
   const radioRef = useRef<HTMLDivElement>(null);
+  const checkInDate = useAppSelector(selectCalendarReducerSetCheckIn);
+  const checkOutDate = useAppSelector(selectCalendarReducerCheckOut);
 
   const isPaymentCompleteModalOpen = useAppSelector(
     selectIsPaymentCompleteModalOpen
   );
   const [userInfo, setUserInfo] = useState<UserInfo>({
-    name: '',
+    firstsign: 1,
+    nickname: '',
     phoneNumber: '',
     sex: 1,
     age: 0,
@@ -118,7 +127,7 @@ export const Payment = () => {
 
     setUserInfo({
       ...userInfo,
-      name: e.target.value,
+      nickname: e.target.value,
     });
     console.log(userInfo);
   };
@@ -134,7 +143,7 @@ export const Payment = () => {
       selectRef.current.focus();
       return;
     }
-    console.log(userInfo.age === 0);
+
     dispatch(modalAction.radioPaymentCompleteModal());
   };
 
@@ -159,12 +168,20 @@ export const Payment = () => {
             <CheckInOutBox>
               <CheckInBox>
                 <CheckInOutText>체크인 날짜</CheckInOutText>
-                <DateText>2022-7월-15일(금)</DateText>
+                <DateText>
+                  {checkInDate !== undefined
+                    ? formatDate(checkInDate)
+                    : '날짜 선택오류'}
+                </DateText>
                 <CheckInTimeText>15:00</CheckInTimeText>
               </CheckInBox>
               <CheckOutBox>
                 <CheckInOutText>체크아웃 날짜</CheckInOutText>{' '}
-                <DateText>2022-7월-17일(일)</DateText>
+                <DateText>
+                  {checkOutDate !== undefined
+                    ? formatDate(checkOutDate)
+                    : '날짜 선택오류'}
+                </DateText>
                 <CheckOutTimeText>11:00</CheckOutTimeText>
               </CheckOutBox>
               <Line />
@@ -178,7 +195,7 @@ export const Payment = () => {
             <InputBox
               id="name"
               onChange={handleInputChange}
-              value={userInfo.name}
+              value={userInfo.nickname}
               isErr={isNameError}
               placeholder="성명을 입력해주세요"
               type="text"

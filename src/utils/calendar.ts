@@ -55,15 +55,23 @@ export const CompareDate = (
   checkInDay?: number[],
   checkOutDay?: number[]
 ) => {
+  /* 룸 데이터 입력이 있는 경우
+   * 예약이 방은 막는다
+   * 클릭이 된 시점부터 예약가능한 날짜의 방만을 보여준다.
+   */
   if (soldDay[0]) {
     if (soldDay[1]) {
       return 'disable-room';
     }
     if (soldDay[2] !== undefined) {
-      let diffDay = new Date(year, month, day);
-      let diffDay2 = new Date(soldDay[2][0], soldDay[2][1], soldDay[2][2]);
+      let diffDay = new Date(year, month - 1, day);
+      let diffDay2 = new Date(soldDay[2][0], soldDay[2][1] - 1, soldDay[2][2]);
       if (checkInDay !== undefined) {
-        let diffDay3 = new Date(checkInDay[0], checkInDay[1], checkInDay[2]);
+        let diffDay3 = new Date(
+          checkInDay[0],
+          checkInDay[1] - 1,
+          checkInDay[2]
+        );
         // 가장 빠른 불가능한 예약 이후로의 예약은 다 막는다.
         if (diffDay > diffDay2) {
           return 'disable-room';
@@ -171,5 +179,12 @@ export const CompareDate = (
 export const formatDate = (date: number[]) => {
   let formatted_date = `( ${date[0]} - ${date[1] < 10 ? '0' + date[1] : date[1]}
   - ${date[2] < 10 ? '0' + date[2] : date[2]} )`;
+  return formatted_date;
+};
+
+export const formatDateInSearch = (date: number[]) => {
+  let formatted_date = `${date[0]}-${date[1] < 10 ? '0' + date[1] : date[1]}-${
+    date[2] < 10 ? '0' + date[2] : date[2]
+  }`;
   return formatted_date;
 };
