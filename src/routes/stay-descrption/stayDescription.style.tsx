@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import theme from '../../style/theme';
+import { Link } from 'react-router-dom';
 
 export const TitleContainer = styled.div`
   display: flex;
@@ -35,6 +36,8 @@ export const Title = styled.div`
 export const DescriptionContainer = styled.div`
   & > img {
     width: 100%;
+    height: 500px;
+    object-fit: cover;
   }
 `;
 
@@ -87,6 +90,11 @@ export const ContentsContainer = styled.div`
   @media (max-width: 768px) {
     margin: 30px 20px 0 20px;
   }
+`;
+
+export const RoomLink = styled(Link)`
+  color: #000;
+  text-decoration: none;
 `;
 
 export const Room = styled.div`

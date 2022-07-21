@@ -181,12 +181,13 @@ export default function Search(): JSX.Element {
             searchResult.stations.map((item, key) => [
               <ProductListItem
                 key={key}
-                productImageSrc={item.image}
-                productTitle={item.name}
+                stayId={item.id}
+                stayImageSrc={item.image}
+                stayTitle={item.name}
                 minPrice={item.minprice}
                 maxPrice={item.maxprice}
-                productRegion={item.local_id.name}
-                productStayType={item.stay_id.name}
+                stayRegion={item.local_id.name}
+                StayType={item.stay_id.name}
                 event={item.event_id}
               />,
             ])

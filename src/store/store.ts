@@ -23,6 +23,7 @@ import sliderReducer from './modules/slider/slider.slice';
 import calendarReducer from './modules/calendar/calendar.slice';
 import navigatorReducer from './modules/navigator/navigator.slice';
 import userReducer from './modules/user//user.slice';
+import stayReducer from './modules/stay/stay.slice';
 
 const persistConfig = {
   key: 'root',
@@ -38,6 +39,7 @@ const rootReducer = combineReducers({
   calendar: calendarReducer,
   navigator: navigatorReducer,
   user: userReducer,
+  stay: stayReducer,
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

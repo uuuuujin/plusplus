@@ -1,5 +1,5 @@
 import Home from './home/home.component';
-import Description from './description/description.component';
+import StayDescription from './stay-descrption/stayDescription.component';
 import Search from './search/search.component';
 import Listing from './listing/listing.component';
 import MyPage from './mypage/mypage.component';
@@ -10,7 +10,7 @@ import BookingList from '../components/admin-booking-list/admin-booking-list.com
 import LoginPage from './login/login.component';
 import Payment from '../components/payment/payment.component';
 import Auth from './auth/auth.component';
-import DescriptionRoom from '../components/description-room/descriptionRoom.component';
+import RoomDescription from './room-description/roomDescription.component';
 
 export const ROUTES = {
   HOME: {
@@ -23,10 +23,15 @@ export const ROUTES = {
     link: '/search',
     component: Search,
   },
-  DESCRIPTION: {
-    path: '/description',
-    link: '/description',
-    component: Description,
+  STAY: {
+    path: '/stay/:stationId',
+    link: '/stay',
+    component: StayDescription,
+  },
+  ROOM: {
+    path: '/stay/:stationId/:roomId',
+    link: '/stay',
+    component: RoomDescription,
   },
   LISTING: {
     path: '/listing',
@@ -75,10 +80,5 @@ export const ROUTES = {
     path: 'auth/*',
     link: 'auth/*',
     component: Auth,
-  },
-  ROOM: {
-    path: 'search/room',
-    link: 'search/room',
-    component: DescriptionRoom,
   },
 };
