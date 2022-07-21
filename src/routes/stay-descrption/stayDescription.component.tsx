@@ -34,14 +34,13 @@ export default function StayDescription(): JSX.Element {
 
   const stayData = useAppSelector(selectStayData);
 
-  const [coordinate, setCoordinate] = useState<number[]>([0, 0]);
-
   useEffect(() => {
     const fetchData = async () => {
       await dispatch(getStay(STAY_ID));
     };
 
     fetchData();
+    console.log(stayData);
   }, [STAY_ID, dispatch]);
 
   // useEffect(() => {
@@ -86,11 +85,14 @@ export default function StayDescription(): JSX.Element {
 
         <ContentsContainer>
           <SubTitle>Map</SubTitle>
-          {/* <Map y={parseFloat(stayData.y)} x={parseFloat(stayData.x)} />
-          
-          <Map y={33.308704704334026} x={126.76810471045683} />
+          {stayData.id !== 0 && (
+            <Map y={parseFloat(stayData.y)} x={parseFloat(stayData.x)} />
+          )}
+          {/*{<Map y={parseFloat(stayData.y)} x={parseFloat(stayData.x)} />*/}
 
-          <Map y={coordinate[0]} x={coordinate[1]} /> */}
+          {/*<Map y={33.308704704334026} x={126.76810471045683} />*/}
+
+          {/*<Map y={coordinate[0]} x={coordinate[1]} /> }*/}
         </ContentsContainer>
       </div>
     </Container>
