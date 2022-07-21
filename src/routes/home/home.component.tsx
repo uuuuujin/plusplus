@@ -1,9 +1,10 @@
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
 import { persistor } from '../../store/store';
-import { modalAction } from '../../store/modules/modal/modal.slice';
 import { fetchAllEvents } from '../../api/event';
+import { fetchPopularStay } from '../../api/popular-stay';
 import { selectAllEvents } from '../../store/modules/event/event.select';
+import { selectPopularStay } from '../../store/modules/popular-stay/popularStay.select';
 
 import Container from '../../components/container/container.component';
 import Header from '../../components/header/header.component';
@@ -23,6 +24,7 @@ export default function Home(): JSX.Element {
   const dispatch = useAppDispatch();
 
   const events = useAppSelector(selectAllEvents);
+  const popularStays = useAppSelector(selectPopularStay);
 
   const logout = () => {
     const purge = async () => {
@@ -33,11 +35,12 @@ export default function Home(): JSX.Element {
   };
 
   useEffect(() => {
-    const getEvents = () => {
-      dispatch(fetchAllEvents());
+    const fetchData = async () => {
+      await dispatch(fetchAllEvents());
+      await dispatch(fetchPopularStay());
     };
 
-    getEvents();
+    fetchData();
   }, [dispatch]);
 
   return (
@@ -55,7 +58,7 @@ export default function Home(): JSX.Element {
 
         <SliderContainer>
           <SliderTitle>인기순</SliderTitle>
-          {/* <SwiperComponent swiperDataArr={dummyData}></SwiperComponent> */}
+          <SwiperComponent swiperDataArr={popularStays}></SwiperComponent>
         </SliderContainer>
 
         <Header />

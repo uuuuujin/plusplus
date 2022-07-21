@@ -26,6 +26,7 @@ import userReducer from './modules/user//user.slice';
 import userlistReducer from './modules/userlist/userlist.slice';
 import stayReducer from './modules/stay/stay.slice';
 import eventReducer from './modules/event/event.slice';
+import popularStayReducer from './modules/popular-stay/popularStay.slice';
 
 const persistConfig = {
   key: 'root',
@@ -44,6 +45,7 @@ const rootReducer = combineReducers({
   userlist: userlistReducer,
   stay: stayReducer,
   event: eventReducer,
+  popularStay: popularStayReducer,
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
