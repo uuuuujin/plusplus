@@ -6,7 +6,7 @@ interface User {
   userImageURL: string;
   age: number;
   email: string;
-  gender: string;
+  sex: string;
 }
 
 interface UserInformation {
@@ -19,7 +19,7 @@ const initialState: UserInformation = {
     userImageURL: '',
     age: 0,
     email: '',
-    gender: '',
+    sex: '',
   },
 };
 export const userlistSlice = createSlice({
@@ -29,11 +29,11 @@ export const userlistSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchUser.fulfilled, (state, action) => {
       state.user = {
-        userImageURL: action.payload.data.userImageURL,
-        nickname: action.payload.data.nickname,
+        userImageURL: action.payload.data.profile,
+        nickname: action.payload.data.nickName,
         age: action.payload.data.age,
         email: action.payload.data.email,
-        gender: action.payload.data.gender,
+        sex: action.payload.data.sex,
       };
     });
   },
