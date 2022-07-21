@@ -3,13 +3,11 @@ import theme from '../../style/theme';
 import { Link } from 'react-router-dom';
 
 export const Container = styled.div`
-  position: relative;
   width: 383px;
   display: inline-block;
   padding: 0 18px;
   box-sizing: border-box;
   margin-bottom: 40px;
-  cursor: pointer;
 
   @media (max-width: 780px) {
     width: 100%;
@@ -18,35 +16,16 @@ export const Container = styled.div`
 `;
 
 export const LikeIconContainer = styled.div`
-  cursor: pointer;
-  position: absolute;
-  top: 60%;
-  right: 20px;
-  z-index: 1;
-
   & > svg {
     width: 26px;
     height: 26px;
+    cursor: pointer;
   }
 `;
 
 export const StayLink = styled(Link)`
   color: #000;
   text-decoration: none;
-`;
-
-export const ItemContainer = styled.div`
-  // width: 383px;
-  // display: inline-block;
-  // padding: 0 18px;
-  // box-sizing: border-box;
-  // margin-bottom: 40px;
-  // cursor: pointer;
-
-  // @media (max-width: 780px) {
-  //   width: 100%;
-  //   margin-bottom: 50px;
-  // }
 `;
 
 export const ProductImage = styled.img`
@@ -59,14 +38,10 @@ export const ProductImage = styled.img`
   }
 `;
 
-export const DescriptionContainer = styled.div`
+export const Bottom = styled.div`
   margin-top: 10px;
-`;
-
-export const Top = styled.div`
   display: flex;
   justify-content: space-between;
-  padding-right: 6px;
 `;
 
 export const ProductTitle = styled.div`
