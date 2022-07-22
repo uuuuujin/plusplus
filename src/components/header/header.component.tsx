@@ -34,7 +34,7 @@ export default function Header(): JSX.Element {
           to={ROUTES.HOME.path}
           onClick={() => clickLogoHandler('home')}
         >
-          <Logo src="/pluspluslogo.png" />
+          <Logo src="/pluspluslogo2.png" />
         </LogoLink>
         <Icons>
           <Icon onClick={handleCalendarModal}>

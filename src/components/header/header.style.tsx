@@ -21,11 +21,13 @@ export const Nav = styled.div`
   border-bottom: 1px solid ${theme.colors.border};
 `;
 export const LogoLink = styled(Link)`
-  width: 50px;
-  height: 50px;
+  width: 85px;
+  height: 85px;
+  display: flex;
 `;
 export const Logo = styled.img`
   width: 100%;
+  align-self: center;
 `;
 export const Icons = styled.div`
   display: flex;
