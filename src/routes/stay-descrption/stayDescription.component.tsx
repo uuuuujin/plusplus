@@ -16,6 +16,7 @@ import { deleteWishItem } from '../../api/wishlist';
 import { ROUTES } from '../routes';
 import Container from '../../components/container/container.component';
 import Header from '../../components/header/header.component';
+import LoginModal from '../../components/login-modal/loginModal.component';
 
 import { AiOutlineHeart } from 'react-icons/ai';
 
@@ -121,6 +122,8 @@ export default function StayDescription(): JSX.Element {
             <Map y={parseFloat(stayData.y)} x={parseFloat(stayData.x)} />
           )}
         </ContentsContainer>
+
+        <LoginModal />
       </div>
     </Container>
   );
