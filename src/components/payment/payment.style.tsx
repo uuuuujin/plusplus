@@ -188,7 +188,7 @@ export const PaymentPriceBox = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 12px 0;
-  align-items: center;
+  align-items: flex-end;
 `;
 
 export const PaymentEventBox = styled.div`
@@ -198,16 +198,25 @@ export const PaymentEventBox = styled.div`
   align-items: baseline;
 `;
 
-export const EventButton = styled.button`
+export const EventInfo = styled.div`
   border: none;
-  background-color: transparent;
-  border: 1px solid #000;
-  width: 15%;
-  padding: 6px 7px;
+  color: #94b49f;
+  font-weight: bold;
+  width: 30%;
+  padding: 6px 0;
   font-size: 12px;
   cursor: pointer;
+  text-align: right;
 `;
 
+export const EventRate = styled.div`
+  border: none;
+  color: red;
+  text-align: right;
+  width: 15%;
+  padding: 6px 0;
+  font-size: 16px;
+`;
 export const SelectBox = styled.select`
   padding: 2px 5px;
   border: 1px solid #ddd;
@@ -217,12 +226,12 @@ export const SelectBox = styled.select`
 
 export const PaymentPriceText = styled.span`
   font-size: 13px;
-  font-weight: 400;
+  font-weight: 400; ;
 `;
 
 export const SalePrice = styled.span`
-  width: 15%;
-  text-align: center;
+  width: 30%;
+  text-align: right;
 `;
 
 export const TotalPrice = styled(SalePrice)`

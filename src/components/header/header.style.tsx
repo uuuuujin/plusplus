@@ -21,7 +21,8 @@ export const Nav = styled.div`
   border-bottom: 1px solid ${theme.colors.border};
 `;
 export const LogoLink = styled(Link)`
-  width: 20%;
+  width: 50px;
+  height: 50px;
 `;
 export const Logo = styled.img`
   width: 100%;

@@ -52,6 +52,8 @@ export interface IRoom {
 export interface IEvent {
   id: number;
   name: string;
+  image?: string;
+  detailImage?: string;
   start_date: string;
   end_date: string;
   rate: number;

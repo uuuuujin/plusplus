@@ -27,9 +27,6 @@ export interface IPaymentModalProps {
   stationName: string;
   roomName: string;
 }
-export interface PaymentModalProps {
-  props: IPaymentModalProps;
-}
 
 declare global {
   interface Window {
@@ -41,7 +38,7 @@ const CompletePaymentModal = (props: IPaymentModalProps) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const isPaymentModalOpen = useAppSelector(selectIsPaymentCompleteModalOpen);
-  console.log(props.x, props.y);
+
   const onCloseModal = () => {
     dispatch(modalAction.radioPaymentCompleteModal());
   };
@@ -92,7 +89,12 @@ const CompletePaymentModal = (props: IPaymentModalProps) => {
           </BookingInfoBox>
         </BookingInfoWrap>
         <HeadText>위치정보</HeadText>
-        <Map y={parseFloat(props.y)} x={parseFloat(props.x)} />
+        <Map
+          y={parseFloat(props.y)}
+          x={parseFloat(props.x)}
+          name={props.stationName}
+          height={250}
+        />
         <ButtonBox>
           <MoveHomeButton onClick={onClickHomeButton}>
             홈으로 이동

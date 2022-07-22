@@ -48,3 +48,8 @@ export const selectIsUserModifyModalOpen = createSelector(
   [selectModalReducer],
   (modal) => modal.isUserModifyModalOpen
 );
+
+export const selectIsErrorModalOpen = createSelector(
+  [selectModalReducer],
+  (modal) => modal.isErrorModalOpen
+);

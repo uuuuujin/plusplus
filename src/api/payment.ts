@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { IEvent } from './bookinglist';
 
 export interface roomData {
   id: number;
@@ -25,6 +26,7 @@ export interface roomData {
     status: string;
     created_at: string;
     updated_at: string;
+    event_id: IEvent;
   };
 }
 
