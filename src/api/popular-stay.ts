@@ -7,7 +7,6 @@ export const fetchPopularStay = createAsyncThunk(
     const response = await axios.get(
       `${process.env.REACT_APP_API_URL}/stations/likes`
     );
-    console.log('인기순 숙소: ', response.data);
     return response.data;
   }
 );

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
 import { modalAction } from '../../store/modules/modal/modal.slice';
 import { searchAction } from '../../store/modules/search/search.slice';
@@ -41,7 +41,7 @@ export default function DestinationModal(): JSX.Element {
     <MainModal
       isOpen={isDestinationModalOpen}
       onClose={handleDestinationModal}
-      title="어디로 떠날까요?"
+      title="어디로 떠날까요? ✈️"
       contentWidth={600}
     >
       <RegionButtonContainer>

@@ -9,6 +9,8 @@ const theme: DefaultTheme = {
     subTitle: '#808080',
     discount: '#fa622f',
     filledHeart: '#ed4956',
+    buttonHover: '#f2f2f2',
+    mainButtonHover: '#ff901a',
   },
 };
 

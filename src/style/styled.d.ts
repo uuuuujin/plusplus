@@ -10,6 +10,8 @@ declare module 'styled-components' {
       subTitle: string;
       discount: string;
       filledHeart: string;
+      buttonHover: string;
+      mainButtonHover: string;
     };
   }
 }

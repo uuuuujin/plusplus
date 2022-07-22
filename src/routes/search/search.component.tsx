@@ -1,9 +1,8 @@
-import { useEffect, useMemo, useState, useRef } from 'react';
+import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
 import { formatDateInSearch } from '../../utils/calendar';
 import { getSearchResult } from '../../api/search';
-import { SearchResultType } from '../../store/modules/search/search.typs';
 import { modalAction } from '../../store/modules/modal/modal.slice';
 import { calendarAction } from '../../store/modules/calendar/calendar.slice';
 import { searchAction } from '../../store/modules/search/search.slice';

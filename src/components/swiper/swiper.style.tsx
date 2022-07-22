@@ -35,15 +35,9 @@ export const SlideImage = styled.img`
   }
 `;
 
-export const SlideTitle = styled.div`
-  font-size: 18px;
-  font-weight: 500;
-  margin: 20px 0 10px;
-`;
-
 export const NavigationButtonContainer = styled.div<{ visible: boolean }>`
   width: 150px;
-  margin: 10px auto 0;
+  margin: 25px auto 0;
   display: ${({ visible }) => (visible ? 'flex' : 'none')};
   justify-content: center;
 
@@ -60,5 +54,34 @@ export const NavigationButton = styled.button`
   & > svg {
     width: 25px;
     height: 25px;
+  }
+`;
+
+export const SlideDescriptionContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 30px;
+`;
+
+export const SlideTitle = styled.div`
+  font-size: 22px;
+  font-weight: 500;
+  text-align: center;
+  letter-spacing: 1px;
+`;
+
+export const StayDescription = styled.div`
+  margin-top: 10px;
+  font-size: 14px;
+  color: #333;
+  text-align: center;
+
+  & > span {
+    display: inline-block;
+  }
+
+  & > span + span {
+    margin-left: 15px;
   }
 `;
