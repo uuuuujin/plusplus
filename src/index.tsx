@@ -7,6 +7,7 @@ import { ThemeProvider } from 'styled-components';
 import { BrowserRouter } from 'react-router-dom';
 
 import App from './App';
+import ScrollToTop from './components/scrollTop/scrollTop.component';
 
 import { store, persistor } from './store/store';
 import theme from './style/theme';
@@ -20,6 +21,7 @@ root.render(
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <BrowserRouter>
+          <ScrollToTop />
           <App />
         </BrowserRouter>
       </PersistGate>
