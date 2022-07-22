@@ -1,3 +1,5 @@
+import {IMonth} from "../components/calendar-modal/calendarModal.component";
+
 /**
  * 해당 년도가 윤년인지 판단해주는 유틸
  * @param year
@@ -64,21 +66,23 @@ export const CompareDate = (
     if (soldDay[1]) {
       return 'disable-room';
     }
-    if (soldDay[2] !== undefined) {
-      let diffDay = new Date(year, month - 1, day);
-      let diffDay2 = new Date(soldDay[2][0], soldDay[2][1] - 1, soldDay[2][2]);
-      if (checkInDay !== undefined) {
-        let diffDay3 = new Date(
+    if(checkInDay !== undefined){
+      let diffDay3 = new Date(
           checkInDay[0],
           checkInDay[1] - 1,
           checkInDay[2]
-        );
+      ); // 체크인 날짜
+
+      let diffDay = new Date(year, month - 1, day); // 오늘
+      // 체크인 날짜보다 전 데이터
+      if(diffDay < diffDay3){
+        return 'disable';
+      }
+
+      if(soldDay[2] !== undefined){
+        let diffDay2 = new Date(soldDay[2][0], soldDay[2][1] - 1, soldDay[2][2]); //가장 빠른 체크아웃 데이터
         // 가장 빠른 불가능한 예약 이후로의 예약은 다 막는다.
         if (diffDay > diffDay2) {
-          return 'disable-room';
-        }
-        // 클릭 이전 날짜의 클릭을 막는다.
-        if (diffDay3 > diffDay) {
           return 'disable-room';
         }
       }
@@ -204,4 +208,27 @@ export const formatDate2 = (_date: number[]) => {
   }-${date.getDate() < 10 ? '0' + date.getDate() : date.getDate()}`;
 
   return formatted_date;
+};
+
+
+/**
+ * 체크인 날짜 이후의 예약 불가능한 날짜 값을 확인합니다.
+ * @param checkInDay 체크인 날짜
+ * @param mockData 예약이 된 날짜 리스트
+ * @constructor
+ */
+export const FindDate = (checkInDay: number[], mockData: IMonth[]) => {
+  let checkIn = new Date(checkInDay[0], checkInDay[1], checkInDay[2]);
+  for (let i = 0; i < mockData.length; i++) {
+    for (let j = 0; j < mockData[i].day.length; j++) {
+      let mDate = new Date(
+          mockData[i].year,
+          mockData[i].month,
+          mockData[i].day[j]
+      );
+      if (mDate > checkIn) {
+        return [mockData[i].year, mockData[i].month, mockData[i].day[j]];
+      }
+    }
+  }
 };

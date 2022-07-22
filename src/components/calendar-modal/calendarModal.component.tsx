@@ -4,7 +4,7 @@ import Calendar from '../calendar/calendar.component';
 import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
 import { selectIsCalendarModalOpen } from '../../store/modules/modal/modal.select';
 import { modalAction } from '../../store/modules/modal/modal.slice';
-import { formatDate, formatDate2 } from '../../utils/calendar';
+import {FindDate, formatDate, formatDate2} from '../../utils/calendar';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import {
@@ -18,28 +18,9 @@ import {
   ReservationButton,
 } from './calendarModal.style';
 import { getRoomDate } from '../../api/calendar';
+import {searchAction} from "../../store/modules/search/search.slice";
 
-/**
- * 체크인 날짜 이후의 예약 불가능한 날짜 값을 확인합니다.
- * @param checkInDay 체크인 날짜
- * @param mockData 예약이 된 날짜 리스트
- * @constructor
- */
-const FindDate = (checkInDay: number[], mockData: IMonth[]) => {
-  let checkIn = new Date(checkInDay[0], checkInDay[1], checkInDay[2]);
-  for (let i = 0; i < mockData.length; i++) {
-    for (let j = 0; j < mockData[i].day.length; j++) {
-      let mDate = new Date(
-        mockData[i].year,
-        mockData[i].month,
-        mockData[i].day[j]
-      );
-      if (mDate > checkIn) {
-        return [mockData[i].year, mockData[i].month, mockData[i].day[j]];
-      }
-    }
-  }
-};
+
 
 export interface CalendarModalProps {
   roomId?: number;
@@ -165,6 +146,7 @@ const CalendarModal = ({ roomId }: CalendarModalProps) => {
     month: nextMonthDate.getMonth(),
   });
 
+  /* arrow를 이용하여 다음 달 데이터 불러오기 */
   // const onClickLeftBtn = () => {
   //   setThisMonth(
   //     thisMonth.month !== 0
@@ -195,8 +177,12 @@ const CalendarModal = ({ roomId }: CalendarModalProps) => {
 
   const onSubmit = () => {
     dispatch(modalAction.setCalendarModal());
-    if (!location.pathname.slice(1).includes('stay')) {
+    if (location.pathname.slice(1).includes('stay') && location.pathname.split('/').length === 4){
+      return
+    }
+    if (!location.pathname.slice(1).includes('search')) {
       navigate(`/search`);
+      dispatch(searchAction.setSearchRegionName(""))
     }
   };
 
@@ -218,7 +204,7 @@ const CalendarModal = ({ roomId }: CalendarModalProps) => {
     <MainModal
       isOpen={isCalendarModalOpen}
       onClose={onCloseCalendar}
-      title="🗓 언제 떠날까요 "
+      title="언제 떠날까요 ?"
       contentWidth={768}
     >
       <CalendarWrapper>
