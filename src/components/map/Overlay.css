@@ -4,9 +4,10 @@
     border-radius: 5px;
     padding: 4px 0;
     color: #fff;
+    background-color: #ff9f38;
     align-items: center;
     text-align: center;
-    background-color: #94b49f;
+
 }
 
 .roomText{

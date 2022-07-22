@@ -2,7 +2,6 @@ import styled, { keyframes } from 'styled-components';
 import theme from '../../style/theme';
 import { MdFavorite, MdPersonPin } from 'react-icons/md';
 import { AiFillCalendar, AiOutlineComment } from 'react-icons/ai';
-import { FaComments } from 'react-icons/fa';
 
 const componentFade = keyframes`
   0% {
@@ -12,6 +11,16 @@ const componentFade = keyframes`
   100% {
     opacity: 1;
   }
+`;
+
+export const LogoutButton = styled.button`
+  border: none;
+  margin: 0 0 10px 0;
+  padding: 3px;
+  cursor: pointer;
+  color: white;
+  font-size: 10px;
+  background-color: #ccd0d4;
 `;
 
 export const Text = styled.span`
@@ -43,6 +52,8 @@ export const HeaderText = styled.span`
 
 export const AdvertiseImg = styled.img`
   height: 60px;
+  width: 100%;
+  object-fit: cover;
   cursor: pointer;
   border-top: 1px solid #fff;
   border-bottom: 1px solid #fff;
@@ -71,6 +82,7 @@ export const MypageContainer = styled.div`
 
 export const UserInfo = styled.div`
   display: flex;
+  width: 100%;
   flex-direction: column;
   align-items: center;
   margin-top: 10px;

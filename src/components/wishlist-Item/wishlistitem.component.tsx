@@ -19,10 +19,9 @@ import { LikeIconContainer } from '../product-list-item/productListItem.style';
 import { AiFillHeart } from 'react-icons/ai';
 import WishListModal from '../like-mange-modal/wishListModal.component';
 import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
-import { modalAction } from '../../store/modules/modal/modal.slice';
-import { selectIsWishManageModalOpen } from '../../store/modules/modal/modal.select';
 import { likeCategorization } from '../../utils/likeCategorization';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export interface WishListItemProps {
   item: RoomItem;
@@ -54,24 +53,26 @@ export default function WishListItem({
   setList,
 }: WishListItemProps): JSX.Element {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const onClickButton = () => {
+    navigate(`/stay/${item.station_id}`);
+  };
+
   const [isWishManageModalOpen, SetIsWishManageModalOpen] = useState(false);
 
   const onClickHeart = () => {
     SetIsWishManageModalOpen(!isWishManageModalOpen);
   };
   return (
-    <ItemContainer>
+    <ItemContainer onClick={onClickButton}>
       <ItemBox>
         <ItemInfo>
           <LikeIconWrap>
             <AiFillHeart onClick={onClickHeart} />
             <span>{likeCategorization(15)}</span>
           </LikeIconWrap>
-          <div>
-            {item.station_name}
-            {/*<StarIcon />*/}
-            {/*<span>4.4</span>*/}
-          </div>
+          <div>{item.station_name}</div>
           <LocationBox>
             <MdOutlineLocationOn />
             <span>제주도 서귀포시 중문관광로72번길 35</span>
@@ -92,7 +93,6 @@ export default function WishListItem({
         </ItemInfo>
         <ItemImgBox src={item.station_image} />
       </ItemBox>
-      <RegisterButton>예약하기</RegisterButton>
       {isWishManageModalOpen && (
         <WishListModal item={item} setList={setList} setModal={onClickHeart} />
       )}

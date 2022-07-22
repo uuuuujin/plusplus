@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import theme from '../../style/theme';
 
 export const DescriptionRoomContainer = styled.div`
   display: flex;
@@ -33,6 +34,12 @@ export const SelectCalendarText = styled.div`
   font-size: 16px;
   font-weight: 400;
   margin-bottom: 10px;
+
+  @media screen and (min-height: 400px) {
+    > span {
+      font-size: 13px;
+    }
+  }
 
   > span {
     padding: 5px 10px 5px 10px;
@@ -111,7 +118,7 @@ export const PaymentButton = styled.button`
   border: none;
   text-align: center;
   color: #fff;
-  background-color: rgb(194, 220, 210);
+  background-color: ${theme.colors.main};
   cursor: pointer;
 `;
 

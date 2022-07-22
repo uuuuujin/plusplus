@@ -11,6 +11,7 @@ import {
   HeaderText,
   ItemMenu,
   LoginIcon,
+  LogoutButton,
   ModifyButton,
   MypageContainer,
   UserIcon,
@@ -120,6 +121,7 @@ export default function MyPage(): JSX.Element {
       await persistor.purge();
     };
     navigate('/');
+    dispatch(dispatch(navigatorAction.setCurrnetPage('home')));
     purge();
   };
 
@@ -140,8 +142,8 @@ export default function MyPage(): JSX.Element {
               <ModifyButton onClick={handleOnClickModifyButton}>
                 회원정보 수정
               </ModifyButton>
-              <button onClick={logout}>로그아웃 테스트</button>
             </FlexRow>
+            <LogoutButton onClick={logout}>로그아웃</LogoutButton>
           </UserInfo>
 
           <UserInfo>

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import theme from '../../style/theme';
 
 export const CalendarWrapper = styled.div`
   display: flex;
@@ -9,7 +10,7 @@ export const CalendarWrapper = styled.div`
 `;
 
 export const ReservationButton = styled.button`
-  background-color: #94b49f;
+  background-color: ${theme.colors.main};
   border: none;
   cursor: pointer;
   color: #fff;
