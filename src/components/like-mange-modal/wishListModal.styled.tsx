@@ -1,41 +1,54 @@
 import styled from 'styled-components';
+import theme from '../../style/theme';
 
-export const WishManageModalContainer = styled.div`
+export const ModalContainer = styled.div`
+  margin: 40px 0 10px;
+`;
+
+export const Title = styled.div`
   display: flex;
+  justify-content: center;
   flex-direction: column;
+  align-items: center;
+  font-size: 18px;
+  margin-bottom: 40px;
+
+  & > div {
+    font-size: 22px;
+    font-weight: 500;
+    display: inline-block;
+    margin-bottom: 10px;
+  }
 `;
 
-export const ButtonBox = styled.div`
+export const ButtonContainer = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 `;
 
-export const ConfirmButton = styled.button`
-  flex: 1 1;
-  height: 60px;
-  background-color: transparent;
+export const Button = styled.button`
+  background-color: ${theme.colors.main};
   border: none;
-  border-top: 1px solid #ddd;
-  padding: 10px;
-  font-size: 14px;
+  padding: 15px;
+  width: 100px;
+  border-radius: 10px;
+  text-align: center;
+  color: #fff;
   cursor: pointer;
-  color: #2196f3;
-`;
+  font-size: 16px;
 
-export const CancelButton = styled.button`
-  flex: 1 1;
-  height: 60px;
-  background-color: transparent;
-  color: #ff6969;
-  border: none;
-  border-top: 1px solid #ddd;
-  border-right: 1px solid #ddd;
-  cursor: pointer;
-  padding: 10px;
-  font-size: 14px;
-`;
+  &:hover {
+    background-color: ${theme.colors.mainButtonHover};
+  }
 
-export const ContentMessage = styled.div`
-  height: 200px;
-  padding: 20px 40px;
+  &.no {
+    background-color: #fff;
+    border: 1px solid ${theme.colors.border};
+    color: #000;
+    margin-right: 60px;
+
+    &:hover {
+      background-color: ${theme.colors.buttonHover};
+    }
+  }
 `;

@@ -3,6 +3,9 @@ import theme from '../../style/theme';
 
 export const Wrapper = styled.div`
   padding-bottom: 60px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
 `;
 
 export const FilterWrap = styled.div`
@@ -10,6 +13,15 @@ export const FilterWrap = styled.div`
   flex-direction: column;
   border-bottom: 1px solid #e6e6e6;
   padding: 10px;
+  position: fixed;
+  background-color: #fff;
+  // z-index: 3;
+
+  // width: 69%;
+
+  @media (max-width: 768px) {
+    width: 95%;
+  }
 `;
 
 export const FilterTop = styled.div`
@@ -144,8 +156,12 @@ export const RowContainer = styled.div`
 `;
 
 export const ProductListContainer = styled.div`
-  margin-top: 20px;
+  padding-top: 140px;
   // height: 60vh;
+
+  @media (max-width: 768px) {
+    padding-top: 175px;
+  }
 `;
 
 export const EmptySearchResult = styled.div`

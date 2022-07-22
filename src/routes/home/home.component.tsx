@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
-import { persistor } from '../../store/store';
 import { fetchAllEvents } from '../../api/event';
 import { fetchPopularStay } from '../../api/popular-stay';
 import { selectAllEvents } from '../../store/modules/event/event.select';
@@ -26,14 +25,6 @@ export default function Home(): JSX.Element {
   const events = useAppSelector(selectAllEvents);
   const popularStays = useAppSelector(selectPopularStay);
 
-  const logout = () => {
-    const purge = async () => {
-      await persistor.purge();
-    };
-
-    purge();
-  };
-
   useEffect(() => {
     const fetchData = async () => {
       await dispatch(fetchAllEvents());
@@ -52,7 +43,6 @@ export default function Home(): JSX.Element {
             alt="배너이미지"
           />
         </MainBanner>
-        <button onClick={logout}>로그아웃 테스트</button>
 
         <SliderContainer>
           <SliderTitle>현재 진행중인 이벤트</SliderTitle>

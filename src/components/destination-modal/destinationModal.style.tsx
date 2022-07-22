@@ -36,7 +36,13 @@ export const RegionButton = styled.button<{
   ${({ regionName, clickedRegionName }) => {
     return (
       regionName === clickedRegionName &&
-      `background-color: ${theme.colors.main}; color: #fff; font-weight: bold;`
+      `background-color: ${theme.colors.main}; 
+      color: #fff; 
+      font-weight: bold;
+      &:hover {
+        background-color: ${theme.colors.main};
+      }
+      `
     );
   }}
 `;

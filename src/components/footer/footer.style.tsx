@@ -14,7 +14,7 @@ export const FooterStyle = styled.div`
   height: 60px;
   border-top: 1px solid ${theme.colors.border};
   background-color: #fff;
-  z-index: 2;
+  z-index: 1;
 `;
 
 export const FooterBox = styled(Link)`

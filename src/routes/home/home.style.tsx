@@ -14,12 +14,13 @@ export const MainBannerImage = styled.img`
 `;
 
 export const SliderContainer = styled.div`
-  margin: 50px 0 60px;
+  margin: 60px 0 60px;
 `;
 
 export const SliderTitle = styled.div`
-  font-size: 18px;
+  font-size: 20px;
   text-align: center;
   margin-bottom: 20px;
   letter-spacing: 8px;
+  font-weight: 600;
 `;
