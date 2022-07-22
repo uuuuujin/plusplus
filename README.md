@@ -1,46 +1,56 @@
-# Getting Started with Create React App
+## **호텔 예약 서비스**
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### **이 프로젝트는 호텔 서비스를 검색, 조회, 그리고 예약할 수 있는 웹 서비스입니다.**
 
-## Available Scripts
+<br>
 
-In the project directory, you can run:
+### **서비스 설명**
 
-### `npm start`
+##### 1. 기획 의도, 목적
+- 자신의 포트폴리오를 쉽게 추가, 수정, 삭제하여 관리하고, 다른 사람과 공유할 수 있는 사이트를 제작하고자 하였습니다.
+- 개발자 간에 포트폴리오를 공유하고, 다른 사람들의 포트폴리오를 한 눈에 확인할 수 있도록 하여, 취업 준비에 도움이 되는 서비스를 제작하고자 하였습니다.
+- 검색 기능을 통해  다른 사람들의 학력, 수상이력, 프로젝트, 자격증에 대한 이력을 검색하여 조회할 수 있도록 하고자 하였습니다.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+##### 2. 웹 서비스의 최종적인 메인 기능과 서브 기능 설명
+- 주제: 한 눈에 들어오는 포트폴리오 관리 및 공유 페이지를 통해, 포트폴리오를 보다 체계적으로 관리하고 취업에 도움이 되는 웹 서비스
+- 메인 기능
+   1. 나의 포트폴리오 페이지 구성 기능, 프로필 수정 기능
+   2. 다른 사람의 포트폴리오 목록 조회 및 방명록 추가 기능
+   3. 다양한 기준(학력, 수상이력 등)으로 검색하여, 기준에 맞는 포트폴리오를 검색 및 조회 가능
+- 서브 기능
+   1. 팔로우 기능
+   2. 다크 모드 기능 
+   3. 게시판 기능
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+##### 3. 프로젝트만의 차별점, 기대 효과
+- 기존에는 학력, 수상이력, 프로젝트 등으로 구조화하여 포트폴리오를 구성하고, 또 시각적으로 한 눈에 들어로게 관리할 수 있는 서비스가 없었는데, 본 포트폴리오 서비스는 이런 서비스를 제공합니다.
+- 사용자는 자신의 포트폴리오를 구조화하여 관리할 수 있고, 또한 다른 사람의 포트폴리오를 검색하고, 또 조회할 수 있습니다.
 
-### `npm test`
+##### 4. 프로젝트 구성
+- 사용 스택
+  - 프론트엔드
+    - React
+    - React-Bootstrap
+    - Styled-Components
+  - 백엔드
+    - Express, Node
+    - Mongoose, multer
+    - Babel
+- 와이어프레임 (https://www.figma.com/file/IHrYe08wEvkYH2bfJR7qa9/%ED%8F%AC%ED%8A%B8%ED%8F%B4%EB%A6%AC%EC%98%A4)
+- 스토리보드 및 유저 시나리오
+  - 사용자는 로그인하면 자신의 포트폴리오 관리 페이지로 이동한다.
+  - 사용자는 포트폴리오 관리 페이지에서 프로필을 수정할 수 있고, 포트폴리오를 항목별로 추가(+버튼), 수정, 삭제할 수 있다.
+  - 사용자는 커뮤니티 페이지로 이동하여, 글 쓰기 버튼을 클릭하여 게시글을 추가할 수 있다.
+  - 사용자는 Network 페이지로 이동하여, + 버튼을 통해 해당 다른 사용자를 팔로우할 수 있다.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+##### 5. 구성원 역할
 
-### `npm run build`
+| 이름 | 역할 | 구현 기능 | 
+| ------ | ------ | ------ |
+| 사람1    |  팀장, 프론트엔드  | 학력, 수상이력 컴포넌트, 게시글 컴포넌트 구현, 와이어프레임 제작  |
+| 사람2   | 프론트엔드    | 자격증, 프로젝트 컴포넌트, 방명록 기능 구현, 와이어프레임 제작   |
+| 사람3   | 프론트엔드    |  게시판 페이지 구현, 와이어프레임 제작  |
+| 사람 4  | 백엔드        | 학력, 수상이력, 게시글 CRUD API 제작 |
+| 사람 5 | 백엔드 | 자격증, 프로젝트 방명록 CRUD API 제작 |
+| 사람 6 | 백엔드 | 게시글, 댓글 API 제작, OAuth 관리 |
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
