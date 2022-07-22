@@ -29,13 +29,22 @@ export const SearchButtonContainer = styled.div`
 `;
 
 export const SearchButton = styled.button`
-  background-color: ${theme.colors.main};
-  border: 0;
   padding: 10px 20px;
-  color: #fff;
+
   border-radius: 10px;
   font-size: 16px;
   cursor: pointer;
+  background-color: ${theme.colors.main};
+  border: 0;
+  color: #fff;
+  // background-color: #fff;
+  // border: 1px solid ${theme.colors.main};
+  // color: ${theme.colors.main};
+
+  &:hover {
+    background-color: ${theme.colors.mainButtonHover};
+    border: 1px solid: ${theme.colors.mainButtonHover};
+  }
 `;
 
 export const CategoryContainer = styled.div`

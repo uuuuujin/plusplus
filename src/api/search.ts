@@ -50,20 +50,18 @@ export const getSearchResult = createAsyncThunk(
     } = props;
     const stayIdArr = arrDestruct(stayIds);
     const themeIdArr = arrDestruct(themeIds);
-    console.log(
-      'url: ',
-      `${process.env.REACT_APP_API_URL}/stations/search?localId=${
-        localId === 0 ? '' : localId
-      }&stayIds=${stayIdArr}&themeIds=${themeIdArr}&minprice=${minprice}&maxprice=${maxprice}&checkIn=${checkIn}&checkOut=${checkOut}`
-    );
+    // console.log(
+    //   'url: ',
+    //   `${process.env.REACT_APP_API_URL}/stations/search?localId=${
+    //     localId === 0 ? '' : localId
+    //   }&stayIds=${stayIdArr}&themeIds=${themeIdArr}&minprice=${minprice}&maxprice=${maxprice}&checkIn=${checkIn}&checkOut=${checkOut}`
+    // );
 
     const response = await axios.get(
       `${process.env.REACT_APP_API_URL}/stations/search?localId=${
         localId === 0 ? '' : localId
       }&stayIds=${stayIdArr}&themeIds=${themeIdArr}&minprice=${minprice}&maxprice=${maxprice}&checkIn=${checkIn}&checkOut=${checkOut}`
     );
-
-    console.log('response: ', response);
 
     return response.data;
   }

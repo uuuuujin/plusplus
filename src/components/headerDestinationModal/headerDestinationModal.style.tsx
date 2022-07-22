@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import theme from '../../style/theme';
 import { Link } from 'react-router-dom';
 export const RegionButtonContainer = styled.div`
-  margin-top: 20px;
-  // border: 1px red solid;
+  padding: 20px 20px 0 20px;
+
   ul {
     display: flex;
     flex-wrap: wrap;
@@ -29,10 +29,20 @@ export const RegionButton = styled.button<{
   font-size: 16px;
   margin: 10px;
 
+  &:hover {
+    background-color: ${theme.colors.buttonHover};
+  }
+
   ${({ regionName, clickedRegionName }) => {
     return (
       regionName === clickedRegionName &&
-      'background-color: #000; color: #fff; font-weight: bold;'
+      `background-color: ${theme.colors.main}; 
+      color: #fff; 
+      font-weight: bold;
+      &:hover {
+        background-color: ${theme.colors.main};
+      }
+      `
     );
   }}
 `;
@@ -41,23 +51,22 @@ export const Bottom = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
-  padding: 20px 0;
-  // position: absolute;
-  bottom: 0;
-  left: 0;
+  padding: 20px 0 10px;
   border-top: 1px solid ${theme.colors.border};
 `;
 
 export const SearchLink = styled(Link)`
-  width: 150px;
-  height: 50px;
-  background-color: #000;
+  text-decoration: none;
+`;
+
+export const SearchButton = styled.div`
+  background-color: ${theme.colors.main};
   border-radius: 10px;
   color: #fff;
   border: none;
   font-size: 18px;
   cursor: pointer;
-  text-decoration: none;
   text-align: center;
-  line-height: 50px;
+  align-items: center;
+  padding: 15px 20px;
 `;

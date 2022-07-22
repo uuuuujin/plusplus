@@ -18,6 +18,8 @@ import {
   NavigationButtonContainer,
   NavigationButton,
   LinkEvent,
+  SlideDescriptionContainer,
+  StayDescription,
 } from './swiper.style';
 
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
@@ -29,10 +31,22 @@ interface SwiperDataType {
   end_date: string;
   rate: number;
   image: string;
+  minprice?: number;
+  maxprice?: number;
+  local_id?: {
+    id?: number;
+    name?: string;
+    classification?: string;
+  };
+}
+
+interface StayType extends StayBaseType {
+  start_date?: string;
+  end_date?: string;
 }
 
 interface swiperDataArrType {
-  swiperDataArr: SwiperDataType[] | StayBaseType[];
+  swiperDataArr: SwiperDataType[] | StayType[];
 }
 
 export default function SwiperComponent({
@@ -78,12 +92,25 @@ export default function SwiperComponent({
               }
             >
               <SlideContainer>
-                <SlideTitle>{item.name}</SlideTitle>
                 <SlideImage
                   className={item.name.includes('이벤트') ? 'event' : 'stay'}
                   src={item.image}
                 />
               </SlideContainer>
+              {item.name.includes('이벤트') ? (
+                <SlideDescriptionContainer>
+                  <SlideTitle>{item.name}</SlideTitle>
+                  <StayDescription>{`${item?.start_date} ~ ${item?.end_date}`}</StayDescription>
+                </SlideDescriptionContainer>
+              ) : (
+                <SlideDescriptionContainer>
+                  <SlideTitle>{item.name}</SlideTitle>
+                  <StayDescription>
+                    <span>{item.local_id?.name}</span>
+                    <span>{`₩${item.minprice?.toLocaleString()} ~ ₩${item.maxprice?.toLocaleString()}`}</span>
+                  </StayDescription>
+                </SlideDescriptionContainer>
+              )}
             </LinkEvent>
           </SwiperSlide>
         );

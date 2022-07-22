@@ -29,6 +29,10 @@ export const RegionButton = styled.button<{
   font-size: 16px;
   margin: 10px;
 
+  &:hover {
+    background-color: ${theme.colors.buttonHover};
+  }
+
   ${({ regionName, clickedRegionName }) => {
     return (
       regionName === clickedRegionName &&

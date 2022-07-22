@@ -47,7 +47,10 @@ export default function Home(): JSX.Element {
     <Container>
       <Wrapper>
         <MainBanner>
-          <MainBannerImage src="main_banner.jpg" alt="배너이미지" />
+          <MainBannerImage
+            src="https://images.prismic.io/stayfolio-production/8614b07b-8fd7-4c5c-a9b4-43011562d9dd_main_top+1800_850.jpg?auto=compress,format&rect=0,0,1800,850&w=1800&h=850"
+            alt="배너이미지"
+          />
         </MainBanner>
         <button onClick={logout}>로그아웃 테스트</button>
 

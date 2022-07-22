@@ -35,7 +35,6 @@ export const fetchUserInfo = createAsyncThunk(
         headers: { Authorization: `Bearer ${token}` },
       }
     );
-    console.log('유저 정보: ', response.data);
     return response.data.data;
   }
 );
@@ -46,7 +45,7 @@ interface LikeType {
 }
 
 export const fetchLike = async ({ token, stationId }: LikeType) => {
-  const response = await axios.post(
+  await axios.post(
     `${process.env.REACT_APP_API_URL}/likes`,
     {
       station_id: stationId,

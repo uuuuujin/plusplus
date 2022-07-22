@@ -64,7 +64,7 @@ export const ResetButton = styled.button`
   }
 
   &:hover {
-    background-color: #f2f2f2;
+    background-color: ${theme.colors.buttonHover};
   }
 `;
 
@@ -95,8 +95,12 @@ export const CheckboxElement = styled.div`
 export const CheckboxInput = styled.input`
   transform: scale(2);
   margin-right: 20px;
-  border: 1px solid red;
+  border: 1px solid ${theme.colors.main};
   cursor: pointer;
+
+  &:hover {
+    color: ${theme.colors.main};
+  }
 `;
 export const CheckboxLabel = styled.label`
   display: inline-block;

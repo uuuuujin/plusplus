@@ -17,6 +17,7 @@ import {
   selectCalendarReducerCheckOut,
 } from '../../store/modules/calendar/calendar.select';
 
+import theme from '../../style/theme';
 import MainModal from '../main-modal/mainModal.component';
 import {
   FilterModalContainer,
