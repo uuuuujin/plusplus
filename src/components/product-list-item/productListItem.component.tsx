@@ -7,6 +7,7 @@ import {
   selectAccessToken,
 } from '../../store/modules/user/user.select';
 import { fetchLike } from '../../api/user';
+import { deleteWishItem } from '../../api/wishlist';
 
 import { ROUTES } from '../../routes/routes';
 import {
@@ -76,7 +77,12 @@ export default function ProductListItem(
 
   const handleLike = () => {
     if (!isLoggedIn) dispatch(modalAction.radioLoginModal());
-    else fetchLike({ token: userToken, stationId: stayId });
+    else {
+      if (isLiked) deleteWishItem(userToken, stayId);
+      else fetchLike({ token: userToken, stationId: stayId });
+
+      setIsLiked((v) => !v);
+    }
   };
 
   const discounted_minprice = event && (100 - event.rate) * minPrice * 0.01;
