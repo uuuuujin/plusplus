@@ -14,19 +14,13 @@ export const ItemBox = styled.div`
   margin: 0 auto;
   margin-top: 10px;
   margin-bottom: 10px;
-
-  @media screen and (max-width: 450px) {
-    > img {
-      display: none;
-    }
-  }
 `;
 
 export const InfoBox = styled.div`
   width: 70%;
   padding: 22px 15px 3px 15px;
 
-  @media screen and (max-width: 450px) {
+  @media screen and (max-width: 400px) {
     width: 100%;
   }
 `;
@@ -41,6 +35,13 @@ export const RoomName = styled.span`
 export const StyledLink = styled(Link)`
   width: 30%;
   height: 100%;
+
+  @media screen and (max-width: 450px) {
+    width: 0%;
+    > img {
+      display: none;
+    }
+  }
 `;
 
 export const RoomImg = styled.img`

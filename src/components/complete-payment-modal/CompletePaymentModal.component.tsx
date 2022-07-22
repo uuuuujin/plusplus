@@ -28,12 +28,6 @@ export interface IPaymentModalProps {
   roomName: string;
 }
 
-declare global {
-  interface Window {
-    kakao: any;
-  }
-}
-
 const CompletePaymentModal = (props: IPaymentModalProps) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();

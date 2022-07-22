@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { BsMap } from 'react-icons/bs';
+import theme from '../../style/theme';
 
 export const PaymentWrapper = styled.div`
   display: flex;
@@ -62,7 +63,7 @@ export const CheckInOutBox = styled.div`
 `;
 
 export const CheckInOutText = styled.span`
-  width: 20%;
+  width: 24%;
   font-size: 14px;
   font-weight: 500;
 `;
@@ -89,7 +90,7 @@ export const Line = styled.div`
 `;
 
 export const DateText = styled.span`
-  width: 18%;
+  width: 30%;
   min-width: 50px;
   text-align: center;
   height: 15px;
@@ -200,7 +201,7 @@ export const PaymentEventBox = styled.div`
 
 export const EventInfo = styled.div`
   border: none;
-  color: #94b49f;
+  color: ${theme.colors.main};
   font-weight: bold;
   width: 30%;
   padding: 6px 0;
@@ -250,7 +251,8 @@ export const PaymentButton = styled.button`
   border: none;
   text-align: center;
   color: #fff;
-  background-color: rgb(194, 220, 210);
+  background-color: ${theme.colors.main}
+  };
 `;
 
 export const ErrorText = styled.div`

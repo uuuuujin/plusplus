@@ -218,7 +218,7 @@ const CalendarModal = ({ roomId }: CalendarModalProps) => {
     <MainModal
       isOpen={isCalendarModalOpen}
       onClose={onCloseCalendar}
-      title="언제 떠날까요 ✈️✈️"
+      title="🗓 언제 떠날까요 "
       contentWidth={768}
     >
       <CalendarWrapper>

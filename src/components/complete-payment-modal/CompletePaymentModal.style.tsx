@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import theme from '../../style/theme';
 
 export const PaymentModalContainer = styled.div`
   display: flex;
@@ -50,7 +51,7 @@ export const ButtonBox = styled.div`
 `;
 
 export const MoveHomeButton = styled.button`
-  color: #94b49f;
+  color: ${theme.colors.main};
   border: 1px solid #ddd;
   background-color: transparent;
   padding: 10px;

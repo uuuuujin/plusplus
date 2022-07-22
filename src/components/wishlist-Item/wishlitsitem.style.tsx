@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { BiStar } from 'react-icons/bi';
+import theme from '../../style/theme';
 
 export const ItemContainer = styled.div`
   display: flex;
@@ -30,7 +31,7 @@ export const ItemBox = styled.div`
     }
     img {
       width: 100%;
-      height: 400px;
+      height: 240px;
       object-fit: cover;
     }
   }
@@ -51,6 +52,9 @@ export const RoomInfoBox = styled.div`
   font-size: 14px;
   padding: 10px;
   height: 40%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 export const PriceInfoBox = styled.div`
@@ -75,7 +79,7 @@ export const SaleRate = styled.span`
 `;
 
 export const RegisterButton = styled.button`
-  background-color: #94b49f;
+  background-color: ${theme.colors.main};
   border: none;
   cursor: pointer;
   color: #fff;
