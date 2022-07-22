@@ -57,6 +57,4 @@ export const fetchLike = async ({ token, stationId }: LikeType) => {
       },
     }
   );
-
-  console.log('좋아요!!: ', response.data);
 };
