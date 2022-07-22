@@ -35,7 +35,7 @@ export const SelectCalendarText = styled.div`
   font-weight: 400;
   margin-bottom: 10px;
 
-  @media screen and (min-height: 400px) {
+  @media screen and (max-width: 480px) {
     > span {
       font-size: 13px;
     }
@@ -65,6 +65,13 @@ export const RoomHeadBox = styled.div`
 export const RoomInFormationText = styled.span`
   letter-spacing: 3.2px;
   font-size: 14px;
+
+  &.amenities {
+    display: inline-block;
+    margin-top: 70px;
+    border-top: 1px solid ${theme.colors.border};
+    padding-top: 30px;
+  }
 `;
 
 export const RoomName = styled.span`
@@ -123,6 +130,39 @@ export const PaymentButton = styled.button`
 `;
 
 export const ContentBox = styled.div`
-  margin-top: 40px;
-  height: 200px;
+  margin-top: 55px;
+  // height: 200px;
+  line-height: 2;
+`;
+
+export const AminitiesUl = styled.ul`
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+`;
+
+export const AminitiesLi = styled.li`
+  color: #777;
+  margin: 20px 10px 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1 1 auto;
+
+  & > svg {
+    font-size: 50px;
+  }
+
+  & > span {
+    font-size: 14px;
+    display: inline-block;
+    margin-top: 10px;
+  }
+
+  @media screen and (max-width: 480px) {
+    & > svg {
+      font-size: 30px;
+    }
+  }
 `;

@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
-import { formatDate, formatDateInSearch } from '../../utils/calendar';
+import { formatDate } from '../../utils/calendar';
 import { getRoom } from '../../api/stay';
 
 import { modalAction } from '../../store/modules/modal/modal.slice';
@@ -30,8 +30,15 @@ import {
   RoomImg,
   PaymentButton,
   ContentBox,
+  AminitiesUl,
+  AminitiesLi,
 } from './roomDescription.style';
 import { roomData } from '../../api/payment';
+
+import { CgSmartHomeRefrigerator } from 'react-icons/cg';
+import { GiCoffeePot, GiWashingMachine, GiWineBottle } from 'react-icons/gi';
+import { BsSpeakerFill } from 'react-icons/bs';
+import { FaPumpSoap } from 'react-icons/fa';
 
 export interface paymentProps extends roomData {
   checkInDate: number[];
@@ -81,6 +88,24 @@ const RoomDescription = () => {
     fetchData();
   }, [dispatch, ROOM_ID]);
 
+  const amenities_list = [
+    {
+      icon: <CgSmartHomeRefrigerator />,
+      name: '냉장고',
+    },
+    {
+      icon: <GiCoffeePot />,
+      name: '커피포트',
+    },
+    {
+      icon: <GiWashingMachine />,
+      name: '세탁기',
+    },
+    { icon: <BsSpeakerFill />, name: '스피커' },
+    { icon: <FaPumpSoap />, name: '샴푸' },
+    { icon: <GiWineBottle />, name: '와인잔' },
+  ];
+
   return (
     <StyledContainer>
       <DescriptionRoomContainer>
@@ -114,6 +139,20 @@ const RoomDescription = () => {
           </PriceBox>
           <RoomImg src={roomData.image} />
           <ContentBox>{roomData.content}</ContentBox>
+
+          <RoomInFormationText className="amenities">
+            AMENITIES
+          </RoomInFormationText>
+          <AminitiesUl>
+            {amenities_list.map((el, index) => {
+              return (
+                <AminitiesLi>
+                  {el.icon}
+                  <span>{el.name}</span>
+                </AminitiesLi>
+              );
+            })}
+          </AminitiesUl>
         </RoomHeadBox>
 
         <PaymentButton onClick={handleOnClickPayment}>결제하기</PaymentButton>
