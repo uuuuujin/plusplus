@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks/index.hook';
 import { userAction } from '../../store/modules/user/user.slice';
+import { fetchUserInfo } from '../../api/user';
 
 export default function Auth(): JSX.Element {
   const navigate = useNavigate();
@@ -17,18 +18,7 @@ export default function Auth(): JSX.Element {
     };
 
     dispatch(userAction.logIn(data));
-
-    // const getUserInfo = async (token: string) => {
-    //   const response = await axios.get('http://localhost:5050/users', {
-    //     headers: {
-    //       Authorization: `Bearer ${token}`,
-    //     },
-    //   });
-
-    //   console.log(response.data);
-    // };
-
-    // getUserInfo(data.accessToken);
+    dispatch(fetchUserInfo(data.accessToken));
 
     navigate('/');
   }, [navigate, dispatch, location]);

@@ -126,6 +126,13 @@ const hotelData = [
       end_date: '2022-08-05',
       rate: 30,
     },
+    likes: [
+      {
+        id: 0,
+        station_id: 0,
+        user_id: 0,
+      },
+    ],
   },
   {
     id: 1,
@@ -142,6 +149,13 @@ const hotelData = [
       end_date: '2022-08-05',
       rate: 30,
     },
+    likes: [
+      {
+        id: 0,
+        station_id: 0,
+        user_id: 0,
+      },
+    ],
   },
   {
     id: 1,
@@ -158,6 +172,13 @@ const hotelData = [
       end_date: '2022-08-05',
       rate: 30,
     },
+    likes: [
+      {
+        id: 0,
+        station_id: 0,
+        user_id: 0,
+      },
+    ],
   },
   {
     id: 1,
@@ -174,6 +195,13 @@ const hotelData = [
       end_date: '2022-08-05',
       rate: 30,
     },
+    likes: [
+      {
+        id: 0,
+        station_id: 0,
+        user_id: 0,
+      },
+    ],
   },
   {
     id: 1,
@@ -190,6 +218,13 @@ const hotelData = [
       end_date: '2022-08-05',
       rate: 30,
     },
+    likes: [
+      {
+        id: 0,
+        station_id: 0,
+        user_id: 0,
+      },
+    ],
   },
   {
     id: 1,
@@ -206,6 +241,13 @@ const hotelData = [
       end_date: '2022-08-05',
       rate: 30,
     },
+    likes: [
+      {
+        id: 0,
+        station_id: 0,
+        user_id: 0,
+      },
+    ],
   },
   {
     id: 1,
@@ -222,6 +264,13 @@ const hotelData = [
       end_date: '2022-08-05',
       rate: 30,
     },
+    likes: [
+      {
+        id: 0,
+        station_id: 0,
+        user_id: 0,
+      },
+    ],
   },
   {
     id: 1,
@@ -238,6 +287,13 @@ const hotelData = [
       end_date: '2022-08-05',
       rate: 30,
     },
+    likes: [
+      {
+        id: 0,
+        station_id: 0,
+        user_id: 0,
+      },
+    ],
   },
 ];
 export default function RoomList(): JSX.Element {
@@ -298,7 +354,7 @@ export default function RoomList(): JSX.Element {
         </Filter>
       </Filters>
 
-      <ProductListContainer>
+      {/* <ProductListContainer>
         {hotelData.map((item, key) => [
           <ProductListItem
             key={key}
@@ -310,9 +366,10 @@ export default function RoomList(): JSX.Element {
             stayRegion={item.productRegion}
             StayType={item.productStayType}
             event={item.event_id}
+            likes={item.likes}
           />,
         ])}
-      </ProductListContainer>
+      </ProductListContainer> */}
     </div>
   );
 }
