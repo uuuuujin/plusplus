@@ -119,7 +119,12 @@ export default function StayDescription(): JSX.Element {
         <ContentsContainer>
           <SubTitle>Map</SubTitle>
           {stayData.id !== 0 && (
-            <Map y={parseFloat(stayData.y)} x={parseFloat(stayData.x)} />
+            <Map
+              y={parseFloat(stayData.y)}
+              x={parseFloat(stayData.x)}
+              name={stayData.name}
+              height={450}
+            />
           )}
         </ContentsContainer>
 
