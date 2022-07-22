@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
 import { modalAction } from '../../store/modules/modal/modal.slice';
 import { searchAction } from '../../store/modules/search/search.slice';
+import { calendarAction } from '../../store/modules/calendar/calendar.slice';
 import { selectIsHeaderDestinationModalOpen } from '../../store/modules/modal/modal.select';
 import {
   selectSearchRegion,
@@ -30,6 +31,8 @@ export default function HeaderDestinationModal(): JSX.Element {
 
   const handleDestinationModal = () => {
     dispatch(modalAction.radioHeaderDestinationModal());
+    dispatch(calendarAction.setCheckInDate(undefined));
+    dispatch(calendarAction.setCheckOutDate(undefined));
   };
   const handleRegionClick = (props: IndexNameType) => {
     dispatch(searchAction.setSearchRegionName(props));

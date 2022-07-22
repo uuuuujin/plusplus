@@ -10,6 +10,7 @@ import Header from '../../components/header/header.component';
 import Footer from '../../components/footer/footer.component';
 import SwiperComponent from '../../components/swiper/swiper.component';
 import UserInfoModal from '../../components/user-info-modal/userInfoModal.component';
+import BannerSwiper from '../../components/banner-swiper/bannerSwiper.component';
 
 import {
   MainBanner,
@@ -34,14 +35,20 @@ export default function Home(): JSX.Element {
     fetchData();
   }, [dispatch]);
 
+  const BANNER_IMAGES = [
+    'https://d2u1fvsvew9tft.cloudfront.net/plus/1658500098920이벤트배너.png',
+    'https://d2u1fvsvew9tft.cloudfront.net/plus/1658498830946이벤트배너2.png',
+  ];
+
   return (
     <Container>
       <Wrapper>
         <MainBanner>
-          <MainBannerImage
-            src="https://images.prismic.io/stayfolio-production/8614b07b-8fd7-4c5c-a9b4-43011562d9dd_main_top+1800_850.jpg?auto=compress,format&rect=0,0,1800,850&w=1800&h=850"
+          {/* <MainBannerImage
+            src="https://d2u1fvsvew9tft.cloudfront.net/plus/1658500098920이벤트배너.png"
             alt="배너이미지"
-          />
+          /> */}
+          <BannerSwiper imgUrlArr={BANNER_IMAGES} />
         </MainBanner>
 
         <SliderContainer>

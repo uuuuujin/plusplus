@@ -45,7 +45,7 @@ import {
   selectIsPaymentCompleteModalOpen,
 } from '../../store/modules/modal/modal.select';
 import { formatDate, formatDateInSearch } from '../../utils/calendar';
-import { useLocation } from 'react-router-dom';
+import {useLocation} from 'react-router-dom';
 import { postOrder, postOrderProps } from '../../api/payment';
 import {
   getUser,
@@ -58,11 +58,22 @@ import { selectAccessToken } from '../../store/modules/user/user.select';
 import { paymentProps } from '../../routes/room-description/roomDescription.component';
 import { calendarAction } from '../../store/modules/calendar/calendar.slice';
 import ErrorModal from '../error-modal/errorModal.component';
+import {getRoomDate} from "../../api/calendar";
+import {IRoomBooking} from "../calendar-modal/calendarModal.component";
 
 export const StyledContainer = styled(ContainerStyle)`
   background-color: #fafafa;
   margin-bottom: 60px;
 `;
+
+const selectOptions = [
+  { value: 0, text: '나이대를 선택하세요' },
+  { value: 20, text: '20대' },
+  { value: 30, text: '30대' },
+  { value: 40, text: '40대' },
+  { value: 50, text: '50대' },
+  { value: 60, text: '60대 이상' },
+];
 
 export const Payment = () => {
   const dispatch = useAppDispatch();
@@ -98,14 +109,7 @@ export const Payment = () => {
   const [isNameError, setIsNameError] = useState<boolean>(false);
   const [isTelError, setIsTelError] = useState<boolean>(false);
 
-  const selectOptions = [
-    { value: 0, text: '나이대를 선택하세요' },
-    { value: 20, text: '20대' },
-    { value: 30, text: '30대' },
-    { value: 40, text: '40대' },
-    { value: 50, text: '50대' },
-    { value: 60, text: '60대 이상' },
-  ];
+
 
   const handleClickRadioButton = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserInfo({
@@ -167,9 +171,6 @@ export const Payment = () => {
       age: userInfo.age,
     };
 
-    const res1 = postUser(updateUser, accessToken);
-    res1.then((result) => console.log('업데이트가 완료되었습니다.'));
-
     const postData: postOrderProps = {
       startDate: formatDateInSearch(state.checkInDate),
       endDate: formatDateInSearch(state.checkOutDate),
@@ -182,11 +183,28 @@ export const Payment = () => {
       roomId: state.id,
       eventId: 1,
     };
-    const res2 = postOrder(postData, accessToken);
-    res2.then((res) => console.log('주문 완료'));
-    dispatch(calendarAction.setCheckInDate(undefined));
-    dispatch(calendarAction.setCheckOutDate(undefined));
-    dispatch(modalAction.radioPaymentCompleteModal());
+
+    const responseRoomIsPossible = getRoomDate(state.id,postData.startDate,postData.endDate);
+    responseRoomIsPossible.then(
+        res => {
+          const data = res.data.find((item: IRoomBooking) => (
+            item.isOrdered
+        ))
+          if(data !== undefined){
+            dispatch(modalAction.radioErrorModal());
+          }else{
+            //정보를 매번 수정해 줄 필요가 있나??
+            const res1 = postUser(updateUser, accessToken);
+            res1.then((result) => console.log('업데이트가 완료되었습니다.'));
+
+            const res2 = postOrder(postData, accessToken);
+            res2.then((res) => console.log('주문 완료'));
+            dispatch(calendarAction.setCheckInDate(undefined));
+            dispatch(calendarAction.setCheckOutDate(undefined));
+            dispatch(modalAction.radioPaymentCompleteModal());
+          }
+        }
+    )
   };
 
   return (
@@ -334,7 +352,9 @@ export const Payment = () => {
             </PaymentPriceBox>
           </PaymentInfoBox>
           <PaymentButton onClick={handleCompleteModalOpen}>
-            85,000원 결제하기
+            {state.station_id.event_id
+                ? state.price * (1 - state.station_id.event_id.rate / 100)
+                : state.price}원 결제하기
           </PaymentButton>
         </PaymentWrapper>
       )}
@@ -353,7 +373,8 @@ export const Payment = () => {
       {isErrorModalOpen && (
         <ErrorModal
           title={'잘못된 접근방식입니다'}
-          content={'!!!메인페이지로 돌아갑니다.!!!'}
+          content={`방이 예약되었거나 잘못된 접근방식입니다. 
+          \n메인페이지로 돌아갑니다.`}
         />
       )}
     </StyledContainer>

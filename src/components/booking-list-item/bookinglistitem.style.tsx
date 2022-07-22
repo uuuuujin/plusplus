@@ -20,7 +20,7 @@ export const InfoBox = styled.div`
   width: 70%;
   padding: 22px 15px 3px 15px;
 
-  @media screen and (max-width: 400px) {
+  @media screen and (max-width: 480px) {
     width: 100%;
   }
 `;
@@ -35,6 +35,8 @@ export const RoomName = styled.span`
 export const StyledLink = styled(Link)`
   width: 30%;
   height: 100%;
+  text-decoration: none;
+  color: #000;
 
   @media screen and (max-width: 450px) {
     width: 0%;
@@ -94,7 +96,7 @@ export const ButtonBox = styled.div`
   display: flex;
   align-items: center;
   //height: calc(175px - 70%);
-  height: 60px;
+  height: 15%;
 
   > svg {
     margin-left: 30px;

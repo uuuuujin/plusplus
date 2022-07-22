@@ -98,13 +98,13 @@ export default function Search(): JSX.Element {
   useEffect(() => {
     dispatch(navigatorAction.setCurrnetPage(location.pathname.slice(1)));
     const defaultProps = {
-      localId: 0,
+      localId: searchRegionName.id ? searchRegionName.id : 0,
       stayIds: [],
       themeIds: [],
       minprice: 0,
       maxprice: 1000000,
-      checkIn: '',
-      checkOut: '',
+      checkIn: checkInDate ? formattedCheckIn : '',
+      checkOut: checkOutDate ? formattedCheckOut : '',
     };
 
     const fetchSearchResult = async () => {
@@ -115,7 +115,15 @@ export default function Search(): JSX.Element {
 
   return (
     <Container>
-      <Wrapper>
+      <Wrapper
+        className={
+          searchResult.stations.length === 2
+            ? 'two'
+            : searchResult.stations.length === 1
+            ? 'one'
+            : ''
+        }
+      >
         <Header />
         <FilterWrap>
           <FilterTop>

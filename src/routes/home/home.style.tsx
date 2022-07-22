@@ -7,6 +7,7 @@ export const Wrapper = styled.div`
 export const MainBanner = styled.div`
   width: 100%;
   text-align: center;
+  margin-top: 30px;
 `;
 
 export const MainBannerImage = styled.img`
@@ -14,7 +15,7 @@ export const MainBannerImage = styled.img`
 `;
 
 export const SliderContainer = styled.div`
-  margin: 60px 0 60px;
+  margin: 100px 0 60px;
 `;
 
 export const SliderTitle = styled.div`
