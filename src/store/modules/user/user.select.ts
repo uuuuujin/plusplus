@@ -13,3 +13,8 @@ export const selectIsLoggedIn = createSelector(
   [selectUserReducer],
   (user) => user.isLoggedIn
 );
+
+export const selectUserId = createSelector(
+  [selectUserReducer],
+  (user) => user.userId
+);
