@@ -3,9 +3,18 @@ import theme from '../../style/theme';
 
 export const Wrapper = styled.div`
   padding-bottom: 60px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
+
+  &.two {
+    height: 80vh;
+
+    @media (max-width: 480px) {
+      height: auto;
+    }
+  }
+
+  &.one {
+    height: 80vh;
+  }
 `;
 
 export const FilterWrap = styled.div`
@@ -15,9 +24,6 @@ export const FilterWrap = styled.div`
   padding: 10px;
   position: fixed;
   background-color: #fff;
-  // z-index: 3;
-
-  // width: 69%;
 
   @media (max-width: 768px) {
     width: 95%;
@@ -49,10 +55,6 @@ export const SearchButton = styled.button`
   background-color: ${theme.colors.main};
   border: 0;
   color: #fff;
-  // background-color: #fff;
-  // border: 1px solid ${theme.colors.main};
-  // color: ${theme.colors.main};
-
   &:hover {
     background-color: ${theme.colors.mainButtonHover};
     border: 1px solid: ${theme.colors.mainButtonHover};
@@ -165,7 +167,7 @@ export const ProductListContainer = styled.div`
 `;
 
 export const EmptySearchResult = styled.div`
-  height: 60vh;
+  height: 65vh;
   text-align: center;
   display: flex;
   justify-content: center;
