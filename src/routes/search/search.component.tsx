@@ -194,6 +194,7 @@ export default function Search(): JSX.Element {
                 stayRegion={item.local_id.name}
                 StayType={item.stay_id.name}
                 event={item.event_id}
+                likes={item.likes}
               />,
             ])
           )}

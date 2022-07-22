@@ -1,16 +1,19 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { PURGE } from 'redux-persist';
+import { fetchUserInfo } from '../../../api/user';
 
 export interface UserState {
   accessToken: string;
   refreshToken: string;
   isLoggedIn: boolean;
+  userId: number;
 }
 
 const initialState: UserState = {
   accessToken: '',
   refreshToken: '',
   isLoggedIn: false,
+  userId: 0,
 };
 
 export const userSlice = createSlice({
@@ -29,7 +32,11 @@ export const userSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(PURGE, () => initialState);
+    builder
+      .addCase(PURGE, () => initialState)
+      .addCase(fetchUserInfo.fulfilled, (state, action) => {
+        state.userId = action.payload.user.id;
+      });
   },
 });
 

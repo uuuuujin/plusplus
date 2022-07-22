@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import theme from '../../style/theme';
 import { Link } from 'react-router-dom';
+import { MdFavorite } from 'react-icons/md';
 
 export const TitleContainer = styled.div`
   display: flex;
@@ -140,5 +141,20 @@ export const RoomCost = styled.div`
 
   @media (max-width: 768px) {
     font-size: 12px;
+  }
+`;
+
+export const FilledHeart = styled(MdFavorite)`
+  color: ${theme.colors.filledHeart};
+`;
+
+export const LikeIconContainer = styled.div`
+  display: flex;
+  align-items: center;
+
+  & > svg {
+    width: 26px;
+    height: 26px;
+    cursor: pointer;
   }
 `;

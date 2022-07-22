@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import theme from '../../style/theme';
 import { Link } from 'react-router-dom';
+import { MdFavorite } from 'react-icons/md';
 
 export const Container = styled.div`
   width: 383px;
@@ -95,4 +96,8 @@ export const DiscountedCostContainer = styled.div`
 export const DiscountRate = styled.span`
   color: ${theme.colors.discount};
   margin-right: 10px;
+`;
+
+export const FilledHeart = styled(MdFavorite)`
+  color: ${theme.colors.filledHeart};
 `;

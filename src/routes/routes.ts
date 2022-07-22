@@ -83,8 +83,8 @@ export const ROUTES = {
     component: Payment,
   },
   AUTH: {
-    path: 'auth/*',
-    link: 'auth/*',
+    path: '/auth/*',
+    link: '/auth/*',
     component: Auth,
   },
 };
