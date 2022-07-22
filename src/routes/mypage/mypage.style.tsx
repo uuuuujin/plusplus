@@ -1,6 +1,6 @@
 import styled, { keyframes } from 'styled-components';
 import theme from '../../style/theme';
-import { MdFavorite, MdPersonPin } from 'react-icons/md';
+import { MdFavorite } from 'react-icons/md';
 import { AiFillCalendar, AiOutlineComment } from 'react-icons/ai';
 
 const componentFade = keyframes`
@@ -15,16 +15,26 @@ const componentFade = keyframes`
 
 export const LogoutButton = styled.button`
   border: none;
-  margin: 0 0 10px 0;
-  padding: 3px;
+  background: transparent;
   cursor: pointer;
-  color: white;
-  font-size: 10px;
-  background-color: #ccd0d4;
+  color: gray;
+  font-size: 12px;
 `;
 
 export const Text = styled.span`
   color: ${theme.colors.main};
+`;
+
+export const TitleText = styled.span`
+  font-size: 20px;
+  margin: 20px 0 0 0;
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: 1.0px;
+  
+  @media screen and (max-width: 480px){
+     font-size: 14px;
+  }
 `;
 
 export const InnerContainer = styled.div`
@@ -117,11 +127,14 @@ export const FlexRow = styled.div`
     font-size: 30px;
     margin-bottom: 8px;
     cursor: pointer;
-    &:hover {
-      transform: scale(1.1);
-    }
   }
 `;
+
+export const ModifyConditionBox = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+`
 
 export const ModifyButton = styled.button`
   border: none;
@@ -129,6 +142,10 @@ export const ModifyButton = styled.button`
   cursor: pointer;
   color: gray;
   font-size: 12px;
+  &::before{
+    content:"|";
+    margin-right: 10px;
+  }
 `;
 
 export const ItemMenu = styled.div`
@@ -140,6 +157,13 @@ export const ItemMenu = styled.div`
   padding: 5px;
   height: 50px;
   border-right: 1px solid #000;
+  cursor: pointer;
+  
+  &:hover{
+    > svg{
+      transform: scale(1.1);
+    }
+  }
 
   > span {
     font-size: 12px;
@@ -164,11 +188,11 @@ export const FillFavoriteIcon = styled(MdFavorite)`
 `;
 
 export const FillCalendar = styled(AiFillCalendar)`
-  color: #68a790;
+  color: ${theme.colors.main};
 `;
 
 export const FillComments = styled(AiOutlineComment)`
-  color: #68a790;
+  color: ${theme.colors.main};
 `;
 
 export const Coupon = styled.div`

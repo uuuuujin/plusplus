@@ -12,7 +12,7 @@ import {
   ItemMenu,
   LoginIcon,
   LogoutButton,
-  ModifyButton,
+  ModifyButton, ModifyConditionBox,
   MypageContainer,
   UserIcon,
   UserInfo,
@@ -139,11 +139,14 @@ export default function MyPage(): JSX.Element {
                 color={userInfo.oauthName === 'NAVER' ? NAVERCOLOR : KAKAOCOLOR}
                 text={userInfo.oauthName === 'NAVER' ? 'NAVER' : 'KAKAO'}
               />
+
+            </FlexRow>
+            <ModifyConditionBox>
+              <LogoutButton onClick={logout}>로그아웃</LogoutButton>
               <ModifyButton onClick={handleOnClickModifyButton}>
                 회원정보 수정
               </ModifyButton>
-            </FlexRow>
-            <LogoutButton onClick={logout}>로그아웃</LogoutButton>
+            </ModifyConditionBox>
           </UserInfo>
 
           <UserInfo>
