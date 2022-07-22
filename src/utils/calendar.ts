@@ -44,6 +44,7 @@ export const getCalendar = (year: number, month: number) => {
  * @param month 월
  * @param day 일
  * @param today 오늘 날짜
+ * @param soldDay
  * @constructor
  */
 export const CompareDate = (
@@ -193,5 +194,14 @@ export const formatDateInSearch = (date: number[]) => {
   let formatted_date = `${date[0]}-${date[1] < 10 ? '0' + date[1] : date[1]}-${
     date[2] < 10 ? '0' + date[2] : date[2]
   }`;
+  return formatted_date;
+};
+
+export const formatDate2 = (_date: number[]) => {
+  const date = new Date(_date[0], _date[1], _date[2]);
+  let formatted_date = `${date.getFullYear()}-${
+    date.getMonth() < 10 ? '0' + date.getMonth() : date.getMonth()
+  }-${date.getDate() < 10 ? '0' + date.getDate() : date.getDate()}`;
+
   return formatted_date;
 };

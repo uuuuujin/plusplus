@@ -12,7 +12,8 @@ import {
   CheckOutTimeText,
   DateText,
   ErrorText,
-  EventButton,
+  EventInfo,
+  EventRate,
   HeadText,
   ImgBox,
   InfoBox,
@@ -39,7 +40,10 @@ import styled from 'styled-components';
 import CompletePaymentModal from '../complete-payment-modal/CompletePaymentModal.component';
 import { modalAction } from '../../store/modules/modal/modal.slice';
 import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
-import { selectIsPaymentCompleteModalOpen } from '../../store/modules/modal/modal.select';
+import {
+  selectIsErrorModalOpen,
+  selectIsPaymentCompleteModalOpen,
+} from '../../store/modules/modal/modal.select';
 import { formatDate, formatDateInSearch } from '../../utils/calendar';
 import { useLocation } from 'react-router-dom';
 import { postOrder, postOrderProps } from '../../api/payment';
@@ -53,6 +57,7 @@ import {
 import { selectAccessToken } from '../../store/modules/user/user.select';
 import { paymentProps } from '../../routes/room-description/roomDescription.component';
 import { calendarAction } from '../../store/modules/calendar/calendar.slice';
+import ErrorModal from '../error-modal/errorModal.component';
 
 export const StyledContainer = styled(ContainerStyle)`
   background-color: #fafafa;
@@ -74,9 +79,14 @@ export const Payment = () => {
   const isPaymentCompleteModalOpen = useAppSelector(
     selectIsPaymentCompleteModalOpen
   );
+
+  const isErrorModalOpen = useAppSelector(selectIsErrorModalOpen);
   const [userInfo, setUserInfo] = useState<userData>(InitialData);
 
   useEffect(() => {
+    if (!state) {
+      dispatch(modalAction.radioErrorModal());
+    }
     const user = getUser(accessToken);
     user.then((res) => {
       setUserInfo(res.data.user);
@@ -163,7 +173,9 @@ export const Payment = () => {
     const postData: postOrderProps = {
       startDate: formatDateInSearch(state.checkInDate),
       endDate: formatDateInSearch(state.checkOutDate),
-      price: state.price,
+      price: state.station_id.event_id
+        ? state.price * (1 - state.station_id.event_id.rate / 100)
+        : state.price,
       SpecialRequest: '감사합니다.',
       stationId: state.station_id.id,
       userId: userInfo.id,
@@ -179,7 +191,7 @@ export const Payment = () => {
 
   return (
     <StyledContainer>
-      {userInfo && (
+      {userInfo && state && (
         <PaymentWrapper>
           <Header />
           <OrderInfoBox>
@@ -291,16 +303,34 @@ export const Payment = () => {
             <HeadText>금액 및 할인 정보*</HeadText>
             <PaymentPriceBox>
               <PaymentPriceText>총 예약 금액</PaymentPriceText>
-              <SalePrice> 85,000원</SalePrice>
+              <SalePrice> {state.price.toLocaleString()}원</SalePrice>
             </PaymentPriceBox>
             <PaymentEventBox>
               <PaymentPriceText>적용가능 이벤트</PaymentPriceText>
-              <EventButton>이벤트 조회/적용</EventButton>
+              <EventInfo>
+                {state.station_id.event_id
+                  ? state.station_id.event_id.name
+                  : '없음'}
+              </EventInfo>
+            </PaymentEventBox>
+            <PaymentEventBox>
+              <PaymentPriceText>할인률</PaymentPriceText>
+              <EventRate>
+                {state.station_id.event_id
+                  ? state.station_id.event_id.rate
+                  : ''}
+                %
+              </EventRate>
             </PaymentEventBox>
             <Line />
             <PaymentPriceBox>
               <PaymentPriceText>결제 금액</PaymentPriceText>
-              <TotalPrice> 85,000원</TotalPrice>
+              <TotalPrice>
+                {state.station_id.event_id
+                  ? state.price * (1 - state.station_id.event_id.rate / 100)
+                  : state.price}
+                원
+              </TotalPrice>
             </PaymentPriceBox>
           </PaymentInfoBox>
           <PaymentButton onClick={handleCompleteModalOpen}>
@@ -318,6 +348,12 @@ export const Payment = () => {
           phoneNumber={userInfo.phoneNumber}
           stationName={state.station_id.name}
           roomName={state.name}
+        />
+      )}
+      {isErrorModalOpen && (
+        <ErrorModal
+          title={'잘못된 접근방식입니다'}
+          content={'!!!메인페이지로 돌아갑니다.!!!'}
         />
       )}
     </StyledContainer>

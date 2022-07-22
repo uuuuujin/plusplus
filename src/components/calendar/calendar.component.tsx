@@ -8,7 +8,6 @@ import {
   DayTxt,
   MonthBox,
   MonthText,
-  ReservationIcon,
   YearText,
 } from './calendar.style';
 import { CompareDate, getCalendar } from '../../utils/calendar';
@@ -21,15 +20,19 @@ import {
 import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
 import { calendarAction } from '../../store/modules/calendar/calendar.slice';
 
-const mockData = [4, 16, 20, 25, 30];
-
 type CalendarProps = {
   year: number;
   month: number;
   roomId?: number;
+  disabled?: number[];
 };
 
-const Calendar = ({ year, month, roomId }: CalendarProps): JSX.Element => {
+const Calendar = ({
+  year,
+  month,
+  roomId,
+  disabled,
+}: CalendarProps): JSX.Element => {
   const dispatch = useAppDispatch();
   const { startDay, totalOfDay } = getCalendar(year, month);
   const todayDate = new Date();
@@ -81,7 +84,7 @@ const Calendar = ({ year, month, roomId }: CalendarProps): JSX.Element => {
                     roomId
                       ? [
                           true,
-                          mockData.includes(index + i + 1 - startDay),
+                          disabled!.includes(index + i + 1 - startDay),
                           disableDay,
                         ]
                       : [false, false, [0, 0, 0]],
