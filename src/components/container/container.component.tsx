@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
-const ContainerStyle = styled.div`
+export const ContainerStyle = styled.div`
   max-width: 768px;
-  margin: 0 auto;
-  background-color: pink;
+  margin: 76px auto 0px;
+  background-color: #fff;
 `;
 
 interface ContainerProp {
@@ -11,5 +11,9 @@ interface ContainerProp {
 }
 
 export default function Container({ children }: ContainerProp): JSX.Element {
-  return <ContainerStyle>{children}</ContainerStyle>;
+  return (
+    <div>
+      <ContainerStyle>{children}</ContainerStyle>
+    </div>
+  );
 }

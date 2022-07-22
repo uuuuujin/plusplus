@@ -1,0 +1,16 @@
+.customOverlay{
+    display: flex;
+    width: 60px;
+    border-radius: 5px;
+    padding: 4px 0;
+    color: #fff;
+    background-color: #ff9f38;
+    align-items: center;
+    text-align: center;
+
+}
+
+.roomText{
+    width: 100%;
+    font-size: 14px;
+}

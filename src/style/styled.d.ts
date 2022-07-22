@@ -6,7 +6,12 @@ declare module 'styled-components' {
     borderRadius: string;
     colors: {
       main: string;
-      secondary: string;
+      border: string;
+      subTitle: string;
+      discount: string;
+      filledHeart: string;
+      buttonHover: string;
+      mainButtonHover: string;
     };
   }
 }
