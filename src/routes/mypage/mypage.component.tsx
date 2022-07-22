@@ -21,7 +21,7 @@ import BookingListComponent from '../../components/booking-list/bookinglist.comp
 import Header from '../../components/header/header.component';
 import Footer from '../../components/footer/footer.component';
 import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { navigatorAction } from '../../store/modules/navigator/navigator.slice';
 import { StyledContainer } from '../../components/payment/payment.component';
 import { useState } from 'react';
@@ -31,6 +31,7 @@ import { selectIsUserModifyModalOpen } from '../../store/modules/modal/modal.sel
 import UserModifyModal from '../../components/user-modify-modal/userModifyModal.component';
 import { modalAction } from '../../store/modules/modal/modal.slice';
 import { getUser, InitialData, userData } from '../../api/mypage';
+import { persistor } from '../../store/store';
 
 const KAKAOCOLOR = '#FEE500';
 const NAVERCOLOR = '#2DB400';
@@ -56,13 +57,12 @@ const renderComponent = (type: MYPAGE_STATUS) => {
   switch (type) {
     case MYPAGE_STATUS.BOOKINGLIST:
       return <BookingListComponent />;
-      break;
+
     case MYPAGE_STATUS.WISHLIST:
       return <WishList />;
-      break;
+
     case MYPAGE_STATUS.REVIEW:
       return <ReviewComponent />;
-      break;
   }
 };
 
@@ -85,12 +85,18 @@ export default function MyPage(): JSX.Element {
   const location = useLocation();
   const accessToken = useAppSelector(selectAccessToken);
   const isUserModifyModalOpen = useAppSelector(selectIsUserModifyModalOpen);
+  const navigate = useNavigate();
 
   const [userInfo, setUserInfo] = useState<userData>(InitialData);
 
   useEffect(() => {
+    if (!accessToken) {
+      navigate('/login');
+    }
     const data2 = getUser(accessToken);
-    data2.then((res) => setUserInfo(res.data.user));
+    data2.then((res) => {
+      setUserInfo(res.data.user);
+    });
   }, []);
 
   useEffect(() => {
@@ -107,6 +113,14 @@ export default function MyPage(): JSX.Element {
 
   const handleOnClickModifyButton = () => {
     dispatch(modalAction.radioUserModifyModal());
+  };
+
+  const logout = () => {
+    const purge = async () => {
+      await persistor.purge();
+    };
+    navigate('/');
+    purge();
   };
 
   return (
@@ -126,6 +140,7 @@ export default function MyPage(): JSX.Element {
               <ModifyButton onClick={handleOnClickModifyButton}>
                 회원정보 수정
               </ModifyButton>
+              <button onClick={logout}>로그아웃 테스트</button>
             </FlexRow>
           </UserInfo>
 

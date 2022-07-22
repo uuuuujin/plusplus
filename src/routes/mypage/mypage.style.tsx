@@ -64,9 +64,9 @@ export const MypageContainer = styled.div`
   display: flex;
   box-sizing: border-box;
   flex-direction: column;
-  margin: 0 auto;
   width: 100%;
   min-width: 380px;
+  margin: 0 auto;
 `;
 
 export const UserInfo = styled.div`
