@@ -1,14 +1,24 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
+import { modalAction } from '../../store/modules/modal/modal.slice';
 import { selectStayData } from '../../store/modules/stay/stay.select';
-import { getStay } from '../../api/stay';
-import { ROUTES } from '../routes';
+import {
+  selectIsLoggedIn,
+  selectUserId,
+  selectAccessToken,
+} from '../../store/modules/user/user.select';
 
+import { getStay } from '../../api/stay';
+import { fetchLike } from '../../api/user';
+import { deleteWishItem } from '../../api/wishlist';
+
+import { ROUTES } from '../routes';
 import Container from '../../components/container/container.component';
 import Header from '../../components/header/header.component';
+import LoginModal from '../../components/login-modal/loginModal.component';
 
-import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
+import { AiOutlineHeart } from 'react-icons/ai';
 
 import {
   TitleContainer,
@@ -23,6 +33,8 @@ import {
   RoomTitle,
   RoomCost,
   RoomLink,
+  LikeIconContainer,
+  FilledHeart,
 } from './stayDescription.style';
 import Map from '../../components/map/map.component';
 
@@ -30,9 +42,14 @@ export default function StayDescription(): JSX.Element {
   const location = useLocation();
   const dispatch = useAppDispatch();
 
+  const stayData = useAppSelector(selectStayData);
+  const isLoggedIn = useAppSelector(selectIsLoggedIn);
+  const userId = useAppSelector(selectUserId);
+  const userToken = useAppSelector(selectAccessToken);
+
   const STAY_ID = Number(location.pathname.split('/')[2]);
 
-  const stayData = useAppSelector(selectStayData);
+  const [isLiked, setIsLiked] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -40,13 +57,27 @@ export default function StayDescription(): JSX.Element {
     };
 
     fetchData();
-    console.log(stayData);
   }, [STAY_ID, dispatch]);
 
-  // useEffect(() => {
-  //   const coord = [parseFloat(stayData.y), parseFloat(stayData.x)];
-  //   setCoordinate(coord);
-  // }, [stayData]);
+  useEffect(() => {
+    const checkIsLiked = () => {
+      const userIdArr = stayData.likes.map((el) => el.user_id);
+      const result = userIdArr.some((el) => el === userId);
+      setIsLiked(result);
+    };
+
+    checkIsLiked();
+  }, [stayData.likes, userId]);
+
+  const handleLike = () => {
+    if (!isLoggedIn) dispatch(modalAction.radioLoginModal());
+    else {
+      if (isLiked) deleteWishItem(userToken, stayData.id);
+      else fetchLike({ token: userToken, stationId: stayData.id });
+
+      setIsLiked((v) => !v);
+    }
+  };
 
   return (
     <Container>
@@ -54,7 +85,9 @@ export default function StayDescription(): JSX.Element {
         <Header></Header>
         <TitleContainer>
           <Title>{stayData.name}</Title>
-          <AiOutlineHeart />
+          <LikeIconContainer onClick={handleLike}>
+            {isLiked ? <FilledHeart /> : <AiOutlineHeart />}
+          </LikeIconContainer>
         </TitleContainer>
         <DescriptionContainer>
           <img src={stayData.image} alt="숙소 이미지" />
@@ -86,19 +119,11 @@ export default function StayDescription(): JSX.Element {
         <ContentsContainer>
           <SubTitle>Map</SubTitle>
           {stayData.id !== 0 && (
-            <Map
-              y={parseFloat(stayData.y)}
-              x={parseFloat(stayData.x)}
-              name={stayData.name}
-              height={450}
-            />
+            <Map y={parseFloat(stayData.y)} x={parseFloat(stayData.x)} />
           )}
-          {/*{<Map y={parseFloat(stayData.y)} x={parseFloat(stayData.x)} />*/}
-
-          {/*<Map y={33.308704704334026} x={126.76810471045683} />*/}
-
-          {/*<Map y={coordinate[0]} x={coordinate[1]} /> }*/}
         </ContentsContainer>
+
+        <LoginModal />
       </div>
     </Container>
   );
