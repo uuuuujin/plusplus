@@ -3,7 +3,8 @@ import { DefaultTheme } from 'styled-components';
 const theme: DefaultTheme = {
   borderRadius: '5px', // 임의로 넣은거
   colors: {
-    main: '#ff1414',
+    // main: '#ff1414',
+    main: '#ff9f38',
     border: '#ddd',
     subTitle: '#808080',
     discount: '#fa622f',

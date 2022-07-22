@@ -25,8 +25,7 @@ import {
   DiscountRate,
   FilledHeart,
 } from './productListItem.style';
-import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
-import { MdFavorite } from 'react-icons/md';
+import { AiOutlineHeart } from 'react-icons/ai';
 
 interface ProductListItemProp {
   stayId: number;
