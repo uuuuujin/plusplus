@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import theme from '../../style/theme';
 
 export const ErrorModalContainer = styled.div`
   display: flex;
@@ -26,5 +27,5 @@ export const ConfirmButton = styled.button`
   cursor: pointer;
   padding: 10px;
   color: white;
-  background-color: #94b49f;
+  background-color: ${theme.colors.main};
 `;

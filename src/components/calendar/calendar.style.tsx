@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { BsDot } from 'react-icons/bs';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
+import theme from '../../style/theme';
 
 export const CalendarContainer = styled.div`
   display: flex;
@@ -22,27 +23,11 @@ export const YearText = styled.span`
   opacity: 0.4;
 `;
 
-export const InfoBox = styled.div`
-  position: absolute;
-  display: flex;
-  align-items: center;
-  top: 40px;
-  right: 10px;
-`;
-
-export const InfoTxt = styled.span`
-  display: inline-block;
-  margin-left: 1px;
-  font-size: 11px;
-  letter-spacing: -0.5px;
-  opacity: 0.5;
-`;
-
 export const MonthBox = styled.div`
   display: flex;
   justify-content: start;
   align-items: baseline;
-  margin: 10px 0px;
+  margin: 10px 0;
 
   min-width: 100px;
   width: 100%;
@@ -97,15 +82,15 @@ export const DayBox = styled.div`
   }
 
   .onlyStartDay {
-    color: #94b49f;
-    border: 2px solid #94b49f;
+    color: ${theme.colors.main};
+    border: 2px solid ${theme.colors.main};
     border-radius: 10px;
   }
 
   .period {
     color: #fff;
     border-right: 0.1px solid #ddd;
-    background-color: #94b49f;
+    background-color: ${theme.colors.main};
     box-sizing: border-box;
   }
 
@@ -113,18 +98,18 @@ export const DayBox = styled.div`
     color: #fff;
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
-    background-color: #94b49f;
+    background-color: ${theme.colors.main};
     border-right: 0.1px solid #ddd;
   }
 
   .endDay {
     color: #fff;
-    border-top: 2px solid #94b49f;
-    border-bottom: 2px solid #94b49f;
-    border-right: 2px solid #94b49f;
+    border-top: 2px solid ${theme.colors.main};
+    border-bottom: 2px solid ${theme.colors.main};
+    border-right: 2px solid ${theme.colors.main};
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
-    background-color: #94b49f;
+    background-color: ${theme.colors.main};
   }
 
   .date_box,
@@ -183,25 +168,4 @@ export const DateTxt = styled.span`
   display: inline-block;
   font-size: 13px;
   margin-bottom: 5px;
-`;
-
-export const ReservationIcon = styled(BsDot)`
-  font-size: 20px;
-  color: #81b147;
-`;
-
-export const ArrowBack = styled(IoIosArrowBack)`
-  font-size: 20px;
-  position: absolute;
-  cursor: pointer;
-  top: 50%;
-  left: 0;
-`;
-
-export const ArrowForward = styled(IoIosArrowForward)`
-  font-size: 20px;
-  position: absolute;
-  cursor: pointer;
-  top: 50%;
-  right: 0;
 `;

@@ -14,6 +14,12 @@ interface MapProps {
   height: number;
 }
 
+declare global {
+  interface Window {
+    kakao: any;
+  }
+}
+
 const Map = ({ y, x, name, height }: MapProps): JSX.Element => {
   const ref = useRef<HTMLDivElement>(null);
   const options = {

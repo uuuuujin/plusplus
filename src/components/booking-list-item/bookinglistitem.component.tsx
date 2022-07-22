@@ -38,7 +38,7 @@ const BookingListItem = (props: bookingListItemProps) => {
         </RoomName>
         <LocationBox>
           <MdOutlineLocationOn />
-          <span>제주도 서귀포시 중문관광로72번길 35 </span>
+          <span>{props.address}</span>
         </LocationBox>
         <CheckInOutTimeBox>
           <CheckInOutTime>
