@@ -51,7 +51,7 @@ export const Bottom = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
-  padding: 20px 0 10px;
+  padding-top: 20px;
   border-top: 1px solid ${theme.colors.border};
 `;
 
@@ -69,4 +69,8 @@ export const SearchButton = styled.div`
   text-align: center;
   align-items: center;
   padding: 15px 20px;
+
+  &:hover {
+    background-color: ${theme.colors.mainButtonHover};
+  }
 `;

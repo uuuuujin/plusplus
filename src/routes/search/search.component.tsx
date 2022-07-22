@@ -113,10 +113,6 @@ export default function Search(): JSX.Element {
     fetchSearchResult();
   }, [dispatch, location]);
 
-  // const [searchListArr, setSearchListArr] = useState<SearchResultType[]>([]);
-  // const observerRef = useRef<IntersectionObserver>();
-  // const listRef = useRef<HTMLDivElement>(null);
-
   return (
     <Container>
       <Wrapper>

@@ -47,44 +47,42 @@ export default function HeaderDestinationModal(): JSX.Element {
     <MainModal
       isOpen={isHeaderDestinationModalOpen}
       onClose={handleDestinationModal}
-      title="어디로 떠날까요? ✈️"
+      title="어디로 떠날까요?"
       contentWidth={600}
     >
-      <div>
-        <RegionButtonContainer>
-          <ul>
-            <li>
-              <RegionButton
-                regionName="국내전체"
-                clickedRegionName={searchRegion.name}
-                onClick={() => handleRegionClick({ id: 0, name: '국내전체' })}
-              >
-                국내전체
-              </RegionButton>
-            </li>
-            {local.map((item) => {
-              return (
-                <li key={item.name}>
-                  <RegionButton
-                    regionName={item.name}
-                    clickedRegionName={searchRegion.name}
-                    onClick={() =>
-                      handleRegionClick({ id: item.id, name: item.name })
-                    }
-                  >
-                    {item.name}
-                  </RegionButton>
-                </li>
-              );
-            })}
-          </ul>
-        </RegionButtonContainer>
+      <RegionButtonContainer>
+        <ul>
+          <li>
+            <RegionButton
+              regionName="국내전체"
+              clickedRegionName={searchRegion.name}
+              onClick={() => handleRegionClick({ id: 0, name: '국내전체' })}
+            >
+              국내전체
+            </RegionButton>
+          </li>
+          {local.map((item) => {
+            return (
+              <li key={item.name}>
+                <RegionButton
+                  regionName={item.name}
+                  clickedRegionName={searchRegion.name}
+                  onClick={() =>
+                    handleRegionClick({ id: item.id, name: item.name })
+                  }
+                >
+                  {item.name}
+                </RegionButton>
+              </li>
+            );
+          })}
+        </ul>
         <Bottom>
           <SearchLink onClick={handleDestinationModal} to={ROUTES.SEARCH.path}>
             <SearchButton>검색하기</SearchButton>
           </SearchLink>
         </Bottom>
-      </div>
+      </RegionButtonContainer>
     </MainModal>
   );
 }

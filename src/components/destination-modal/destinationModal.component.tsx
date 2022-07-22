@@ -41,7 +41,7 @@ export default function DestinationModal(): JSX.Element {
     <MainModal
       isOpen={isDestinationModalOpen}
       onClose={handleDestinationModal}
-      title="어디로 떠날까요? ✈️"
+      title="어디로 떠날까요?"
       contentWidth={600}
     >
       <RegionButtonContainer>

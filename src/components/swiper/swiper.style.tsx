@@ -61,12 +61,12 @@ export const SlideDescriptionContainer = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
-  margin-top: 30px;
+  margin-top: 25px;
 `;
 
 export const SlideTitle = styled.div`
-  font-size: 22px;
-  font-weight: 500;
+  font-size: 18px;
+  font-weight: 600;
   text-align: center;
   letter-spacing: 1px;
 `;
