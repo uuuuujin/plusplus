@@ -65,7 +65,7 @@ export default function WishListItem({
     SetIsWishManageModalOpen(!isWishManageModalOpen);
   };
   return (
-    <ItemContainer onClick={onClickButton}>
+    <ItemContainer>
       <ItemBox>
         <ItemInfo>
           <LikeIconWrap>
@@ -80,18 +80,18 @@ export default function WishListItem({
           <RoomInfoBox>{item.station_content}</RoomInfoBox>
           <PriceInfoBox>
             <NormalPrice>
-              {item.station_minprice} ~ {item.station_maxprice}
+              {item.station_minprice.toLocaleString()} ~ {item.station_maxprice.toLocaleString()}
             </NormalPrice>
             <div>
-              <SaleRate>25%</SaleRate>
+              <SaleRate>30%</SaleRate>
               <SalePrice>
-                {item.station_minprice * 0.75}원 ~{' '}
-                {item.station_maxprice * 0.75}원
+                {(item.station_minprice * 0.7).toLocaleString()}원 ~{' '}
+                {(item.station_maxprice * 0.7).toLocaleString()}원
               </SalePrice>
             </div>
           </PriceInfoBox>
         </ItemInfo>
-        <ItemImgBox src={item.station_image} />
+        <ItemImgBox src={item.station_image} onClick={onClickButton}/>
       </ItemBox>
       {isWishManageModalOpen && (
         <WishListModal item={item} setList={setList} setModal={onClickHeart} />

@@ -7,6 +7,7 @@ export const ItemContainer = styled.div`
   flex-direction: column;
   box-shadow: 0 0 5px 0 rgb(0 0 0 / 20%);
 
+  cursor: pointer;
   margin: 10px 0;
   border-top: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
@@ -16,6 +17,9 @@ export const ItemImgBox = styled.img`
   width: 50%;
   height: 250px;
   object-fit: cover;
+  &:hover{
+    opacity: 0.7;
+  }
 `;
 
 export const StarIcon = styled(BiStar)`

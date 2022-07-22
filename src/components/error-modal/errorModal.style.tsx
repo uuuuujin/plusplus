@@ -5,6 +5,7 @@ export const ErrorModalContainer = styled.div`
   display: flex;
   flex-direction: column;
   padding: 20px;
+  white-space: pre-wrap;
 `;
 
 export const ContentText = styled.div`

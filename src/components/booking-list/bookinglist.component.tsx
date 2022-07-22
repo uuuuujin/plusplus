@@ -1,7 +1,7 @@
 import { InnerContainer } from '../../routes/mypage/mypage.style';
 import BookingListItem from '../booking-list-item/bookinglistitem.component';
 import { Line } from '../payment/payment.style';
-import { TitleText } from '../wishlist/wishlist.style';
+import {TitleText} from "../../routes/mypage/mypage.style";
 import { useAppSelector } from '../../hooks/index.hook';
 import { selectAccessToken } from '../../store/modules/user/user.select';
 import { useEffect, useState } from 'react';
@@ -13,7 +13,6 @@ const BookingListComponent = (): JSX.Element => {
   useEffect(() => {
     const data = getBookingList(accessToken);
     data.then((res) => setBookingData(res.data));
-    console.log(bookingData);
   }, []);
 
   return (

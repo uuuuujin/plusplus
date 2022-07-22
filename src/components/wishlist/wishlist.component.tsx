@@ -1,6 +1,5 @@
-import { InnerContainer } from '../../routes/mypage/mypage.style';
+import {InnerContainer, TitleText} from '../../routes/mypage/mypage.style';
 import WishListItem from '../wishlist-Item/wishlistitem.component';
-import { CurrentStatistic, TitleText } from './wishlist.style';
 import { Line } from '../payment/payment.style';
 import { useEffect, useState } from 'react';
 import { getWishList, RoomItem } from '../../api/wishlist';
@@ -58,9 +57,6 @@ export default function WishList(): JSX.Element {
           return (
             <div key={index}>
               <WishListItem item={item} setList={setListData} />
-              <CurrentStatistic>
-                &lt; {index + 1}/{listData.length} &gt;
-              </CurrentStatistic>
             </div>
           );
         })}
