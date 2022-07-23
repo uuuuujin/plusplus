@@ -12,7 +12,8 @@ import {
   ItemMenu,
   LoginIcon,
   LogoutButton,
-  ModifyButton, ModifyConditionBox,
+  ModifyButton,
+  ModifyConditionBox,
   MypageContainer,
   UserIcon,
   UserInfo,
@@ -139,7 +140,6 @@ export default function MyPage(): JSX.Element {
                 color={userInfo.oauthName === 'NAVER' ? NAVERCOLOR : KAKAOCOLOR}
                 text={userInfo.oauthName === 'NAVER' ? 'NAVER' : 'KAKAO'}
               />
-
             </FlexRow>
             <ModifyConditionBox>
               <LogoutButton onClick={logout}>로그아웃</LogoutButton>
@@ -181,7 +181,7 @@ export default function MyPage(): JSX.Element {
                 <span>나의 후기</span>
               </ItemMenu>
             </FlexRow>
-            <AdvertiseImg src="https://yaimg.yanolja.com/v5/2022/01/17/13/61e5740f544f02.81195355.png" />
+            {/* <AdvertiseImg src="https://yaimg.yanolja.com/v5/2022/01/17/13/61e5740f544f02.81195355.png" /> */}
           </UserInfo>
           {renderComponent(mypageComponent)}
           <Footer />

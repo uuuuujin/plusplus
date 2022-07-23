@@ -57,7 +57,7 @@ export default function Home(): JSX.Element {
         </SliderContainer>
 
         <SliderContainer>
-          <SliderTitle>인기순</SliderTitle>
+          <SliderTitle>혼자와서 둘이가는 인기순</SliderTitle>
           <SwiperComponent swiperDataArr={popularStays}></SwiperComponent>
         </SliderContainer>
 

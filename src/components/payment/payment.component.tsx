@@ -45,7 +45,7 @@ import {
   selectIsPaymentCompleteModalOpen,
 } from '../../store/modules/modal/modal.select';
 import { formatDate, formatDateInSearch } from '../../utils/calendar';
-import {useLocation} from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { postOrder, postOrderProps } from '../../api/payment';
 import {
   getUser,
@@ -58,8 +58,8 @@ import { selectAccessToken } from '../../store/modules/user/user.select';
 import { paymentProps } from '../../routes/room-description/roomDescription.component';
 import { calendarAction } from '../../store/modules/calendar/calendar.slice';
 import ErrorModal from '../error-modal/errorModal.component';
-import {getRoomDate} from "../../api/calendar";
-import {IRoomBooking} from "../calendar-modal/calendarModal.component";
+import { getRoomDate } from '../../api/calendar';
+import { IRoomBooking } from '../calendar-modal/calendarModal.component';
 
 export const StyledContainer = styled(ContainerStyle)`
   background-color: #fafafa;
@@ -108,8 +108,6 @@ export const Payment = () => {
 
   const [isNameError, setIsNameError] = useState<boolean>(false);
   const [isTelError, setIsTelError] = useState<boolean>(false);
-
-
 
   const handleClickRadioButton = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserInfo({
@@ -184,27 +182,27 @@ export const Payment = () => {
       eventId: 1,
     };
 
-    const responseRoomIsPossible = getRoomDate(state.id,postData.startDate,postData.endDate);
-    responseRoomIsPossible.then(
-        res => {
-          const data = res.data.find((item: IRoomBooking) => (
-            item.isOrdered
-        ))
-          if(data !== undefined){
-            dispatch(modalAction.radioErrorModal());
-          }else{
-            //정보를 매번 수정해 줄 필요가 있나??
-            const res1 = postUser(updateUser, accessToken);
-            res1.then((result) => console.log('업데이트가 완료되었습니다.'));
+    const responseRoomIsPossible = getRoomDate(
+      state.id,
+      postData.startDate,
+      postData.endDate
+    );
+    responseRoomIsPossible.then((res) => {
+      const data = res.data.find((item: IRoomBooking) => item.isOrdered);
+      if (data !== undefined) {
+        dispatch(modalAction.radioErrorModal());
+      } else {
+        //정보를 매번 수정해 줄 필요가 있나??
+        const res1 = postUser(updateUser, accessToken);
+        res1.then((result) => console.log('업데이트가 완료되었습니다.'));
 
-            const res2 = postOrder(postData, accessToken);
-            res2.then((res) => console.log('주문 완료'));
-            dispatch(calendarAction.setCheckInDate(undefined));
-            dispatch(calendarAction.setCheckOutDate(undefined));
-            dispatch(modalAction.radioPaymentCompleteModal());
-          }
-        }
-    )
+        const res2 = postOrder(postData, accessToken);
+        res2.then((res) => console.log('주문 완료'));
+        dispatch(calendarAction.setCheckInDate(undefined));
+        dispatch(calendarAction.setCheckOutDate(undefined));
+        dispatch(modalAction.radioPaymentCompleteModal());
+      }
+    });
   };
 
   return (
@@ -345,16 +343,23 @@ export const Payment = () => {
               <PaymentPriceText>결제 금액</PaymentPriceText>
               <TotalPrice>
                 {state.station_id.event_id
-                  ? state.price * (1 - state.station_id.event_id.rate / 100)
-                  : state.price}
+                  ? (
+                      state.price *
+                      (1 - state.station_id.event_id.rate / 100)
+                    ).toLocaleString()
+                  : state.price.toLocaleString()}
                 원
               </TotalPrice>
             </PaymentPriceBox>
           </PaymentInfoBox>
           <PaymentButton onClick={handleCompleteModalOpen}>
             {state.station_id.event_id
-                ? state.price * (1 - state.station_id.event_id.rate / 100)
-                : state.price}원 결제하기
+              ? (
+                  state.price *
+                  (1 - state.station_id.event_id.rate / 100)
+                ).toLocaleString()
+              : state.price.toLocaleString()}
+            원 결제하기
           </PaymentButton>
         </PaymentWrapper>
       )}
