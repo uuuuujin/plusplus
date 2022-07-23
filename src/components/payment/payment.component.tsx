@@ -95,7 +95,7 @@ export const Payment = () => {
   const [userInfo, setUserInfo] = useState<userData>(InitialData);
 
   useEffect(() => {
-    if (!state) {
+    if (!state || !accessToken) {
       dispatch(modalAction.radioErrorModal());
     }
     const user = getUser(accessToken);
@@ -255,6 +255,7 @@ export const Payment = () => {
                 onChange={handleInputChange}
                 value={userInfo.nickName}
                 isErr={isNameError}
+                maxLength={10}
                 placeholder="성명을 입력해주세요"
                 type="text"
                 ref={nameRef}

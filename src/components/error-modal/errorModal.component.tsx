@@ -31,7 +31,7 @@ export const ErrorModal = ({ title, content }: IErrorModalProps) => {
   };
 
   return (
-    <MainModal isOpen={isErrorModalOpen} onClose={onCloseModal} title={title}>
+    <MainModal isOpen={isErrorModalOpen} onClose={onNavigateHome} title={title}>
       <ErrorModalContainer>
         <ContentText>{content}</ContentText>
         <ButtonBox>

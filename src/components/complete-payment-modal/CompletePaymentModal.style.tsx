@@ -38,6 +38,7 @@ export const BookingText = styled.span`
   width: 60%;
   font-size: 14px;
   font-weight: 400;
+  
 `;
 
 export const ButtonBox = styled.div`

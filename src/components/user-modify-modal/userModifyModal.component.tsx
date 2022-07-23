@@ -160,6 +160,7 @@ const UserModifyModal = ({ info }: UserModifyModalProps) => {
             value={userInfo.nickName}
             isErr={isNameError}
             placeholder="성명을 입력해주세요"
+            maxLength={10}
             type="text"
             ref={nameRef}
           />

@@ -1,4 +1,4 @@
-import { useAppDispatch } from '../../hooks/index.hook';
+import {useAppDispatch, useAppSelector} from '../../hooks/index.hook';
 
 import { modalAction } from '../../store/modules/modal/modal.slice';
 import { navigatorAction } from '../../store/modules/navigator/navigator.slice';
@@ -13,9 +13,14 @@ import {
   BsCalendarCheck,
   BsCalendarCheckFill,
 } from 'react-icons/bs';
+import {useState} from "react";
+import {selectIsCalendarModalOpen, selectIsHeaderDestinationModalOpen} from "../../store/modules/modal/modal.select";
 
 export default function Header(): JSX.Element {
   const dispatch = useAppDispatch();
+  const isCalendarModalOpen = useAppSelector(selectIsCalendarModalOpen);
+  const isHeaderDestinationModalOpen =  useAppSelector(selectIsHeaderDestinationModalOpen)
+
   const handleHeaderDestinationModal = () => {
     dispatch(modalAction.radioHeaderDestinationModal());
   };
@@ -48,8 +53,8 @@ export default function Header(): JSX.Element {
           </Icon>
         </Icons>
       </Nav>
-      <HeaderDestinationModal />
-      <CalendarModal />
+      {isHeaderDestinationModalOpen && <HeaderDestinationModal />}
+      {isCalendarModalOpen && <CalendarModal />}
     </NavWrapper>
   );
 }
