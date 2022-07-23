@@ -44,7 +44,7 @@ import {
   selectIsErrorModalOpen,
   selectIsPaymentCompleteModalOpen,
 } from '../../store/modules/modal/modal.select';
-import { formatDate, formatDateInSearch } from '../../utils/calendar';
+import {formatDate, formatDateInSearch, getDateDiff} from '../../utils/calendar';
 import { useLocation } from 'react-router-dom';
 import { postOrder, postOrderProps } from '../../api/payment';
 import {
@@ -181,12 +181,13 @@ export const Payment = () => {
       roomId: state.id,
       eventId: 1,
     };
-
+   const checkDate = new Date(state.checkOutDate[0],state.checkOutDate[1],state.checkOutDate[2]-1)
     const responseRoomIsPossible = getRoomDate(
       state.id,
       postData.startDate,
-      postData.endDate
+      formatDateInSearch([checkDate.getFullYear(), checkDate.getMonth(), checkDate.getDate()])
     );
+
     responseRoomIsPossible.then((res) => {
       const data = res.data.find((item: IRoomBooking) => item.isOrdered);
       if (data !== undefined) {
@@ -319,7 +320,7 @@ export const Payment = () => {
             <HeadText>금액 및 할인 정보*</HeadText>
             <PaymentPriceBox>
               <PaymentPriceText>총 예약 금액</PaymentPriceText>
-              <SalePrice> {state.price.toLocaleString()}원</SalePrice>
+              <SalePrice> {(state.price * getDateDiff(state.checkInDate, state.checkOutDate)).toLocaleString()}원</SalePrice>
             </PaymentPriceBox>
             <PaymentEventBox>
               <PaymentPriceText>적용가능 이벤트</PaymentPriceText>
@@ -333,9 +334,9 @@ export const Payment = () => {
               <PaymentPriceText>할인률</PaymentPriceText>
               <EventRate>
                 {state.station_id.event_id
-                  ? state.station_id.event_id.rate
+                  ? `${state.station_id.event_id.rate}%`
                   : ''}
-                %
+
               </EventRate>
             </PaymentEventBox>
             <Line />
@@ -343,12 +344,16 @@ export const Payment = () => {
               <PaymentPriceText>결제 금액</PaymentPriceText>
               <TotalPrice>
                 {state.station_id.event_id
-                  ? (
-                      state.price *
-                      (1 - state.station_id.event_id.rate / 100)
+                    ? (
+                        state.price *
+                        (1 - state.station_id.event_id.rate / 100) *
+                        getDateDiff(state.checkInDate,state.checkOutDate)
                     ).toLocaleString()
-                  : state.price.toLocaleString()}
+                    : (
+                        state.price * getDateDiff(state.checkInDate,state.checkOutDate)
+                    ).toLocaleString()}
                 원
+
               </TotalPrice>
             </PaymentPriceBox>
           </PaymentInfoBox>
@@ -356,9 +361,11 @@ export const Payment = () => {
             {state.station_id.event_id
               ? (
                   state.price *
-                  (1 - state.station_id.event_id.rate / 100)
+                  (1 - state.station_id.event_id.rate / 100) * getDateDiff(state.checkInDate,state.checkOutDate)
                 ).toLocaleString()
-              : state.price.toLocaleString()}
+              : (
+                    state.price * getDateDiff(state.checkInDate,state.checkOutDate)
+                ).toLocaleString()}
             원 결제하기
           </PaymentButton>
         </PaymentWrapper>

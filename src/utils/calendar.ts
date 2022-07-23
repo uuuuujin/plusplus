@@ -63,7 +63,19 @@ export const CompareDate = (
    * 클릭이 된 시점부터 예약가능한 날짜의 방만을 보여준다.
    */
   if (soldDay[0]) {
+    // 체크 아웃만 가능 한 날 조건 탐색
     if (soldDay[1]) {
+      if(checkInDay !== undefined && checkOutDay !== undefined && soldDay[2]){
+        if(checkOutDay[0] === year && checkOutDay[1] === month && checkOutDay[2] === day){
+          return 'endDayOnly'
+        }
+      }
+
+      if(checkInDay !== undefined && soldDay[2] && checkOutDay === undefined){
+        if(soldDay[2][0] === year && soldDay[2][1] === month && soldDay[2][2] === day){
+          return 'date_box'
+        }
+      }
       return 'disable-room';
     }
     if(checkInDay !== undefined){
@@ -232,3 +244,11 @@ export const FindDate = (checkInDay: number[], mockData: IMonth[]) => {
     }
   }
 };
+
+export const getDateDiff = (d1:number[], d2:number[]) => {
+  const date1 = new Date(d1[0],d1[1],d1[2])
+  const date2 = new Date(d2[0],d2[1],d2[2])
+
+  const diffDate = date1.getTime() - date2.getTime()
+  return Math.abs(diffDate / (1000 * 60 * 60 * 24)); // 밀리세컨 * 초 * 분 * 시 = 일
+}

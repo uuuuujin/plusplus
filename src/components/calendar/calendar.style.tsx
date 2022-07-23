@@ -111,6 +111,17 @@ export const DayBox = styled.div`
     border-bottom-right-radius: 20px;
     background-color: ${theme.colors.main};
   }
+  
+  .endDayOnly{
+    color: #fff;
+    border-top: 2px solid ${theme.colors.main};
+    border-bottom: 2px solid ${theme.colors.main};
+    border-right: 2px solid ${theme.colors.main};
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    pointer-events: none;
+    background-color: ${theme.colors.main};
+  }
 
   .date_box,
   .today {
@@ -132,7 +143,8 @@ export const DayBox = styled.div`
   .startDay,
   .onlyStartDay,
   .endDay,
-  .period {
+  .period,
+  .endDayOnly{
     width: calc(100% / 7);
     flex: initial;
     box-sizing: border-box;
