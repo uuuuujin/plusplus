@@ -79,7 +79,7 @@ const CalendarModal = ({ roomId }: CalendarModalProps) => {
           month: Number(res.data[0].date.substring(0, 10).split('-')[1]),
           day: [],
         };
-        res.data.map((el: IRoomBooking) => {
+        res.data.map((el: IRoomBooking, index:number) => {
           if (el.isOrdered) {
             arr.day.push(Number(el.date.substring(0, 10).split('-')[2]));
           }

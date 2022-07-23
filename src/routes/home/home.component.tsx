@@ -14,11 +14,11 @@ import BannerSwiper from '../../components/banner-swiper/bannerSwiper.component'
 
 import {
   MainBanner,
-  MainBannerImage,
   SliderContainer,
   SliderTitle,
   Wrapper,
 } from './home.style';
+import {navigatorAction} from "../../store/modules/navigator/navigator.slice";
 
 export default function Home(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -27,6 +27,7 @@ export default function Home(): JSX.Element {
   const popularStays = useAppSelector(selectPopularStay);
 
   useEffect(() => {
+    dispatch(navigatorAction.setCurrnetPage('home'))
     const fetchData = async () => {
       await dispatch(fetchAllEvents());
       await dispatch(fetchPopularStay());

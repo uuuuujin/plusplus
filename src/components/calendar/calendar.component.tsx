@@ -117,15 +117,9 @@ const Calendar = ({
 
   return (
     <CalendarContainer>
-      {/*<InfoBox>*/}
-      {/*  <ReservationIcon />*/}
-      {/*  <InfoTxt>예약이 존재하는 날입니다.</InfoTxt>*/}
-      {/*</InfoBox>*/}
       <MonthBox>
-        {/*<ArrowBack />*/}
         <MonthText>{month}월</MonthText>
         <YearText>{year}년 </YearText>
-        {/*<ArrowForward />*/}
       </MonthBox>
       <CalendarBox>
         <DayHeaderBox>
