@@ -44,9 +44,10 @@ const CalendarModal = ({ roomId }: CalendarModalProps) => {
 
   const isCalendarModalOpen = useAppSelector(selectIsCalendarModalOpen);
   let today = new Date();
-  let nextMonthDate = new Date(today.setMonth(today.getMonth() + 1));
-  let nextNextMonthDate = new Date(today.setMonth(today.getMonth() + 1));
-  today.setMonth(today.getMonth() - 2);
+  today.setDate(today.getDate())
+  let nextMonthDate = new Date(today.getFullYear(), today.getMonth() + 1, 1);
+  let nextNextMonthDate = new Date(today.getFullYear(), today.getMonth() + 2, 1);
+
 
   const [firstMonth, setFirstMonth] = useState<IMonth | ''>('');
   const [secondMonth, setSecondMonth] = useState<IMonth | ''>('');
@@ -58,19 +59,19 @@ const CalendarModal = ({ roomId }: CalendarModalProps) => {
   useEffect(() => {
     if (roomId) {
       const data = getRoomDate(
-        roomId,
-        formatDate2([today.getFullYear(), today.getMonth() + 1, 1]),
-        formatDate2([today.getFullYear(), today.getMonth() + 2, 0])
+          roomId,
+          formatDate2([today.getFullYear(), today.getMonth() + 1, 1]),
+          formatDate2([today.getFullYear(), today.getMonth() + 2, 0])
       );
       const data2 = getRoomDate(
-        roomId,
-        formatDate2([today.getFullYear(), today.getMonth() + 2, 1]),
-        formatDate2([today.getFullYear(), today.getMonth() + 3, 0])
+          roomId,
+          formatDate2([today.getFullYear(), today.getMonth() + 2, 1]),
+          formatDate2([today.getFullYear(), today.getMonth() + 3, 0])
       );
       const data3 = getRoomDate(
-        roomId,
-        formatDate2([today.getFullYear(), today.getMonth() + 3, 1]),
-        formatDate2([today.getFullYear(), today.getMonth() + 4, 0])
+          roomId,
+          formatDate2([today.getFullYear(), today.getMonth() + 3, 1]),
+          formatDate2([today.getFullYear(), today.getMonth() + 4, 0])
       );
 
       data.then((res) => {
@@ -131,7 +132,7 @@ const CalendarModal = ({ roomId }: CalendarModalProps) => {
       return `체크인 날짜 ${formatDate(checkInDate)}`;
     } else {
       return `체크인 날짜 ${formatDate(checkInDate)}  ~ 체크아웃 ${formatDate(
-        checkOutDate
+          checkOutDate
       )}`;
     }
   };
@@ -201,38 +202,38 @@ const CalendarModal = ({ roomId }: CalendarModalProps) => {
   };
 
   return (
-    <MainModal
-      isOpen={isCalendarModalOpen}
-      onClose={onCloseCalendar}
-      title="언제 떠날까요 ?"
-      contentWidth={768}
-    >
-      <CalendarWrapper>
-        <CalendarBox>
-          <Calendar
-            year={thisMonth.year}
-            month={thisMonth.month + 1}
-            roomId={roomId}
-            disabled={firstMonth !== '' ? firstMonth.day : []}
-          />
-          <Calendar
-            year={nextMonth.year}
-            month={nextMonth.month + 1}
-            roomId={roomId}
-            disabled={secondMonth !== '' ? secondMonth.day : []}
-          />
-          <Calendar
-            year={nextNextMonthDate.getFullYear()}
-            month={nextNextMonthDate.getMonth() + 1}
-            roomId={roomId}
-            disabled={thirdMonth !== '' ? thirdMonth.day : []}
-          />
-        </CalendarBox>
-        <ReservationButton onClick={onSubmit}>
-          {checkInOutText()} 검색
-        </ReservationButton>
-      </CalendarWrapper>
-    </MainModal>
+      <MainModal
+          isOpen={isCalendarModalOpen}
+          onClose={onCloseCalendar}
+          title="언제 떠날까요 ?"
+          contentWidth={768}
+      >
+        <CalendarWrapper>
+          <CalendarBox>
+            <Calendar
+                year={thisMonth.year}
+                month={thisMonth.month + 1}
+                roomId={roomId}
+                disabled={firstMonth !== '' ? firstMonth.day : []}
+            />
+            <Calendar
+                year={nextMonth.year}
+                month={nextMonth.month + 1}
+                roomId={roomId}
+                disabled={secondMonth !== '' ? secondMonth.day : []}
+            />
+            <Calendar
+                year={nextNextMonthDate.getFullYear()}
+                month={nextNextMonthDate.getMonth() + 1}
+                roomId={roomId}
+                disabled={thirdMonth !== '' ? thirdMonth.day : []}
+            />
+          </CalendarBox>
+          <ReservationButton onClick={onSubmit}>
+            {checkInOutText()} 검색
+          </ReservationButton>
+        </CalendarWrapper>
+      </MainModal>
   );
 };
 
