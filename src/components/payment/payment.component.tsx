@@ -91,8 +91,16 @@ export const Payment = () => {
     selectIsPaymentCompleteModalOpen
   );
 
+  const IsRoomAble = () => {
+    alert('api 요청 후 방이 유효한지 확인')
+  }
+
+  setInterval(IsRoomAble, 10000)
+
   const isErrorModalOpen = useAppSelector(selectIsErrorModalOpen);
   const [userInfo, setUserInfo] = useState<userData>(InitialData);
+
+
 
   useEffect(() => {
     if (!state || !accessToken) {

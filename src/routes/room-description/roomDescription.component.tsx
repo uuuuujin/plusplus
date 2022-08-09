@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/index.hook';
 import { formatDate } from '../../utils/calendar';
@@ -39,7 +39,7 @@ import { CgSmartHomeRefrigerator } from 'react-icons/cg';
 import { GiCoffeePot, GiWashingMachine, GiWineBottle } from 'react-icons/gi';
 import { BsSpeakerFill } from 'react-icons/bs';
 import { FaPumpSoap } from 'react-icons/fa';
-import {calendarAction} from "../../store/modules/calendar/calendar.slice";
+import { calendarAction } from '../../store/modules/calendar/calendar.slice';
 
 export interface paymentProps extends roomData {
   checkInDate: number[];
@@ -83,13 +83,49 @@ const RoomDescription = () => {
 
   useEffect(() => {
     dispatch(calendarAction.setCheckOutDate(undefined));
-    dispatch(calendarAction.setCheckInDate(undefined))
+    dispatch(calendarAction.setCheckInDate(undefined));
     const fetchData = async () => {
       await dispatch(getRoom(ROOM_ID));
     };
 
     fetchData();
   }, [dispatch, ROOM_ID]);
+
+  const VALIDTIME = 600;
+  const time = useRef<number>(VALIDTIME);
+
+  let intervalRef: { current: NodeJS.Timeout | null } = useRef(null);
+
+  const [min, setMin] = useState(10);
+  const [sec, setSec] = useState(0);
+
+  useEffect(() => {
+    intervalRef.current = setInterval(decreaseNum, 1000);
+    return () => clearInterval(intervalRef.current as NodeJS.Timeout);
+  }, []);
+
+  useEffect(() => {
+    console.log(min, sec);
+    if (time.current <= 0) {
+      console.log('api호출');
+      // 시간이 초과되면 clearInterval 해줌
+      clearInterval(intervalRef.current as NodeJS.Timeout);
+    }
+  }, [sec]);
+
+  const timerReset = () => {
+    clearInterval(intervalRef.current as NodeJS.Timeout);
+    time.current = VALIDTIME;
+    setMin(Math.floor(VALIDTIME / 60));
+    setSec(VALIDTIME % 60);
+  };
+
+  const decreaseNum = () => {
+    time.current -= 1; // 1초씩 감소
+
+    setMin(Math.floor(time.current / 60)); //useState로 분, 시를 계속 업데이트 쳐준다
+    setSec(time.current % 60);
+  };
 
   const amenities_list = [
     {
