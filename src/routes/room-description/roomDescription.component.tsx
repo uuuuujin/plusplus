@@ -91,42 +91,6 @@ const RoomDescription = () => {
     fetchData();
   }, [dispatch, ROOM_ID]);
 
-  const VALIDTIME = 600;
-  const time = useRef<number>(VALIDTIME);
-
-  let intervalRef: { current: NodeJS.Timeout | null } = useRef(null);
-
-  const [min, setMin] = useState(10);
-  const [sec, setSec] = useState(0);
-
-  useEffect(() => {
-    intervalRef.current = setInterval(decreaseNum, 1000);
-    return () => clearInterval(intervalRef.current as NodeJS.Timeout);
-  }, []);
-
-  useEffect(() => {
-    console.log(min, sec);
-    if (time.current <= 0) {
-      console.log('api호출');
-      // 시간이 초과되면 clearInterval 해줌
-      clearInterval(intervalRef.current as NodeJS.Timeout);
-    }
-  }, [sec]);
-
-  const timerReset = () => {
-    clearInterval(intervalRef.current as NodeJS.Timeout);
-    time.current = VALIDTIME;
-    setMin(Math.floor(VALIDTIME / 60));
-    setSec(VALIDTIME % 60);
-  };
-
-  const decreaseNum = () => {
-    time.current -= 1; // 1초씩 감소
-
-    setMin(Math.floor(time.current / 60)); //useState로 분, 시를 계속 업데이트 쳐준다
-    setSec(time.current % 60);
-  };
-
   const amenities_list = [
     {
       icon: <CgSmartHomeRefrigerator />,
