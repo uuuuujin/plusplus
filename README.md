@@ -88,15 +88,6 @@
 | <img src="https://user-images.githubusercontent.com/43837954/183717400-ff6c7a20-6556-4d9a-b3a1-b08d8a436422.png" height=200> | <img src= "https://user-images.githubusercontent.com/43837954/183717187-ed2f96fd-5b88-49ff-b828-c5f9b3ca03db.png" height=200> |
 
 
-### 협업 툴
-
-| 툴                                                                                  | 사용 이유                     |
-| ----------------------------------------------------------------------------------- | ----------------------------- |
-| [figma](https://www.figma.com/file/RyTmflN3MdG9UrtAXsktg8/plusplus)                 | 기획과 와이어프레임 작성      |
-| [notion](https://gigantic-paint-f2a.notion.site/1-a2c35e3c8c9b4355b5e80c37d95f8c69) | 회의록, 기획안 등 문서화 작업 |
-| discord                                                                             | 소통과 git hook 사용          |
-| gathertown                                                                          | 온라인 회의                   |
-
 
 
 ### 구성원 역할
