@@ -58,9 +58,9 @@
 
 <img src="https://user-images.githubusercontent.com/43837954/183718496-af8de0a5-9f0e-4d44-9f7f-c5bba6cc0d09.gif" width=200><br/>
 
-### 사용 스택
+----
 
----
+### 사용 스택
 
 #### 프론트엔드
 
@@ -70,19 +70,23 @@
 
 > ![NestJS](https://img.shields.io/badge/nestjs-%23E0234E.svg?style=for-the-badge&logo=nestjs&logoColor=white) > ![MySQL](https://img.shields.io/badge/mysql-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white) > ![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white) > ![Nginx](https://img.shields.io/badge/nginx-%23009639.svg?style=for-the-badge&logo=nginx&logoColor=white) > ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white) > ![ESLint](https://img.shields.io/badge/ESLint-4B3263?style=for-the-badge&logo=eslint&logoColor=white)
 
+
 ### 서비스 구조
 
 <img src="https://user-images.githubusercontent.com/43837954/183718704-51ddd431-94f9-474f-9e42-81059298a6b3.png" width="1000">
 
-#### ERD 구조
+
+### ERD 구조
 
 <img src="https://user-images.githubusercontent.com/43837954/183718740-d6ca940d-f0f2-4fba-9b8f-120908fa9c4f.png" width="700">
 
+
 ### 폴더구조
 
-| frontend                                                                                                                     | backend                                                                                                                       |
+| frontend                                                                                                                     | backend                                                                                                                       |
 | ---------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
 | <img src="https://user-images.githubusercontent.com/43837954/183717400-ff6c7a20-6556-4d9a-b3a1-b08d8a436422.png" height=200> | <img src= "https://user-images.githubusercontent.com/43837954/183717187-ed2f96fd-5b88-49ff-b828-c5f9b3ca03db.png" height=200> |
+
 
 ### 협업 툴
 
@@ -93,42 +97,7 @@
 | discord                                                                             | 소통과 git hook 사용          |
 | gathertown                                                                          | 온라인 회의                   |
 
-### 🔗 Wiki 링크
 
-<table align="center">
-<thead>
-  <tr>
-    <th colspan=5>
-      <a href="https://kdt-gitlab.elice.io/sw_track/class_02_seoul/web_project_2/team1"> 📖 Wiki </a>
-    </th>
-  </tr>
-</thead>
-<tbody>
-  <tr>
-    <td align="center" colspan=2>
-      <a href="https://www.figma.com/file/RyTmflN3MdG9UrtAXsktg8/plusplus"> 🖼 WireFrame</a>
-    </td>
-    <td align="center">
-      <a href="https://www.notion.so/bd4008055c0a4336809abc4eb980c182"> 📄 Code Convention</a>
-    </td>
-    <td align="center">
-      <a href="https://www.notion.so/4976f60b93d74eedba9591176722506d">📝 회의록</a>
-    </td>
-
-  </tr>
-    <tr>
-    <td align="center" colspan=2>
-      <a href="https://www.notion.so/API-5bc35e0a226341b284dcde3f4d8275e5"> 💳 API </a>
-    </td>
-    <td align="center">
-      <a href="https://www.notion.so/062c600c791c4bafb1a75638de48b7dd">💣 리팩토링 issue</a>
-    </td>
-    <td align="center" colspan=2>
-      <a href="https://www.notion.so/1-a2c35e3c8c9b4355b5e80c37d95f8c69"> 🧬기능명세서</a>
-    </td>
-  </tr>
-</tbody>
-<table>
 
 ### 구성원 역할
 
@@ -136,6 +105,6 @@
 | ------ | ---------------- | ------------------------------------------------------------------------------------------ |
 | 박승준 | 팀장, 프론트엔드 | header, 관리자 페이지, 유저 리스트, 숙소 리스트 페이지                                     |
 | 정유진 | 프론트엔드       | footer, 메인페이지, 로그인 페이지, 검색 페이지, 숙소 상세 페이지                           |
-| 이용준 | 프론트엔드       | 캘린더 modal, 방 상세 페이지, 상품 결제 페이지, 마이페이지,                                |
+| 이용준 | 프론트엔드       | 캘린더 modal, 방 상세 페이지, 상품 결제 페이지, 마이페이지                                |
 | 김지호 | 백엔드           | 유저, 주문, Oauth, 로그인 API,배포                                                         |
 | 나혜지 | 백엔드           | 검색 필터링, 숙소, 방, 날짜별 예약현황 조회, 카테고리, 테마, 찜, 이벤트, 이미지 업로드 API |
